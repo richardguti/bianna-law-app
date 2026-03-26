@@ -153,7 +153,7 @@ export function TopNav() {
 
   return (
     <>
-      <header className="w-full sticky top-0 z-30 bg-surface/80 backdrop-blur-md flex justify-between items-center px-8 py-3 border-b border-outline-variant/20 shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
+      <header className="w-full sticky top-0 z-30 bg-surface/80 backdrop-blur-md flex justify-between items-center px-4 md:px-8 py-3 border-b border-outline-variant/20 shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
         <div className="flex items-center gap-6">
           <button
             onClick={toggleSidebar}
