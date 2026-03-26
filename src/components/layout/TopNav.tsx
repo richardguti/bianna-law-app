@@ -157,7 +157,7 @@ export function TopNav() {
         <div className="flex items-center gap-6">
           <button
             onClick={toggleSidebar}
-            className="text-on-surface-variant hover:text-primary transition-colors md:hidden"
+            className="text-on-surface-variant hover:text-primary transition-colors lg:hidden"
             aria-label="Toggle sidebar"
           >
             <span className="material-symbols-outlined">menu</span>
@@ -165,7 +165,7 @@ export function TopNav() {
 
           <span className="text-2xl font-serif italic text-primary">Bia</span>
 
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-6">
             <span className="text-sm font-label uppercase tracking-wider text-on-surface-variant">{title}</span>
           </nav>
         </div>

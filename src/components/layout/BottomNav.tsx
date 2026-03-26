@@ -23,7 +23,7 @@ export function BottomNav() {
   return (
     <>
       {/* Bottom tab bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-outline-variant/20 flex items-stretch pb-safe">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-outline-variant/20 flex items-stretch pb-safe">
         {PRIMARY_TABS.map(({ to, icon, label }) => (
           <NavLink
             key={to}
@@ -64,10 +64,10 @@ export function BottomNav() {
       {moreOpen && (
         <>
           <div
-            className="md:hidden fixed inset-0 z-30 bg-black/20"
+            className="lg:hidden fixed inset-0 z-30 bg-black/20"
             onClick={() => setMoreOpen(false)}
           />
-          <div className="md:hidden fixed bottom-16 left-0 right-0 z-40 bg-surface rounded-t-2xl border-t border-outline-variant/20 shadow-2xl pb-safe">
+          <div className="lg:hidden fixed bottom-16 left-0 right-0 z-40 bg-surface rounded-t-2xl border-t border-outline-variant/20 shadow-2xl pb-safe">
             <div className="px-5 pt-4 pb-2">
               <p className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant/60 mb-3">
                 More Pages
