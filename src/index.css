@@ -1,0 +1,130 @@
+/* Google Fonts must come before @tailwindcss and @theme */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Plus+Jakarta+Sans:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+@import "tailwindcss";
+
+/* ─── Sage Design System — "The Sovereign Editorial" ──────────────────────
+   Tokens sourced directly from the Stitch design files.
+   Tailwind v4 uses @theme instead of tailwind.config.js.
+   ───────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Surface hierarchy — soft sage layers, no harsh whites */
+  --color-surface:                   #f8faf6;
+  --color-surface-bright:            #f8faf6;
+  --color-surface-dim:               #d8dbd7;
+  --color-surface-container-lowest:  #ffffff;
+  --color-surface-container-low:     #f2f4f0;
+  --color-surface-container:         #eceeeb;
+  --color-surface-container-high:    #e7e9e5;
+  --color-surface-container-highest: #e1e3df;
+  --color-surface-variant:           #e1e3df;
+
+  /* Primary — forest sage */
+  --color-primary:                   #546345;
+  --color-on-primary:                #ffffff;
+  --color-primary-container:         #a4b491;
+  --color-on-primary-container:      #38462b;
+  --color-primary-fixed:             #d8e8c2;
+  --color-primary-fixed-dim:         #bccca8;
+  --color-inverse-primary:           #bccca8;
+  --color-surface-tint:              #546345;
+
+  /* Secondary */
+  --color-secondary:                 #5b605a;
+  --color-on-secondary:              #ffffff;
+  --color-secondary-container:       #dde1da;
+  --color-on-secondary-container:    #5f645e;
+  --color-secondary-fixed:           #e0e4dd;
+  --color-secondary-fixed-dim:       #c3c8c1;
+
+  /* Tertiary */
+  --color-tertiary:                  #556349;
+  --color-on-tertiary:               #ffffff;
+  --color-tertiary-container:        #a4b495;
+  --color-on-tertiary-container:     #39462e;
+  --color-tertiary-fixed:            #d8e8c7;
+  --color-tertiary-fixed-dim:        #bcccac;
+
+  /* On-surface */
+  --color-on-surface:                #191c1a;
+  --color-on-surface-variant:        #45483f;
+  --color-on-background:             #191c1a;
+  --color-background:                #f8faf6;
+  --color-inverse-surface:           #2e312f;
+  --color-inverse-on-surface:        #eff1ed;
+
+  /* Outline */
+  --color-outline:                   #75786f;
+  --color-outline-variant:           #c5c8bc;
+
+  /* Error */
+  --color-error:                     #ba1a1a;
+  --color-on-error:                  #ffffff;
+  --color-error-container:           #ffdad6;
+  --color-on-error-container:        #93000a;
+
+  /* Typography */
+  --font-headline: 'Newsreader', serif;
+  --font-body:     'Plus Jakarta Sans', sans-serif;
+  --font-label:    'Plus Jakarta Sans', sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Border radius */
+  --radius:      0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-full: 9999px;
+
+  /* Elevation shadows — ambient, tinted, no heavy drops */
+  --shadow-sm:    0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-float: 0 4px 16px rgba(25,28,26,0.04);
+  --shadow-modal: 0 8px 32px rgba(25,28,26,0.12);
+}
+
+/* ─── Base reset ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-headline);
+}
+
+/* ─── Material Symbols ─────────────────────────────────────────────────── */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  user-select: none;
+}
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ─── Editorial scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c5c8bc; border-radius: 10px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Bia 4-tier outline HTML (Claude output rendered in preview pane) ─── */
+.bia-outline { font-family: sans-serif; font-size: 13px; line-height: 1.6; }
+.bia-outline a { color: #546345; }

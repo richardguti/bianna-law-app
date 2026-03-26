@@ -1,0 +1,132 @@
+{
+  "version": "1.0",
+  "description": "Core 1L legal corpus: FRCP key rules + landmark Supreme Court cases",
+  "chunks": [
+    {
+      "id": "frcp-8",
+      "source": "FRCP",
+      "title": "Rule 8 — General Rules of Pleading",
+      "content": "Rule 8(a): A pleading that states a claim for relief must contain: (1) a short and plain statement of the grounds for the court's jurisdiction; (2) a short and plain statement of the claim showing that the pleader is entitled to relief; and (3) a demand for the relief sought. Rule 8(b): A party must state in short and plain terms its defenses to each claim asserted against it. Rule 8(d): Each allegation must be simple, concise, and direct. The 'notice pleading' standard under Rule 8 was interpreted in Twombly (2007) and Iqbal (2009) to require plausibility, not mere possibility, that the claim is legally sufficient."
+    },
+    {
+      "id": "frcp-12",
+      "source": "FRCP",
+      "title": "Rule 12 — Defenses and Objections",
+      "content": "Rule 12(b) lists seven defenses that may be raised by motion: (1) lack of subject-matter jurisdiction; (2) lack of personal jurisdiction; (3) improper venue; (4) insufficient process; (5) insufficient service of process; (6) failure to state a claim upon which relief can be granted; (7) failure to join a party under Rule 19. Rule 12(b)(6) motion to dismiss tests the legal sufficiency of the complaint. Under Iqbal/Twombly, the court must accept well-pleaded facts as true, disregard legal conclusions, and determine whether the remaining facts state a plausible claim."
+    },
+    {
+      "id": "frcp-56",
+      "source": "FRCP",
+      "title": "Rule 56 — Summary Judgment",
+      "content": "The court shall grant summary judgment if the movant shows there is no genuine dispute as to any material fact and the movant is entitled to judgment as a matter of law. The court considers materials in the record including depositions, documents, affidavits. The nonmovant must present specific facts showing a genuine issue for trial — cannot rely on mere allegations. The moving party bears the initial burden of showing absence of genuine dispute. Celotex Corp. v. Catrett (1986) clarified that the movant need not produce affirmative evidence negating the opponent's case when the opponent bears the burden of proof at trial."
+    },
+    {
+      "id": "frcp-23",
+      "source": "FRCP",
+      "title": "Rule 23 — Class Actions",
+      "content": "A class action requires satisfaction of Rule 23(a): (1) numerosity — the class is so numerous that joinder is impracticable; (2) commonality — questions of law or fact common to the class; (3) typicality — claims of the named parties are typical of the class; (4) adequacy — the representative parties will fairly and adequately protect interests of the class. Additionally, one of Rule 23(b) requirements must be met: (b)(1) risk of inconsistent adjudications; (b)(2) party opposing class has acted on grounds generally applicable to the class; (b)(3) questions common to class members predominate over individual questions and a class action is a superior method."
+    },
+    {
+      "id": "frcp-26",
+      "source": "FRCP",
+      "title": "Rule 26 — General Provisions Governing Discovery",
+      "content": "Rule 26(a) requires initial mandatory disclosures without a discovery request, including names of individuals likely to have discoverable information and documents supporting the party's claims. Rule 26(b)(1) defines the scope of discovery: any nonprivileged matter relevant to any party's claim or defense and proportional to the needs of the case. Proportionality factors include: importance of issues at stake, amount in controversy, parties' relative access to information, resources, importance of discovery in resolving issues, whether burden outweighs likely benefit. Work-product doctrine (Rule 26(b)(3)) protects documents prepared in anticipation of litigation."
+    },
+    {
+      "id": "int-shoe",
+      "source": "Constitutional Law / Civil Procedure",
+      "title": "International Shoe Co. v. Washington, 326 U.S. 310 (1945)",
+      "content": "ISSUE: Whether a Delaware corporation with no office in Washington but whose salespeople solicited orders there was subject to personal jurisdiction in Washington state courts. RULE: Due Process requires that a defendant have 'minimum contacts' with the forum state such that maintenance of the suit does not offend 'traditional notions of fair play and substantial justice.' HOLDING: International Shoe had sufficient minimum contacts — its salespeople were regularly present in Washington conducting substantial business — so jurisdiction was proper. SIGNIFICANCE: This case replaced the rigid Pennoyer 'presence' test with the modern minimum contacts analysis for personal jurisdiction. The court uses a sliding scale: greater the contacts, easier to establish jurisdiction; systematic and continuous contacts may support general jurisdiction."
+    },
+    {
+      "id": "pennoyer",
+      "source": "Civil Procedure",
+      "title": "Pennoyer v. Neff, 95 U.S. 714 (1877)",
+      "content": "ISSUE: Whether Oregon courts had jurisdiction over a nonresident whose land was attached after a default judgment. RULE: A state's sovereignty is limited to its own territory. Personal jurisdiction requires either (1) physical presence of the defendant in the forum state, or (2) defendant's consent to jurisdiction. A state can exercise jurisdiction over property (in rem) within its borders. HOLDING: Oregon lacked personal jurisdiction over Neff because he was not served within Oregon and did not consent. The subsequent attachment of property could not retroactively cure the jurisdictional defect. SIGNIFICANCE: Established the foundational territorial theory of jurisdiction, later modified by International Shoe's minimum contacts test. Still relevant for in rem and quasi in rem jurisdiction."
+    },
+    {
+      "id": "twombly",
+      "source": "Civil Procedure",
+      "title": "Bell Atlantic Corp. v. Twombly, 550 U.S. 544 (2007)",
+      "content": "ISSUE: Whether an antitrust complaint alleging parallel conduct by telecom companies was sufficient under Rule 8. RULE: A complaint must allege 'enough facts to state a claim to relief that is plausible on its face.' A claim is plausible when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged. HOLDING: The complaint failed because it merely alleged parallel conduct — which is consistent with lawful behavior — without additional facts suggesting an actual agreement to restrain trade. SIGNIFICANCE: Replaced the Conley v. Gibson 'no set of facts' standard. Together with Iqbal, established the 'plausibility pleading' standard under Rule 8(a)(2). Courts must disregard conclusory statements and assess whether remaining facts state a plausible claim."
+    },
+    {
+      "id": "iqbal",
+      "source": "Civil Procedure",
+      "title": "Ashcroft v. Iqbal, 556 U.S. 662 (2009)",
+      "content": "ISSUE: Whether a Pakistani Muslim's Bivens complaint against Ashcroft and Mueller for post-9/11 detention was sufficient under Rule 8. RULE: Two-pronged Iqbal/Twombly test: (1) Identify and disregard pleadings that are not entitled to the assumption of truth because they are mere legal conclusions; (2) Determine whether the remaining factual allegations plausibly give rise to an entitlement to relief. Discriminatory purpose is not plausibly inferred from the fact that those arrested were Arab Muslim men. HOLDING: Complaint dismissed — the allegation that officials adopted the detention policy 'because of' and not 'in spite of' its discriminatory effect was conclusory. SIGNIFICANCE: Extended Twombly beyond antitrust to all federal civil complaints. Courts must distinguish between 'conclusory' allegations (not accepted as true) and 'well-pleaded factual allegations' (accepted as true)."
+    },
+    {
+      "id": "palsgraf",
+      "source": "Torts",
+      "title": "Palsgraf v. Long Island Railroad Co., 248 N.Y. 339 (1928)",
+      "content": "ISSUE: Whether a railroad is liable to a plaintiff injured by falling scales when its employee's negligent act (helping a passenger board) caused an explosion at the other end of the platform. RULE (Cardozo majority): Negligence is a matter of relation between the parties — duty runs only to those within the foreseeable zone of danger. There is no duty to the unforeseeable plaintiff. RULE (Andrews dissent): Proximate cause is the more practical question — once negligent, the defendant is liable for all direct consequences, not just foreseeable ones. HOLDING: No liability. The guard owed no duty to Mrs. Palsgraf, who was an unforeseeable plaintiff standing far away. SIGNIFICANCE: The foundational case on the duty element of negligence and the debate between 'foreseeability of plaintiff' (Cardozo) vs. 'proximate cause as policy' (Andrews) approaches to limiting tort liability."
+    },
+    {
+      "id": "macpherson",
+      "source": "Torts / Products Liability",
+      "title": "MacPherson v. Buick Motor Co., 217 N.Y. 382 (1916)",
+      "content": "ISSUE: Whether an automobile manufacturer can be liable to a buyer (not in privity) for negligence when a defective wheel causes injury. RULE: A manufacturer has a duty of reasonable care to any person who may foreseeably be endangered by the product, not just the immediate purchaser. The duty extends beyond privity when: (1) the article is reasonably certain to place life and limb in peril if negligently made, and (2) the manufacturer knows it will be used by persons other than the purchaser. HOLDING: Buick was liable. An automobile is inherently dangerous if defectively made, and Buick knew it would be used by people other than the dealer. SIGNIFICANCE: Judge Cardozo's opinion eliminated the privity requirement for negligence in products liability, setting the stage for modern strict products liability in Greenman v. Yuba Power Products."
+    },
+    {
+      "id": "hadley",
+      "source": "Contracts",
+      "title": "Hadley v. Baxendale, 9 Ex. 341 (1854)",
+      "content": "ISSUE: Whether a mill owner could recover lost profits from a carrier who delayed delivering a broken mill shaft to be used as a model for a new one. RULE: Contract damages are limited to those that: (1) arise naturally from the breach (general damages), or (2) were in the reasonable contemplation of both parties at the time of contracting as the probable result of breach (consequential/special damages). HOLDING: Lost profits were not recoverable because the carrier was not told the mill would be shut down during the delay — the loss did not arise naturally and was not in the reasonable contemplation of the parties. SIGNIFICANCE: The foundational case establishing foreseeability as the limit on consequential contract damages, codified in UCC § 2-715 and Restatement (Second) of Contracts § 351."
+    },
+    {
+      "id": "lucy-zehmer",
+      "source": "Contracts",
+      "title": "Lucy v. Zehmer, 196 Va. 493 (1954)",
+      "content": "ISSUE: Whether a contract for the sale of a farm written on a restaurant receipt was enforceable when the seller claimed it was a joke. RULE: Mutual assent (offer and acceptance) is judged by the objective theory of contracts — what a reasonable person in the offeree's position would believe, not the secret, uncommunicated intent of either party. If a party's words and acts, judged by a reasonable standard, manifest an intention to agree, they are bound even if they secretly intended otherwise. HOLDING: Contract enforceable. Zehmer's outward manifestations — serious discussion, written agreement, wife's signature — would lead a reasonable person to believe a genuine offer was made. SIGNIFICANCE: Establishes the objective theory of mutual assent. The 'reasonable person' standard governs contract formation, not subjective or uncommunicated intent."
+    },
+    {
+      "id": "marbury",
+      "source": "Constitutional Law",
+      "title": "Marbury v. Madison, 5 U.S. 137 (1803)",
+      "content": "ISSUE: Whether the Supreme Court could issue a writ of mandamus ordering Madison to deliver Marbury's judicial commission. RULE: (1) Marbury had a legal right to his commission; (2) A legal remedy must exist for violation of a legal right; (3) However, Section 13 of the Judiciary Act, which granted SCOTUS original mandamus jurisdiction, was unconstitutional because it conflicted with Article III of the Constitution. (4) It is emphatically the province and duty of the Judicial Department to say what the law is. HOLDING: Court could not issue the writ because Section 13 was void. SIGNIFICANCE: Established the power of judicial review — the Supreme Court's authority to strike down legislation that violates the Constitution. Marshall's political genius: affirmed judicial power without directly confronting Jefferson."
+    },
+    {
+      "id": "erie",
+      "source": "Civil Procedure / Federal Courts",
+      "title": "Erie Railroad Co. v. Tompkins, 304 U.S. 64 (1938)",
+      "content": "ISSUE: Whether federal courts sitting in diversity should apply state or federal common law. RULE: Except in matters governed by the Constitution or Acts of Congress, the law to be applied in any case is the law of the state. There is no federal general common law. Federal courts in diversity must apply state substantive law (as declared by the state's highest court) but may apply federal procedural rules under the Rules Enabling Act. HOLDING: Overruled Swift v. Tyson (1842). The federal district court should have applied Pennsylvania law (which would have denied recovery). SIGNIFICANCE: The Erie doctrine requires federal courts to apply state substantive law in diversity cases. The substance/procedure distinction (Erie, Guaranty Trust, Byrd, Hanna) is a major 1L civil procedure topic."
+    },
+    {
+      "id": "hanna",
+      "source": "Civil Procedure",
+      "title": "Hanna v. Plumer, 380 U.S. 460 (1965)",
+      "content": "ISSUE: Whether a Federal Rule of Civil Procedure (Rule 4, service of process) must yield to a conflicting state law. RULE: When a Federal Rule of Civil Procedure directly conflicts with a state rule, the FRCP governs in federal court so long as it does not violate the Rules Enabling Act (i.e., it is 'arguably procedural' and does not abridge, enlarge, or modify substantive rights). The twin aims of Erie — (1) preventing forum shopping and (2) avoiding inequitable administration of the law — apply only when no Federal Rule directly on point. HOLDING: FRCP Rule 4 controls. Federal service rules are valid and do not impermissibly alter substantive rights. SIGNIFICANCE: Created the two-step Hanna framework for Erie analysis: (1) Is there a directly applicable Federal Rule? If yes, apply it unless REA violation. (2) If no Federal Rule, use the Erie/Byrd analysis."
+    },
+    {
+      "id": "brownvboard",
+      "source": "Constitutional Law",
+      "title": "Brown v. Board of Education, 347 U.S. 483 (1954)",
+      "content": "ISSUE: Whether racial segregation in public schools violates the Equal Protection Clause of the Fourteenth Amendment. RULE: The Equal Protection Clause prohibits states from maintaining racially segregated public schools. Separate educational facilities are inherently unequal. The 'separate but equal' doctrine of Plessy v. Ferguson (1896) has no place in public education. HOLDING: Segregated public schools violate the Equal Protection Clause unanimously (Warren, C.J.). Psychological studies (the 'doll test') showed segregation generates feelings of inferiority. SIGNIFICANCE: Landmark equal protection case overruling Plessy v. Ferguson. Applied the strict scrutiny standard to racial classifications. Established that state-sponsored racial segregation in public schools is unconstitutional."
+    },
+    {
+      "id": "griswold",
+      "source": "Constitutional Law",
+      "title": "Griswold v. Connecticut, 381 U.S. 479 (1965)",
+      "content": "ISSUE: Whether a Connecticut law banning contraceptives violates the Constitution. RULE: The Bill of Rights has penumbras (emanations) that create a right to privacy. Specific guarantees of the First, Third, Fourth, Fifth, and Ninth Amendments create 'zones of privacy.' Marriage is a relationship within the protected zone. HOLDING: Connecticut law unconstitutional as applied to married couples. The state cannot regulate the intimate decisions of married couples in the 'sacred precincts of marital bedrooms.' SIGNIFICANCE: Established the constitutional right to privacy from the 'penumbras and emanations' of the Bill of Rights. Foundation for Roe v. Wade, Lawrence v. Texas, and Obergefell v. Hodges. Goldberg's concurrence relied on the Ninth Amendment. Harlan's concurrence relied on substantive due process under the 14th Amendment."
+    },
+    {
+      "id": "nytimes-sullivan",
+      "source": "Constitutional Law / Torts",
+      "title": "New York Times Co. v. Sullivan, 376 U.S. 254 (1964)",
+      "content": "ISSUE: Whether Alabama's defamation law, as applied to a civil rights era newspaper ad, violated the First Amendment. RULE: The First Amendment prohibits a public official from recovering for a defamatory falsehood relating to official conduct unless the official proves 'actual malice' — that the statement was made with knowledge of its falsity or with reckless disregard of whether it was false or not. HOLDING: Sullivan could not recover. The NYT ad contained minor inaccuracies but NYT did not act with actual malice. SIGNIFICANCE: Transformed American defamation law. Creates a spectrum: (1) Public officials — must prove actual malice; (2) Public figures — must prove actual malice (Curtis Publishing); (3) Private figures on matters of public concern — negligence sufficient (Gertz v. Robert Welch, Inc.)."
+    },
+    {
+      "id": "pierson-post",
+      "source": "Property",
+      "title": "Pierson v. Post, 3 Cai. 175 (N.Y. 1805)",
+      "content": "ISSUE: Whether a hunter pursuing a fox acquires a property right in the fox that would prevent another person from killing and taking it. RULE (Majority): Property rights in wild animals (ferae naturae) are acquired only through occupancy — actual physical possession (capture) or mortal wounding coupled with continued pursuit. Mere pursuit is insufficient to establish legal possession. RULE (Dissent/Livingston): Custom among hunters should control — a hunter who is actively pursuing an animal in a reasonable way should have rights superior to an interloper who swoops in and kills it. HOLDING: Pierson wins. Post's pursuit, without capture or mortal wounding, gave him no property right. SIGNIFICANCE: Foundational property case on first-in-time rules, the nature of possession, and the law/custom debate. Raises questions about economic efficiency (who is the better incentivizer?) vs. certainty (clear bright-line rule)."
+    },
+    {
+      "id": "celotex",
+      "source": "Civil Procedure",
+      "title": "Celotex Corp. v. Catrett, 477 U.S. 317 (1986)",
+      "content": "ISSUE: Under Rule 56, can a summary judgment movant meet its burden without producing affirmative evidence negating the nonmovant's claim? RULE: Under Rule 56, the moving party bears the initial burden of informing the court of the basis for its motion and identifying portions of the record showing absence of a genuine dispute. But when the nonmovant bears the burden of proof at trial, the movant need not produce evidence negating the opponent's case — it can simply point to the absence of evidence supporting the nonmovant's case. The nonmovant must then respond with specific facts showing a genuine issue for trial. HOLDING: Celotex met its burden by pointing to the absence of evidence that its products were the source of exposure. SIGNIFICANCE: Defined the movant's burden under Rule 56 and created the framework for summary judgment motions where the opponent bears the ultimate burden of proof."
+    }
+  ]
+}

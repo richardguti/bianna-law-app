@@ -1,0 +1,12 @@
+node_modules/
+.code-review-graph/
+dist/
+dist-react/
+*.log
+.env
+.env.local
+.env.*.local
+*.ico
+*.icns
+make_icon.js
+FUNCTIONAL_AUDIT.md
