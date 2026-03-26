@@ -10,3 +10,5 @@ dist-react/
 *.icns
 make_icon.js
 FUNCTIONAL_AUDIT.md
+dmg-download/
+*.dmg
