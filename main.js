@@ -95,7 +95,7 @@ function ensureBiannaLawDir() {
 }
 
 // ─── IPC: API Key Management ──────────────────────────────────────────────────
-ipcMain.handle('api-key-exists', () => !!(store.get('anthropicApiKey') || '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'));
+ipcMain.handle('api-key-exists', () => !!(store.get('anthropicApiKey')));
 
 ipcMain.handle('api-key-save', (_event, key) => {
   if (!key || typeof key !== 'string' || !key.startsWith('sk-')) {
@@ -122,7 +122,7 @@ const supermemory = new Supermemory({ apiKey: smKey });
 
 // ─── IPC: AI Chat (Dual Model + Supermemory + RAG) ─────────────────────────
 ipcMain.handle('ai-prompt-send', async (_event, { prompt, systemPrompt, mode, modelPreference = 'claude' }) => {
-  const apiKey = (store.get('anthropicApiKey') || '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');
+  const apiKey = (store.get('anthropicApiKey'));
   
   try {
     let memoryContext = '';
@@ -209,7 +209,7 @@ Always be precise with legal terminology. Cite cases and statutes where relevant
 
 // ─── IPC: Document Generation (IRAC .docx) ───────────────────────────────────
 ipcMain.handle('generate-document', async (_event, { caseText, caseName }) => {
-  const apiKey = (store.get('anthropicApiKey') || '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');
+  const apiKey = (store.get('anthropicApiKey'));
   if (!apiKey) {
     return { success: false, error: 'No API key configured. Click Settings to add your Anthropic API key.' };
   }
@@ -475,7 +475,7 @@ ipcMain.handle('notion-sync-quiz', async (_event, { topic, score, total, difficu
 //      - Color-coded priority sections (🔴 High / 🟡 Medium / 🟢 Low)
 //      - Per-week reading tables with volume, difficulty, and due date columns
 ipcMain.handle('organize-syllabus', async (_event, { syllabusText, courseName }) => {
-  const apiKey = (store.get('anthropicApiKey') || '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');
+  const apiKey = (store.get('anthropicApiKey'));
   if (!apiKey) return { success: false, error: 'No API key configured.' };
 
   const notionKey = (store.get('notionApiKey') || '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');
@@ -1004,7 +1004,7 @@ ipcMain.handle('app:diagnostics', async () => {
     platform:         process.platform,
     nodeVersion:      process.version,
     isPackaged:       app.isPackaged,
-    apiKeyPresent:    !!(store.get('anthropicApiKey') || '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'),
+    apiKeyPresent:    !!(store.get('anthropicApiKey')),
     notionKeyPresent: !!(store.get('notionApiKey')    || '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'),
     openClaw: { installed, running, port: OPENCLAW_PORT },
     biannaDir,
@@ -1068,7 +1068,7 @@ ipcMain.handle('scan-legal-files', async () => {
   });
 
   // Ask Claude to classify all files in one shot
-  const apiKey = store.get('anthropicApiKey') || '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';
+  const apiKey = store.get('anthropicApiKey');
   try {
     const Anthropic = require('@anthropic-ai/sdk');
     const client    = new Anthropic.default({ apiKey });
@@ -1192,7 +1192,7 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl }) => {
 
   // 4. Generate outline with Claude
   progress('Generating outline with Claude…', transcripts.length, transcripts.length);
-  const apiKey = store.get('anthropicApiKey') || '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';
+  const apiKey = store.get('anthropicApiKey');
   try {
     const Anthropic  = require('@anthropic-ai/sdk');
     const client     = new Anthropic.default({ apiKey });
