@@ -72,6 +72,7 @@ BIA STYLE OUTPUT: When generating outlines, use this exact four-tier HTML system
 
 export function OutlineGenerator() {
   const apiKey = useAppStore((s) => s.apiKey)
+  const [mobileTab, setMobileTab] = useState<'configure' | 'output'>('configure')
 
   const [subject,      setSubject]      = useState<DocumentSubject>('contracts')
   const [modes,        setModes]        = useState<DocumentMode[]>(['full_outline'])
@@ -164,7 +165,7 @@ export function OutlineGenerator() {
       if (!text) throw new Error('Empty response from API — verify your API key in Settings.')
       return text as string
     },
-    onSuccess: (html) => setOutput(html),
+    onSuccess: (html) => { setOutput(html); setMobileTab('output') },
   })
 
   /* Continue generating (appends to existing output) */
@@ -230,9 +231,26 @@ export function OutlineGenerator() {
   }
 
   return (
-    <div className="flex h-full overflow-hidden">
+    <div className="flex flex-col h-full overflow-hidden">
+      {/* Mobile tab bar */}
+      <div className="lg:hidden flex border-b border-outline-variant/20 bg-surface-container-low shrink-0">
+        <button
+          onClick={() => setMobileTab('configure')}
+          className={`flex-1 py-2.5 text-xs font-label uppercase tracking-widest transition-colors ${mobileTab === 'configure' ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant'}`}
+        >
+          Configure
+        </button>
+        <button
+          onClick={() => setMobileTab('output')}
+          className={`flex-1 py-2.5 text-xs font-label uppercase tracking-widest transition-colors ${mobileTab === 'output' ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant'}`}
+        >
+          Output {generate.isPending && '…'}
+        </button>
+      </div>
+
+      <div className="flex flex-1 overflow-hidden">
       {/* Left panel — controls */}
-      <section className="w-[400px] shrink-0 bg-surface-container-low border-r border-outline-variant/10 p-8 space-y-8 overflow-y-auto no-scrollbar">
+      <section className={`w-full lg:w-[400px] shrink-0 bg-surface-container-low border-r border-outline-variant/10 p-6 lg:p-8 space-y-8 overflow-y-auto no-scrollbar ${mobileTab === 'output' ? 'hidden lg:flex lg:flex-col' : 'flex flex-col'}`}>
         <header>
           <p className="font-label uppercase tracking-widest text-[10px] text-primary font-bold mb-2">Drafting Suite</p>
           <h1 className="font-serif text-3xl text-on-surface leading-tight">Outline Generator</h1>
@@ -390,7 +408,7 @@ export function OutlineGenerator() {
       </section>
 
       {/* Right panel — live preview */}
-      <section className="flex-1 flex flex-col overflow-hidden bg-surface-container-lowest">
+      <section className={`flex-1 flex flex-col overflow-hidden bg-surface-container-lowest ${mobileTab === 'configure' ? 'hidden lg:flex' : 'flex'}`}>
         {/* Toolbar */}
         {output && (
           <div className="flex items-center gap-2 px-6 py-3 border-b border-outline-variant/10 bg-surface-container-low shrink-0">
@@ -460,6 +478,7 @@ export function OutlineGenerator() {
           )}
         </div>
       </section>
+      </div>
     </div>
   )
 }
