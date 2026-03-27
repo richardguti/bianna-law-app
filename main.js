@@ -786,11 +786,22 @@ ipcMain.handle('openclaw:status', async () => {
 // Run the official install script — streams progress back to renderer
 ipcMain.handle('openclaw:install', () => {
   return new Promise((resolve) => {
-    const child = spawnProc(
-      'powershell.exe',
-      ['-NoProfile', '-NonInteractive', '-Command', 'irm https://openclaw.ai/install.ps1 | iex'],
-      { shell: false, windowsHide: false }
-    );
+    const isMac = process.platform === 'darwin';
+    let child;
+    if (isMac) {
+      // macOS: try shell installer, fall back to npm install -g
+      child = spawnProc(
+        '/bin/bash',
+        ['-c', 'curl -fsSL https://openclaw.ai/install.sh | bash || npm install -g openclaw'],
+        { shell: false }
+      );
+    } else {
+      child = spawnProc(
+        'powershell.exe',
+        ['-NoProfile', '-NonInteractive', '-Command', 'irm https://openclaw.ai/install.ps1 | iex'],
+        { shell: false, windowsHide: false }
+      );
+    }
     let output = '';
     const onData = (d) => {
       const chunk = d.toString();
@@ -816,12 +827,15 @@ ipcMain.handle('openclaw:start-gateway', () => {
   return new Promise(async (resolve) => {
     const os = require('os');
 
-    // Build an augmented PATH that includes the most likely npm global bin dirs
-    const npmGlobalBin = path.join(os.homedir(), 'AppData', 'Roaming', 'npm');
+    // Build an augmented PATH that includes the most likely npm global bin dirs (cross-platform)
+    const isMac = process.platform === 'darwin';
+    const sep   = isMac ? ':' : ';';
+    const npmGlobalBin = isMac
+      ? ['/usr/local/bin', '/opt/homebrew/bin', path.join(os.homedir(), '.npm-global', 'bin')]
+      : [path.join(os.homedir(), 'AppData', 'Roaming', 'npm')];
     const augmentedEnv = {
       ...process.env,
-      PATH: [process.env.PATH, npmGlobalBin, path.join(npmGlobalBin, 'node_modules', '.bin')]
-        .filter(Boolean).join(';'),
+      PATH: [process.env.PATH, ...npmGlobalBin].filter(Boolean).join(sep),
     };
 
     function trySpawn(cmd, args) {
@@ -859,10 +873,12 @@ ipcMain.handle('openclaw:start-gateway', () => {
 ipcMain.handle('openclaw:get-dashboard-url', () => {
   const { exec } = require('child_process');
   const os = require('os');
-  const npmGlobalBin = path.join(os.homedir(), 'AppData', 'Roaming', 'npm');
+  const isMacDash = process.platform === 'darwin';
+  const macBins   = ['/usr/local/bin', '/opt/homebrew/bin', path.join(os.homedir(), '.npm-global', 'bin')];
+  const winBin    = path.join(os.homedir(), 'AppData', 'Roaming', 'npm');
   const env = {
     ...process.env,
-    PATH: [process.env.PATH, npmGlobalBin].filter(Boolean).join(';'),
+    PATH: [process.env.PATH, ...(isMacDash ? macBins : [winBin])].filter(Boolean).join(isMacDash ? ':' : ';'),
   };
   return new Promise((resolve) => {
     exec('openclaw dashboard --no-open', { env, timeout: 8000 }, (err, stdout) => {
@@ -878,7 +894,11 @@ ipcMain.handle('openclaw:get-dashboard-url', () => {
 // The user only needs to type y / n if prompted and press Enter.
 ipcMain.handle('openclaw:open-terminal', () => {
   const { exec } = require('child_process');
-  exec(`start cmd /k "openclaw gateway run --token ${OPENCLAW_GATEWAY_TOKEN}"`, { shell: true });
+  if (process.platform === 'darwin') {
+    exec(`osascript -e 'tell application "Terminal" to do script "openclaw gateway run --token ${OPENCLAW_GATEWAY_TOKEN}"'`);
+  } else {
+    exec(`start cmd /k "openclaw gateway run --token ${OPENCLAW_GATEWAY_TOKEN}"`, { shell: true });
+  }
   return { success: true };
 });
 

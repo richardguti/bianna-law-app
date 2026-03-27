@@ -48,6 +48,8 @@ export function DocumentVault() {
   const [upMode,      setUpMode]      = useState<DocumentMode>('full_outline')
   const [upText,      setUpText]      = useState('')
   const [upFileName,  setUpFileName]  = useState<string | null>(null)
+  const [renamingId,  setRenamingId]  = useState<string | null>(null)
+  const [renameVal,   setRenameVal]   = useState('')
 
   const { data: docs = [] } = useQuery<DocumentRow[]>({
     queryKey: ['documents', filterSub, filterMode, search],
@@ -68,6 +70,17 @@ export function DocumentVault() {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['documents'] })
       if (viewId) { setViewId(null); setViewContent('') }
+    },
+  })
+
+  const renameDoc = useMutation({
+    mutationFn: async ({ id, topic }: { id: string; topic: string }) => {
+      await supabase.from('documents').update({ topic }).eq('id', id)
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['documents'] })
+      setRenamingId(null)
+      setRenameVal('')
     },
   })
 
@@ -174,7 +187,24 @@ export function DocumentVault() {
                     <div className="flex items-start gap-3 mb-3">
                       <span className="material-symbols-outlined text-primary-container text-xl mt-0.5">{MODE_ICON[doc.mode as DocumentMode]}</span>
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm text-on-surface truncate">{doc.topic}</p>
+                        {renamingId === doc.id ? (
+                          <form
+                            onSubmit={(e) => { e.preventDefault(); if (renameVal.trim()) renameDoc.mutate({ id: doc.id, topic: renameVal.trim() }) }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex gap-1"
+                          >
+                            <input
+                              autoFocus
+                              value={renameVal}
+                              onChange={(e) => setRenameVal(e.target.value)}
+                              className="flex-1 min-w-0 text-sm bg-surface-container-low border border-primary rounded px-2 py-0.5 outline-none"
+                            />
+                            <button type="submit" className="text-primary"><span className="material-symbols-outlined text-sm">check</span></button>
+                            <button type="button" onClick={() => setRenamingId(null)} className="text-on-surface-variant"><span className="material-symbols-outlined text-sm">close</span></button>
+                          </form>
+                        ) : (
+                          <p className="font-semibold text-sm text-on-surface truncate">{doc.topic}</p>
+                        )}
                         <p className="text-[10px] text-on-surface-variant mt-0.5">
                           {new Date(doc.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                         </p>
@@ -189,6 +219,13 @@ export function DocumentVault() {
                       </span>
                     </div>
                     <div className="flex gap-1 mt-3 pt-3 border-t border-outline-variant/10">
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setRenamingId(doc.id); setRenameVal(doc.topic) }}
+                        className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-on-surface-variant hover:bg-surface-container-high transition-colors"
+                        title="Rename"
+                      >
+                        <span className="material-symbols-outlined text-sm">edit</span>
+                      </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); copyHtml(doc.html_content) }}
                         className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-on-surface-variant hover:bg-surface-container-high transition-colors"
