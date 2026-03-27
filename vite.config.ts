@@ -10,6 +10,16 @@ export default defineConfig({
   build: {
     outDir: isPWA ? 'dist-pwa' : 'dist-react',
   },
+  // Pre-bundle React dependencies so Rolldown (Vite 8) can resolve them correctly.
+  // Without this, Rolldown fails with "cannot resolve import 'react'" on some machines.
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-dom/client',
+      'react-router-dom',
+    ],
+  },
   plugins: [
     react(),
     tailwindcss(),

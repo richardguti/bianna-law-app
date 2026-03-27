@@ -60,7 +60,35 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadFile(path.join(__dirname, 'dist-react', 'index.html'));
+  const indexPath = path.join(__dirname, 'dist-react', 'index.html');
+
+  // Guard: show a clear error dialog if the built UI is missing (e.g. electron-builder
+  // ran before `vite build`, or the PWA build was packaged instead of the Electron build).
+  if (!fs.existsSync(indexPath)) {
+    app.whenReady().then(() => {
+      dialog.showErrorBox(
+        'App failed to load',
+        'dist-react/index.html is missing.\n\n' +
+        'Please rebuild with:\n  npm install\n  npm run build:mac\n\n' +
+        'Do NOT use "npm run build:pwa" — that build is for the web app only.'
+      );
+      app.quit();
+    });
+    return;
+  }
+
+  mainWindow.loadFile(indexPath);
+
+  // If the page fails to load (e.g. built with wrong base path), show a clear error.
+  mainWindow.webContents.on('did-fail-load', (_event, errorCode, errorDesc, validatedURL) => {
+    if (errorCode === -6 || errorCode === -3) return; // ERR_FILE_NOT_FOUND / ERR_ABORTED on navigation — ignore
+    const msg =
+      `The app UI failed to load (${errorCode}: ${errorDesc}).\n\n` +
+      `URL attempted: ${validatedURL}\n\n` +
+      'This usually means the app was packaged with the PWA build instead of the\n' +
+      'Electron build. Rebuild with:\n  npm install\n  npm run build:mac';
+    dialog.showErrorBox('App load error', msg);
+  });
 
   // DevTools: open in dev or when launched with --devtools flag
   if (!app.isPackaged || process.argv.includes('--devtools')) {
