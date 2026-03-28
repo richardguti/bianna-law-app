@@ -130,10 +130,13 @@ export function OutlineGenerator() {
 
       const chipList  = chips.length ? `Topics: ${chips.join(', ')}` : ''
       const modeDescs = modes.map((m) => MODES.find((x) => x.value === m)?.label ?? m).join(' + ')
-      // Custom mode: use free-form prompt directly; otherwise build structured request
-      const prompt = customPrompt.trim()
+      const basePrompt = `Generate a ${modeDescs} for a 1L law student on the following.\n\nSubject: ${subject}\n${topic ? `Topic: ${topic}\n` : ''}${chipList}\n${notes ? `Notes:\n${notes}` : ''}`
+      // Custom mode: use free-form prompt entirely; otherwise append extra instructions if provided
+      const prompt = modes.includes('custom') && customPrompt.trim()
         ? customPrompt.trim()
-        : `Generate a ${modeDescs} for a 1L law student on the following.\n\nSubject: ${subject}\n${topic ? `Topic: ${topic}\n` : ''}${chipList}\n${notes ? `Notes:\n${notes}` : ''}`
+        : customPrompt.trim()
+          ? `${basePrompt}\n\nAdditional instructions: ${customPrompt.trim()}`
+          : basePrompt
 
       const userContent: unknown[] = [{ type: 'text', text: prompt }]
       if (attachedData) userContent.unshift(attachedData)
@@ -308,11 +311,11 @@ export function OutlineGenerator() {
           </div>
         </div>
 
-        {/* Custom free-form request (shown when Custom mode selected OR always visible) */}
+        {/* Custom mode: full override prompt */}
         {modes.includes('custom') && (
-          <div className="space-y-3">
+          <div className="space-y-2">
             <label className="font-label uppercase tracking-widest text-[10px] text-on-surface-variant font-bold">
-              Custom Request
+              Custom Request <span className="normal-case text-[9px] opacity-60">(overrides all fields below)</span>
             </label>
             <textarea
               value={customPrompt}
@@ -321,7 +324,6 @@ export function OutlineGenerator() {
               placeholder="Describe exactly what you need — e.g. 'Compare IRAC and CREAC for a torts negligence issue involving a slip-and-fall with contributory negligence'"
               className="w-full bg-surface-container-lowest border border-outline-variant/20 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-lg px-4 py-3 text-sm outline-none resize-none transition-all"
             />
-            <p className="text-[9px] text-on-surface-variant/60">This overrides subject/topic — use it to generate anything.</p>
           </div>
         )}
 
@@ -384,6 +386,23 @@ export function OutlineGenerator() {
             </button>
           )}
         </div>
+
+        {/* Chat prompt — always visible, appends extra instructions to any generation */}
+        {!modes.includes('custom') && (
+          <div className="space-y-2">
+            <label className="font-label uppercase tracking-widest text-[10px] text-on-surface-variant font-bold flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-sm text-primary">chat</span>
+              Additional Instructions
+            </label>
+            <textarea
+              value={customPrompt}
+              onChange={(e) => setCustomPrompt(e.target.value)}
+              rows={3}
+              placeholder="Optional — add specific requests, e.g. 'Focus on minority rule distinctions' or 'Include professor Suárez's emphasis on policy rationale'…"
+              className="w-full bg-surface-container-lowest border border-outline-variant/20 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-lg px-4 py-3 text-sm outline-none resize-none transition-all"
+            />
+          </div>
+        )}
 
         {/* Cost + Generate */}
         <div className="pt-4 border-t border-outline-variant/10">

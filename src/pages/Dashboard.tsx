@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { supabase, BIANNA_USER_ID, type DocumentRow, type CaseRow } from '../lib/supabase'
@@ -47,9 +47,9 @@ function ProgressBar({ label, pct, count }: { label: string; pct: number; count:
   )
 }
 
-/* ─── Per-course progress bar (queries Supabase for real counts) ─────────── */
+/* ─── Per-course progress bar — Supabase cases + localStorage reading assignments ─ */
 function CourseProgressBar({ course }: { course: LocalCourse }) {
-  const { data } = useQuery({
+  const { data: sbData } = useQuery({
     queryKey: ['course-cases', course.id],
     queryFn: async () => {
       const { data } = await supabase
@@ -60,23 +60,56 @@ function CourseProgressBar({ course }: { course: LocalCourse }) {
       return (data ?? []) as { status: string }[]
     },
   })
-  const total = data?.length ?? 0
-  const read  = data?.filter((c) => c.status === 'read').length ?? 0
-  const pct   = total ? Math.round((read / total) * 100) : 0
-  return <ProgressBar label={course.name} pct={pct} count={`${read} / ${total} cases`} />
+
+  const { total, read } = useMemo(() => {
+    // Prefer Supabase if it has data
+    if (sbData && sbData.length > 0) {
+      return { total: sbData.length, read: sbData.filter((c) => c.status === 'read').length }
+    }
+    // Fallback: count localStorage reading assignments for this course
+    try {
+      const all = JSON.parse(localStorage.getItem('slp_assignments') ?? '[]') as Array<{
+        course_id: string | null; type: string; completed?: boolean
+      }>
+      const readings = all.filter((a) => a.course_id === course.id && a.type === 'reading')
+      return { total: readings.length, read: readings.filter((a) => a.completed).length }
+    } catch { return { total: 0, read: 0 } }
+  }, [sbData, course.id])
+
+  const pct = total ? Math.round((read / total) * 100) : 0
+  return <ProgressBar label={course.name} pct={pct} count={`${read} / ${total} readings`} />
 }
 
 export function Dashboard() {
   const navigate = useNavigate()
+  const [liiQuery, setLiiQuery] = useState('')
+  function openLii() {
+    const url = liiQuery.trim()
+      ? `https://www.law.cornell.edu/search/site?q=${encodeURIComponent(liiQuery.trim())}`
+      : 'https://www.law.cornell.edu'
+    window.open(url, '_blank')
+  }
 
-  /* Calendar events from localStorage */
+  /* Calendar events from localStorage — refreshes whenever user navigates back */
   const [upcomingEvents, setUpcomingEvents] = useState<LocalAssignment[]>([])
-  useEffect(() => {
+  const loadEvents = () => {
     try {
       const all: LocalAssignment[] = JSON.parse(localStorage.getItem('slp_assignments') ?? '[]')
       const today = new Date().toISOString().slice(0, 10)
       setUpcomingEvents(all.filter((a) => a.due_date >= today).sort((a, b) => a.due_date.localeCompare(b.due_date)).slice(0, 5))
     } catch { /* ignore */ }
+  }
+  useEffect(() => {
+    loadEvents()
+    const onVisible = () => { if (!document.hidden) loadEvents() }
+    const onRefresh = () => loadEvents()
+    document.addEventListener('visibilitychange', onVisible)
+    window.addEventListener('slp:refresh', onRefresh)
+    return () => {
+      document.removeEventListener('visibilitychange', onVisible)
+      window.removeEventListener('slp:refresh', onRefresh)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   /* Reading progress per course — deduplicate by name */
@@ -178,16 +211,22 @@ export function Dashboard() {
             </div>
           }
         />
-        <StatCard
-          label="Streak"
-          value={stats?.streak ?? 0}
-          sub={
-            <div className="flex items-center gap-1 mb-1">
-              <span className="material-symbols-outlined text-primary filled" style={{ fontSize: 20 }}>local_fire_department</span>
-              <span className="text-xs font-medium text-on-surface-variant">Days</span>
-            </div>
-          }
-        />
+        <div className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 shadow-[var(--shadow-sm)]">
+          <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Legal Research · LII</p>
+          <div className="flex gap-2 mt-3">
+            <input
+              value={liiQuery}
+              onChange={(e) => setLiiQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && openLii()}
+              placeholder="Search Cornell LII…"
+              className="flex-1 min-w-0 bg-surface-container-low rounded-lg px-3 py-1.5 text-sm outline-none border border-outline-variant/20 focus:border-primary transition-colors"
+            />
+            <button onClick={openLii} className="px-3 py-1.5 bg-primary text-on-primary rounded-lg text-xs font-bold hover:opacity-90 transition-opacity shrink-0">
+              <span className="material-symbols-outlined text-sm">search</span>
+            </button>
+          </div>
+          <button onClick={() => openLii()} className="mt-2 text-[10px] text-primary underline font-label">Open LII →</button>
+        </div>
       </div>
 
       {/* Main grid */}

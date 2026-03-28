@@ -349,7 +349,7 @@ export function ReadingTracker() {
           </div>
           <div className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/10 text-center">
             <p className="text-3xl font-serif text-primary">★ {hookCases}</p>
-            <p className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1">Prof. Hooks</p>
+            <p className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1">MSJ / Legal Writing</p>
           </div>
         </div>
       )}
@@ -446,7 +446,7 @@ export function ReadingTracker() {
                 filterHook ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container'
               }`}
             >
-              ★ Prof. Hooks Only
+              ★ MSJ Tracker
             </button>
           </div>
 
