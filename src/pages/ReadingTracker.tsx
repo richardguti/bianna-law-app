@@ -36,7 +36,8 @@ const STATUS_LABEL: Record<CaseStatus, string> = {
 }
 
 /* ─── Syllabus Parse prompt ──────────────────────────────────────────────── */
-const PARSE_SYSTEM = `Extract a structured course reading list from the provided law school syllabus. Respond ONLY with valid JSON (no markdown fences):
+const PARSE_SYSTEM = `Extract a structured course reading list from the provided law school document. This may be a full syllabus OR a reading checklist — handle both.
+Respond ONLY with valid JSON (no markdown fences):
 {
   "courseName": "...",
   "professor": "...",
@@ -47,12 +48,15 @@ const PARSE_SYSTEM = `Extract a structured course reading list from the provided
   "cases": [{"week":1,"date":"YYYY-MM-DD","caseName":"...","doctrineArea":"...","isProfessorHook":false}]
 }
 Rules:
+- Extract "courseName" from the document title or header (e.g. "CONSTITUTIONAL LAW READING CHECKLIST" → "Constitutional Law", "CRIMINAL LAW READING CHECKLIST" → "Criminal Law", "PROPERTY READING CHECKLIST" → "Property").
+- "professor" and "semester" may be null if not present (reading checklists often omit them).
 - "type" must be one of: midterm, final, quiz, assignment, reading.
-- Extract ALL graded events into "assignments".
-- For syllabi with page ranges (e.g. "Pages 1-53"), create one "cases" entry per week using the page range as caseName (e.g. "Pages 1–53") and the week's topic or subject area as doctrineArea.
-- Derive exact calendar dates (YYYY-MM-DD) from week headings. For Spring 2026, Week 1 starting JAN 13 = 2026-01-13.
-- If a week has no cases or readings, still create a placeholder entry with caseName = "Week N Readings".
-- "cases" must never be null or missing — use [] only if the syllabus has truly zero content.`
+- Extract ALL graded events (exams, quizzes, papers) into "assignments". Reading checklists may have none — use [].
+- For EACH dated reading entry, create a "cases" entry. Use the page range or description as "caseName" and the weekly topic as "doctrineArea".
+- Include the EXACT dates from the document (e.g. "Jan. 12" → "2026-01-12", "Jan. 14" → "2026-01-14"). Spring 2026 semester.
+- "caseName" must be descriptive: include page range AND case names if listed (e.g. "Pages 1–37 (Marbury v. Madison, Martin v. Hunter's Lessee)").
+- Skip "NO CLASS" entries — do not add them as cases.
+- "cases" must never be null — use [] only if the document has truly zero content.`
 
 ///////////////////////////////////////////////////////////
 // Calendar ICS Helper
@@ -67,7 +71,7 @@ function generateICSAndDownload(parsed: any) {
       icsEvents += [
         'BEGIN:VEVENT',
         `DTSTART;VALUE=DATE:${dateStr}`,
-        `SUMMARY:📖 Reading: ${c.caseName.substring(0, 50)}`,
+        `SUMMARY:📖 ${c.caseName.substring(0, 60)}`,
         'BEGIN:VALARM',
         'TRIGGER:-PT10H', // Reminder 10 hours before
         'DESCRIPTION:Law School Reading Reminder',
@@ -182,22 +186,41 @@ export function ReadingTracker() {
       if (start < 0 || end < start) throw new Error('Claude returned an unexpected format — could not parse syllabus JSON.')
       const parsed = JSON.parse(rawText.slice(start, end + 1))
 
-      // Generate a stable UUID for the course (used in both localStorage and Supabase cases)
-      const courseId = crypto.randomUUID()
+      const parsedName: string = parsed.courseName || attachedFile?.replace(/\.(pdf|docx|txt|md)$/i, '').replace(/reading\s*checklist/i, '').replace(/_/g, ' ').trim() || 'Unknown Course'
       const finalAssignment = (parsed.assignments ?? []).find(
         (a: { type: string }) => a.type === 'final'
       )
 
-      // 1. Save course to localStorage
+      // Match to an existing course with similar name (avoids duplicates)
+      const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, ' ').trim()
+      const existingCourse = courses.find((c) => {
+        const a = normalize(c.name); const b = normalize(parsedName)
+        return a === b || a.includes(b.split(' ')[0]) || b.includes(a.split(' ')[0])
+      })
+      const courseId   = existingCourse?.id ?? crypto.randomUUID()
+      const isNewCourse = !existingCourse
+
+      // 1. Save course to localStorage (skip if matched existing)
       const newCourse: LocalCourse = {
         id:         courseId,
-        name:       parsed.courseName || 'Unknown Course',
-        professor:  parsed.professor ?? null,
-        exam_date:  finalAssignment?.dueDate ?? null,
-        semester:   parsed.semester ?? 'Spring 2026',
-        created_at: new Date().toISOString(),
+        name:       existingCourse?.name ?? parsedName,
+        professor:  parsed.professor ?? existingCourse?.professor ?? null,
+        exam_date:  finalAssignment?.dueDate ?? existingCourse?.exam_date ?? null,
+        semester:   parsed.semester ?? existingCourse?.semester ?? 'Spring 2026',
+        created_at: existingCourse?.created_at ?? new Date().toISOString(),
       }
-      setCourses((prev) => { const next = [...prev, newCourse]; saveCourses(next); return next })
+      if (isNewCourse) {
+        setCourses((prev) => { const next = [...prev, newCourse]; saveCourses(next); return next })
+      } else {
+        // Update existing course exam_date if we just learned it
+        if (finalAssignment?.dueDate && !existingCourse?.exam_date) {
+          setCourses((prev) => {
+            const next = prev.map((c) => c.id === courseId ? { ...c, exam_date: finalAssignment.dueDate } : c)
+            saveCourses(next); return next
+          })
+        }
+        setActiveTab(courseId)
+      }
 
       // Push course info to OpenClaw long-term memory so all AI features know Bianna's schedule
       ;(window as any).seniorPartner?.openClawMemoryWrite?.({
@@ -242,12 +265,12 @@ export function ReadingTracker() {
       }
 
       // 4. Sync case readings into slp_assignments so Calendar shows them with exact dates
-      //    (Calendar already reads this key — no extra code needed there)
+      //    Title is prefixed with course name: "Constitutional Law — Pages 1–37 (Marbury v. Madison)"
       const caseReadings = (parsed.cases ?? [])
-        .filter((c: { date?: string }) => c.date)
+        .filter((c: { date?: string; caseName?: string }) => c.date && c.caseName && !/no class/i.test(c.caseName))
         .map((c: { caseName: string; date: string; doctrineArea?: string }) => ({
           id:        crypto.randomUUID(),
-          title:     c.caseName,
+          title:     `${newCourse.name} — ${c.caseName}`,
           type:      'reading' as const,
           due_date:  c.date,
           course_id: courseId,
