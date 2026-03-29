@@ -60,7 +60,9 @@
     "publish": {
       "provider": "github",
       "owner": "richardguti",
-      "repo": "bianna-law-app"
+      "repo": "bianna-law-app",
+      "draft": false,
+      "prerelease": false
     }
   },
   "keywords": [
