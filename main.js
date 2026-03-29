@@ -10,6 +10,14 @@ const path   = require('path');
 const fs     = require('fs');
 const Store  = require('electron-store');
 
+// ─── Auto Updater ─────────────────────────────────────────────────────────────
+const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+autoUpdater.autoDownload = true;
+autoUpdater.autoInstallOnAppQuit = true;
+
 // ─── Persistent Store ────────────────────────────────────────────────────────
 const store = new Store({
   encryptionKey: 'slp-bianna-secure-2024',
@@ -71,6 +79,31 @@ function createWindow() {
 app.whenReady().then(() => {
   ensureBiannaLawDir();
   createWindow();
+
+  // ── OTA Updates ──────────────────────────────────────────────────────────
+  autoUpdater.on('update-downloaded', (info) => {
+    dialog.showMessageBox(mainWindow, {
+      type: 'info',
+      title: 'Update Ready — Senior Law Partner',
+      message: `Version ${info.version} has been downloaded and is ready to install.`,
+      detail: 'Click "Restart & Update" to apply the update now, or "Later" to install on next launch.',
+      buttons: ['Restart & Update', 'Later'],
+      defaultId: 0,
+      icon: path.join(__dirname, 'assets', 'icon.png'),
+    }).then(({ response }) => {
+      if (response === 0) autoUpdater.quitAndInstall(false, true);
+    });
+  });
+
+  autoUpdater.on('error', (err) => {
+    log.error('Auto-updater error:', err);
+  });
+
+  // Check 8 seconds after launch (let app finish loading), then every 4 hours
+  if (app.isPackaged) {
+    setTimeout(() => autoUpdater.checkForUpdatesAndNotify(), 8000);
+    setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 4 * 60 * 60 * 1000);
+  }
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

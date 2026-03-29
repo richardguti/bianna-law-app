@@ -1,6 +1,6 @@
 {
   "name": "senior-law-partner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A local AI legal mentor and study interface for 1L law students.",
   "main": "main.js",
   "author": "Bianna",
@@ -45,13 +45,8 @@
     },
     "mac": {
       "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "arm64",
-            "x64"
-          ]
-        }
+        { "target": "dmg", "arch": ["arm64", "x64"] },
+        { "target": "zip", "arch": ["arm64", "x64"] }
       ],
       "icon": "assets/icon.icns",
       "category": "public.app-category.education",
@@ -61,6 +56,11 @@
     "dmg": {
       "title": "Senior Law Partner",
       "backgroundColor": "#1a1a2e"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "richardguti",
+      "repo": "bianna-law-app"
     }
   },
   "keywords": [
@@ -98,7 +98,9 @@
     "@supabase/supabase-js": "^2.99.3",
     "@tanstack/react-query": "^5.95.0",
     "docx": "^9.6.1",
+    "electron-log": "^5.4.3",
     "electron-store": "^8.2.0",
+    "electron-updater": "^6.8.3",
     "google-auth-library": "^10.6.2",
     "googleapis": "^171.4.0",
     "lucide-react": "^0.577.0",

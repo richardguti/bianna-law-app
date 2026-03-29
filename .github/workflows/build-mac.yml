@@ -5,6 +5,9 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
+permissions:
+  contents: write   # required to create GitHub Releases
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -40,14 +43,18 @@ jobs:
           sips -z 1024 1024 assets/icon.png --out assets/icon.iconset/icon_512x512@2x.png 2>/dev/null || true
           iconutil -c icns assets/icon.iconset -o assets/icon.icns || true
 
-      - name: Build Vite + Electron for macOS
-        run: npm run build:mac
+      - name: Build Vite
+        run: npx vite build
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-      - name: Upload DMG artifact
+      - name: Build Electron + publish to GitHub Releases
+        run: npx electron-builder --mac --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload DMG as artifact (backup)
         uses: actions/upload-artifact@v4
         with:
           name: Senior-Law-Partner-macOS
