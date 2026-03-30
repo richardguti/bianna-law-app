@@ -36,8 +36,7 @@
       "!**/.github/**",
       "!**/coverage/**",
       "!**/*.d.ts",
-      "!**/*.ts",
-      "!**/src/**"
+      "!src/**"
     ],
     "win": {
       "target": "dir",
