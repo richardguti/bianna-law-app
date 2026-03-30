@@ -496,6 +496,43 @@ export function OutlineGenerator() {
             </div>
           )}
         </div>
+
+        {/* Chat input bar — always visible at bottom of right panel */}
+        <div className="shrink-0 border-t border-outline-variant/10 bg-surface-container-low px-4 py-3">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              if (!customPrompt.trim() && !generate.isPending) generate.mutate()
+              else if (customPrompt.trim()) generate.mutate()
+            }}
+            className="flex items-end gap-2 max-w-3xl mx-auto"
+          >
+            <textarea
+              value={customPrompt}
+              onChange={(e) => setCustomPrompt(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault()
+                  generate.mutate()
+                }
+              }}
+              rows={1}
+              placeholder={output ? 'Ask a follow-up or refinement…' : 'Type a custom prompt or just hit Generate →'}
+              className="flex-1 bg-surface-container-lowest border border-outline-variant/20 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl px-4 py-2.5 text-sm outline-none resize-none transition-all"
+              style={{ maxHeight: '120px', overflowY: 'auto' }}
+            />
+            <button
+              type="submit"
+              disabled={generate.isPending || !apiKey}
+              className="shrink-0 p-2.5 bg-primary text-on-primary rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40"
+            >
+              <span className="material-symbols-outlined text-xl">
+                {generate.isPending ? 'hourglass_empty' : 'send'}
+              </span>
+            </button>
+          </form>
+          <p className="text-[10px] text-on-surface-variant/50 text-center mt-1.5">Shift+Enter for new line · Enter to send</p>
+        </div>
       </section>
       </div>
     </div>
