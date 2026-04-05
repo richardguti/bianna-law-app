@@ -18,8 +18,9 @@ try {
   const log = require('electron-log');
   autoUpdater.logger = log;
   autoUpdater.logger.transports.file.level = 'info';
-  autoUpdater.autoDownload = true;
-  autoUpdater.autoInstallOnAppQuit = true;
+  // Disable autoDownload on macOS because unsigned ZIP updates fail
+  autoUpdater.autoDownload = process.platform !== 'darwin';
+  autoUpdater.autoInstallOnAppQuit = process.platform !== 'darwin';
 } catch (e) {
   console.warn('[updater] electron-updater failed to load:', e.message);
 }
@@ -97,19 +98,40 @@ app.whenReady().then(() => {
 
   // ── OTA Updates ──────────────────────────────────────────────────────────
   if (autoUpdater) {
-    autoUpdater.on('update-downloaded', (info) => {
-      dialog.showMessageBox(mainWindow, {
-        type: 'info',
-        title: 'Update Ready — Senior Law Partner',
-        message: `Version ${info.version} has been downloaded and is ready to install.`,
-        detail: 'Click "Restart & Update" to apply the update now, or "Later" to install on next launch.',
-        buttons: ['Restart & Update', 'Later'],
-        defaultId: 0,
-        icon: path.join(__dirname, 'assets', 'icon.png'),
-      }).then(({ response }) => {
-        if (response === 0) autoUpdater.quitAndInstall(false, true);
+    if (process.platform === 'darwin') {
+      // macOS: Notify about update and redirect to GitHub Releases
+      autoUpdater.on('update-available', (info) => {
+        dialog.showMessageBox(mainWindow, {
+          type: 'info',
+          title: 'Update Available — Senior Law Partner',
+          message: `Version ${info.version} is available!`,
+          detail: 'Because you are using macOS, you must download the update manually using Safari.\n\nClick "Download Update" to open the latest release page.',
+          buttons: ['Download Update', 'Later'],
+          defaultId: 0,
+          cancelId: 1,
+          icon: path.join(__dirname, 'assets', 'icon.png'),
+        }).then(({ response }) => {
+          if (response === 0) {
+            shell.openExternal('https://github.com/richardguti/bianna-law-app/releases/latest');
+          }
+        });
       });
-    });
+    } else {
+      // Windows / Linux: standard background download and install
+      autoUpdater.on('update-downloaded', (info) => {
+        dialog.showMessageBox(mainWindow, {
+          type: 'info',
+          title: 'Update Ready — Senior Law Partner',
+          message: `Version ${info.version} has been downloaded and is ready to install.`,
+          detail: 'Click "Restart & Update" to apply the update now, or "Later" to install on next launch.',
+          buttons: ['Restart & Update', 'Later'],
+          defaultId: 0,
+          icon: path.join(__dirname, 'assets', 'icon.png'),
+        }).then(({ response }) => {
+          if (response === 0) autoUpdater.quitAndInstall(false, true);
+        });
+      });
+    }
 
     autoUpdater.on('error', (err) => {
       console.error('[updater] error:', err);

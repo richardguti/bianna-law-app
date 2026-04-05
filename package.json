@@ -27,7 +27,7 @@
       "assets/**/*",
       "legal-data/**/*",
       "skills/**/*",
-      "!**/*.{md,markdown,txt,log,map}",
+      "!**/*.{md,markdown,log,map}",
       "!**/test{s,}/**",
       "!**/__test{s,}__/**",
       "!**/docs/**",
