@@ -71,6 +71,13 @@
       "owner": "richardguti",
       "repo": "bianna-law-app",
       "releaseType": "release"
+    },
+    "protocols": {
+      "name": "Senior Law Partner",
+      "schemes": [
+        "seniorpartner",
+        "biannalaw"
+      ]
     }
   },
   "keywords": [

@@ -90,6 +90,26 @@ function createWindow() {
   globalShortcut.register('F12', () => {
     if (mainWindow) mainWindow.webContents.toggleDevTools();
   });
+
+  // Intercept new window creations (e.g. target="_blank") and route them to default browser
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('mailto:')) {
+      shell.openExternal(url).catch(e => console.error('Failed to open external url', e));
+    }
+    return { action: 'deny' };
+  });
+
+  // Prevent main window from accidentally navigating away or treating deep links improperly
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    // allow file:// (local React dev or built app)
+    if (url.startsWith('file://')) return;
+    if (url.startsWith('http://localhost') || url.startsWith('http://127.0.0.1')) return;
+    
+    event.preventDefault();
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('mailto:')) {
+      shell.openExternal(url).catch(e => console.error('Failed to navigate to external url', e));
+    }
+  });
 }
 
 app.whenReady().then(() => {
@@ -108,8 +128,7 @@ app.whenReady().then(() => {
           detail: 'Because you are using macOS, you must download the update manually using Safari.\n\nClick "Download Update" to open the latest release page.',
           buttons: ['Download Update', 'Later'],
           defaultId: 0,
-          cancelId: 1,
-          icon: path.join(__dirname, 'assets', 'icon.png'),
+          cancelId: 1
         }).then(({ response }) => {
           if (response === 0) {
             shell.openExternal('https://github.com/richardguti/bianna-law-app/releases/latest');
@@ -139,9 +158,18 @@ app.whenReady().then(() => {
 
     // Check 8 seconds after launch (let app finish loading), then every 4 hours
     if (app.isPackaged) {
-      setTimeout(() => autoUpdater.checkForUpdatesAndNotify(), 8000);
-      setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 4 * 60 * 60 * 1000);
+      setTimeout(() => {
+        autoUpdater.checkForUpdatesAndNotify().catch(e => console.warn('[updater] manual catch:', e.message));
+      }, 8000);
+      setInterval(() => {
+        autoUpdater.checkForUpdatesAndNotify().catch(e => console.warn('[updater] manual catch:', e.message));
+      }, 4 * 60 * 60 * 1000);
     }
+  }
+
+  // Register the protocol correctly for macOS so Safari doesn't throw a generic error if initiated
+  if (!app.isDefaultProtocolClient('seniorpartner')) {
+    app.setAsDefaultProtocolClient('seniorpartner');
   }
 
   app.on('activate', () => {
