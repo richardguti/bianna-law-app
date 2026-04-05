@@ -11,12 +11,18 @@ const fs     = require('fs');
 const Store  = require('electron-store');
 
 // ─── Auto Updater ─────────────────────────────────────────────────────────────
-const { autoUpdater } = require('electron-updater');
-const log = require('electron-log');
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
-autoUpdater.autoDownload = true;
-autoUpdater.autoInstallOnAppQuit = true;
+let autoUpdater = null;
+try {
+  const updaterModule = require('electron-updater');
+  autoUpdater = updaterModule.autoUpdater;
+  const log = require('electron-log');
+  autoUpdater.logger = log;
+  autoUpdater.logger.transports.file.level = 'info';
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
+} catch (e) {
+  console.warn('[updater] electron-updater failed to load:', e.message);
+}
 
 // ─── Persistent Store ────────────────────────────────────────────────────────
 const store = new Store({
@@ -70,10 +76,19 @@ function createWindow() {
 
   mainWindow.loadFile(path.join(__dirname, 'dist-react', 'index.html'));
 
-  // DevTools: open in dev or when launched with --devtools flag
+  // DevTools: open in dev or --devtools flag; Cmd+Opt+I / F12 toggles in all builds
   if (!app.isPackaged || process.argv.includes('--devtools')) {
     mainWindow.webContents.openDevTools();
   }
+
+  // Allow toggling DevTools with Cmd+Option+I (Mac) or F12 (all) in packaged builds
+  const { globalShortcut } = require('electron');
+  globalShortcut.register('CommandOrControl+Alt+I', () => {
+    if (mainWindow) mainWindow.webContents.toggleDevTools();
+  });
+  globalShortcut.register('F12', () => {
+    if (mainWindow) mainWindow.webContents.toggleDevTools();
+  });
 }
 
 app.whenReady().then(() => {
@@ -81,28 +96,30 @@ app.whenReady().then(() => {
   createWindow();
 
   // ── OTA Updates ──────────────────────────────────────────────────────────
-  autoUpdater.on('update-downloaded', (info) => {
-    dialog.showMessageBox(mainWindow, {
-      type: 'info',
-      title: 'Update Ready — Senior Law Partner',
-      message: `Version ${info.version} has been downloaded and is ready to install.`,
-      detail: 'Click "Restart & Update" to apply the update now, or "Later" to install on next launch.',
-      buttons: ['Restart & Update', 'Later'],
-      defaultId: 0,
-      icon: path.join(__dirname, 'assets', 'icon.png'),
-    }).then(({ response }) => {
-      if (response === 0) autoUpdater.quitAndInstall(false, true);
+  if (autoUpdater) {
+    autoUpdater.on('update-downloaded', (info) => {
+      dialog.showMessageBox(mainWindow, {
+        type: 'info',
+        title: 'Update Ready — Senior Law Partner',
+        message: `Version ${info.version} has been downloaded and is ready to install.`,
+        detail: 'Click "Restart & Update" to apply the update now, or "Later" to install on next launch.',
+        buttons: ['Restart & Update', 'Later'],
+        defaultId: 0,
+        icon: path.join(__dirname, 'assets', 'icon.png'),
+      }).then(({ response }) => {
+        if (response === 0) autoUpdater.quitAndInstall(false, true);
+      });
     });
-  });
 
-  autoUpdater.on('error', (err) => {
-    log.error('Auto-updater error:', err);
-  });
+    autoUpdater.on('error', (err) => {
+      console.error('[updater] error:', err);
+    });
 
-  // Check 8 seconds after launch (let app finish loading), then every 4 hours
-  if (app.isPackaged) {
-    setTimeout(() => autoUpdater.checkForUpdatesAndNotify(), 8000);
-    setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 4 * 60 * 60 * 1000);
+    // Check 8 seconds after launch (let app finish loading), then every 4 hours
+    if (app.isPackaged) {
+      setTimeout(() => autoUpdater.checkForUpdatesAndNotify(), 8000);
+      setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 4 * 60 * 60 * 1000);
+    }
   }
 
   app.on('activate', () => {

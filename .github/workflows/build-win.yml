@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Generate icon.ico from icon.png
+        run: node -e "const p=require('png-to-ico').default||require('png-to-ico');p('assets/icon.png').then(b=>require('fs').writeFileSync('assets/icon.ico',b))"
+
       - name: Build Vite
         run: npx vite build
         env:
