@@ -1,6 +1,6 @@
 {
   "name": "senior-law-partner",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A local AI legal mentor and study interface for 1L law students.",
   "main": "main.js",
   "author": "Bianna",
