@@ -29,7 +29,19 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Generate icon.ico from icon.png
-        run: node -e "const p=require('png-to-ico').default||require('png-to-ico');p('assets/icon.png').then(b=>require('fs').writeFileSync('assets/icon.ico',b))"
+        shell: pwsh
+        run: |
+          # Use ImageMagick (pre-installed on windows-latest) to generate a multi-size ICO
+          # Squarify first (crop to center square), then produce all standard ICO sizes
+          $sizes = @(16, 32, 48, 64, 128, 256)
+          $tmpFiles = @()
+          foreach ($size in $sizes) {
+            $out = "assets/icon_tmp_$size.png"
+            magick assets/icon.png -resize "${size}x${size}^" -gravity center -extent "${size}x${size}" -background transparent $out
+            $tmpFiles += $out
+          }
+          magick @tmpFiles assets/icon.ico
+          $tmpFiles | ForEach-Object { if (Test-Path $_) { Remove-Item $_ } }
 
       - name: Build Vite
         run: npx vite build
