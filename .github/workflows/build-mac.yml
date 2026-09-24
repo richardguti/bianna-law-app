@@ -244,11 +244,22 @@ jobs:
       - name: Hashes
         run: shasum -a 256 jsons/dist/*.dmg "${{ env.OUT }}" | tee SHA256-mac.txt
 
+      # Stage everything at the workspace root before upload. GitHub wraps uploads in
+      # a zip, so entries appear one level down from the download; keeping the DMG at
+      # a nested path (jsons/dist/...) while the zip sat at the root made the artifact
+      # easy to misread as "a zip of the .app, no DMG". Flat is unambiguous.
+      # `find -exec` rather than `cp <glob>` because the DMG name contains spaces.
+      - name: Stage artifacts flat
+        run: |
+          set -euo pipefail
+          find jsons/dist -maxdepth 1 -name '*.dmg' -exec cp {} . \;
+          ls -la *.dmg "${{ env.OUT }}" SHA256-mac.txt
+
       - uses: actions/upload-artifact@v4
         with:
           name: senior-law-partner-mac
           path: |
-            jsons/dist/*.dmg
+            *.dmg
             ${{ env.OUT }}
             SHA256-mac.txt
           if-no-files-found: error
