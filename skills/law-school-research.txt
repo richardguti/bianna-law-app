@@ -1,0 +1,64 @@
+SKILL: law-school-research
+PURPOSE: Guide all legal research and case analysis for a 1L law student. Apply these research principles whenever answering legal questions, analyzing cases, or generating study materials.
+
+RESEARCH FRAMEWORK — APPLY IN THIS ORDER:
+
+1. IDENTIFY THE LEGAL ISSUE
+   - State the precise legal question in one sentence.
+   - Format: "Whether [party] can [claim/defense] when [key facts]?"
+   - Identify which area of law governs (Civ Pro, Contracts, Torts, Property, Con Law, Crim Law).
+
+2. LOCATE GOVERNING AUTHORITY
+   Priority hierarchy:
+   a. Constitutional provisions (if applicable)
+   b. Federal statutes / FRCP rules (for procedural issues)
+   c. Binding precedent from the relevant circuit/state supreme court
+   d. Persuasive authority (other circuits, Restatements, law review articles)
+   e. Secondary sources (treatises, hornbooks) for understanding only
+
+3. CASE ANALYSIS PROTOCOL
+   For every case cited, extract and state:
+   - FACTS: Only material facts (those that changed the outcome)
+   - PROCEDURAL POSTURE: Where in the litigation are we?
+   - ISSUE: The precise legal question the court decided
+   - HOLDING: The court's answer (narrow rule, not broad dicta)
+   - REASONING: The "because" — what legal principle justifies the holding
+   - DICTA: Any statements beyond what was necessary to decide the case (not binding)
+   - DISSENT: If important, note the dissent's core objection
+   - SIGNIFICANCE: What doctrine/test/rule does this case establish?
+
+4. RULE SYNTHESIS
+   When multiple cases address the same issue:
+   - Identify the dominant rule (majority rule)
+   - Note minority/split-circuit positions
+   - Synthesize into a single clear rule statement
+   - Note any circuit splits or unresolved questions
+
+5. APPLICATION TO FACTS (IRAC APPLICATION SECTION)
+   - Take each element of the rule and apply it to the specific facts
+   - Argue BOTH sides for any contested element
+   - Identify the strongest counterargument and address it
+   - Lead with the strongest argument first
+
+6. 1L CORE SUBJECT AREAS — KEY AUTHORITIES TO CITE:
+   CIVIL PROCEDURE: FRCP Rules 8, 12(b)(6), 12(b)(2), 15, 23, 26, 56; Int'l Shoe, Twombly, Iqbal, Pennoyer, Burnham
+   CONTRACTS: UCC Art. 2 (goods), common law (services); Restatement (Second) of Contracts
+   TORTS: Restatement (Second/Third) of Torts; duty, breach, causation, damages
+   PROPERTY: numerus clausus, adverse possession, recording acts, landlord-tenant
+   CONSTITUTIONAL LAW: Marbury, McCulloch, Commerce Clause cases, 14th Amendment, Bill of Rights incorporation
+   CRIMINAL LAW: MPC vs. common law; actus reus, mens rea, causation, defenses
+
+7. RESEARCH QUALITY STANDARDS
+   - Never cite a case for a proposition it does not stand for
+   - Always distinguish cases with different material facts
+   - Flag overruled or limited precedent explicitly
+   - If you are uncertain of a specific citation, say so — do not fabricate case names or holdings
+   - Prefer primary sources over secondary sources
+   - When in doubt, apply the more protective/cautious legal standard
+
+8. OUTPUT FORMAT FOR RESEARCH MEMOS
+   [ISSUE]
+   [SHORT ANSWER — one paragraph]
+   [RULE — black-letter statement with citations]
+   [ANALYSIS — element-by-element application]
+   [CONCLUSION — direct answer + recommended next steps]

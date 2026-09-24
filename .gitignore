@@ -1,0 +1,54 @@
+# Build outputs. Several GB, and GitHub rejects any single file over 100 MB --
+# the Electron framework binary alone is 170.8 MB.
+dist/
+jsons/dist/
+dist-react/
+jsons/dist-react/
+
+# Packaged application payloads (~115 MB app.asar each).
+resources/
+locales/
+*.asar
+*.zip
+*.dmg
+*.blockmap
+
+# The Windows Electron runtime, extracted at the project root by earlier builds.
+# The macOS runner downloads its own Electron; none of this is source.
+Senior Law Partner.exe
+*.dll
+*.pak
+*.node
+*.bin
+*.dat
+snapshot_blob.bin
+v8_context_snapshot.bin
+vk_swiftshader_icd.json
+icudtl.dat
+LICENSE.electron.txt
+LICENSES.chromium.html
+
+# The staged corpus copy made by the workflow. The source of truth is
+# icm/references/florida-statutes, which IS committed. No trailing slash: the
+# directory does not exist yet, and a trailing slash only matches real directories.
+jsons/references
+
+# Dependencies.
+node_modules/
+jsons/node_modules/
+
+# Local noise.
+debug.log
+*.log
+.DS_Store
+Thumbs.db
+
+# Secrets. Never commit these. .env.local holds VITE_DEEPSEEK_KEY, which Vite
+# inlines into the renderer bundle at build time; CI writes it from the
+# DEEPSEEK_KEY repository secret instead.
+.env
+.env.local
+.env.*.local
+*.pem
+*.p12
+*.key

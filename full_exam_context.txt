@@ -1,0 +1,639 @@
+FALL 13 ANSWERS:
+CRIMINAL LAW  PROFESSOR DEWOLF  
+FALL 2013  December 14, 2013  
+ FINAL EXAM SAMPLE ANSWER  
+ 
+ MULTIPLE CHOICE  
+ 
+ 1.  (A) is the BEST  answer , because it includes the requirement that he be negligent in 
+failing to recognize the danger to Tracie; (B) is incorrect , because even if he had a duty to her, he 
+may not have been negligent in failing to recognize that she was in danger; (C) is incorrect, because 
+it imposes a standard of recklessness, whereas the crime only requires negligence; (D) is incorrect, 
+because he may have had a duty to prevent the injury . 
+ 2.  (A) is correct , because a recklessness standard applies to the element of the non -
+recylcable character of the material; (B) is incorrect, because even if he removed the bag, he still 
+could be convic ted of committing the crime; (C) is incorrect because it imposes a higher culpability 
+standard for the circumstance elements than is required for the commission of the crime; and (D) is 
+incorrect because it requires a knowledge standard for the circumstanc e element . 
+ 3.  (A) is incorrect, because knowledge isn’t enough to satisfy the requirement that she have 
+the purpose of facilitating his commission of the crime; (B) is n’t the best answer, but it isn’t exactly 
+wrong either, so I gave it credit as a correc t answer.  The MPC is deliberately ambiguous with 
+respect to the circumstance element (in this case, the amount of the cocaine).  Thus, it’s possible 
+that she could be convicted even if she had no culpability with respect to the amount ; (C) is 
+correct , because if the crime didn’t occur, Sally isn’t an accomplice to committing the crime; (D) is 
+incorrect, because Tom might have some person al defense (e.g., insanity) that doesn’t apply to 
+Sally . 
+ 4.  (A) is correct , because the defense of necessity doesn’t ap ply unless the harm to be 
+avoided is greater than the harm that he seeks to avoid; (B) is incorrect, because negligence isn’t 
+sufficient to satisfy the mens rea of the crime, which requires intent or purpose; (C) is incorrect for 
+the same reason; (D) is in correct, because the sincerity of his belief is insufficient to invoke the 
+justification; he has to be right about it.  
+ 5.  (A) is correct , because she committed a substantial step in approaching his house; the 
+only question is whether her conduct was stro ngly corroborative; (B) is incorrect, because her actual 
+belief is not inconsistent with a finding that she had the purpose of entering a place where she did 
+not have a right to be.  (C) is incorrect, because it employs a standard that is higher than the o ne 
+used by the MPC; (D) is incorrect, because her choice to leave was not voluntary; it was a result of 
+being unsuccessful in entering the house.  
+ 6.  (A) is incorrect, because it is not enough to have a mental disease or defect; the mental 
+disease must ha ve been the reason for the criminal conduct; (B) is incorrect, because the act of 
+driving was voluntary, even though falling asleep was not; (C) is incorrect, because he might have a 
+defense based upon the first prong of the insanity defense even though th e second one didn’t apply; 
+and thus (D) is the correct answer . 
+ 7.  (A) is an incorrect answer, because the MPC permits a unilateral conspiracy; (B) is 
+incorrect, because again it is sufficient if the defendant believes that there was an agreement; (C) is 
+correct,  because it is sufficient for a conspiracy convict ion; and (D) is incorrect because it imposes 
+a requirement of an overt act, which doesn’t apply to first or second degree felonies.  
+ 8.  (A) is incorrect, because she may have owed a duty to help hi m because of the 
+contractual relationship between them; (B) is incorrect, because whether her conduct was 
+DeWolf, Criminal Law, Fall 2013 , Final Exam, Sample Answer  Page 2  
+ 
+reasonable would be a question for the jury; (C) is correct;  even though it specifies a standard of 
+recklessness, it would be enough to satisfy the  n egligence standard; and (D) is incorrect for the 
+same reason as (B).  
+ 9.  (A) is incorrect, because it doesn’t posit that intoxication had anything to do with the 
+decision to shoot Leon; (B) is correct , because he would qualify for the imperfect self -defen se rule; 
+(C) is incorrect, because Walter still may have honestly believed that he was about to receive a 
+serious bodily injury; and (D) is incorrect because attempted murder is not a general intent crime.  
+ 10.  (A) is incorrect, because the “transferred i ntent” rule could apply; (B) is incorrect, 
+because under the transferred intent rule, the injury to a third person doesn’t need to be foreseeable; 
+(C) is correct , because of the principle of transferred intent; and thus (D) is incorrect, because the 
+defens es applied earlier to the shooting of Leon might also apply to Donna.  
+ 11.  (A) is correct , because Jason may otherwise satisfy the requirements of § 8967; (B) is 
+incorrect, because what state you are in would be a question of fact rather than a question o f law; 
+(C) is incorrect, because even if Jason didn’t intend to do so, it might be sufficient to show that he 
+was reckless as to which state he was in; (D) is incorrect, because his motivation and Susan’s best 
+interests are not relevant to whether he viola ted § 8967.  
+ 12.  (A) is incorrect, because the application of the penal code to these particular facts is a 
+mistake of law for which no culpability is required; (B) is incorrect, since he operated the yacht and 
+allowed the thing to fill up ; so long as the re is a voluntary act that leads to the bad result, the 
+requirement is satisfied ; (C) is correct , because Ben only has to be reckless with respect to the 
+discharge; and (D) is incorrect because it doesn’t take into account whether Ben was aware of the 
+risk that the holding tank would overflow.  
+ 
+ ESSAY 1 
+ 
+ The retreat rule was inherited from the common law, and placed a higher value on the 
+protection of human life, even if it required the surrender of a right that the actor might otherwise 
+enjoy.  For exampl e, if a man in a wheelchair approaches you with a knife, and you have the 
+opportunity to run away with complete safety, the Model Penal Code approach requires you to do 
+so, even though the person wielding the knife had no right to force you to do so.  By c ontrast, so -
+called “stand your ground” laws authorize an actor’s use of deadly force if he faces a threat of 
+sufficient magnitude (e.g., death, rape, or kidnapping), even if the actor could also avoid the threat 
+by retreating.  
+ Even though many states adop ted the common law view of retreat, some states (influenced 
+by the culture of the West) thought it was “unmanly” to require a person to retreat, and therefore 
+rejected the retreat rule inherited from the common law .  The MPC retreat rule is actually quite 
+restrictive:  it only requires that one retreat when one knows (not simply believes there is a high 
+probability , or even should know ) that the actor can do so with complete safety .  Thus, the rule 
+doesn’t apply if the jury finds (or, more accurately, unles s the jury believes the contrary beyond a 
+reasonable doubt) that the defendant harbored some belief, however unreasonable or however 
+improbable, that he might suffer some injury if he tried to flee.  
+ Nonetheless, some people support a “stand your ground” l aw in the belief that the threat of 
+using deadly force in self -defense actually make s the community safer.  There is some empirical 
+evidence to support the (counterintuitive) theory that “more guns, less crime” – restricting the 
+availability of handguns ac tually makes a community more dangerous rather than safer.  Along 
+those lines, it might be thought (and it might turn out to be true) that by adopting a “stand your 
+ground” law, a state will experience less crime because of the fear that more citizens will  use deadly 
+force in self -protection than if the law seems more sympathetic to the criminal.  
+ By contrast, those who oppose a “stand your ground” law believe that , given the already 
+DeWolf, Criminal Law, Fall 2013 , Final Exam, Sample Answer  Page 3  
+ 
+generous provisions for a defendant under the MPC, revising the statute to  permit the defendant to 
+use deadly force even when he knows he can retreat with complete safety reflects a profound 
+disrespect for the value of human life, and permits a disproportionate and unnecessary use of deadly 
+force.  It permits the gratuitous use of deadly force essentially for a trivial reason – to protect a 
+relatively minor property right or to support a “manly” approach to confrontation.  
+   
+ 
+ ESSAY 2 
+  
+ 
+ There are two ways that Cota could be convicted of manslaughter.  First, t he jury might find 
+that Cota recklessly caused Antonio  Jr.’s death.  The second would be if he were found to be an 
+accomplice to Almaguer’s killing of Antonio  Jr. Both will be analyzed below.  Cota would have 
+available to him defenses based upon his intoxi cation and self -defense.  
+ 
+Manslaughter  
+ Manslaughter is defined as causing the death of another human being (MPC § 210.1) 
+recklessly (MPC § 210.3).  The first requirement would be to show that Cota actually caused 
+Antonio  Jr.’s death.  It is unclear from t he facts exactly what happened.  The report says that 
+“Almaguer’s gun went off,” but it’s not clear whether Almaguer actually fired the gun, or it 
+somehow went off while the two were struggling.  Cota wasn’t directly involved in this part of the 
+fight.  He could only be blamed for his initial act of urinating from the balcony, and his later act of 
+removing his shirt and preparing to join the fight.  However, both suffer from a defect in causation. 
+ Even if the act of urinating from the balcony was a but-for cause of Antonio  Jr.’s death, it could 
+hardly be said to be a proximate cause , which does not allow a finding of causation if the later result 
+is so remote and/or accidental as to lack a just bearing on the defendant’s guilt .  On the other hand, 
+Cota’s removing his shirt, which is more directly involved in the fatal shooting, seems to lack the 
+element of but -for cause.  
+ In addition, even assuming the MPC causation  test were satisfied, the prosecution would 
+still have to prove beyond a reasonable doubt that  Cota had the mens rea of recklessly killing 
+Antonio  Jr.  Urinating from the balcony  would have to be done with a conscious awareness of the 
+potential that this act could lead to someone’s death.  Cota would persuasively deny any such 
+awareness  (although h is later encouragement of Almaguer to shoot again could be used to suggest 
+that Cota and Almaguer were deliberately provoking a confrontation) . 
+  
+Accomplice to manslaughter  
+ More plausible is the charge that Cota was an accomplice to manslaughter .  To conv ict 
+Cota, the prosecution would have to show that Cota had the purpose of facilitating the conduct that 
+risked the death of Antonio  Jr., and that with respect to that risk Cota acted recklessly.   
+ Actus reus  of Accomplice Liability .  The actus reus of acc omplice liability is satisfied if the 
+defendant “aids or agrees or attempts to aid [the principal] in planning or committing” the offense 
+(MPC § 2.06(3)(ii).)  Here the prosecution would argue that in taking off his shirt and getting ready 
+to join the figh t, Cota was agreeing to aid or attempting to aid Almaguer in fighting Antonio Sr.  
+One difficulty with this is for the prosecution is that it is only later that Antonio Jr.  joined the fight.  
+However, to the extent that Cota was reckless with respect to th e fact that somebody might be The facts of this case were (loosely) drawn from State v . Almaguer, 232 Ariz. 190, 30 3 P.3d 84 
+(2013), which affirmed the defendant’s conviction for manslaughter.   It was modified to focus 
+on the behavior of Cota rather than Almaguer.   
+DeWolf, Criminal Law, Fall 2013 , Final Exam, Sample Answer  Page 4  
+ 
+fatally shot as a result of the fight, the change in identity of the victim doesn’t prevent a conviction.  
+ The mens rea for accomplice liability distinguishes between the conduct element(s) and the 
+result element(s) .  The mens  rea of purpose applies to the conduct element – and based on the 
+above discussion a jury could find that Cota had the purpose of helping Almaguer in the fight.  On 
+the other hand, mere recklessness is sufficient with respect to the result (death).  In thi s context 
+Cota would be found reckless if he was aware of a risk that death might result and his choice of 
+encountering the risk was a gross deviation from the standard of a law -abiding person.  So long as 
+Cota was reckless with respect to the risk that fi ghting could lead to death, the fact that he didn’t 
+have the purpose of causing anyone’s death doesn’t prevent his conviction.  In this respect the case 
+is similar to McVay or the dragracing cases, where the defendant intended to facilitate conduct that 
+the defendant was aware recklessly risked death.   
+ With respect to Cota’s actually was aware  of the risk of death we have conflicting evidence. 
+ On the one hand, Cota would undoubtedly claim that he only wanted to fight – he didn’t want to 
+kill anybody.  (H is phone call from the car seems to support this.)  On the other hand, immediately 
+after the shot was fired, Cota seemed to want Almaguer to continue shooting (although it’s unclear 
+who he wanted Almaguer to shoot, since Almaguer was pointing the pistol at  two other men, not 
+Antonio Jr.   Even though this encouragement occurred after the fact, it suggests that Cota was not 
+simply anticipating a fight and was surprised that it resulted in a fatal shooting .   
+ A key question would be whether Cota was aware at the time they arrived at the party that 
+Almaguer had a handgun in his belt , and/or that Almaguer was likely to bring it out if a fight 
+erupted .  If he was aware of that fact, worse yet somehow deliberately provoked a fight knowing 
+that it might end badly, the prosecution would have strong evidence that Cota was aware of the risk 
+of a fatal shooting when he took off his shirt.  On the other hand, if Cota had no idea that Almaguer 
+was armed, it would easier to show that he thought the risk was limited to inju ry in a fistfight, and 
+he would then lack the mens rea  necessary for manslaughter.  Even if he should  have been aware of 
+that risk, unless the jury finds that he was consciously aware of a risk of death when he prepared to 
+join the fight, unless the jury f inds that he was actually aware of that risk the jury couldn’t convict.  
+ In summary, if Cota wanted to help Almaguer fight with Antonio, and Cota thereby 
+recklessly risked a fatal shooting , Cota could be convicted  of manslaughter . 
+ 
+Defenses  
+ Cota could ass ert self -defense (or defense of others) and intoxication as defenses.   
+ Self-defense (or defense of others) .  Under the MPC, an actor is justified in using force to 
+defend himself or others (§ 3.04 and § 3.05).  However, it is only justified if the actor believes such 
+force is “immediately necessary” for the purpose of protecting himself or another person (§ 3.04(1)  
+and § 3.05(1)(a)).  Moreover, the justification is unavailable if the actor is reckless in forming the 
+belief that such force is necessary (if  the mens rea of the crime for which the defense is offered is 
+satisfied by recklessness) . To the extent that Cota asserts self -defense as a defense to manslaughter, 
+he would lose the defense if he were reckless with respect to the need for using self -defense. 
+ The facts aren’t clear as to why Cota made preparations to join Almaguer in the fight.  He 
+may have believed that either he or Almaguer would be injured, perhaps seriously, and the use of 
+force was necessary to prevent such injury.  And Cota may have  believed that, even if they weren’t 
+going to follow the Marquess of Queensbury rules, there would be appropriate limits on the fight. 
+On the other hand, Cota may have been less interested in simply preventing harm and more 
+prepared to exact some kind of r evenge.   The jury could still reject Cota’s claim of self -defense (or 
+defense of others) as being either insincere or recklessly formed.  
+ It is a more difficult determination as to accomplice liability.  Since Cota must have the 
+purpose of helping Almaguer  in the fight, it would be sufficient if Cota actually believed that such 
+assistance was necessary, even if he formed such a belief recklessly.  Particularly if Cota were 
+DeWolf, Criminal Law, Fall 2013 , Final Exam, Sample Answer  Page 5  
+ 
+aware of Almaguer’s possession of a hand gun, he might have believed that once a fight  got started 
+it would escalate and cause harm.  Even so, Cota’s encouragement to keep shooting Antonio Jr. is 
+in conflict with a claimed motive to prevent anybody from getting hurt.  
+ An additional aspect of self -defense is the requirement to retreat if one  knows that one can 
+do so with complete safety .  (§ 3.04(2)(b)(ii).)  The prosecution might claim that any self -defense 
+argument is unavailable because Cota could have simply stayed out of the fight.  On the other hand, 
+Cota could plausibly claim that once  the fight started (since it had a lot to do with his own 
+behavior), retreat in complete safety was not available.  Moreover, retreat is only required in 
+preference to the use of deadly force if the other can avoid injury with complete safety.  (§ 
+3.05(2)( a)) 
+ Intoxication .  Intoxication is available as a defense if the mens rea  that the prosecution must 
+prove is higher than recklessness.  Otherwise, it is of no use.  Thus, if Cota says he was so drunk he 
+wasn’t aware of the potential that Almaguer’s gun mi ght be involved in a fatal shooting, such 
+awareness is immaterial.  On the other hand , as with self -defense, the prosecution would have to 
+prove purpose with respect to the conduct e lement of the accomplice charge.  If Cota claims that as 
+a result of his i ntoxication (by alcohol or marijuana) he didn’t actually intend to assist Almaguer in 
+the fight, it would be relevant evidence.  However, the jury would very likely disbelieve him.  
+ 
+ QUESTION 2½ 
+ 
+ The major differences in a non -MPC jurisdiction would be:  
+  
+(1) Standard for accomplice liability .  The common law classifications had principals and 
+accessories, and accessories before the fact and after the fact.  Also, i n non -MPC jurisdictions  (such 
+as California in the Luparello case) , one can be convicted not only for those crimes resulting from 
+the conduct which the defendant aided or attempted to aid, but also for those crimes that are the 
+“natural and probable consequence ” of the original venture.  Thus, in a non -MPC jurisdiction it 
+would be sufficient if Cota only intended to assist Almaguer in fighting, if a natural and probable 
+consequence of doing so would be a deadly encounter (similar to the facts in Luparello ).  It would 
+not be necessary to show that Cota was aware of the risk of death.  
+ 
+(2) Self-defen se.  Whereas the MPC recognizes “imperfect” self -defense, and permits a belief in the 
+need for force as a justification, many jurisdictions (such as NY in the Goetz case) reject imperfect 
+self-defense and insist that the belief be both honest and reasonabl e.  Thus, if Cota actually (but 
+negligently) believed that his assistance in the fight was justified, a non -MPC jurisdiction would 
+give him no credit.  
+ 
+(3) Retreat .  Some jurisdictions would require retreat without the knowledge that retreat could be 
+accom plished with complete  safety . 
+ 
+(4) Intoxication .  Some jurisdictions  only permit evidence of intoxication as a defense to murder, 
+rather than admitting it for any specific intent crime.  
+DeWolf, Criminal Law, Fall 2013 , Final Exam, Sample Answer  Page 6  
+ 
+ 
+CHECKLIST  
+ 
+ ESSAY 1 
+ 
+ Explanation  of the Retreat Rule  
+ Origin at Common Law  
+ Rejection by Western “manly”  states  
+ MPC’s restrictive  version  
+  
+  
+  
+  
+   Pros  
+ Politically  popular  
+ Sends a message  re criminality  
+ May deter other criminal behavior  
+  
+ Cons  
+ Encourages disrespect for human life  
+ MPC rule alrea dy quite generous  
+  
+ 
+ ESSAY 2 
+ 
+ Overview  
+ Two theories  for conviction  
+ Manslaughter  
+ 
+ Actus Reus + Mens  Rea 
+ Actus Reus : causing death  
+ Urination  “too remote / accidental”  
+ Shirt removal wasn’t a but-for cause  
+ Mens rea  
+ Recklessness  is minimum  standard  
+ Conscious  of risk + gross deviation  
+ C consciously  aware of risk of death?  
+  
+ Accomplice liability  
+ Aid/Attempt /Agree   to assist in fight?  
+ Requires purpose  to aid conduct  
+ Was C reckless re risk of death?  
+ Did C know about the handgun  
+ Post-shooting stmt v. “accident”  
+  
+   Defenses  
+ Self-defense , MPC § 3.04  / 3.05  
+ Only to protect against unlawful  force  
+ Imperfect Self-defense  
+ Belief is sufficient, even if unreason.  
+ No evidence he thought it necessary  
+ Retreat  rule doesn’t se em to apply  
+ Imperfect self -defense for accomplice  
+  
+ Intoxication , MPC § 4.01  
+ Doesn’t help  if recklessness is suff.  
+ Relevant to accomplice  liability  
+ Did it affect  his decisionmaking?  
+  
+   
+  
+
+ESSAY 2½ 
+ 
+ Different test for accomplice  
+ Use o f nat. & prob.  doctrine  
+ 
+ Different standard for self-defense  
+ No imperfect self-defense  
+  
+  
+ 
+  
+ Retreat rule  might be more restrictive  
+  
+ Intoxication  rules  
+ Excluded from “specific intent”  crimes  
+  
+  
+   Exam # ______________  
+ 
+DeWolf, Criminal Law, Fall 2011, Final Exam, Sample Answer  Page  7  
+ 
+            
+ 
+ 
+ 
+ 
+
+FALL 15 ANSWERS:
+DeWolf, Final Exam Sample Answer, December 16, 2015  Page 1 of 6  
+ 
+ 
+Professor DeWolf  Fall 2015  
+Criminal Law  December 19, 2015  
+ 
+ FINAL -- SAMPLE ANSWER  
+ 
+MULTIPLE CHOICE  
+ 
+1.  (a) is incorrect because he still has to complete a “substantial step.”  (b) is the  correct 
+answer ; it may or may not be considered reconnoitering the place, but if it is so 
+considered, it would qualify as a substantial step; (c) is incorrect because we don’t know 
+what his intentions were; and (d) is incorrect because it might be a subst antial step  
+ 
+2.  (a) is correct  because the crime only requires negligence; (b) is incorrect, because even 
+if it caused the death, we don’t know if it was negligent or not; (c) is incorrect, because 
+Steve assumed a duty by taking a job as the security guard; (d) is incorrect because a j ury 
+could find that it was not too remote or accidental.  
+ 
+3. (a) is incorrect, because the evidence might not support the finding of negligence; (b) is 
+correct , because duress only applies where force is threatened; (c) is incorrect, for the 
+same reason that (b) is correct; and (d) is incorrect, for the same reason.  
+ 
+4. (a) is incorrect, because it ignores the mens rea element; (b) is incorrect, because if he is 
+at least reckless in failing to recognize that she was unconscious, he can be convicted; (c) 
+is correc t, because Peter must be at least reckless in failing to recognize that Stephanie 
+was unconscious; (d) is incorrect, because one doesn’t have to use force if the victim is 
+unconscious  
+ 
+5. (a) is correct , because necessity requires that the crime inflict lesse r harm than the harm 
+sought to be avoided; (b) is incorrect, because it might still justify the defense of 
+necessity; (c) is incorrect, for the same reason that (a) is correct; (d) is incorrect, because 
+it doesn’t require that the harm avoided exceed the h arm committed;  
+ 
+6. (a) is incorrect, because the mistake was one of fact; (b) is incorrect, because the mens 
+rea is knowingly or intentionally; (c) is incorrect for the same reason; and (d) is thus 
+correct.  
+ 
+7. (a) is incorrect, because she may have a self -defen se argument; (b) is incorrect because 
+she might be suffering from a mental disease; (c) is true and thus correct  – it seems 
+unlikely that she would reasonably believe that, but given that assumption, she would be 
+acquitted. (d) is incorrect, because intoxi cation would not provide a defense to a crime 
+requiring only recklessness.  
+ 
+8. (a) is correct;  (b) is incorrect, because he must be at least reckless with respect to the 
+element of the nonrecyclable nature of roofing shingles; (c) is incorrect, because one ca n 
+be an accomplice without meeting of the minds; (d) is incorrect, because it does not take 
+Chelsea’s actual mens rea into account  
+DeWolf, Final Exam Sample Answer, December 16, 2015  Page 2 of 6  
+ 
+ 
+ 
+9. (a) is correct; (b) is incorrect, because the MPC doesn’t recognize the distinction 
+between factual and legal impossibility;  (c) is incorrect, for the same reason;  and (d) is 
+incorrect because it was a mistake of fact, not law.  
+ 
+10. (a) is correct;  (b) is incorrect, because the Code doesn’t require dangerous proximity; (c) 
+is incorrect, because Walter’s abandonment was not volunta ry; he was afraid of getting 
+caught; (d) is incorrect, because he is charged with attempt.  
+ 
+11. (a) is incorrect, because Charles could still be charged with causing Bill’s injury; (b) is 
+incorrect, because one only need be reckless; (c) is correct;  (d) is inc orrect because it 
+doesn’t state the mens rea requirement.  
+ 
+12. (a) is incorrect, because he must be at least reckless with respect to the result element; (b) 
+is correct;  (c) is incorrect, because he could still be aware of a risk of harm; (d) is 
+incorrect, bec ause even minor participants can be found to be accomplices.  
+ 
+ESSAY 1 
+ 
+ There are several key features of the Model Penal Code approach to the insanity defense.  
+It builds upon previous formulations, such as the M’Naghten standard, but it also introduces some 
+innovations .  Like other versions, it applies the insanity defense only to one who suffer s from a 
+“mental disease or defect,” who as a result lack s “substantial capacity” in one of two areas:  either 
+(1) to appre ciate the wrongfulness of his conduct ; or (2) to conform his conduct to the requirements 
+of law.   The first “prong” is sometimes referred to as the cognitive prong, while the second is 
+referred to as the control prong.  The MPC test differs in part from pr evious tests because it does 
+not require what one court called a “complete prostration of faculties”; even if the defendant has 
+some capacity to appreciate the wrongfulness of his conduct or to control it, if he lacks substantial 
+capacity he may be acquitt ed. 
+The cognitive prong is fundamentally similar to the M’Naghten test in that it relieves the 
+defendant of responsibility for criminal conduct if there is an inability to understand the nature of 
+his actions (for example, if the defendant thinks that he i s shooting a Martian rather than a human 
+being); or if because of mental disease he doesn’t understand the wrongfulness of committing 
+crime (e.g., the defendant thinks that he is a secret agent who has a license to kill ).  The major 
+difference between the cognitive prong of the MPC test and the earlier McNaghten test is that it is 
+not simply a recognition test, but permits the defendant to avoid conviction if he lacks substantial 
+capacity to appreciate the wrongfulness  of his conduct.  Thus, John Hinckley avoided conviction 
+for shooting President Reagan in part because the jury found that he was unable to appreciate  that 
+what he was doing was wrong.  
+ The second prong of the test – the control prong – is based on the MPC  authors’ belief that 
+criminal conviction should only follow from acts over which the defendant has meaningful control.  
+If a jury finds that the defendant, as a result of mental disease or defect, is unable to control his 
+conduct, then it makes no more se nse to punish him than it would to punish someone because their 
+leg pops up after someone struck his knee cap with a reflex hammer.  
+ Critics of the MPC test have focused on two areas.  First, they doubt that the “appreciation” 
+or “substantial capacity” provi sions of the test are an improvement over the earlier requirements 
+DeWolf, Final Exam Sample Answer, December 16, 2015  Page 3 of 6  
+ 
+ 
+that the defendant’s mental disease or defect prevented the defendant from recognizing the 
+wrongfulness of conduct.  The fact that the defendant understands what he is doing, but doesn’t 
+appreciate the wrongfulness of his conduct, shouldn’t be a bar to criminal conviction.  (I may 
+understand the service that Navy Seals provide without appreciating them.)  And criminal guilt is 
+not limited to those who have an unimpaired ability to abide by the law.  Even those for whom 
+lawful behavior is difficult are still subject to criminal conviction if they disobey.  Why should it 
+be different for someone who has some capacity, but perhaps lacks substantial capacity in these 
+areas?  
+ The more severe criticis m has been leveled at the control prong.  The theory of the MPC – 
+that science (particularly the science of psychiatry) would be able to identify those who are unable 
+to control their conduct (as distinguished from those who can, but prefer not to ) has not  held up 
+over time.  Psychiatrists can debate one another as to whether a particular individual suffers from 
+some mental disease, and how most effectively to treat it, but they cannot provide reliable guidance 
+in distinguishing from those who canno t obey the law, as distinguished from those who simply 
+choose not to.  Consequently, courts like Lyons decided that they would no longer recognize the 
+control prong of the MPC test.  Other jurisdictions have similarly reformulated their test for 
+insanity.  Congress eliminated the control prong after the Hinckley case.  
+ Another approach has been to offer the jury a third alternative in addition to guilt or 
+acquittal by reason of insanity:  guilty but mentally ill.  This approach is favored by those who 
+recog nize that a person may be mentally ill and yet still responsible for their criminal conduct.  
+Moreover, it assures the jury that the defendant will be incarcerated in a place where they cannot 
+harm the public further.  Thus, defendants like Andrea Yates, w ho drowned her five children in 
+the bathtub, may clearly be mentally ill, but she isn’t free from responsibility for her conduct.  
+ Nonetheless, many commentators point out that the debate over the insanity defense is 
+overblown because very few cases actual ly raise the defense, and fewer still are successful.  In 
+addition, studies of jury verdicts comparing the different formulation of the test seem to make little 
+difference in whether the jury applies the defense or not.  Thus the debate is a tempest in a t eapot 
+rather than a genuine source of concern about the effectiveness of the criminal justice system.  
+ 
+ESSAY 2 
+ 
+ Milton could be charged with two different kinds of crimes:  first, he could be charged with 
+conspiracy to commit arson; second, with being an accomplice to arson.  He would assert the 
+defense of duress, and would deny that he committed any actus reus on either charge.  
+ Conviction of either crime requires proof of two elements:  that the defendant committed 
+a criminal act ( actus reus ) and that h e did so with the requisite mens rea (“guilty mind”).  
+ 
+Conspiracy to Commit Arson  
+ Actus Reus.  Milton would be guilty of conspiring to commit arson if he agreed with Earnest 
+that Earnest should commit arson.  MPC §§ 5.03(1)(a); 220.1(1)(b).  The question here is whether 
+Milton actually agreed with Earnest.  Earnest made the proposal, and the facts a re silent as to 
+whether Milton verbally responded .  If Milton didn ’t actually agree, he can’t be convicted of 
+conspiring.  Milton ’s inquiry about what Earnest wanted him to do, followed by arguably doing 
+what Earnest asked, could support a finding that he di d actually agree.  On the other hand , mere 
+silence coupled with a failure to do something  wouldn ’t be agreement . 
+DeWolf, Final Exam Sample Answer, December 16, 2015  Page 4 of 6  
+ 
+ 
+ There is no overt act req uirement, because this is a felony of the second degree.  MPC § 
+5.03(5).  Moreover, so long as Earnest committed an overt act  (which he did) , that requirement 
+would be fulfilled.  
+ Mens rea .  The jury would have to be convinced that if Milton agreed with Earnest, he did 
+so for the purpose of promoting or facilitating the commission of the crime.  It sounds from the 
+facts as though Milton was at least ambivalent – the arson wasn’t his idea, and he might deny that 
+he actually desired that the arson take place.  In cases where the defend ant actually aided another, 
+but denied having the purpose of doing so, courts have looked to whether the defendant, in addition 
+to knowing of the criminal purpose of those they were working with, actually had a stake in the 
+outcome or otherwise benefitted from the “co -conspirator’s” activities to t he point where you could 
+fairly say that the defendant did more than just his daily work.  Earnest offered to “remember” 
+Milton when he got his money, so a jury could find that Milton agreed with Earnest for the purpose 
+of obtaining a fina ncial pay -off. 
+ 
+Accomplice to Arson   
+ Actus reus .  Milton might be accused of helping Earnest commit arson: MPC § 
+2.06(3)(a)(ii) makes him an accomplice if, with the purpose of promoting the commission of the 
+offense, he aids or agrees or attempts to aid a nother in committing it.  Milton might argue that he 
+didn’t do anything, and therefore (a)(ii) wouldn’t apply.  However, if Milton changed his cleaning 
+routine so that he was on a different floor, and therefore wouldn’t smell the smoke, then a jury 
+could find that he aided Earnest in the commission of the crime.  
+MPC § 2.06(3)(a)(iii) would also make him an accomplice if, having the legal duty to 
+prevent the commission of the offense, he failed to do so.  Ordinarily, one does not have a duty to 
+prevent another from  harm.  One can decline to be a “good Samaritan” without legal consequence.  
+However, if there is a duty to act  then the failure to act can be considered criminal (if it otherwise 
+meets the requirements).  So, for example, a parent who neglects a child and  thereby causes the 
+child’s death may be convicted of a form of homicide (depending upon the culpability involved).  
+Here the prosecution would have to prove that Milton had a duty to report the fire.  Legal duties 
+can arise from a statute, from a status r elationship (e.g., family), from a contractual relationship, 
+and from voluntarily assuming a duty to act.  The only applicable category would be the third – 
+the existence of a contractual relationship.  Because he was an employee, Milton could be found 
+to have a duty to his employer to call the fire department or perhaps to alert the police regarding 
+Earnest’s plans.  His failure to do so could be considered a culpable act, just as if he had actually 
+observed a fire in the buildi ng and deliberately neglected to call the fire department.  
+ Mens rea .  The prosecution w ould also have to prove that Milton had the requisite mens 
+rea to be an accomplice.  Ordinarily, to be an accomplice one must act with the purpose of 
+facilitating or promoting the offense.  As with conspiracy, it’s unclear from the facts what he 
+actually did or didn’t do .  Pe rhaps he simply did his normal routine, and wasn’t sure whether 
+Earnest was serious about what he told him.  Perhaps he altered his routine and would normally 
+have been in a place where he would have smelled smoke and called the fire department, but 
+delibe rately chose to be elsewhere —pursuant to Earnest’s request —so that he would have 
+“plausible deniability.”  It’s not enough to show that Milton knew that by going elsewhere he was 
+making it easier for Earnest’s plans to succeed – he has to have done so with  the purpose of helping 
+Earnest.  The analysis would depend upon whether Milton were prosecuted under MPC § 
+2.06(3)(a)(ii) and/or § 2.06(3)(a)(iii).  Under (a)(ii), the prosecution could argue that he altered his 
+DeWolf, Final Exam Sample Answer, December 16, 2015  Page 5 of 6  
+ 
+ 
+way of cleaning for the purpose of helping Earnest commit the crime.   Under (a)(iii), it would 
+have to be shown that he “failed” to make a “proper” effort to prevent the crime.   
+ Just as in the analysis of conspiracy, Milton’s purpose may be inferred from the fact that 
+he stood to gain something from the arson.  Earnest promised to “remember him” when he got his 
+money.  If the jury finds that Milton was motivated to stand by and do nothing while the fire burned 
+because he thought he would be rewarded for this conduct, then he could be said to have  the 
+purpose of facilitating the commission of the crime.  
+ 
+Duress  
+ An otherwise criminal act can be excused if it resulted from duress.  Under MPC § 2.09, 
+Milton would be excused if Milton “was coerced to [commit arson] by the use of, or a threat to 
+use, u nlawful force against his person or the person of another, which a person of reasonable 
+firmness in his situation would have been unable to resist.”  The first question is whether there was 
+the use of or threat of the use of unlawful force against his pers on.  Milton was afraid of Earnest, 
+but he wouldn’t be entitled to the defense unless there was a use of force or threat of the use of 
+unlawful force.  Even if he had evidence that Earnest had threatened him, Milton still wouldn’t be 
+entitled to the defense  unless a person of reasonable firmness would have been unable to resist.  If 
+a person of reasonable firmness would have gone to the police rather than capitulate to Earnest, 
+then he would be denied the defense.  
+ If found guilty of both conspiracy and comp licity, Milton could only be convicted of one, 
+because the conspiracy to commit a crime and the actual commission merge.  MPC § 1.07(1)(b).  
+  
+ESSAY 2½  
+ 
+ There are several differences if the MPC is not followed.  
+ Overt Act for Conspiracy .  Some jurisdictions would include a requirement for a conspiracy 
+conviction that the defendant commit an over t act. 
+ Multiple Prosecutions .  Under the MPC, Milton could not be convicted of conspiring to 
+commit arson and committing arson, even if all the elements of bo th crimes were proven.  Under 
+the MPC they merge.  However, in jurisdictions like the federal system, following the Pinkerton 
+rule, Milton could be convicted both of  conspiracy and of arson, if both crimes were proven.  
+ Different standard for accomplice l iability .  Under the MPC, Milton has to have the 
+purpose of facilitating this particular crime.  Some jurisdictions  could permit an accomplice who 
+merely knows of the assistance they are providing to be convicted of being an accomplice .  Other 
+jurisdictions might only permit an accomplice to be convicted if the principal is also convicted.  
+ Different formulat ion of duress .  Some jurisdictions would not use the “reasonable 
+firmness” standard; some would require that the use of force or threat be imminent in order to 
+entitled use of the defense.  
+  
+DeWolf, Final Exam Sample Answer, December 16, 2015  Page 6 of 6  
+ 
+ 
+ 
+ 
+MC Score _____           CHECKLIST  
+ 
+ESSAY 1 
+ 
+ Description of MPC Insanity  Defense  
+ Requires proof of mental disease/defect  
+ Cognitive prong  
+ Control prong  
+ Appreciation  
+ Substantial capacity  
+ 
+ Criticism  
+ “Appreciation” too generous   Control prong   
+ Lack of scientific basis  
+ Congress  abandoned control prong  
+ GBMI  
+ Different tests yield similar results   
+ Few cases invoke defense/fewer succeed  
+  
+  
+ 
+ESSAY 2 
+ 
+ Overview  
+ Actus reus + mens rea  
+ Conspiracy  
+ Did Milton agree  
+ Agreement inferred from behavior  
+ Must be proof of agreement ? 
+ No overt act requirement  
+  
+ Mens rea  
+ Did he intend to agree  
+ Did he have a stake in the outcome ? 
+  
+ Accomplice  liability  
+ Actus reus :  act or failure to act  
+ 2.06(3)(a)(iii):  did he have a duty to act?   Contract as basis for duty  
+ Did Milton fail to prevent crime?  
+ What would be a proper  effort?  
+ Did M have mens rea for complicity?  
+ Must have purpose  of facilitating  
+  
+ Duress  
+ No use of force  or threat of force  
+ Did M exhibit reasonable firmness?  
+ Merger of complicity and conspiracy  
+  
+  
+  
+  
+ 2.06(3)(a)(ii): did he act to facilitate  
+          
+ESSAY 2½  
+ 
+ Overt act might be required  
+ Multiple prosecutions  
+ Lower standard for complicity  
+ Different standard for duress    
+  
+ 
+ 
+ 
+          Exam # _______________  

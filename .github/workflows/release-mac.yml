@@ -1,0 +1,225 @@
+# release-mac.yml — build, ad-hoc sign and verify the macOS app on a macOS runner.
+#
+# WHY A macOS RUNNER IS THE ONLY OPTION
+# -------------------------------------
+# electron-builder cannot produce a macOS bundle on Windows. Every 1.2.x zip was
+# therefore hand-assembled: extract the Electron darwin distribution onto NTFS, drop
+# app.asar in, re-zip. That destroys the bundle twice over:
+#
+#   1. Extracting a macOS distribution onto NTFS flattens every framework symlink.
+#      A framework's glue is symlinks -- "Electron Framework -> Versions/Current/
+#      Electron Framework", "Versions/Current -> A". NTFS materialises them as plain
+#      files, so the bundle ships a 340 KB stub where the real binary belongs.
+#      macOS then cannot tell app from framework: "bundle format is ambiguous".
+#   2. Replacing Resources/app.asar after Electron was signed invalidates the
+#      signature. On Apple Silicon an invalid signature is "killed: 9".
+#
+# Neither is repairable on the student's Mac. `zip -y` cannot preserve symlinks that
+# are already gone, and no local command can rebuild the structure. The damage is
+# done at build time, so the fix belongs here.
+#
+# A macOS runner fixes both by construction: electron-builder creates the framework
+# symlinks itself, and we ad-hoc sign AFTER assembly. The assertions below then prove
+# the shape is right, so this class of failure cannot ship silently again.
+
+name: Release macOS app
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Attach the DMG to a GitHub release'
+        required: true
+        default: 'false'
+        type: choice
+        options: ['false', 'true']
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest          # Apple Silicon by default; proved in step 1
+    timeout-minutes: 60
+    steps:
+      - name: Prove the runner is Apple Silicon
+        run: |
+          uname -m
+          sw_vers
+          node --version
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: jsons/package-lock.json
+
+      # jsons/package.json is both the app manifest and the electron-builder config.
+      # There is no root package.json, so every tool is invoked from jsons/.
+      - name: Install dependencies
+        run: npm ci --prefix jsons
+
+      # The macOS zip-target regression (26.15.0/26.15.1) dereferences .framework
+      # symlinks and produces exactly the "bundle format is ambiguous" failure seen
+      # in the field. We build a DMG rather than a zip, so we are not exposed -- but
+      # refuse to run on a known-bad packer so the reason is never a mystery.
+      - name: Guard the packer version
+        working-directory: jsons
+        run: |
+          V=$(node -p "require('electron-builder/package.json').version")
+          echo "electron-builder $V"
+          case "$V" in
+            26.15.0|26.15.1) echo "FAIL: $V is known-bad for macOS packaging"; exit 1 ;;
+          esac
+
+      # The API key is not in the repository. Vite inlines VITE_DEEPSEEK_KEY from
+      # .env.local, which is gitignored; on CI it comes from the DEEPSEEK_KEY
+      # repository secret instead, written here so the build step is identical in
+      # both places. If the secret is unset the build still succeeds and the app
+      # simply ships without a default key, which Settings can supply at runtime.
+      - name: Inject API key
+        env:
+          DEEPSEEK_KEY: ${{ secrets.DEEPSEEK_KEY }}
+        run: |
+          if [ -n "${DEEPSEEK_KEY:-}" ]; then
+            printf 'VITE_DEEPSEEK_KEY=%s\n' "$DEEPSEEK_KEY" > .env.local
+            echo "key injected from repository secret (${#DEEPSEEK_KEY} chars)"
+          else
+            echo "DEEPSEEK_KEY secret is not set - building with no default key"
+          fi
+          # The value is never echoed. Confirm only that the file arrived.
+          if [ -f .env.local ]; then echo ".env.local present"; fi
+
+      # Cheap check first: compares source to itself, so it catches wiring mistakes
+      # before anything is packaged. This is the gate that caught the Part 2 defect
+      # while the packaged build shipped anyway.
+      - name: Type check
+        run: jsons/node_modules/.bin/tsc --noEmit -p .tsc-check.json
+
+      # vite root is jsons/ (index.html lives there); output goes to ../dist-react.
+      - name: Build renderer
+        run: jsons/node_modules/.bin/vite build --config jsons/vite.config.ts
+
+      # electron-builder reads `files` relative to the app dir (jsons/), so both the
+      # renderer output and the statute corpus must be visible from there.
+      #
+      # main.js looks for the corpus at <resources>/app.asar.unpacked/references/
+      # florida-statutes and falls back to ../icm/references/florida-statutes in the
+      # dev tree. The source of truth on disk is icm/references/florida-statutes
+      # (24,671 files, ~88 MB) -- jsons/references/florida-statutes does not exist,
+      # which is why this copy is required rather than assumed.
+      - name: Stage renderer and statute corpus for packaging
+        run: |
+          set -euo pipefail
+          rm -rf jsons/dist-react jsons/references
+          cp -R dist-react jsons/dist-react
+          mkdir -p jsons/references
+          cp -R icm/references/florida-statutes jsons/references/florida-statutes
+          echo "renderer: $(ls jsons/dist-react | wc -l | tr -d ' ') entries"
+          echo "corpus:   $(find jsons/references/florida-statutes -name '*.md' | wc -l | tr -d ' ') .md files"
+          test "$(find jsons/references/florida-statutes -name '*.md' | wc -l | tr -d ' ')" -ge 24670 \
+            || { echo "FAIL: statute corpus incomplete before packaging"; exit 1; }
+
+      # ---------------------------------------------------------------------
+      # Package, sign, verify. One step so the ordering cannot drift.
+      # ---------------------------------------------------------------------
+      - name: Package, ad-hoc sign and verify
+        working-directory: jsons
+        run: |
+          set -euo pipefail
+          APP="dist/mac-arm64/Senior Law Partner.app"
+
+          # Phase 1 -- build the .app only. No DMG yet: the DMG must be built from
+          # an app that is already signed and verified.
+          npx electron-builder --mac --arm64 --dir --publish never
+          [ -d "$APP" ] || { echo "FAIL: $APP was not produced"; find dist -maxdepth 3 | head -40; exit 1; }
+
+          # Phase 2 -- ad-hoc sign explicitly. Deliberately NOT delegated to
+          # electron-builder's identity handling: findIdentity() returns null when
+          # identity is empty and auto-discovery is off, and the "-" sentinel resolves
+          # by searching the keychain for a certificate literally named "-", which
+          # does not exist. Doing it here is deterministic, and it is exactly the
+          # command the student would otherwise have to run by hand.
+          codesign --force --deep --sign - "$APP"
+          codesign --verify --deep --strict --verbose=2 "$APP"
+          echo "--- signature ---"
+          codesign -dv --verbose=4 "$APP" 2>&1 | sed 's/^/  /'
+
+          # Phase 3 -- assert the structure whose absence made every 1.2.x zip
+          # unlaunchable. This is the gate the old pipeline never had.
+          echo "--- framework symlinks ---"
+          find "$APP/Contents/Frameworks" -type l | sed "s|$APP/||" | sort | tee /tmp/links.txt
+          COUNT=$(wc -l < /tmp/links.txt | tr -d ' ')
+          echo "symlink count: $COUNT"
+          [ "$COUNT" -eq 14 ] || { echo "FAIL: expected 14 framework symlinks, found $COUNT"; exit 1; }
+
+          FW="$APP/Contents/Frameworks/Electron Framework.framework"
+          for n in "Electron Framework" "Resources" "Libraries" "Helpers" "Versions/Current"; do
+            [ -L "$FW/$n" ] || { echo "FAIL: $FW/$n is not a symlink"; exit 1; }
+            printf '  %-18s -> %s\n' "$n" "$(readlink "$FW/$n")"
+          done
+          [ -f "$FW/Versions/A/Electron Framework" ] || { echo "FAIL: framework binary missing"; exit 1; }
+          test -x "$APP/Contents/MacOS/Senior Law Partner" || { echo "FAIL: main binary not executable"; exit 1; }
+
+          # Phase 4 -- prove the statute corpus actually shipped. An app that opens
+          # but has no statutes is not a working app.
+          echo "--- statute corpus inside the bundle ---"
+          UNPACKED="$APP/Contents/Resources/app.asar.unpacked/references/florida-statutes"
+          [ -d "$UNPACKED" ] || { echo "FAIL: corpus not unpacked at $UNPACKED"; find "$APP/Contents/Resources" -maxdepth 2 | head -20; exit 1; }
+          N=$(find "$UNPACKED" -name '*.md' | wc -l | tr -d ' ')
+          echo "  .md files: $N"
+          [ "$N" -ge 24670 ] || { echo "FAIL: corpus incomplete in bundle ($N)"; exit 1; }
+
+          # Phase 5 -- the DMG, built from the app we just signed and verified.
+          npx electron-builder --mac dmg --arm64 --prepackaged "$APP" --publish never
+          ls -la dist/*.dmg
+          echo "BUNDLE STRUCTURE: PASS"
+
+      # ditto is macOS's own archiver and the only one that reliably preserves
+      # symlinks. If a zip is wanted alongside the DMG it must be made here -- a zip
+      # produced anywhere else is the bug documented at the top of this file.
+      - name: Make symlink-safe zip
+        run: |
+          set -euo pipefail
+          APP="jsons/dist/mac-arm64/Senior Law Partner.app"
+          VERSION=$(node -p "require('./jsons/package.json').version")
+          OUT="Senior-Law-Partner-${VERSION}-arm64.zip"
+          ditto -c -k --sequesterRsrc --keepParent "$APP" "$OUT"
+          echo "--- symlinks surviving in the zip ---"
+          unzip -Z "$OUT" | awk '$1 ~ /^l/ {print "  " $NF}' | head -20
+          echo "OUT=$OUT" >> "$GITHUB_ENV"
+
+      - name: Hashes
+        run: shasum -a 256 jsons/dist/*.dmg "${{ env.OUT }}" | tee SHA256-mac.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: senior-law-partner-mac
+          path: |
+            jsons/dist/*.dmg
+            ${{ env.OUT }}
+            SHA256-mac.txt
+          if-no-files-found: error
+
+      - name: Attach to a release
+        if: ${{ inputs.publish == 'true' || startsWith(github.ref, 'refs/tags/v') }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(node -p "require('./jsons/package.json').version")
+          TAG="v${VERSION}-mac"
+          NOTES="Built and ad-hoc signed on a macOS runner. Verified: 14 framework symlinks, valid signature, executable bits set, statute corpus unpacked. First launch on any non-notarized app shows a security prompt: System Settings > Privacy & Security > Open Anyway."
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" --clobber jsons/dist/*.dmg "${{ env.OUT }}" SHA256-mac.txt
+          else
+            gh release create "$TAG" --title "Senior Law Partner ${VERSION} (macOS)" \
+              --notes "$NOTES" \
+              jsons/dist/*.dmg "${{ env.OUT }}" SHA256-mac.txt
+          fi
+
+

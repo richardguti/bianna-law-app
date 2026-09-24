@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Constitutional Law Outline — Bianna L. Estrella</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap');
+
+@page {
+    size: letter;
+    margin: 0.75in;
+}
+
+@media print {
+    body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .cover { page-break-after: always; min-height: 95vh; }
+    .part-break { page-break-before: always; }
+    h1, h2, h3 { page-break-after: avoid; }
+    table, pre, blockquote { page-break-inside: avoid; }
+    .no-print { display: none !important; }
+}
+
+:root {
+    --navy: #1a2744;
+    --gold: #c9a227;
+    --gold-light: #f5e6b8;
+    --cream: #faf8f3;
+    --charcoal: #2c2c2c;
+    --brown: #5a4a3a;
+    --blue: #2e5090;
+    --red: #8b2232;
+    --rule: #d4c9b0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Source Sans Pro', 'Segoe UI', Arial, sans-serif;
+    font-size: 10.5pt; line-height: 1.55; color: var(--charcoal);
+    max-width: 8.5in; margin: 0 auto; padding: 0.5in;
+}
+.print-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 999;
+    background: var(--navy); color: #fff; border: none;
+    padding: 12px 28px; font-size: 14px; font-weight: 700;
+    border-radius: 6px; cursor: pointer; letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.print-btn:hover { background: var(--gold); color: var(--navy); }
+
+/* COVER */
+.cover {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; padding: 2.5in 0.5in 2in;
+}
+.cover .seal { font-size: 54pt; margin-bottom: 8pt; }
+.cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 30pt; color: var(--navy); letter-spacing: 2px;
+    text-transform: uppercase; margin: 0 0 4pt; border: none;
+}
+.cover h2 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14pt; color: var(--gold); font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase; margin: 0 0 18pt;
+    border: none;
+}
+.cover .bar {
+    width: 220pt; height: 2.5pt; margin: 10pt auto;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.cover .meta {
+    font-size: 11pt; color: var(--brown); line-height: 2;
+}
+.cover .meta strong { color: var(--navy); }
+
+/* HEADINGS */
+h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18pt; color: var(--navy);
+    border-bottom: 2.5pt solid var(--gold);
+    padding-bottom: 4pt; margin: 26pt 0 10pt;
+}
+h2 {
+    font-size: 13pt; color: var(--blue); font-weight: 700;
+    border-bottom: 1pt solid var(--rule);
+    padding-bottom: 3pt; margin: 20pt 0 8pt;
+}
+h3 { font-size: 11pt; color: var(--navy); font-weight: 700; margin: 14pt 0 5pt; }
+h4 { font-size: 10pt; color: var(--brown); font-weight: 700; margin: 10pt 0 4pt; }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; margin: 8pt 0 14pt; font-size: 9.5pt; }
+thead th {
+    background: var(--navy); color: #fff; font-weight: 700;
+    text-align: left; padding: 5pt 8pt; font-size: 8.5pt;
+    letter-spacing: 0.5px; text-transform: uppercase;
+}
+td { padding: 4pt 8pt; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+tr:nth-child(even) { background: var(--cream); }
+
+/* CODE / FLOWCHARTS */
+code {
+    font-family: 'Fira Code', Consolas, monospace;
+    background: #f0ebe0; padding: 1pt 3pt; border-radius: 2pt;
+    font-size: 8.5pt; color: var(--red);
+}
+pre {
+    background: var(--navy); color: #e8dcc8;
+    padding: 12pt 16pt; border-radius: 4pt;
+    font-size: 8.5pt; line-height: 1.5;
+    margin: 8pt 0 14pt; border-left: 3pt solid var(--gold);
+    white-space: pre-wrap; word-wrap: break-word;
+}
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+
+/* BLOCKQUOTES */
+blockquote {
+    border-left: 3pt solid var(--gold); background: var(--cream);
+    margin: 8pt 0; padding: 8pt 14pt;
+    font-style: italic; color: var(--brown); font-size: 9.5pt;
+}
+blockquote strong { color: var(--red); font-style: normal; }
+
+/* LISTS */
+ul, ol { margin: 4pt 0 8pt 20pt; }
+li { margin-bottom: 2pt; }
+li strong { color: var(--navy); }
+
+hr { border: none; border-top: 1.5pt solid var(--gold); margin: 18pt 0; }
+a { color: var(--blue); text-decoration: none; }
+em { color: var(--brown); }
+p { margin: 4pt 0; }
+
+/* HEADER / FOOTER for screen */
+.header-bar {
+    text-align: center; font-size: 7.5pt; color: var(--brown);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    border-bottom: 0.5pt solid var(--rule); padding-bottom: 4pt; margin-bottom: 8pt;
+}
+</style>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">⬇ EXPORT TO PDF</button>
+
+    <div class="cover">
+        <div class="seal">⚖️</div>
+        <h1>Constitutional Law</h1>
+        <h2>Master Attack Outline</h2>
+        <div class="bar"></div>
+        <div class="meta">
+            <strong>Professor Keith R. Fisher</strong><br>
+            Spring 2026<br><br>
+            <strong>Bianna L. Estrella</strong><br>
+            St. Thomas University College of Law<br><br>
+            <em>Exam-Ready Reference<br>All Doctrines · Decision Trees · Case Tables · Fisher Strategies</em>
+        </div>
+    </div>
+    
+<div class="header-bar">
+CONSTITUTIONAL LAW OUTLINE — PROFESSOR FISHER — SPRING 2026 — BIANNA L. ESTRELLA
+</div>
+<h1 id="constitutional-law-master-attack-outline">⚖️ CONSTITUTIONAL LAW — MASTER ATTACK OUTLINE</h1>
+
+<h2 id="professor-keith-r-fisher-final-exam-reference">Professor Keith R. Fisher | Final Exam Reference</h2>
+
+<hr />
+
+<h1 id="part-i-justiciability-judicial-review">PART I: JUSTICIABILITY &amp; JUDICIAL REVIEW</h1>
+
+<h2 id="1-judicial-review-marbury-v-madison-1803">1. Judicial Review — <em>Marbury v. Madison</em> (1803)</h2>
+
+<p><strong>Rule:</strong> The Supreme Court has the authority to declare acts of Congress unconstitutional. "It is emphatically the province and duty of the judicial department to say what the law is."</p>
+
+<p><strong>Fisher Alert:</strong> This is the structural bedrock. Every ConLaw answer begins with the assumption that the Court can review the law.</p>
+
+<hr />
+
+<h2 id="2-standing-article-iii-2">2. Standing (Article III, § 2)</h2>
+
+<h3 id="the-lujan-three-prong-test">The <em>Lujan</em> Three-Prong Test</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Prong</th>
+  <th>Requirement</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Injury in Fact</strong></td>
+  <td>Concrete, particularized, actual/imminent</td>
+  <td><em>Lujan v. Defenders of Wildlife</em></td>
+</tr>
+<tr>
+  <td><strong>Causation</strong></td>
+  <td>Fairly traceable to defendant's conduct</td>
+  <td><em>Allen v. Wright</em></td>
+</tr>
+<tr>
+  <td><strong>Redressability</strong></td>
+  <td>Favorable decision would likely remedy injury</td>
+  <td><em>Simon v. Eastern KY Welfare Rights</em></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="decision-tree-standing">Decision Tree: Standing</h3>
+
+<pre><code>Does P have INJURY IN FACT?
+├─ NO → No Standing. Case dismissed.
+└─ YES → Is injury TRACEABLE to D's conduct?
+    ├─ NO → No Standing.
+    └─ YES → Would a favorable ruling REDRESS the injury?
+        ├─ NO → No Standing.
+        └─ YES → P HAS STANDING. Proceed to merits.
+</code></pre>
+
+<h3 id="special-standing-rules">Special Standing Rules</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Doctrine</th>
+  <th>Rule</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Taxpayer Standing</strong></td>
+  <td>Generally NO standing to challenge federal spending. Exception: Establishment Clause challenges to congressional exercises of taxing/spending power</td>
+  <td><em>Flast v. Cohen</em></td>
+</tr>
+<tr>
+  <td><strong>Third-Party Standing</strong></td>
+  <td>Generally NO. Exception: close relationship + hindrance to third party asserting own rights</td>
+  <td><em>Craig v. Boren</em> (beer vendor for young men)</td>
+</tr>
+<tr>
+  <td><strong>Organizational Standing</strong></td>
+  <td>Org can sue on behalf of members if: (1) members have standing; (2) interests germane to purpose; (3) individual participation not required</td>
+  <td><em>Hunt v. Washington Apple</em></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="3-mootness-ripeness">3. Mootness &amp; Ripeness</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Doctrine</th>
+  <th>Rule</th>
+  <th>Exception</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Mootness</strong></td>
+  <td>Case must present a live controversy at all stages</td>
+  <td>"Capable of repetition yet evading review" (<em>Roe v. Wade</em>)</td>
+</tr>
+<tr>
+  <td><strong>Ripeness</strong></td>
+  <td>Case must not be premature; actual harm must be imminent</td>
+  <td>Pre-enforcement challenges allowed if threat of prosecution is credible</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="4-political-question-doctrine-baker-v-carr-1962">4. Political Question Doctrine — <em>Baker v. Carr</em> (1962)</h2>
+
+<p><strong>The Baker Factors (any one = political question):</strong>
+1. Textually demonstrable constitutional commitment to another branch
+2. Lack of judicially discoverable/manageable standards
+3. Impossibility of deciding without an initial policy determination
+4. Impossibility of resolving without disrespecting another branch
+5. Unusual need for unquestioning adherence to a political decision
+6. Potential for embarrassment from conflicting pronouncements</p>
+
+<p><strong>Fisher Tip:</strong> Gerrymandering (<em>Rucho v. Common Cause</em>) = political question. Malapportionment (<em>Baker v. Carr</em>) = justiciable.</p>
+
+<hr />
+
+<h1 id="part-ii-federal-legislative-power">PART II: FEDERAL LEGISLATIVE POWER</h1>
+
+<h2 id="1-the-commerce-clause-art-i-8-cl-3">1. The Commerce Clause (Art. I, § 8, cl. 3)</h2>
+
+<h3 id="the-lopez-three-categories">The <em>Lopez</em> Three Categories</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Category</th>
+  <th>Definition</th>
+  <th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Channels</strong></td>
+  <td>Highways, waterways, internet, airways</td>
+  <td><em>Heart of Atlanta Motel</em></td>
+</tr>
+<tr>
+  <td><strong>Instrumentalities</strong></td>
+  <td>Persons/things in interstate commerce (trucks, planes, people)</td>
+  <td><em>Shreveport Rate Cases</em></td>
+</tr>
+<tr>
+  <td><strong>Substantial Effects</strong></td>
+  <td>Activities with a substantial effect on interstate commerce</td>
+  <td><em>Wickard v. Filburn</em>, <em>Gonzales v. Raich</em></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="decision-tree-commerce-clause">Decision Tree: Commerce Clause</h3>
+
+<pre><code>Is the regulated activity in a CHANNEL of interstate commerce?
+├─ YES → Valid under Commerce Power.
+└─ NO → Is it an INSTRUMENTALITY or person/thing IN commerce?
+    ├─ YES → Valid.
+    └─ NO → Does it have a SUBSTANTIAL EFFECT on interstate commerce?
+        ├─ Is it ECONOMIC activity? (*Raich*)
+        │   ├─ YES → Aggregate effects. Rational basis. Congress wins.
+        │   └─ NO → (*Lopez*/*Morrison*) Apply 4 factors:
+        │       1. Is it economic? (NO = bad for govt)
+        │       2. Jurisdictional element? (hook to specific interstate nexus)
+        │       3. Congressional findings? (helpful but not dispositive)
+        │       4. Attenuation? (too many causal steps = fails)
+        └─ NO → Beyond Commerce Power.
+</code></pre>
+
+<h3 id="the-nfib-v-sebelius-anti-commandeering-limit">⚠️ The <em>NFIB v. Sebelius</em> Anti-Commandeering Limit</h3>
+
+<p><strong>Rule:</strong> Congress can regulate existing activity but cannot <strong>compel</strong> individuals to enter commerce. The individual mandate was NOT valid under Commerce Clause because "inactivity" ≠ "activity."</p>
+
+<p><strong>Fisher Trap:</strong> The mandate was upheld under the <strong>Taxing Power</strong> — the "penalty" functioned as a "tax" (produces revenue, paid to IRS, no scienter requirement).</p>
+
+<hr />
+
+<h2 id="2-the-necessary-proper-clause-art-i-8-cl-18">2. The Necessary &amp; Proper Clause (Art. I, § 8, cl. 18)</h2>
+
+<p><strong>Rule (<em>McCulloch v. Maryland</em>):</strong> "Let the end be legitimate, let it be within the scope of the constitution, and all means which are appropriate, which are plainly adapted to that end, which are not prohibited, but consist with the letter and spirit of the constitution, are constitutional."</p>
+
+<p><strong>Modern Limit (<em>Comstock</em>):</strong> The N&amp;P Clause can support federal civil commitment of sexually dangerous prisoners — 5-factor test:
+1. Broad, not narrow, construction of N&amp;P
+2. Long history of federal involvement
+3. Sound reasons for the statute
+4. The statute accommodates state interests
+5. The statute is narrow in scope</p>
+
+<hr />
+
+<h2 id="3-taxing-spending-power-art-i-8-cl-1">3. Taxing &amp; Spending Power (Art. I, § 8, cl. 1)</h2>
+
+<h3 id="taxing-power">Taxing Power</h3>
+
+<ul>
+<li>Congress can tax virtually anything as long as it produces some revenue</li>
+<li><em>NFIB</em>: "Shared responsibility payment" = tax (not a penalty) because it was paid to IRS, produced revenue, and had no scienter requirement</li>
+</ul>
+
+<h3 id="spending-power-south-dakota-v-dole-1987">Spending Power — <em>South Dakota v. Dole</em> (1987)</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Factor</th>
+  <th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>General Welfare</td>
+  <td>Spending must serve general welfare (broad deference)</td>
+</tr>
+<tr>
+  <td>Unambiguous Conditions</td>
+  <td>States must know what they're agreeing to</td>
+</tr>
+<tr>
+  <td>Germaneness</td>
+  <td>Conditions must relate to the federal interest in the program</td>
+</tr>
+<tr>
+  <td>No Independent Bar</td>
+  <td>Cannot violate other constitutional provisions</td>
+</tr>
+<tr>
+  <td><strong>No Coercion</strong></td>
+  <td>Cannot be so coercive it's a "gun to the head" (<em>NFIB</em>)</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Alert:</strong> <em>NFIB</em> Medicaid expansion was unconstitutional coercion — threatening to revoke ALL existing Medicaid funding (10%+ of state budgets) was "economic dragooning."</p>
+
+<hr />
+
+<h2 id="4-the-tenth-amendment-anti-commandeering">4. The Tenth Amendment &amp; Anti-Commandeering</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Principle</th>
+  <th>Rule</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Anti-Commandeering (Legislative)</strong></td>
+  <td>Congress cannot compel state legislatures to enact/enforce federal programs</td>
+  <td><em>New York v. United States</em></td>
+</tr>
+<tr>
+  <td><strong>Anti-Commandeering (Executive)</strong></td>
+  <td>Congress cannot compel state executive officers to administer federal programs</td>
+  <td><em>Printz v. United States</em></td>
+</tr>
+<tr>
+  <td><strong>General Applicability OK</strong></td>
+  <td>Laws that apply to states AND private parties are fine</td>
+  <td><em>Garcia v. San Antonio</em></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="part-iii-dormant-commerce-clause-dcc">PART III: DORMANT COMMERCE CLAUSE (DCC)</h1>
+
+<h2 id="decision-tree-dcc-analysis">Decision Tree: DCC Analysis</h2>
+
+<pre><code>Does a STATE law burden interstate commerce?
+├─ Is there a FEDERAL LAW on point?
+│   ├─ YES → Preemption analysis (see Part IV). DCC doesn't apply.
+│   └─ NO → Continue DCC.
+├─ Does the law DISCRIMINATE against out-of-state commerce?
+│   ├─ ON ITS FACE → Virtually Per Se Invalid. Strict Scrutiny.
+│   │   └─ State must prove: (1) Compelling interest AND (2) No non-discriminatory alternatives
+│   │       Key cases: *Philadelphia v. NJ* (waste); *Dean Milk* (milk)
+│   ├─ IN EFFECT → Same Strict Scrutiny analysis
+│   │   └─ *Hunt v. Washington Apple* (labeling law = facial neutrality, discriminatory effect)
+│   └─ NO (Truly Neutral) → Apply the PIKE BALANCING TEST
+│       └─ Does the burden on interstate commerce CLEARLY EXCEED
+│           the putative local benefits?
+│           ├─ YES → Unconstitutional
+│           └─ NO → Law is upheld
+│               Key case: *Pike v. Bruce Church*
+└─ EXCEPTION: Market Participant Doctrine
+    └─ State acting as BUYER/SELLER (not regulator) → DCC doesn't apply
+        *Hughes v. Alexandria Scrap*; *Reeves v. Stake*
+</code></pre>
+
+<h3 id="key-distinctions-table">Key Distinctions Table</h3>
+
+<table>
+<thead>
+<tr>
+  <th>If the Law...</th>
+  <th>Standard</th>
+  <th>Govt Wins?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Facially discriminates</td>
+  <td>Virtual per se invalidity</td>
+  <td>Almost never</td>
+</tr>
+<tr>
+  <td>Discriminates in effect</td>
+  <td>Strict Scrutiny</td>
+  <td>Rarely</td>
+</tr>
+<tr>
+  <td>Is neutral but burdensome</td>
+  <td><em>Pike</em> Balancing</td>
+  <td>Usually</td>
+</tr>
+<tr>
+  <td>State is market participant</td>
+  <td>No DCC review</td>
+  <td>Always</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="dcc-vs-privileges-immunities-art-iv-2">DCC vs. Privileges &amp; Immunities (Art. IV, § 2)</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Feature</th>
+  <th>DCC</th>
+  <th>P&amp;I Clause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Protects</strong></td>
+  <td>Interstate commerce flow</td>
+  <td>Individual "fundamental" rights (livelihood)</td>
+</tr>
+<tr>
+  <td><strong>Who can sue?</strong></td>
+  <td>Anyone (including corps)</td>
+  <td>Only natural persons (NO corporations)</td>
+</tr>
+<tr>
+  <td><strong>Market Participant?</strong></td>
+  <td>Exception applies (state immune)</td>
+  <td>NO exception — <em>Camden</em></td>
+</tr>
+<tr>
+  <td><strong>Standard</strong></td>
+  <td><em>Pike</em> or Strict Scrutiny</td>
+  <td><em>United Building v. Camden</em>: (1) Does law burden fundamental right? (2) Is there substantial reason? (3) Is it closely tailored?</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Exam Tip:</strong> If the plaintiff is a <strong>corporation</strong> → DCC only. If the plaintiff is a <strong>person</strong> and the state is a <strong>market participant</strong> → P&amp;I is the only option (<em>Camden</em>).</p>
+
+<hr />
+
+<h1 id="part-iv-preemption-supremacy-clause-art-vi">PART IV: PREEMPTION (Supremacy Clause, Art. VI)</h1>
+
+<h2 id="decision-tree-preemption">Decision Tree: Preemption</h2>
+
+<pre><code>Is there a FEDERAL LAW and a STATE LAW on the same topic?
+├─ EXPRESS PREEMPTION: Does federal law explicitly say "states may not..."?
+│   ├─ YES → State law preempted. End.
+│   └─ NO → Continue.
+├─ FIELD PREEMPTION: Does federal regulation so thoroughly occupy the field
+│   that it leaves no room for state law?
+│   ├─ YES → State law preempted. (*Arizona v. US* — immigration)
+│   └─ NO → Continue.
+├─ CONFLICT PREEMPTION:
+│   ├─ IMPOSSIBILITY: Is it physically impossible to comply with both?
+│   │   ├─ YES → State law preempted.
+│   │   └─ NO → Continue.
+│   └─ OBSTACLE: Does state law stand as an obstacle to federal objectives?
+│       ├─ YES → State law preempted. (*Hines v. Davidowitz*)
+│       └─ NO → State law SURVIVES. Both enforced.
+└─ PRESUMPTION: Against preemption in areas of traditional state regulation
+    (*Medtronic v. Lohr*)
+</code></pre>
+
+<hr />
+
+<h1 id="part-v-separation-of-powers">PART V: SEPARATION OF POWERS</h1>
+
+<h2 id="1-executive-power-framework-youngstown-jackson-concurrence">1. Executive Power Framework — <em>Youngstown</em> (Jackson Concurrence)</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Zone</th>
+  <th>Description</th>
+  <th>Standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Zone 1</strong></td>
+  <td>President acts WITH congressional authorization</td>
+  <td>Maximum authority. Presumption of validity.</td>
+</tr>
+<tr>
+  <td><strong>Zone 2</strong></td>
+  <td>President acts in congressional SILENCE</td>
+  <td>"Zone of twilight." Concurrent authority. Case-by-case.</td>
+</tr>
+<tr>
+  <td><strong>Zone 3</strong></td>
+  <td>President acts AGAINST congressional will</td>
+  <td>"Lowest ebb." Power at minimum. Can only prevail if Congress lacks authority over the matter.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="2-executive-privilege-immunity">2. Executive Privilege &amp; Immunity</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Doctrine</th>
+  <th>Rule</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Executive Privilege</strong></td>
+  <td>Presumptive privilege for presidential communications; yields to specific need in criminal proceedings</td>
+  <td><em>United States v. Nixon</em></td>
+</tr>
+<tr>
+  <td><strong>Civil Immunity</strong></td>
+  <td>Absolute immunity for official acts; NO immunity for unofficial/private acts</td>
+  <td><em>Clinton v. Jones</em>; <em>Nixon v. Fitzgerald</em></td>
+</tr>
+<tr>
+  <td><strong>Criminal Immunity</strong></td>
+  <td>Absolute for core Art. II functions; Presumptive for official acts; None for unofficial acts</td>
+  <td><em>Trump v. United States</em> (2024)</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="trump-v-united-states-tripartite-immunity-test"><em>Trump v. United States</em> — Tripartite Immunity Test</h3>
+
+<pre><code>Was the President's act...
+├─ A CORE constitutional function (e.g., pardon, commander-in-chief)?
+│   └─ ABSOLUTE IMMUNITY. Cannot be prosecuted. Period.
+├─ An OFFICIAL ACT (within outer perimeter of duties)?
+│   └─ PRESUMPTIVE IMMUNITY. Prosecution must prove no intrusion on executive function.
+└─ An UNOFFICIAL/PRIVATE act?
+    └─ NO IMMUNITY. Fully subject to prosecution.
+</code></pre>
+
+<h2 id="3-non-delegation-doctrine">3. Non-Delegation Doctrine</h2>
+
+<p><strong>Rule:</strong> Congress cannot delegate legislative power without an "intelligible principle" to guide the executive. (<em>Whitman v. American Trucking</em>)</p>
+
+<p><strong>Reality:</strong> The Court has only struck down delegations twice (both 1935). Modern delegations are almost always upheld.</p>
+
+<h2 id="4-appointment-removal">4. Appointment &amp; Removal</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Power</th>
+  <th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Appointments</strong> (Art. II, § 2)</td>
+  <td>Principal officers: President appoints, Senate confirms. Inferior officers: Congress may vest in President, courts, or department heads.</td>
+</tr>
+<tr>
+  <td><strong>Removal</strong></td>
+  <td>President has implied removal power over executive officers (<em>Myers</em>). Congress can limit removal of quasi-judicial/quasi-legislative officers to "good cause" (<em>Humphrey's Executor</em>).</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p><em>Continued in Part 2...</em></p>
+
+<div class="part-break"></div>
+
+<hr />
+
+<h1 id="part-vi-incorporation">PART VI: INCORPORATION</h1>
+
+<h2 id="the-doctrine">The Doctrine</h2>
+
+<p><strong>Rule:</strong> The 14th Amendment's Due Process Clause <strong>selectively incorporates</strong> most Bill of Rights protections against the states.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Approach</th>
+  <th>Description</th>
+  <th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Total Incorporation</strong></td>
+  <td>All of the Bill of Rights apply to states</td>
+  <td>Rejected (Black's view)</td>
+</tr>
+<tr>
+  <td><strong>Selective Incorporation</strong></td>
+  <td>Only "fundamental" rights apply</td>
+  <td><strong>Current Law</strong> (<em>McDonald v. Chicago</em>)</td>
+</tr>
+<tr>
+  <td><strong>Total Inc. + Extras</strong></td>
+  <td>All BoR + other unenumerated rights</td>
+  <td>Rejected (but SDP does add extras)</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Test:</strong> Is the right "fundamental to our scheme of ordered liberty" or "deeply rooted in this Nation's history and tradition"?</p>
+
+<p><strong>Not Incorporated:</strong> Grand Jury indictment (5th), Excessive fines (partially), Civil jury trial (7th — <em>but see</em> recent developments).</p>
+
+<hr />
+
+<h1 id="part-vii-substantive-due-process-sdp">PART VII: SUBSTANTIVE DUE PROCESS (SDP)</h1>
+
+<h2 id="the-two-competing-methodologies">The Two Competing Methodologies</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Method</th>
+  <th>Approach</th>
+  <th>Champion</th>
+  <th>Modern Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Glucksberg</strong> ("Narrow")</td>
+  <td>Right must be "deeply rooted in history and tradition" + "carefully described"</td>
+  <td>Rehnquist, Alito</td>
+  <td><strong>DOMINANT</strong> after <em>Dobbs</em></td>
+</tr>
+<tr>
+  <td><strong>Lawrence/Obergefell</strong> ("Broad")</td>
+  <td>Tradition is a "living thing"; look at emerging awareness of injustice</td>
+  <td>Kennedy, Souter</td>
+  <td>Weakened but not dead</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="the-text-history-tradition-tht-framework-bruendobbsheller">The Text, History &amp; Tradition (THT) Framework (<em>Bruen/Dobbs/Heller</em>)</h3>
+
+<pre><code>Is a FUNDAMENTAL RIGHT claimed?
+├─ Step 1: Is the right DEEPLY ROOTED in this Nation's history and tradition?
+│   ├─ YES → Fundamental right. Apply Strict Scrutiny.
+│   └─ NO → NOT a fundamental right. Apply Rational Basis.
+├─ Step 2: CAREFULLY DESCRIBE the right (narrow framing per Glucksberg)
+│   └─ "Right to physician-assisted suicide" NOT "right to autonomy"
+└─ Step 3: HISTORICAL ANALOGUES — is there a historical tradition of
+    regulating this conduct? (*Bruen* for 2A; *Dobbs* for abortion)
+</code></pre>
+
+<p><strong>Fisher Exam Strategy:</strong>
+- Want law <strong>upheld</strong>? → Cite <em>Glucksberg</em> THT. Frame right narrowly. Show no historical protection.
+- Want law <strong>struck down</strong>? → Cite <em>Lawrence/Obergefell</em> dignity framework. Frame right broadly.</p>
+
+<hr />
+
+<h2 id="the-sdp-evolution-key-cases">The SDP Evolution: Key Cases</h2>
+
+<h3 id="a-economic-sdp-dead">A. Economic SDP (Dead)</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Era</th>
+  <th>Rule</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Lochner Era</strong> (1905–1937)</td>
+  <td>"Liberty of contract" is fundamental; courts will second-guess economic regulation</td>
+  <td><em>Lochner v. New York</em></td>
+</tr>
+<tr>
+  <td><strong>Post-New Deal</strong> (1937+)</td>
+  <td>Economic regulation gets Rational Basis only; courts defer completely</td>
+  <td><em>West Coast Hotel v. Parrish</em>; <em>Williamson v. Lee Optical</em></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Tip:</strong> <em>Lochner</em> is the "ghost" — any time a Justice accuses the majority of "judicial activism," they invoke <em>Lochner</em>. The fear of being a "Lochner court" constrains SDP expansion.</p>
+
+<hr />
+
+<h3 id="b-privacy-contraception">B. Privacy &amp; Contraception</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Griswold v. CT</em> (1965)</td>
+  <td>Right to marital privacy → "penumbras" of BoR → struck down contraception ban for married couples</td>
+</tr>
+<tr>
+  <td><em>Eisenstadt v. Baird</em> (1972)</td>
+  <td>Extended to unmarried individuals — "If the right means anything, it is the right of the individual"</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="c-abortion-the-doctrinal-arc">C. Abortion — The Doctrinal Arc</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Standard</th>
+  <th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Roe v. Wade</em> (1973)</td>
+  <td>Trimester framework; right to abortion is fundamental</td>
+  <td><strong>OVERRULED</strong></td>
+</tr>
+<tr>
+  <td><em>Planned Parenthood v. Casey</em> (1992)</td>
+  <td>Undue Burden test replaces trimesters; viability line retained</td>
+  <td><strong>OVERRULED</strong></td>
+</tr>
+<tr>
+  <td><strong><em>Dobbs v. Jackson</em></strong> (2022)</td>
+  <td><strong>No constitutional right to abortion.</strong> Returned to states. Rational Basis.</td>
+  <td><strong>CURRENT LAW</strong></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="dobbs-the-controlling-framework"><em>Dobbs</em> — The Controlling Framework</h3>
+
+<p><strong>Holding:</strong> The Constitution does not confer a right to abortion. <em>Roe</em> and <em>Casey</em> are overruled.</p>
+
+<p><strong>The Test Applied:</strong>
+1. Is abortion "deeply rooted in history and tradition"? → <strong>NO</strong> (criminalized in 3/4 of states at ratification of 14th Amendment)
+2. Is it "implicit in the concept of ordered liberty"? → <strong>NO</strong>
+3. Therefore: <strong>Rational Basis Review</strong> → Mississippi's 15-week ban is rationally related to legitimate interests (potential life, maternal health, medical ethics)</p>
+
+<p><strong>Fisher Traps:</strong>
+- <em>Dobbs</em> does NOT say states must ban abortion — only that states MAY
+- The <em>Dobbs</em> majority insists its logic does NOT threaten <em>Griswold</em>, <em>Lawrence</em>, or <em>Obergefell</em> (but Concurrence Thomas disagrees)
+- <strong>Exam move:</strong> Always mention the Thomas concurrence suggesting ALL SDP rights should be reconsidered</p>
+
+<hr />
+
+<h3 id="d-marriage-as-a-fundamental-right">D. Marriage as a Fundamental Right</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Rule</th>
+  <th>Scrutiny</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Loving v. Virginia</em> (1967)</td>
+  <td>Marriage is a "basic civil right of man"; anti-miscegenation laws fail Strict Scrutiny on EP AND DP grounds</td>
+  <td>Strict</td>
+</tr>
+<tr>
+  <td><em>Zablocki v. Redhail</em> (1978)</td>
+  <td>Cannot condition marriage on payment of child support</td>
+  <td>Strict</td>
+</tr>
+<tr>
+  <td><em>Turner v. Safley</em> (1987)</td>
+  <td>Even prisoners retain fundamental right to marry</td>
+  <td>Reasonableness (prison context)</td>
+</tr>
+<tr>
+  <td><strong><em>Obergefell v. Hodges</em></strong> (2015)</td>
+  <td>Same-sex couples have fundamental right to marry under DP + EP "synergy"</td>
+  <td><strong>Effectively Strict</strong> (Kennedy never says it)</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="obergefell-the-double-helix"><em>Obergefell</em> — The "Double Helix"</h3>
+
+<p><strong>Kennedy's Four Principles:</strong>
+1. Individual autonomy in marriage choice
+2. Marriage supports a unique two-person union
+3. Marriage safeguards children and families
+4. Marriage is a "keystone of social order"</p>
+
+<p><strong>The Synergy:</strong> DP protects the liberty to marry; EP ensures the state can't grant it to some but deny it to others. Together they create a "double helix" — the state cannot "level down" by abolishing marriage entirely.</p>
+
+<p><strong>Fisher Exam Strategy:</strong> If a fact pattern involves a "dignity" interest:
+1. Argue Strict Scrutiny (fundamental right under <em>Loving/Skinner</em>)
+2. Alternative: "Rational Basis with Bite" — moral disapproval/animus is never legitimate (<em>Romer/Lawrence</em>)</p>
+
+<hr />
+
+<h3 id="e-the-right-to-die-spectrum">E. The "Right to Die" Spectrum</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Category</th>
+  <th>Legal Status</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Refusing treatment</strong> (competent patient)</td>
+  <td>Protected liberty interest</td>
+  <td><em>Cruzan</em> (assumed)</td>
+</tr>
+<tr>
+  <td><strong>Refusing treatment</strong> (incompetent)</td>
+  <td>State may require "clear and convincing evidence"</td>
+  <td><em>Cruzan</em></td>
+</tr>
+<tr>
+  <td><strong>Physician-assisted suicide</strong></td>
+  <td>NOT a fundamental right</td>
+  <td><em>Glucksberg</em></td>
+</tr>
+<tr>
+  <td><strong>Active euthanasia</strong></td>
+  <td>No protection; state can criminalize</td>
+  <td>No case on point</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="glucksberg-the-history-and-tradition-fortress"><em>Glucksberg</em> — The "History and Tradition" Fortress</h3>
+
+<p><strong>Holding:</strong> No fundamental right to physician-assisted suicide. Rational Basis.</p>
+
+<p><strong>State Interests (all legitimate):</strong>
+1. Preserving human life
+2. Preventing suicide
+3. Protecting vulnerable populations (elderly/disabled)
+4. Protecting medical profession integrity
+5. Preventing slippery slope to euthanasia</p>
+
+<p><strong>Fisher Tip — Distinguish the Methods:</strong>
+- <strong>Passive</strong> (removing a tube) = <em>Cruzan</em> = more protected
+- <strong>Active</strong> (providing a pill) = <em>Glucksberg</em> = not protected
+- <strong>Palliative care</strong> (pain meds that hasten death) = "Double Effect" loophole — intent is pain relief, not death</p>
+
+<hr />
+
+<h3 id="f-sexual-intimacy">F. Sexual Intimacy</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Bowers v. Hardwick</em> (1986)</td>
+  <td>No fundamental right to sodomy (defined narrowly)</td>
+  <td><strong>OVERRULED</strong></td>
+</tr>
+<tr>
+  <td><strong><em>Lawrence v. Texas</em></strong> (2003)</td>
+  <td>Adults have liberty interest in consensual intimate conduct. Anti-sodomy laws violate SDP. Kennedy avoids naming scrutiny level.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Lawrence's Lasting Impact:</strong>
+- "Moral disapproval" alone is NOT a legitimate state interest
+- Paved the way for <em>Windsor</em> → <em>Obergefell</em>
+- Uses "Rational Basis with Bite" (or dignity-based review)</p>
+
+<hr />
+
+<h1 id="part-viii-procedural-due-process-pdp">PART VIII: PROCEDURAL DUE PROCESS (PDP)</h1>
+
+<h2 id="step-1-is-there-a-protected-interest">Step 1: Is There a Protected Interest?</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Type</th>
+  <th>Source</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Life</strong></td>
+  <td>Self-evident</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><strong>Liberty</strong></td>
+  <td>Freedom from physical restraint + other fundamental interests</td>
+  <td><em>Board of Regents v. Roth</em></td>
+</tr>
+<tr>
+  <td><strong>Property</strong></td>
+  <td>NOT just real property — includes entitlements, licenses, welfare benefits, continued employment (if "for cause" only)</td>
+  <td><em>Goldberg v. Kelly</em>; <em>Roth</em></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>The "New Property" (<em>Goldberg v. Kelly</em>):</strong> Government benefits (welfare, licenses, permits) = property interests if there's a legitimate claim of entitlement under state law.</p>
+
+<p><strong>Fisher Tip:</strong> "Rights vs. Privileges" distinction is DEAD. If the government creates an entitlement, they must provide process before taking it away.</p>
+
+<hr />
+
+<h2 id="step-2-what-process-is-due">Step 2: What Process Is Due?</h2>
+
+<h3 id="the-mathews-v-eldridge-balancing-test-1976">The <em>Mathews v. Eldridge</em> Balancing Test (1976)</h3>
+
+<pre><code>Three Factors to Balance:
+┌─────────────────────────────────────────────────┐
+│ (1) Private Interest: How important is the      │
+│     interest to the individual?                  │
+│                                                  │
+│ (2) Risk of Error: What's the risk of erroneous │
+│     deprivation under current procedures? Would  │
+│     additional safeguards reduce that risk?       │
+│                                                  │
+│ (3) Government Interest: What's the fiscal and  │
+│     administrative burden of additional process? │
+└─────────────────────────────────────────────────┘
+</code></pre>
+
+<table>
+<thead>
+<tr>
+  <th>Situation</th>
+  <th>Process Required</th>
+  <th>Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Welfare termination</td>
+  <td>Pre-termination hearing (oral)</td>
+  <td><em>Goldberg v. Kelly</em></td>
+</tr>
+<tr>
+  <td>Disability benefits</td>
+  <td>Post-termination paper review sufficient</td>
+  <td><em>Mathews v. Eldridge</em></td>
+</tr>
+<tr>
+  <td>Public employment (for cause)</td>
+  <td>Pre-termination notice + opportunity to respond</td>
+  <td><em>Cleveland Bd. v. Loudermill</em></td>
+</tr>
+<tr>
+  <td>Reputation alone</td>
+  <td>NO due process (stigma alone ≠ liberty) unless coupled with loss of tangible interest ("stigma-plus")</td>
+  <td><em>Paul v. Davis</em></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Alert — "Good Name" Interest:</strong> You have a property interest in your reputation only if the government's defamatory statement is accompanied by a concrete loss (firing, license revocation). Stigma alone = no process due.</p>
+
+<hr />
+
+<p><em>Continued in Part 3...</em></p>
+
+<div class="part-break"></div>
+
+<hr />
+
+<h1 id="part-ix-equal-protection-14th-amend-1">PART IX: EQUAL PROTECTION (14th Amend. § 1)</h1>
+
+<blockquote>
+  <p>"No State shall... deny to any person within its jurisdiction the equal protection of the laws."</p>
+</blockquote>
+
+<p><strong>Structural Note:</strong> EP applies to <strong>states</strong> via the 14th Amendment. It applies to the <strong>federal government</strong> via the 5th Amendment Due Process Clause ("Reverse Incorporation" — <em>Bolling v. Sharpe</em>).</p>
+
+<hr />
+
+<h2 id="the-master-scrutiny-table">THE MASTER SCRUTINY TABLE</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Level</th>
+  <th>Classification</th>
+  <th>Test</th>
+  <th>Burden</th>
+  <th>Gov't Wins?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Strict Scrutiny</strong></td>
+  <td>Race, National Origin, Alienage (state law)</td>
+  <td>Compelling interest + Narrowly tailored</td>
+  <td>Government</td>
+  <td>Rarely</td>
+</tr>
+<tr>
+  <td><strong>Intermediate Scrutiny</strong></td>
+  <td>Sex/Gender</td>
+  <td>Important interest + Substantially related + "Exceedingly persuasive justification"</td>
+  <td>Government</td>
+  <td>Sometimes</td>
+</tr>
+<tr>
+  <td><strong>Rational Basis</strong></td>
+  <td>Age, Disability, Poverty, Economic regulation</td>
+  <td>Legitimate interest + Rationally related</td>
+  <td>Challenger</td>
+  <td>Almost never (gov't wins)</td>
+</tr>
+<tr>
+  <td><strong>Rational Basis "with Bite"</strong></td>
+  <td>Animus-based laws targeting unpopular groups</td>
+  <td>Legitimate interest + Rationally related (but Court actually looks closely)</td>
+  <td>Unclear (Court says challenger)</td>
+  <td>Gov't loses when animus found</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="decision-tree-equal-protection-analysis">DECISION TREE: Equal Protection Analysis</h2>
+
+<pre><code>Does a LAW treat people DIFFERENTLY?
+├─ YES → What is the BASIS of the classification?
+│   ├─ RACE or NATIONAL ORIGIN → STRICT SCRUTINY
+│   │   ├─ Is the law FACIALLY discriminatory?
+│   │   │   ├─ YES → Strict Scrutiny automatically
+│   │   │   └─ NO (Facially Neutral) → Must prove DISCRIMINATORY INTENT
+│   │   │       └─ Impact alone NOT enough (*Washington v. Davis*)
+│   │   │       └─ Use *Arlington Heights* factors to find intent
+│   │   └─ Apply: Compelling Interest + Narrow Tailoring
+│   │
+│   ├─ SEX/GENDER → INTERMEDIATE SCRUTINY
+│   │   ├─ Facially discriminatory? → Intermediate automatically
+│   │   ├─ Facially neutral? → Must prove intent (*Feeney* "because of" test)
+│   │   └─ Apply: Important Interest + Substantially Related
+│   │       + "Exceedingly Persuasive Justification" (*VMI*)
+│   │
+│   ├─ ALIENAGE →
+│   │   ├─ STATE law → Strict Scrutiny (general rule)
+│   │   │   └─ EXCEPTION: "Political Function" jobs → Rational Basis
+│   │   │       (cops, teachers = OK to exclude; notaries = NOT OK)
+│   │   └─ FEDERAL law → Rational Basis (broad deference to immigration power)
+│   │
+│   └─ AGE / DISABILITY / WEALTH → RATIONAL BASIS
+│       └─ BUT check for ANIMUS → *Cleburne*/*Moreno*/*Romer*
+│           └─ "Bare desire to harm" is NEVER legitimate
+│
+└─ NO differential treatment → No EP claim.
+</code></pre>
+
+<hr />
+
+<h2 id="section-1-rational-basis-review">SECTION 1: RATIONAL BASIS REVIEW</h2>
+
+<h3 id="the-standard">The Standard</h3>
+
+<p><strong>Rule:</strong> A classification is constitutional if it is <strong>rationally related</strong> to a <strong>legitimate</strong> state interest. The court <strong>hypothesizes</strong> reasons — the government doesn't need to articulate its actual purpose.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Principle</th>
+  <th>Rule</th>
+  <th>Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Hypothesized Reasons OK</strong></td>
+  <td>Court can invent a reason the legislature never stated</td>
+  <td><em>Railway Express v. NY</em>; <em>Fritz</em></td>
+</tr>
+<tr>
+  <td><strong>One Step at a Time</strong></td>
+  <td>Legislature can attack a problem piecemeal</td>
+  <td><em>Williamson v. Lee Optical</em></td>
+</tr>
+<tr>
+  <td><strong>Underinclusivity OK</strong></td>
+  <td>Law need not address all evils at once</td>
+  <td><em>Railway Express</em></td>
+</tr>
+<tr>
+  <td><strong>Overinclusivity OK</strong></td>
+  <td>Law can be imperfect in its reach</td>
+  <td><em>Lee Optical</em></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="rational-basis-with-bite-the-animus-exception">Rational Basis "with Bite" — The Animus Exception</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>What Happened</th>
+  <th>Why It Failed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>USDA v. Moreno</em> (1973)</td>
+  <td>Food stamp denial to "hippie" households</td>
+  <td>"Bare desire to harm a politically unpopular group" = never legitimate</td>
+</tr>
+<tr>
+  <td><em>City of Cleburne</em> (1985)</td>
+  <td>Zoning denied for group home for disabled</td>
+  <td>Frat houses/nursing homes allowed in same zone → irrational prejudice, not safety</td>
+</tr>
+<tr>
+  <td><em>Romer v. Evans</em> (1996)</td>
+  <td>CO amendment stripped all LGBT protections</td>
+  <td>"Animus" — law so broad it could only be explained by hostility</td>
+</tr>
+<tr>
+  <td><em>Village of Willowbrook v. Olech</em> (2000)</td>
+  <td>33-ft easement demanded vs. 15-ft for neighbors</td>
+  <td>"Class of one" — irrational and wholly arbitrary treatment of individual</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Tip:</strong> Even when alleging animus, if the government can articulate a good economic rational basis, the law will <strong>probably</strong> be upheld (<em>Beazer</em>). Merely alluding to animus isn't enough.</p>
+
+<hr />
+
+<h2 id="section-2-race-discrimination">SECTION 2: RACE DISCRIMINATION</h2>
+
+<h3 id="a-the-historical-arc">A. The Historical Arc</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Era</th>
+  <th>Doctrine</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1880</td>
+  <td>Political rights protected</td>
+  <td><em>Strauder v. WV</em> (jury exclusion struck down)</td>
+</tr>
+<tr>
+  <td>1896</td>
+  <td>"Separate but Equal"</td>
+  <td><em>Plessy v. Ferguson</em></td>
+</tr>
+<tr>
+  <td>1938–50</td>
+  <td>Attacking "Equal" in graduate schools</td>
+  <td><em>Sweatt v. Painter</em> (intangibles)</td>
+</tr>
+<tr>
+  <td><strong>1954</strong></td>
+  <td><strong>"Separate is inherently unequal"</strong></td>
+  <td><strong><em>Brown v. Board</em></strong></td>
+</tr>
+<tr>
+  <td>1955</td>
+  <td>Remedy: "All deliberate speed"</td>
+  <td><em>Brown II</em></td>
+</tr>
+<tr>
+  <td>1967</td>
+  <td>Interracial marriage protected</td>
+  <td><em>Loving v. Virginia</em></td>
+</tr>
+<tr>
+  <td>1968</td>
+  <td>Affirmative duty to integrate "root and branch"</td>
+  <td><em>Green v. County School Bd.</em></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="b-proving-discrimination-facial-vs-neutral-laws">B. Proving Discrimination — Facial vs. Neutral Laws</h3>
+
+<pre><code>Is the law FACIALLY discriminatory (mentions race)?
+├─ YES → STRICT SCRUTINY automatically
+│   └─ Even "equal application" is no defense (*Loving*)
+│   └─ Even in PRISON → Strict Scrutiny (*Johnson v. California*)
+└─ NO (Facially Neutral) →
+    Must prove DISCRIMINATORY PURPOSE/INTENT
+    └─ Impact alone is NOT enough (*Washington v. Davis*)
+    └─ Use the *ARLINGTON HEIGHTS* factors:
+        1. Disproportionate impact (starting point, not enough alone)
+        2. Historical background of discrimination
+        3. Sequence of events (sudden rule changes)
+        4. Procedural departures (skipped meetings/notice)
+        5. Substantive departures (ignored usual criteria)
+        6. Legislative history (floor statements, minutes)
+    └─ If plaintiff proves race was a "MOTIVATING FACTOR":
+        → BURDEN SHIFTS to government (*Mt. Healthy*)
+        → Gov't can survive if it proves SAME DECISION
+          would have been made anyway ("but-for" defense)
+</code></pre>
+
+<h3 id="c-korematsu-and-facial-discrimination-against-minorities">C. <em>Korematsu</em> and Facial Discrimination Against Minorities</h3>
+
+<p><strong>Birth of Strict Scrutiny:</strong> "All legal restrictions which curtail the civil rights of a single racial group are immediately suspect... courts must subject them to the most rigid scrutiny." — <em>Korematsu v. United States</em> (1944)</p>
+
+<p><strong>Overruled:</strong> <em>Trump v. Hawaii</em> (2018): "Korematsu was gravely wrong the day it was decided."</p>
+
+<p><strong>Fisher Exam Move:</strong> If government claims "national security" for a racial classification:
+1. State Strict Scrutiny applies (<em>Korematsu/Loving</em>)
+2. Argue <em>Korematsu</em> is "gravely wrong" per <em>Trump v. Hawaii</em>
+3. Apply Narrow Tailoring: Could non-racial means achieve safety? (Usually yes)</p>
+
+<h3 id="d-affirmative-action-the-rise-and-fall">D. Affirmative Action — The Rise and Fall</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Holding</th>
+  <th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Bakke</em> (1978)</td>
+  <td>Quotas = unconstitutional. "Plus factor" for diversity = OK. Powell's "Harvard Plan."</td>
+  <td>Superseded</td>
+</tr>
+<tr>
+  <td><em>Grutter v. Bollinger</em> (2003)</td>
+  <td>Law school holistic review OK — diversity is compelling</td>
+  <td><strong>OVERRULED</strong></td>
+</tr>
+<tr>
+  <td><em>Gratz v. Bollinger</em> (2003)</td>
+  <td>Mechanical point system = unconstitutional (not individualized)</td>
+  <td>Still good law</td>
+</tr>
+<tr>
+  <td><em>Fisher I</em> (2013)</td>
+  <td>Courts must apply Strict Scrutiny rigorously, not defer to university</td>
+  <td>Still good law</td>
+</tr>
+<tr>
+  <td><strong><em>SFFA v. Harvard</em></strong> (2023)</td>
+  <td><strong>Race-conscious admissions unconstitutional.</strong> No measurable goals, relies on stereotypes, no logical endpoint.</td>
+  <td><strong>CURRENT LAW</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Current Rule:</strong> ALL racial classifications get <strong>Strict Scrutiny</strong> regardless of "benign" or "hostile" motive.</p>
+
+<p><strong>Permissible Justifications:</strong>
+- ✅ Remedying <strong>specific, proven</strong> past discrimination by that entity
+- ❌ Remedying "societal discrimination" (too amorphous)
+- ❌ Diversity in higher education (expired per <em>SFFA</em>)</p>
+
+<p><strong>Fisher Tip:</strong> Never say "reverse discrimination." The Court treats ALL race-based government action the same way.</p>
+
+<hr />
+
+<h2 id="section-3-sexgender-discrimination">SECTION 3: SEX/GENDER DISCRIMINATION</h2>
+
+<h3 id="the-standard-intermediate-scrutiny-craig-v-boren-1976">The Standard: Intermediate Scrutiny (<em>Craig v. Boren</em>, 1976)</h3>
+
+<p><strong>Test:</strong> Classification must serve <strong>important</strong> governmental objectives and be <strong>substantially related</strong> to achievement of those objectives.</p>
+
+<p><strong>Enhanced:</strong> Must provide an "<strong>exceedingly persuasive justification</strong>" (<em>VMI/Hogan</em>)</p>
+
+<h3 id="key-cases">Key Cases</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Holding</th>
+  <th>Principle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Reed v. Reed</em> (1971)</td>
+  <td>Struck down preference for males as estate administrators</td>
+  <td>First sex-discrimination win</td>
+</tr>
+<tr>
+  <td><em>Craig v. Boren</em> (1976)</td>
+  <td>Struck down OK beer age law (21 for men, 18 for women)</td>
+  <td><strong>Established Intermediate Scrutiny</strong></td>
+</tr>
+<tr>
+  <td><em>Mississippi Univ. v. Hogan</em> (1982)</td>
+  <td>All-female nursing school must admit men</td>
+  <td>"Compensatory" argument fails if it reinforces stereotypes</td>
+</tr>
+<tr>
+  <td><strong><em>US v. Virginia (VMI)</em></strong> (1996)</td>
+  <td>VMI must admit women; VWIL is "pale shadow"</td>
+  <td>Cannot exclude based on generalizations about "most women"</td>
+</tr>
+<tr>
+  <td><em>Sessions v. Morales-Santana</em> (2017)</td>
+  <td>Struck down citizenship residency disparity</td>
+  <td>"Leveling down" remedy: took benefit from mothers rather than extending to fathers</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="sex-based-purpose-requirement-feeney-1979">Sex-Based Purpose Requirement — <em>Feeney</em> (1979)</h3>
+
+<p><strong>Rule:</strong> Facially neutral law with disproportionate sex-based impact is NOT unconstitutional without proof of <strong>discriminatory purpose</strong>.</p>
+
+<p><strong>The "Because Of" Test:</strong> Legislature must have acted "<strong>because of</strong>, not merely in spite of," the adverse effects on women.</p>
+
+<p><strong>Fisher Trap:</strong> Foreseeability ≠ Intent. Even if the legislature <em>knew</em> a law would disadvantage women, that's insufficient. They must have <em>wanted</em> it.</p>
+
+<h3 id="benign-sex-preferences-the-lady-vs-woman-test">"Benign" Sex Preferences — The "Lady vs. Woman" Test</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Type</th>
+  <th>Outcome</th>
+  <th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>"Lady" Preferences</strong> (based on stereotype of female dependency)</td>
+  <td>STRUCK DOWN</td>
+  <td><em>Orr v. Orr</em> (alimony); <em>Wiesenfeld</em> (Social Security)</td>
+</tr>
+<tr>
+  <td><strong>"Woman" Preferences</strong> (based on documented economic disadvantage)</td>
+  <td>UPHELD</td>
+  <td><em>Webster</em> (Social Security formula); <em>Ballard</em> (Navy promotion)</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="pregnancy">Pregnancy</h3>
+
+<p><strong>Rule (<em>Geduldig v. Aiello</em>):</strong> Excluding pregnancy from disability insurance is NOT sex discrimination (divides "pregnant persons" vs. "non-pregnant persons").</p>
+
+<p><strong>Override:</strong> Congress enacted the <strong>Pregnancy Discrimination Act</strong> for employment. But <em>Geduldig</em> remains the constitutional rule.</p>
+
+<hr />
+
+<h2 id="section-4-other-classifications">SECTION 4: OTHER CLASSIFICATIONS</h2>
+
+<h3 id="alienage">Alienage</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Actor</th>
+  <th>Standard</th>
+  <th>Exception</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>State</strong> (general)</td>
+  <td>Strict Scrutiny</td>
+  <td><em>Graham v. Richardson</em></td>
+</tr>
+<tr>
+  <td><strong>State</strong> (political function jobs)</td>
+  <td>Rational Basis</td>
+  <td>Cops (<em>Foley</em>), Teachers (<em>Ambach</em>) — but NOT notaries (<em>Bernal</em>)</td>
+</tr>
+<tr>
+  <td><strong>Federal Government</strong></td>
+  <td>Rational Basis (deference)</td>
+  <td><em>Mathews v. Diaz</em></td>
+</tr>
+<tr>
+  <td><strong>Undocumented Aliens</strong></td>
+  <td>Rational Basis</td>
+  <td><strong>Exception:</strong> <em>Plyler v. Doe</em> — cannot bar children from public schools (heightened RB)</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="age-disability-poverty">Age, Disability, Poverty</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Class</th>
+  <th>Standard</th>
+  <th>Key Case</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Age</strong></td>
+  <td>Rational Basis</td>
+  <td><em>Murgia</em></td>
+  <td>We all age → not "discrete and insular"</td>
+</tr>
+<tr>
+  <td><strong>Disability</strong></td>
+  <td>Rational Basis</td>
+  <td><em>Cleburne</em></td>
+  <td>But see "RB with Bite" when animus present</td>
+</tr>
+<tr>
+  <td><strong>Poverty</strong></td>
+  <td>Rational Basis</td>
+  <td><em>Rodriguez</em></td>
+  <td>School funding disparities upheld</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Tip — Fundamental Rights Bypass:</strong> Even if a group isn't suspect (disability), if the law affects a <strong>fundamental right</strong> (voting, courts, travel), Strict Scrutiny may still apply regardless of the classification.</p>
+
+<hr />
+
+<p><em>Continued in Part 4...</em></p>
+
+<div class="part-break"></div>
+
+<hr />
+
+<h1 id="part-x-the-state-action-doctrine">PART X: THE STATE ACTION DOCTRINE</h1>
+
+<blockquote>
+  <p><strong>The 14th Amendment applies ONLY to STATE action.</strong> Private conduct — no matter how discriminatory — is not covered. <em>Civil Rights Cases</em> (1883).</p>
+</blockquote>
+
+<h2 id="decision-tree-is-there-state-action">Decision Tree: Is There State Action?</h2>
+
+<pre><code>Is the DEFENDANT a government entity or official?
+├─ YES → STATE ACTION exists. Apply 14th Amendment.
+└─ NO (Private Actor) → Run through the EXCEPTIONS:
+    │
+    ├─ 1. PUBLIC FUNCTION TEST
+    │   └─ Does the private entity exercise powers "traditionally
+    │      and EXCLUSIVELY reserved to the State"?
+    │       ├─ Running a town → YES (*Marsh v. Alabama*)
+    │       ├─ Running an election → YES (*Smith v. Allwright*; *Terry v. Adams*)
+    │       ├─ Running a park → YES (*Evans v. Newton*)
+    │       ├─ Shopping center → NO (*Hudgens v. NLRB*)
+    │       ├─ Utility company → NO (*Jackson v. Metro Edison*)
+    │       └─ Warehouse lien sale → NO (*Flagg Bros. v. Brooks*)
+    │
+    ├─ 2. JUDICIAL ENFORCEMENT (*Shelley v. Kraemer*)
+    │   └─ Is a STATE COURT enforcing a discriminatory private agreement?
+    │       ├─ YES → State Action (court is the engine of discrimination)
+    │       └─ NO (enforcing neutral law like trespass) → No State Action
+    │       └─ Extends to money damages for breach (*Barrows v. Jackson*)
+    │
+    ├─ 3. SYMBIOTIC RELATIONSHIP (*Burton v. Wilmington Parking Auth.*)
+    │   └─ Are the state and private actor so INTERTWINED that the state
+    │      profits from the discrimination?
+    │       ├─ Lease in public building + mutual benefit → YES (*Burton*)
+    │       ├─ Mere state licensing → NO (*Moose Lodge v. Irvis*)
+    │       └─ Mere regulation → NO (*Jackson*)
+    │
+    ├─ 4. STATE ENCOURAGEMENT (*Reitman v. Mulkey*)
+    │   └─ Did the state AFFIRMATIVELY authorize/encourage discrimination
+    │      (e.g., amending constitution to protect right to discriminate)?
+    │       ├─ YES → State Action
+    │       └─ Mere repeal of anti-discrimination law → Arguable (*Harlan dissent*)
+    │
+    ├─ 5. JOINT PARTICIPATION (*Lugar v. Edmondson Oil*)
+    │   └─ Did the private actor use STATE OFFICIALS (sheriff, clerk, judge)
+    │      to carry out the act?
+    │       ├─ YES → State Action
+    │       └─ *Edmonson v. Leesville*: peremptory challenges in court = State Action
+    │
+    ├─ 6. ENTWINEMENT (*Brentwood Academy v. TN Secondary School*)
+    │   └─ Is the private org so permeated by public officials (84% public
+    │      school members, state retirement system) that it IS the state?
+    │       ├─ YES → State Action
+    │       └─ Must be "pervasive" entwinement, not just occasional overlap
+    │
+    └─ 7. NEGATIVE LIBERTY (*DeShaney v. Winnebago County*)
+        └─ Did the state FAIL to protect someone from a private actor?
+            ├─ Generally NO State Action — DP is a shield, not a sword
+            └─ EXCEPTION: State has CUSTODY of the person (prison, hospital)
+                → Affirmative duty to protect arises
+</code></pre>
+
+<h3 id="quick-reference-state-action-outcomes">Quick Reference: State Action Outcomes</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Scenario</th>
+  <th>State Action?</th>
+  <th>Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Private company town restricts speech</td>
+  <td>✅ YES</td>
+  <td><em>Marsh</em></td>
+</tr>
+<tr>
+  <td>Political party excludes voters from primary</td>
+  <td>✅ YES</td>
+  <td><em>Smith v. Allwright</em></td>
+</tr>
+<tr>
+  <td>Court enforces racial covenant</td>
+  <td>✅ YES</td>
+  <td><em>Shelley v. Kraemer</em></td>
+</tr>
+<tr>
+  <td>Restaurant in public parking garage discriminates</td>
+  <td>✅ YES</td>
+  <td><em>Burton</em></td>
+</tr>
+<tr>
+  <td>Private creditor uses sheriff to seize property</td>
+  <td>✅ YES</td>
+  <td><em>Lugar</em></td>
+</tr>
+<tr>
+  <td>Athletic association run by public schools</td>
+  <td>✅ YES</td>
+  <td><em>Brentwood</em></td>
+</tr>
+<tr>
+  <td>Shopping center bans protesters</td>
+  <td>❌ NO</td>
+  <td><em>Hudgens</em></td>
+</tr>
+<tr>
+  <td>Utility company terminates service</td>
+  <td>❌ NO</td>
+  <td><em>Jackson</em></td>
+</tr>
+<tr>
+  <td>Private club with liquor license discriminates</td>
+  <td>❌ NO</td>
+  <td><em>Moose Lodge</em></td>
+</tr>
+<tr>
+  <td>Nursing home transfers patient (90% state-funded)</td>
+  <td>❌ NO</td>
+  <td><em>Blum v. Yaretsky</em></td>
+</tr>
+<tr>
+  <td>Private school fires teacher (99% public money)</td>
+  <td>❌ NO</td>
+  <td><em>Rendell-Baker</em></td>
+</tr>
+<tr>
+  <td>Social workers fail to stop child abuse</td>
+  <td>❌ NO</td>
+  <td><em>DeShaney</em></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="part-xi-congressional-enforcement-powers">PART XI: CONGRESSIONAL ENFORCEMENT POWERS</h1>
+
+<h2 id="the-statutory-framework">The Statutory Framework</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Statute</th>
+  <th>Requires State Action?</th>
+  <th>Target</th>
+  <th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>42 U.S.C. § 1983</strong> (Civil)</td>
+  <td>YES ("under color of law")</td>
+  <td>State actors</td>
+  <td>14th Amend.</td>
+</tr>
+<tr>
+  <td><strong>18 U.S.C. § 242</strong> (Criminal)</td>
+  <td>YES ("under color of law")</td>
+  <td>State actors</td>
+  <td>14th Amend.</td>
+</tr>
+<tr>
+  <td><strong>42 U.S.C. § 1985(3)</strong> (Civil)</td>
+  <td>NO</td>
+  <td>Private conspiracies</td>
+  <td>13th/14th Amend.</td>
+</tr>
+<tr>
+  <td><strong>18 U.S.C. § 241</strong> (Criminal)</td>
+  <td>NO</td>
+  <td>Private conspiracies</td>
+  <td>13th/14th/15th</td>
+</tr>
+<tr>
+  <td><strong>42 U.S.C. § 1981</strong> (Civil)</td>
+  <td>NO</td>
+  <td>Private racial discrimination in contracts</td>
+  <td>13th Amend.</td>
+</tr>
+<tr>
+  <td><strong>42 U.S.C. § 1982</strong> (Civil)</td>
+  <td>NO</td>
+  <td>Private racial discrimination in property</td>
+  <td>13th Amend.</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="the-13th-amendment-the-green-light-for-private-conduct">The 13th Amendment — The "Green Light" for Private Conduct</h2>
+
+<p><strong>Key Distinction:</strong> Unlike the 14th Amendment, the 13th Amendment is NOT limited to state action. It bans slavery AND empowers Congress to abolish the "badges and incidents of slavery."</p>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Holding</th>
+  <th>Reach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Jones v. Alfred H. Mayer</em> (1968)</td>
+  <td>§ 1982 bars private racial discrimination in property sales</td>
+  <td>Congress defines "badges of slavery"</td>
+</tr>
+<tr>
+  <td><em>Sullivan v. Little Hunting Park</em> (1969)</td>
+  <td>Extended to community facility membership</td>
+  <td>Lease-related discrimination</td>
+</tr>
+<tr>
+  <td><em>Runyon v. McCrary</em> (1976)</td>
+  <td>§ 1981 bars private schools from race-based admissions</td>
+  <td>Commercial operations can't exclude by race</td>
+</tr>
+<tr>
+  <td><em>Griffin v. Breckenridge</em> (1971)</td>
+  <td>§ 1985(3) covers purely private racial conspiracies</td>
+  <td>Requires "class-based invidiously discriminatory animus"</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Limit:</strong> The 13th Amendment power is generally limited to <strong>racial</strong> discrimination. It does not reach gender (<em>Bray</em>) or economic (<em>Carpenters v. Scott</em>) animus.</p>
+
+<hr />
+
+<h2 id="the-14th-amendment-5-appropriate-legislation">The 14th Amendment, § 5 — "Appropriate Legislation"</h2>
+
+<h3 id="two-theories-of-congressional-power">Two Theories of Congressional Power</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Theory</th>
+  <th>Definition</th>
+  <th>Champion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Remedial</strong></td>
+  <td>Congress can only provide mechanisms to fix violations the Court has already found</td>
+  <td><em>Boerne</em> (dominant)</td>
+</tr>
+<tr>
+  <td><strong>Prophylactic</strong></td>
+  <td>Congress can proactively prevent future violations, even those the Court hasn't yet declared</td>
+  <td><em>Katzenbach v. Morgan</em> (limited)</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="the-katzenbach-v-morgan-ratchet">The <em>Katzenbach v. Morgan</em> "Ratchet"</h3>
+
+<p><strong>Holding:</strong> Congress can use § 5 to ban literacy tests for Puerto Rican voters, even though the Court in <em>Lassiter</em> said literacy tests were constitutional.</p>
+
+<p><strong>The "One-Way Ratchet" (Footnote 10):</strong> Congress can <strong>expand</strong> rights beyond the Court's floor. Congress can <strong>NOT</strong> restrict or dilute rights below that floor.</p>
+
+<h3 id="the-city-of-boerne-congruence-proportionality-test">The <em>City of Boerne</em> "Congruence &amp; Proportionality" Test</h3>
+
+<p><strong>Holding:</strong> RFRA is unconstitutional as applied to states. Congress cannot use § 5 to <strong>redefine</strong> constitutional rights.</p>
+
+<p><strong>The Test:</strong></p>
+
+<pre><code>Is the federal law a valid exercise of § 5?
+├─ (1) CONGRUENCE: Is the remedy closely related to an identified
+│      constitutional injury (a pattern of STATE violations)?
+│   ├─ YES → Continue
+│   └─ NO → Unconstitutional (law is "substantive" not "remedial")
+│
+├─ (2) PROPORTIONALITY: Is the remedy proportional to the harm?
+│   ├─ "Surgical" fix for documented violations → VALID
+│   └─ "Sledgehammer" nationwide ban without record → INVALID
+│
+└─ KEY: Who is the DEFENDANT?
+    ├─ State Actor → Potentially valid under § 5
+    └─ Private Actor → Almost certainly FAILS (*Morrison*)
+</code></pre>
+
+<h3 id="5-scorecard-what-passed-and-what-failed">§ 5 Scorecard: What Passed and What Failed</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Law</th>
+  <th>Passed?</th>
+  <th>Why?</th>
+  <th>Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Voting Rights Act (§ 5 preclearance)</td>
+  <td>✅</td>
+  <td>Massive record of state voter discrimination</td>
+  <td><em>South Carolina v. Katzenbach</em></td>
+</tr>
+<tr>
+  <td>VRA literacy test ban (nationwide)</td>
+  <td>✅</td>
+  <td>Unanimous — prejudice was "prevalent throughout the Nation"</td>
+  <td><em>Oregon v. Mitchell</em></td>
+</tr>
+<tr>
+  <td>FMLA (family care leave)</td>
+  <td>✅</td>
+  <td>Gender = heightened scrutiny → easier to show pattern</td>
+  <td><em>Nevada v. Hibbs</em></td>
+</tr>
+<tr>
+  <td>ADA Title II (access to courts)</td>
+  <td>✅</td>
+  <td>Protects fundamental right of court access</td>
+  <td><em>Tennessee v. Lane</em></td>
+</tr>
+<tr>
+  <td>RFRA</td>
+  <td>❌</td>
+  <td>No documented pattern of religious persecution; sledgehammer</td>
+  <td><em>City of Boerne</em></td>
+</tr>
+<tr>
+  <td>Patent Remedy Act</td>
+  <td>❌</td>
+  <td>No pattern of state patent theft; states have own remedies</td>
+  <td><em>Florida Prepaid</em></td>
+</tr>
+<tr>
+  <td>ADEA (vs. states)</td>
+  <td>❌</td>
+  <td>Age = rational basis → almost no "unconstitutional" state behavior</td>
+  <td><em>Kimel v. Board of Regents</em></td>
+</tr>
+<tr>
+  <td>ADA Title I (employment)</td>
+  <td>❌</td>
+  <td>Disability = rational basis → anecdotal record only</td>
+  <td><em>Board of Trustees v. Garrett</em></td>
+</tr>
+<tr>
+  <td>VAWA (civil remedy)</td>
+  <td>❌</td>
+  <td>Targets <strong>private</strong> actors, not states; § 5 can't reach private conduct</td>
+  <td><em>United States v. Morrison</em></td>
+</tr>
+<tr>
+  <td>VRA § 4(b) coverage formula</td>
+  <td>❌</td>
+  <td>Data 50 years old; "equal sovereignty" violated</td>
+  <td><em>Shelby County v. Holder</em></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="shelby-county-the-vra-gutted"><em>Shelby County</em> — The VRA Gutted</h3>
+
+<p><strong>Holding:</strong> § 4(b) coverage formula is unconstitutional because it's based on 40-year-old data that no longer reflects current conditions.</p>
+
+<p><strong>Equal Sovereignty Principle:</strong> Federal government must justify treating states differently based on <strong>current</strong> needs, not historical ones.</p>
+
+<p><strong>Ginsburg's Dissent (the "Umbrella"):</strong> "Throwing out preclearance when it has worked... is like throwing away your umbrella in a rainstorm because you are not getting wet."</p>
+
+<p><strong>Post-Shelby Reality:</strong>
+- § 5 preclearance is "inoperable" without a coverage formula
+- § 2 (results test, nationwide) is now the primary tool
+- <em>Brnovich v. DNC</em> (2021) further limited § 2 with restrictive "guideposts"</p>
+
+<hr />
+
+<h1 id="part-xii-fisher-exam-attack-protocol">PART XII: FISHER EXAM ATTACK PROTOCOL</h1>
+
+<h2 id="the-universal-irac-framework">The Universal IRAC Framework</h2>
+
+<pre><code>EVERY ANSWER follows this structure:
+
+I — ISSUE
+   "The issue is whether [specific constitutional provision]
+    prohibits/permits [specific government action]."
+
+R — RULE
+   State the doctrinal test with citation.
+   Include the STANDARD OF REVIEW.
+
+A — APPLICATION
+   This is 70% of your grade.
+   - Apply EACH element of the test to the facts
+   - Argue BOTH SIDES (plaintiff then defendant)
+   - Use "Fisher-isms": discuss, don't just narrate
+   - Have a THESIS and support it
+
+C — CONCLUSION
+   State your holding. Be definitive.
+</code></pre>
+
+<h2 id="fishers-writing-expectations">Fisher's Writing Expectations</h2>
+
+<blockquote>
+  <p><strong>"He wants expository writing. Not narrative. You have a thesis, and then you advance it with support. What works in its favor AND what works against it."</strong></p>
+</blockquote>
+
+<ul>
+<li>❌ Don't be "conclusory" — explain WHY</li>
+<li>✅ Discuss the issue's relevance to the problem</li>
+<li>✅ Look at law review articles for writing style</li>
+<li>✅ Make arguments for BOTH sides before concluding</li>
+</ul>
+
+<hr />
+
+<h2 id="quick-reference-exam-issue-spotting-checklist">QUICK-REFERENCE: EXAM ISSUE-SPOTTING CHECKLIST</h2>
+
+<h3 id="if-the-question-involves-a-state-law">If the question involves a STATE LAW...</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Ask...</th>
+  <th>Doctrine</th>
+  <th>Go To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Does it burden interstate commerce?</td>
+  <td>DCC / Pike / Market Participant</td>
+  <td>Part III</td>
+</tr>
+<tr>
+  <td>Is there a federal law on the same topic?</td>
+  <td>Preemption</td>
+  <td>Part IV</td>
+</tr>
+<tr>
+  <td>Does it discriminate by race?</td>
+  <td>EP — Strict Scrutiny</td>
+  <td>Part IX §2</td>
+</tr>
+<tr>
+  <td>Does it discriminate by sex?</td>
+  <td>EP — Intermediate Scrutiny</td>
+  <td>Part IX §3</td>
+</tr>
+<tr>
+  <td>Does it burden a fundamental right?</td>
+  <td>SDP — Strict Scrutiny</td>
+  <td>Part VII</td>
+</tr>
+<tr>
+  <td>Does it take property/liberty without process?</td>
+  <td>PDP — <em>Mathews</em> balancing</td>
+  <td>Part VIII</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="if-the-question-involves-a-federal-law">If the question involves a FEDERAL LAW...</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Ask...</th>
+  <th>Doctrine</th>
+  <th>Go To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>What is the source of power?</td>
+  <td>Commerce / Taxing / Spending / N&amp;P / § 5</td>
+  <td>Part II</td>
+</tr>
+<tr>
+  <td>Does it commandeer states?</td>
+  <td>10th Amendment / Anti-Commandeering</td>
+  <td>Part II §4</td>
+</tr>
+<tr>
+  <td>Does it condition funds?</td>
+  <td>Spending Power / <em>Dole</em> / Coercion</td>
+  <td>Part II §3</td>
+</tr>
+<tr>
+  <td>Does it abrogate state immunity?</td>
+  <td>§ 5 / <em>Boerne</em> C&amp;P test</td>
+  <td>Part XI</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="if-the-question-involves-a-private-actor">If the question involves a PRIVATE ACTOR...</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Ask...</th>
+  <th>Doctrine</th>
+  <th>Go To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Is there state action?</td>
+  <td>Run the 7-part State Action tree</td>
+  <td>Part X</td>
+</tr>
+<tr>
+  <td>Is it racial discrimination?</td>
+  <td>13th Amendment / § 1981 / § 1982</td>
+  <td>Part XI</td>
+</tr>
+<tr>
+  <td>Is it a conspiracy?</td>
+  <td>§ 1985(3) / <em>Griffin</em> animus requirement</td>
+  <td>Part XI</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="the-fisher-five-must-know-exam-moves">THE "FISHER FIVE" — Must-Know Exam Moves</h2>
+
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Move</th>
+  <th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td><strong>"The Animus Shortcut"</strong></td>
+  <td>Rational Basis law that targets an unpopular group → <em>Moreno/Romer/Cleburne</em></td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><strong>"The Double Helix"</strong></td>
+  <td>Dignity-based claim → argue DP + EP synergy (<em>Obergefell</em>)</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><strong>"The THT Fortress"</strong></td>
+  <td>Defending a law that burdens a claimed SDP right → <em>Glucksberg/Dobbs</em> history test</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><strong>"The Arlington Heights Hunt"</strong></td>
+  <td>Facially neutral law with disproportionate racial impact → find procedural/historical "smoke"</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><strong>"The Boerne Audit"</strong></td>
+  <td>Federal law targeting states under § 5 → check record + C&amp;P + target (state, not private)</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="levels-of-scrutiny-final-master-cheat-sheet">LEVELS OF SCRUTINY — FINAL MASTER CHEAT SHEET</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Scrutiny</th>
+  <th>Applies To</th>
+  <th>Government Must Show</th>
+  <th>Plaintiff Must Show</th>
+  <th>Gov't Wins?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Strict</strong></td>
+  <td>Race, national origin, fundamental rights, content-based speech restrictions</td>
+  <td>Compelling interest + Narrowly tailored (least restrictive means)</td>
+  <td>Classification exists</td>
+  <td>~Rarely</td>
+</tr>
+<tr>
+  <td><strong>Intermediate</strong></td>
+  <td>Sex/gender, illegitimacy, commercial speech</td>
+  <td>Important interest + Substantially related</td>
+  <td>Classification exists</td>
+  <td>~Sometimes</td>
+</tr>
+<tr>
+  <td><strong>Rational Basis</strong></td>
+  <td>Age, disability, wealth, economic regulation</td>
+  <td>Legitimate interest + Rationally related (hypothesized OK)</td>
+  <td>No rational basis exists</td>
+  <td>~Almost always govt wins</td>
+</tr>
+<tr>
+  <td><strong>RB "with Bite"</strong></td>
+  <td>Animus/hostility toward group</td>
+  <td>Legitimate interest (animus is NEVER legitimate)</td>
+  <td>Evidence of animus or irrationality</td>
+  <td>~Plaintiff wins when animus shown</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<blockquote>
+  <p><strong>"The key is not to narrate. You want to discuss. You have a thesis, an idea, and then you advance it by support — what works in its favor and what works against it."</strong> — Professor Fisher</p>
+</blockquote>
+
+<hr />
+
+<p><em>END OF MASTER ATTACK OUTLINE</em></p>
+
+<div class="part-break"></div>
+
+<hr />
+
+<h1 id="part-xiii-freedom-of-speech">PART XIII: FREEDOM OF SPEECH</h1>
+
+<h2 id="framework-summary">Framework Summary</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Restriction Type</th>
+  <th>Scrutiny</th>
+  <th>Key Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Content-Based</strong></td>
+  <td>Strict Scrutiny (compelling interest, narrowly tailored)</td>
+  <td><em>Reed v. Town of Gilbert</em></td>
+</tr>
+<tr>
+  <td><strong>Content-Neutral</strong> (time, place, manner)</td>
+  <td>Intermediate Scrutiny (important interest, narrowly tailored, ample alternative channels)</td>
+  <td><em>Ward v. Rock Against Racism</em></td>
+</tr>
+<tr>
+  <td><strong>Expressive Conduct</strong></td>
+  <td>O'Brien Test (see below)</td>
+  <td><em>United States v. O'Brien</em></td>
+</tr>
+<tr>
+  <td><strong>Commercial Speech</strong></td>
+  <td>Central Hudson Intermediate Scrutiny (see below)</td>
+  <td><em>Central Hudson Gas v. Public Serv. Comm'n</em></td>
+</tr>
+<tr>
+  <td><strong>Prior Restraint</strong></td>
+  <td>Heavy presumption of invalidity</td>
+  <td><em>Near v. Minnesota</em>; <em>Pentagon Papers</em></td>
+</tr>
+<tr>
+  <td><strong>Overbroad / Vague</strong></td>
+  <td>Statutory challenge; can chill protected speech</td>
+  <td><em>Broadrick v. Oklahoma</em>; <em>Grayned v. Rockford</em></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Tip:</strong> The <strong>first move</strong> in any speech question is classification. Content-based vs. content-neutral determines everything — scrutiny level, burden, and outcome. Get this wrong and the entire analysis collapses.</p>
+
+<hr />
+
+<h2 id="decision-tree-content-based-vs-content-neutral">Decision Tree: Content-Based vs. Content-Neutral</h2>
+
+<pre><code>Does the law restrict SPEECH?
+├─ Is it a PRIOR RESTRAINT?
+│   └─ Presumptively unconstitutional. Government must show:
+│       1. Extreme harm
+│       2. Narrowly drawn
+│       (Near v. Minnesota; N.Y. Times v. U.S.)
+├─ Is the regulation CONTENT-BASED?
+│   ├─ Does it target specific subject matter or viewpoint?
+│   │   └─ YES → STRICT SCRUTINY. (Reed v. Town of Gilbert)
+│   │       └─ Compelling interest + least restrictive means
+│   └─ NO (Content-Neutral) → INTERMEDIATE SCRUTINY
+│       └─ Time, place, manner or expressive conduct
+│       └─ Important gov't interest, narrowly tailored,
+│           ample alternative channels of communication
+└─ If EXPRESSIVE CONDUCT → O'BRIEN TEST:
+     1. Government interest unrelated to suppression of expression
+     2. Interest is important / substantial
+     3. Restriction is no greater than essential
+     (United States v. O'Brien)
+</code></pre>
+
+<p><strong>Fisher Alert:</strong> <em>Reed v. Town of Gilbert</em> (2015) was a game-changer. A law that draws distinctions based on the <strong>message conveyed</strong> is content-based — even if the government claims a neutral purpose. If the regulation requires you to <strong>read the speech</strong> to know if it applies, it is content-based. Period.</p>
+
+<hr />
+
+<h2 id="major-speech-doctrine-tables">Major Speech Doctrine Tables</h2>
+
+<h3 id="a-incitement-advocacy-of-illegal-action">A. Incitement / Advocacy of Illegal Action</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Brandenburg v. Ohio</em> (1969)</td>
+  <td>Speech advocating force/lawlessness is protected UNLESS it is (1) directed to inciting <strong>imminent</strong> lawless action AND (2) <strong>likely</strong> to produce such action. (Overrules clear-and-present-danger)</td>
+</tr>
+<tr>
+  <td><em>Hess v. Indiana</em> (1973)</td>
+  <td>Mere "might cause" future harm insufficient; <strong>immediacy</strong> required</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Tip:</strong> <em>Brandenburg</em> is the single most important speech case on the exam. The two-prong test (imminent + likely) is conjunctive — both must be met. A fiery speech at a protest is protected unless violence is about to happen <em>right now</em>.</p>
+
+<p><strong>Fisher Trap:</strong> Do NOT confuse <em>Brandenburg</em> with the old "clear and present danger" test (<em>Schenck</em>). That standard is <strong>dead</strong>. If you cite <em>Schenck</em> as controlling law, you've lost the point.</p>
+
+<h3 id="b-fighting-words-hostile-speech">B. Fighting Words &amp; Hostile Speech</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Doctrine</th>
+  <th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Chaplinsky v. NH</em> (1942)</td>
+  <td>"Fighting words" — personal insults that provoke immediate breach of peace — are <strong>unprotected</strong>.</td>
+</tr>
+<tr>
+  <td><strong>Modern limitation</strong></td>
+  <td>Fighting words doctrine is still nominally valid but rarely upheld; statutes are often struck for overbreadth / content discrimination. (<em>R.A.V. v. St. Paul</em>)</td>
+</tr>
+<tr>
+  <td><strong>True Threats</strong></td>
+  <td>Unprotected if a reasonable person would view the statement as a serious expression of intent to harm. (<em>Virginia v. Black</em>)</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Alert:</strong> <em>R.A.V. v. St. Paul</em> (1992) is the "trap within a trap." Even within the <strong>unprotected</strong> category of fighting words, the government cannot discriminate based on <strong>viewpoint</strong>. The St. Paul ordinance banned only fighting words based on race, color, creed — that's content discrimination within an unprotected category. Scalia's logic: the government can ban all fighting words, but it cannot selectively ban only certain fighting words based on their message.</p>
+
+<h3 id="c-defamation-first-amendment">C. Defamation &amp; First Amendment</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>N.Y. Times v. Sullivan</em> (1964)</td>
+  <td><strong>Public officials</strong> must prove "actual malice" (knowledge of falsity or reckless disregard for truth).</td>
+</tr>
+<tr>
+  <td><em>Gertz v. Welch</em> (1974)</td>
+  <td><strong>Private figures:</strong> no need for actual malice; states can set their own liability standard but must show fault.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Tip — The "Who Is the Plaintiff?" Shortcut:</strong>
+- <strong>Public Official/Figure</strong> → Actual malice required (<em>Sullivan/Curtis Publishing</em>)
+- <strong>Private Figure + Public Concern</strong> → Fault standard set by state, but no presumed/punitive damages without actual malice (<em>Gertz</em>)
+- <strong>Private Figure + Private Concern</strong> → State common law controls (<em>Dun &amp; Bradstreet</em>)</p>
+
+<h3 id="d-obscenity-the-miller-test">D. Obscenity — The Miller Test</h3>
+
+<p><strong><em>Miller v. California</em> (1973):</strong>
+Material is obscene (and <strong>unprotected</strong>) if a trier of fact, applying contemporary community standards, finds:</p>
+
+<ol>
+<li>The work, taken as a whole, appeals to the <strong>prurient interest</strong> in sex.</li>
+<li>It depicts/describes sexual conduct in a <strong>patently offensive</strong> way (specifically defined by state law).</li>
+<li>The work, taken as a whole, lacks serious <strong>literary, artistic, political, or scientific value</strong> (SLAPS test — national standard).</li>
+</ol>
+
+<p><strong>Fisher Trap:</strong> Prong 3 (SLAPS) uses a <strong>national</strong> standard, not a community standard. This is the key distinction students miss. A work can appeal to prurient interest in a conservative community (prongs 1-2) but still be protected if it has serious artistic value nationally (prong 3).</p>
+
+<p><strong>Child Pornography:</strong> Separate category, no Miller test required; totally unprotected (<em>New York v. Ferber</em>). Even private possession is not protected (<em>Osborne v. Ohio</em>). Compare: private possession of obscenity by adults IS protected (<em>Stanley v. Georgia</em>).</p>
+
+<hr />
+
+<h3 id="e-commercial-speech-the-central-hudson-test">E. Commercial Speech — The Central Hudson Test</h3>
+
+<p><strong><em>Central Hudson Gas v. Public Serv. Comm'n</em> (1980)</strong>
+Four-part intermediate scrutiny for regulations of commercial speech:</p>
+
+<ol>
+<li>Is the speech <strong>lawful</strong> and <strong>not misleading</strong>? (If misleading/unlawful → no protection)</li>
+<li>Is the government's interest <strong>substantial</strong>?</li>
+<li>Does the regulation <strong>directly advance</strong> that interest?</li>
+<li>Is the regulation <strong>no more extensive than necessary</strong>? (Reasonable fit, not least restrictive means)</li>
+</ol>
+
+<p><strong>Fisher Alert:</strong> Step 4 does NOT require "least restrictive means" — only a "reasonable fit." This is a common exam trap. Commercial speech gets <strong>intermediate</strong>, not strict, scrutiny. The government has more room here than with political speech.</p>
+
+<p><strong>Post-<em>Sorrell v. IMS Health</em> (2011):</strong> The Court sometimes applies "heightened" rather than relaxed intermediate scrutiny when law targets specific content/viewpoint within commercial speech — blurring the line. Flag this on an exam as an evolving area.</p>
+
+<hr />
+
+<h3 id="f-speech-forums-analysis">F. Speech Forums Analysis</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Forum</th>
+  <th>Government Power</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Traditional Public Forum</strong> (streets, parks)</td>
+  <td>Strict scrutiny for content-based restrictions; content-neutral time, place, manner allowed.</td>
+  <td><em>Hague v. CIO</em></td>
+</tr>
+<tr>
+  <td><strong>Designated Public Forum</strong> (opened for speech by choice)</td>
+  <td>Same as traditional public forum while open. Government can close it, but while open, cannot discriminate.</td>
+  <td><em>Widmar v. Vincent</em></td>
+</tr>
+<tr>
+  <td><strong>Nonpublic Forum</strong> (military base, jail, gov't offices)</td>
+  <td>Reasonable, viewpoint-neutral regulations OK.</td>
+  <td><em>Perry Education Ass'n</em></td>
+</tr>
+<tr>
+  <td><strong>Government Speech</strong></td>
+  <td>Government has its own speech rights; no First Amendment obligation to be viewpoint-neutral.</td>
+  <td><em>Pleasant Grove v. Summum</em></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Tip:</strong> The forum analysis is really about <strong>who owns the space</strong>. Traditional public forums have been "dedicated to assembly and debate" since "time immemorial" (<em>Perry</em>). The government cannot convert a traditional public forum into a nonpublic forum just by declaring it so. But it CAN close a designated public forum entirely — it just can't selectively exclude viewpoints while it's open.</p>
+
+<p><strong>Fisher Trap:</strong> <strong>Government speech</strong> is the "escape hatch." If the government is the speaker (monuments, license plate designs, public school curriculum), the First Amendment does <strong>not</strong> apply. <em>Summum</em> and <em>Walker v. Texas Division</em> confirm this. The trap: students argue viewpoint discrimination when the government is simply choosing its own message.</p>
+
+<hr />
+
+<h3 id="g-prior-restraint">G. Prior Restraint</h3>
+
+<p><strong>Rule:</strong> The government cannot censor speech before it occurs, except in the most extraordinary circumstances. (<em>Near v. Minnesota</em>; <em>New York Times v. United States</em> (Pentagon Papers))</p>
+
+<p><strong>Pentagon Papers test:</strong> Prior restraint requires proof of direct, immediate, irreparable harm → "grave and certain danger."</p>
+
+<p><strong>Fisher Tip:</strong> Prior restraint is the <strong>nuclear option</strong> — almost never valid. The only established exceptions are (1) troop movements in wartime, (2) obscenity, and (3) certain national security secrets where disclosure would cause "grave and irreparable" harm. Even in the Pentagon Papers case, the government <strong>lost</strong> — and those were classified defense documents.</p>
+
+<p><strong>Fisher Exam Strategy:</strong> If you see a prior restraint on an exam, the government almost certainly loses. Write the analysis but reach the conclusion quickly. The more interesting issue is usually <strong>subsequent punishment</strong> — which is where the real balancing occurs.</p>
+
+<hr />
+
+<h1 id="part-xiv-freedom-of-religion">PART XIV: FREEDOM OF RELIGION</h1>
+
+<h2 id="a-free-exercise-clause">A. Free Exercise Clause</h2>
+
+<h3 id="the-modern-framework">The Modern Framework</h3>
+
+<pre><code>Does the law burden a sincerely held religious belief?
+├─ Is the law NEUTRAL and of GENERAL APPLICABILITY?
+│   ├─ YES → RATIONAL BASIS (Smith v. Employment Division, 1990)
+│   └─ NO (law targets religion or is not generally applicable)
+│       → STRICT SCRUTINY (Lukumi Babalu Aye v. Hialeah)
+└─ RFRA (Religious Freedom Restoration Act):
+      Applies to FEDERAL actions only.
+      Government must show:
+        (1) Compelling interest AND
+        (2) Least restrictive means.
+      (Does NOT apply to states after City of Boerne.)
+</code></pre>
+
+<p><strong>Fisher Alert — The <em>Smith</em> Revolution:</strong> Before <em>Smith</em> (1990), the Court applied strict scrutiny to ALL laws that substantially burdened religion (<em>Sherbert v. Verner</em>). <em>Smith</em> gutted that — now neutral, generally applicable laws get only rational basis. This is why Congress passed RFRA to "restore" strict scrutiny. But <em>Boerne</em> held RFRA exceeds Congress's § 5 power as applied to states. <strong>This directly connects to your Section 5 analysis in Part XI.</strong></p>
+
+<h3 id="key-cases-2">Key Cases</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Employment Division v. Smith</em> (1990)</td>
+  <td>Neutral, generally applicable law does not trigger strict scrutiny, even if it incidentally burdens religion.</td>
+</tr>
+<tr>
+  <td><em>Church of Lukumi Babalu Aye v. Hialeah</em> (1993)</td>
+  <td>Law that targets a specific religious practice (animal sacrifice) is not neutral; strict scrutiny applies.</td>
+</tr>
+<tr>
+  <td><em>Fulton v. Philadelphia</em> (2021)</td>
+  <td>If a law provides for <strong>individualized exemptions</strong>, it is not "generally applicable"; strict scrutiny applies.</td>
+</tr>
+<tr>
+  <td><em>Hosanna-Tabor v. EEOC</em> (2012)</td>
+  <td>Ministerial exception: First Amendment bars employment suits by ministers against their religious employers.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher Tip — "General Applicability" Is the Key Battleground:</strong> After <em>Fulton</em>, the practical question is whether the law has <strong>any</strong> mechanism for individualized exceptions (secular exemptions, waiver provisions, discretionary enforcement). If it does, it's not "generally applicable" and strict scrutiny kicks in — even under <em>Smith</em>. This is how litigants functionally get around <em>Smith</em> without overruling it.</p>
+
+<p><strong>State RFRAs:</strong> Many states have their own versions of RFRA; but the federal RFRA cannot be enforced against states (<em>Boerne</em>). On an exam, always check: is the actor <strong>federal</strong> (RFRA applies) or <strong>state</strong> (only <em>Smith/Lukumi</em> framework applies, unless state has its own RFRA)?</p>
+
+<hr />
+
+<h2 id="b-establishment-clause">B. Establishment Clause</h2>
+
+<p><strong>Modern trend:</strong> The Court has moved away from the <em>Lemon</em> test toward a <strong>"historical practices and understandings"</strong> approach, often referencing coercion and historical tradition.</p>
+
+<h3 id="lemon-v-kurtzman-1971-the-old-but-not-dead-test"><em>Lemon v. Kurtzman</em> (1971) — The Old (But Not Dead) Test</h3>
+
+<ol>
+<li>Statute must have a <strong>secular legislative purpose</strong>.</li>
+<li>Principal or primary effect must <strong>neither advance nor inhibit</strong> religion.</li>
+<li>Must not foster <strong>excessive government entanglement</strong> with religion.</li>
+</ol>
+
+<h3 id="the-new-direction-post-kennedy-v-bremerton-2022">The New Direction (Post-<em>Kennedy v. Bremerton</em>, 2022)</h3>
+
+<ul>
+<li>The Establishment Clause must be interpreted by reference to <strong>"historical practices and understandings."</strong></li>
+<li><strong>Government coercion</strong> of religious exercise is a core evil.</li>
+<li>Purely symbolic or historical displays (Ten Commandments monument, legislative prayer) are often upheld if they have a long-standing tradition (<em>Town of Greece v. Galloway</em>).</li>
+<li><strong>School prayer cases remain strict:</strong> government-led prayer in schools is unconstitutional, but private, voluntary prayer by students is protected.</li>
+</ul>
+
+<p><strong>Fisher Trap — Do NOT Automatically Recite <em>Lemon</em>:</strong> After <em>Kennedy v. Bremerton</em> (2022), the <em>Lemon</em> test is effectively <strong>abandoned</strong>. The Court now uses a <strong>historical practices and coercion</strong> framework. If you write out the three-prong <em>Lemon</em> test as your primary analysis, you are applying dead law. Mention <em>Lemon</em> as historical context, then pivot to the <em>Kennedy/Town of Greece</em> framework: (1) Is there a historical tradition for this practice? (2) Does the government <strong>coerce</strong> religious participation?</p>
+
+<h3 id="schemes-of-aid-to-religious-schools">Schemes of Aid to Religious Schools</h3>
+
+<ul>
+<li>Direct aid for religious instruction → <strong>unconstitutional</strong> (old <em>Lemon</em> line).</li>
+<li>Neutral, generally available aid (vouchers, tax credits) → <strong>constitutional</strong> if parents have genuine private choice (<em>Zelman v. Simmons-Harris</em>; <em>Espinoza v. Montana</em>).</li>
+<li><strong>Cannot exclude</strong> religious schools from generally available public benefits solely because they are religious (<em>Trinity Lutheran</em>; <em>Carson v. Makin</em>).</li>
+</ul>
+
+<p><strong>Fisher Alert:</strong> The modern trend is <strong>anti-exclusion</strong>: the government violates the Free Exercise Clause if it excludes religious entities from generally available secular benefits. This flips the old Establishment Clause concern on its head — now the greater constitutional risk is <strong>excluding</strong> religion, not <strong>including</strong> it.</p>
+
+<h3 id="key-cases-table">Key Cases Table</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Holding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Everson v. Board of Ed.</em> (1947)</td>
+  <td>Incorporation; "wall of separation" language used.</td>
+</tr>
+<tr>
+  <td><em>School Dist. of Abington v. Schempp</em> (1963)</td>
+  <td>Bible reading / Lord's Prayer in public school unconstitutional.</td>
+</tr>
+<tr>
+  <td><em>Lee v. Weisman</em> (1992)</td>
+  <td>Clergy-led prayer at public school graduation unconstitutional (coercion).</td>
+</tr>
+<tr>
+  <td><em>Town of Greece v. Galloway</em> (2014)</td>
+  <td>Legislative prayer upheld; historical tradition.</td>
+</tr>
+<tr>
+  <td><em>American Legion v. American Humanist Assoc.</em> (2019)</td>
+  <td>Bladensburg Cross (war memorial) upheld; historical significance.</td>
+</tr>
+<tr>
+  <td><em>Kennedy v. Bremerton</em> (2022)</td>
+  <td>Coach's post-game midfield prayer protected; <em>Lemon</em> abandoned; analysis based on historical practices.</td>
+</tr>
+<tr>
+  <td><em>Carson v. Makin</em> (2022)</td>
+  <td>State cannot exclude religious schools from tuition assistance available to all private schools.</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="c-intersection-of-speech-religion">C. Intersection of Speech &amp; Religion</h2>
+
+<ul>
+<li>Government generally cannot ban blasphemy or "hate speech" based solely on content; such laws are generally content-based and struck under strict scrutiny (<em>Matal v. Tam</em>, <em>Iancu v. Brunetti</em>).</li>
+<li><strong>Exceptions:</strong> True threats, incitement, harassment (as defined by law) remain unprotected.</li>
+</ul>
+
+<p><strong>Fisher Tip — The "Viewpoint Discrimination" Bridge:</strong> When government restricts religious speech in a public forum to avoid "establishing" religion, it commits <strong>viewpoint discrimination</strong> — which is the most egregious First Amendment violation. (<em>Rosenberger v. UVA</em>; <em>Good News Club v. Milford</em>). The Establishment Clause does not justify viewpoint discrimination. This is where the two Religion Clauses and the Speech Clause intersect.</p>
+
+<hr />
+
+<h2 id="updated-final-issue-spotting-checklist">UPDATED FINAL ISSUE-SPOTTING CHECKLIST</h2>
+
+<h3 id="if-the-question-involves-speech">If the question involves SPEECH:</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Ask...</th>
+  <th>Doctrine</th>
+  <th>Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Is it protected speech?</td>
+  <td>Expressive conduct, incitement, obscenity, true threats, fighting words, commercial speech</td>
+  <td>Apply correct category test</td>
+</tr>
+<tr>
+  <td>Who regulates?</td>
+  <td>Government as sovereign vs. employer/educator</td>
+  <td>Special contexts: schools (<em>Tinker</em>, <em>Morse</em>), prisons, gov't employees</td>
+</tr>
+<tr>
+  <td>Is there a prior restraint?</td>
+  <td>Heavy presumption of invalidity</td>
+  <td><em>Near</em>; <em>Pentagon Papers</em></td>
+</tr>
+<tr>
+  <td>Is the law vague or overbroad?</td>
+  <td>Facial challenges; chill</td>
+  <td><em>Broadrick</em>; <em>Grayned</em></td>
+</tr>
+<tr>
+  <td>Is there government speech?</td>
+  <td>No First Amendment constraint</td>
+  <td><em>Pleasant Grove v. Summum</em></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="if-the-question-involves-religion">If the question involves RELIGION:</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Ask...</th>
+  <th>Doctrine</th>
+  <th>Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Free Exercise: Is the law neutral and generally applicable?</td>
+  <td>If YES → <em>Smith</em> (Rational Basis)</td>
+  <td>If NO → Strict Scrutiny or RFRA (feds only)</td>
+</tr>
+<tr>
+  <td>Establishment: Is there coercive religious practice?</td>
+  <td>Historical tradition analysis</td>
+  <td><em>Kennedy v. Bremerton</em> framework</td>
+</tr>
+<tr>
+  <td>Ministerial exception?</td>
+  <td>Bars employment suits by ministers</td>
+  <td><em>Hosanna-Tabor</em></td>
+</tr>
+<tr>
+  <td>Government aid to religion?</td>
+  <td>Neutral, generally available aid OK; cannot exclude religious entities</td>
+  <td><em>Zelman</em>; <em>Espinoza</em>; <em>Carson v. Makin</em></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="fisher-exam-strategy-for-first-amendment">FISHER EXAM STRATEGY FOR FIRST AMENDMENT</h2>
+
+<ol>
+<li><strong>Always classify the speech restriction first</strong> (content-based vs. neutral). That determines the whole analysis.</li>
+<li><strong>For religious claims</strong>, run both Free Exercise AND Establishment Clause arguments <strong>separately</strong>; do not conflate them.</li>
+<li><strong>Watch the intersection:</strong> When government tries to avoid "establishing" by restricting religious speech — usually fails strict scrutiny (<em>Rosenberger</em>; <em>Good News Club</em>).</li>
+<li><strong>Connect to § 5:</strong> If RFRA or a state RFRA is at issue, connect to your <em>Boerne</em> analysis — RFRA is the poster child for the "congruence and proportionality" test.</li>
+<li><strong>The "Both Sides" Move:</strong> Fisher wants expository writing. For speech cases, argue the government's interest seriously before concluding the restriction fails. For religion cases, acknowledge both the Free Exercise and Establishment Clause tensions.</li>
+</ol>
+
+<blockquote>
+  <p><strong>"You are now truly 100% covered. Go into that exam confident."</strong>
+  — Your Virtual Law Emeritus</p>
+</blockquote>
+
+<hr />
+
+<p><em>END OF MASTER ATTACK OUTLINE — ALL PARTS COMPLETE</em></p>
+
+</body>
+</html>

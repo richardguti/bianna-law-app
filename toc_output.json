@@ -1,0 +1,4237 @@
+[
+  {
+    "title": "Front Matter",
+    "page": 2,
+    "level": 1
+  },
+  {
+    "title": "Editorial Advisors",
+    "page": 4,
+    "level": 2
+  },
+  {
+    "title": "Title Page",
+    "page": 6,
+    "level": 2
+  },
+  {
+    "title": "Copyright Page",
+    "page": 9,
+    "level": 2
+  },
+  {
+    "title": "About Aspen Publishing",
+    "page": 11,
+    "level": 2
+  },
+  {
+    "title": "Summary of Contents",
+    "page": 14,
+    "level": 2
+  },
+  {
+    "title": "Contents",
+    "page": 16,
+    "level": 2
+  },
+  {
+    "title": "Preface",
+    "page": 46,
+    "level": 2
+  },
+  {
+    "title": "Acknowledgments",
+    "page": 62,
+    "level": 2
+  },
+  {
+    "title": "Chapter 1 Foundations",
+    "page": 69,
+    "level": 1
+  },
+  {
+    "title": "A. The Sweep of Criminal Law in America",
+    "page": 70,
+    "level": 2
+  },
+  {
+    "title": "Notes",
+    "page": 70,
+    "level": 3
+  },
+  {
+    "title": "B. Why Criminal Punishment?",
+    "page": 80,
+    "level": 2
+  },
+  {
+    "title": "Introductory Note",
+    "page": 80,
+    "level": 3
+  },
+  {
+    "title": "Regina v. Dudley and Stephens",
+    "page": 81,
+    "level": 3
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 88,
+    "level": 3
+  },
+  {
+    "title": "1. The Utilitarian View",
+    "page": 91,
+    "level": 3
+  },
+  {
+    "title": "J. Bentham, An Introduction to the Principles of Morals and Legislation",
+    "page": 91,
+    "level": 4
+  },
+  {
+    "title": "J. Bentham, Principles of Penal Law",
+    "page": 92,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 93,
+    "level": 4
+  },
+  {
+    "title": "a. Deterrence",
+    "page": 94,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 94,
+    "level": 5
+  },
+  {
+    "title": "J.Q. Wilson, Thinking About Crime",
+    "page": 96,
+    "level": 5
+  },
+  {
+    "title": "P.H. Robinson & J.M. Darley, The Role of Deterrence in the Formulation of Criminal Code Rules",
+    "page": 96,
+    "level": 5
+  },
+  {
+    "title": "b. Rehabilitation",
+    "page": 101,
+    "level": 4
+  },
+  {
+    "title": "M. Vitiello, Reconsidering Rehabilitation",
+    "page": 101,
+    "level": 5
+  },
+  {
+    "title": "M.S. Moore, Law and Psychiatry",
+    "page": 102,
+    "level": 5
+  },
+  {
+    "title": "Note \u2014 The Rise and Fall of the Medical Model",
+    "page": 103,
+    "level": 5
+  },
+  {
+    "title": "Note \u2014 Does Rehabilitation Work?",
+    "page": 105,
+    "level": 5
+  },
+  {
+    "title": "A. von Hirsch & L. Maher, Should Penal Rehabilitationism Be Revived?",
+    "page": 107,
+    "level": 5
+  },
+  {
+    "title": "c. Incapacitation",
+    "page": 109,
+    "level": 4
+  },
+  {
+    "title": "F.E. Zimring & G. Hawkins, Incapacitation \u2014 Penal Confinement and the Restraint of Crime",
+    "page": 109,
+    "level": 5
+  },
+  {
+    "title": "J.J. DiIulio, Jr., Prisons Are a Bargain, by Any Measure",
+    "page": 109,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 110,
+    "level": 5
+  },
+  {
+    "title": "2. Retribution",
+    "page": 116,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 116,
+    "level": 4
+  },
+  {
+    "title": "I. Kant, The Philosophy of Law",
+    "page": 117,
+    "level": 4
+  },
+  {
+    "title": "M.S. Moore, The Moral Worth of Retribution",
+    "page": 119,
+    "level": 4
+  },
+  {
+    "title": "Note on Criticisms and Defenses of Retribution",
+    "page": 120,
+    "level": 4
+  },
+  {
+    "title": "H. Morris, On Guilt and Innocence",
+    "page": 121,
+    "level": 4
+  },
+  {
+    "title": "J. Murphy, Marxism and Retribution",
+    "page": 122,
+    "level": 4
+  },
+  {
+    "title": "J. Hampton, Correcting Harms versus Righting Wrongs: The Goal of Retribution",
+    "page": 123,
+    "level": 4
+  },
+  {
+    "title": "J.L. Mackie, Retribution: A Test Case for Ethical Objectivity",
+    "page": 123,
+    "level": 4
+  },
+  {
+    "title": "D. Sered, Until We Reckon: Violence, Mass Incarceration, and a Road to Repair",
+    "page": 125,
+    "level": 4
+  },
+  {
+    "title": "Note on Retribution as a Constraint",
+    "page": 125,
+    "level": 4
+  },
+  {
+    "title": "3. \u201cCousins\u201d of Retribution",
+    "page": 127,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 127,
+    "level": 4
+  },
+  {
+    "title": "a. Retaliation and Revenge",
+    "page": 128,
+    "level": 4
+  },
+  {
+    "title": "J.F. Stephen, A History of the Criminal Law of England",
+    "page": 128,
+    "level": 5
+  },
+  {
+    "title": "Questions",
+    "page": 129,
+    "level": 5
+  },
+  {
+    "title": "Problem: Unexpected Harm",
+    "page": 129,
+    "level": 5
+  },
+  {
+    "title": "Problem: Victim-Impact Statements",
+    "page": 131,
+    "level": 5
+  },
+  {
+    "title": "b. Social Cohesion",
+    "page": 135,
+    "level": 4
+  },
+  {
+    "title": "H.L.A. Hart, Punishment and Responsibility",
+    "page": 135,
+    "level": 5
+  },
+  {
+    "title": "E. Durkheim, The Division of Labor in Society",
+    "page": 135,
+    "level": 5
+  },
+  {
+    "title": "J.F. Stephen, A History of the Criminal Law of England",
+    "page": 136,
+    "level": 5
+  },
+  {
+    "title": "Note",
+    "page": 137,
+    "level": 5
+  },
+  {
+    "title": "4. Mixed Theories",
+    "page": 138,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 139,
+    "level": 4
+  },
+  {
+    "title": "Questioning the Classic Mixed Theory",
+    "page": 140,
+    "level": 4
+  },
+  {
+    "title": "M.S. Moore, Law and Psychiatry",
+    "page": 140,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 142,
+    "level": 4
+  },
+  {
+    "title": "C. What to Punish",
+    "page": 143,
+    "level": 2
+  },
+  {
+    "title": "Problem \u2014 Sex Work",
+    "page": 145,
+    "level": 3
+  },
+  {
+    "title": "Human Rights Watch, Why Sex Work Should Be Decriminalized",
+    "page": 146,
+    "level": 3
+  },
+  {
+    "title": "N. Dowling & J. Bigelsen, A Big Mistake on Sex Work: Reformers Would Let Buyers, Pimps and Promoters Escape Criminal Consequences",
+    "page": 147,
+    "level": 3
+  },
+  {
+    "title": "D. Alternatives to Punishment",
+    "page": 152,
+    "level": 2
+  },
+  {
+    "title": "1. Abolish Prisons? Abolish Punishments?",
+    "page": 152,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 152,
+    "level": 4
+  },
+  {
+    "title": "M. Kaba, We Do This \u2019Til We Free Us",
+    "page": 154,
+    "level": 4
+  },
+  {
+    "title": "A. Akbar, Toward a Radical Imagination of Law",
+    "page": 155,
+    "level": 4
+  },
+  {
+    "title": "L. Ben-Moshe, The Tension Between Abolition and Reform",
+    "page": 156,
+    "level": 4
+  },
+  {
+    "title": "A.M. McLeod, Envisioning Abolition Democracy",
+    "page": 157,
+    "level": 4
+  },
+  {
+    "title": "J. Forman Jr., Comments Offered at Criminal Justice Roundtable",
+    "page": 158,
+    "level": 4
+  },
+  {
+    "title": "R. Kennedy, Say It Loud!",
+    "page": 159,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 162,
+    "level": 4
+  },
+  {
+    "title": "2. Restorative Justice",
+    "page": 168,
+    "level": 3
+  },
+  {
+    "title": "E. The Relevant Institutional Actors",
+    "page": 174,
+    "level": 2
+  },
+  {
+    "title": "Notes",
+    "page": 177,
+    "level": 3
+  },
+  {
+    "title": "Chapter 2 The Process for Determining Guilt",
+    "page": 196,
+    "level": 1
+  },
+  {
+    "title": "A. An Overview of a Criminal Case",
+    "page": 199,
+    "level": 2
+  },
+  {
+    "title": "B. Prosecutor\u2019s Discretion and the Decision to Charge",
+    "page": 206,
+    "level": 2
+  },
+  {
+    "title": "Introductory Notes",
+    "page": 206,
+    "level": 3
+  },
+  {
+    "title": "Inmates of Attica Correctional Facility v. Rockefeller",
+    "page": 215,
+    "level": 3
+  },
+  {
+    "title": "Notes on Checking the Decision Not to Prosecute",
+    "page": 219,
+    "level": 3
+  },
+  {
+    "title": "Problem",
+    "page": 230,
+    "level": 3
+  },
+  {
+    "title": "Notes on \u201cCompulsory\u201d Prosecution in Europe",
+    "page": 230,
+    "level": 3
+  },
+  {
+    "title": "Note on Selective Prosecution",
+    "page": 233,
+    "level": 3
+  },
+  {
+    "title": "United States v. Armstrong",
+    "page": 234,
+    "level": 3
+  },
+  {
+    "title": "P. Karlan, Race, Rights, and Remedies in Criminal Adjudication",
+    "page": 239,
+    "level": 3
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 240,
+    "level": 3
+  },
+  {
+    "title": "Problem",
+    "page": 243,
+    "level": 3
+  },
+  {
+    "title": "C. Plea Bargaining",
+    "page": 245,
+    "level": 2
+  },
+  {
+    "title": "Brady v. United States",
+    "page": 245,
+    "level": 3
+  },
+  {
+    "title": "A.W. Alschuler, The Supreme Court, the Defense Attorney, and the Guilty Plea",
+    "page": 249,
+    "level": 3
+  },
+  {
+    "title": "Notes on Plea Bargaining",
+    "page": 251,
+    "level": 3
+  },
+  {
+    "title": "Note on Plea Outcomes versus Trial Outcomes",
+    "page": 258,
+    "level": 3
+  },
+  {
+    "title": "A. Enker, Perspectives on Plea Bargaining",
+    "page": 259,
+    "level": 3
+  },
+  {
+    "title": "A. Specter, Book Review",
+    "page": 260,
+    "level": 3
+  },
+  {
+    "title": "A.W. Alschuler, The Prosecutor\u2019s Role in Plea Bargaining",
+    "page": 261,
+    "level": 3
+  },
+  {
+    "title": "S. Bibas, Plea Bargaining Outside the Shadow of Trial",
+    "page": 262,
+    "level": 3
+  },
+  {
+    "title": "A.M. Crespo, The Hidden Law of Plea Bargaining",
+    "page": 263,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 263,
+    "level": 3
+  },
+  {
+    "title": "Notes on the Policy Debate",
+    "page": 264,
+    "level": 3
+  },
+  {
+    "title": "A.W. Alschuler, Book Review",
+    "page": 265,
+    "level": 3
+  },
+  {
+    "title": "Scott v. United States",
+    "page": 268,
+    "level": 3
+  },
+  {
+    "title": "Bordenkircher v. Hayes",
+    "page": 278,
+    "level": 3
+  },
+  {
+    "title": "D. Lynch, The Impropriety of Plea Agreements: A Tale of Two Counties",
+    "page": 281,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 283,
+    "level": 3
+  },
+  {
+    "title": "G.E. Lynch, Our Administrative System of Criminal Justice",
+    "page": 287,
+    "level": 3
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 291,
+    "level": 3
+  },
+  {
+    "title": "D. Formal Trials",
+    "page": 294,
+    "level": 2
+  },
+  {
+    "title": "Introductory Note",
+    "page": 294,
+    "level": 3
+  },
+  {
+    "title": "1. The Presentation of Evidence",
+    "page": 296,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 296,
+    "level": 4
+  },
+  {
+    "title": "Questions on Jury Instructions",
+    "page": 303,
+    "level": 4
+  },
+  {
+    "title": "2. Proof Beyond a Reasonable Doubt",
+    "page": 303,
+    "level": 3
+  },
+  {
+    "title": "In re Winship",
+    "page": 304,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 305,
+    "level": 4
+  },
+  {
+    "title": "a. Allocating the Burden of Proof",
+    "page": 311,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 311,
+    "level": 5
+  },
+  {
+    "title": "Patterson v. New York",
+    "page": 312,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 318,
+    "level": 5
+  },
+  {
+    "title": "J.C. Jeffries Jr. & P.B. Stephan, Defenses, Presumptions and Burdens of Proof in the Criminal Law",
+    "page": 320,
+    "level": 5
+  },
+  {
+    "title": "b. Presumptions",
+    "page": 324,
+    "level": 4
+  },
+  {
+    "title": "3. The Role of the Jury",
+    "page": 325,
+    "level": 3
+  },
+  {
+    "title": "Duncan v. Louisiana",
+    "page": 326,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 330,
+    "level": 4
+  },
+  {
+    "title": "G. Williams, The Proof of Guilt",
+    "page": 334,
+    "level": 4
+  },
+  {
+    "title": "L.M. Ouziel, Beyond Law and Fact: Jury Evaluation of Law Enforcement",
+    "page": 334,
+    "level": 4
+  },
+  {
+    "title": "H. Kalven & H. Zeisel, The American Jury",
+    "page": 336,
+    "level": 4
+  },
+  {
+    "title": "J. Bowers, Upside-Down Juries",
+    "page": 337,
+    "level": 4
+  },
+  {
+    "title": "D.W. Broeder, The Functions of the Jury \u2014 Facts or Fictions?",
+    "page": 337,
+    "level": 4
+  },
+  {
+    "title": "United States v. Dougherty",
+    "page": 342,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions on Nullification",
+    "page": 346,
+    "level": 4
+  },
+  {
+    "title": "P. Butler, Racially Based Jury Nullification: Black Power in the Criminal Justice System",
+    "page": 357,
+    "level": 4
+  },
+  {
+    "title": "R.L. Kennedy, Race, Crime, and the Law",
+    "page": 358,
+    "level": 4
+  },
+  {
+    "title": "Note on Race-Based Nullification",
+    "page": 360,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Jury\u2019s Role in Sentencing",
+    "page": 361,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions on Inconsistent Verdicts",
+    "page": 365,
+    "level": 4
+  },
+  {
+    "title": "Chapter 3 Defining Criminal Conduct \u2014 The Elements of Just Punishment",
+    "page": 379,
+    "level": 1
+  },
+  {
+    "title": "A. Introduction",
+    "page": 380,
+    "level": 2
+  },
+  {
+    "title": "B. Legality",
+    "page": 382,
+    "level": 2
+  },
+  {
+    "title": "Commonwealth v. Mochan",
+    "page": 382,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 385,
+    "level": 3
+  },
+  {
+    "title": "McBoyle v. United States",
+    "page": 389,
+    "level": 3
+  },
+  {
+    "title": "Yates v. United States",
+    "page": 391,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 403,
+    "level": 3
+  },
+  {
+    "title": "Problem",
+    "page": 409,
+    "level": 3
+  },
+  {
+    "title": "Keeler v. Superior Court",
+    "page": 410,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 416,
+    "level": 3
+  },
+  {
+    "title": "Rogers v. Tennessee",
+    "page": 418,
+    "level": 3
+  },
+  {
+    "title": "Note",
+    "page": 423,
+    "level": 3
+  },
+  {
+    "title": "City of Chicago v. Morales",
+    "page": 424,
+    "level": 3
+  },
+  {
+    "title": "S. Chapman, Court Upholds America\u2019s Right to Hang Out",
+    "page": 434,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 435,
+    "level": 3
+  },
+  {
+    "title": "C. Proportionality",
+    "page": 452,
+    "level": 2
+  },
+  {
+    "title": "Introductory Note",
+    "page": 452,
+    "level": 3
+  },
+  {
+    "title": "J. Bentham, Principles of Penal Law",
+    "page": 453,
+    "level": 3
+  },
+  {
+    "title": "H. Gross, A Theory of Criminal Justice",
+    "page": 455,
+    "level": 3
+  },
+  {
+    "title": "H.L.A. Hart & A. Honor\u00e9, Causation in the Law",
+    "page": 455,
+    "level": 3
+  },
+  {
+    "title": "A.C. Ewing, A Study of Punishment II: Punishment as Viewed by the Philosopher",
+    "page": 455,
+    "level": 3
+  },
+  {
+    "title": "H.L.A. Hart, Law, Liberty and Morality",
+    "page": 456,
+    "level": 3
+  },
+  {
+    "title": "A. von Hirsch & A. Ashworth, Proportionate Sentencing: Exploring the Principles",
+    "page": 456,
+    "level": 3
+  },
+  {
+    "title": "Harmelin v. Michigan",
+    "page": 457,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 466,
+    "level": 3
+  },
+  {
+    "title": "D. Culpability",
+    "page": 476,
+    "level": 2
+  },
+  {
+    "title": "1. Actus Reus \u2014 Culpable Conduct",
+    "page": 476,
+    "level": 3
+  },
+  {
+    "title": "a. The Requirement of Voluntary Action",
+    "page": 476,
+    "level": 4
+  },
+  {
+    "title": "Martin v. State",
+    "page": 476,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 477,
+    "level": 5
+  },
+  {
+    "title": "People v. Newton",
+    "page": 480,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 482,
+    "level": 5
+  },
+  {
+    "title": "M. Kelman, Interpretive Construction in the Substantive Criminal Law",
+    "page": 491,
+    "level": 5
+  },
+  {
+    "title": "M. Moore, Act and Crime",
+    "page": 492,
+    "level": 5
+  },
+  {
+    "title": "Note on the Concurrence Requirement",
+    "page": 492,
+    "level": 5
+  },
+  {
+    "title": "Note on Culpable Thoughts",
+    "page": 494,
+    "level": 5
+  },
+  {
+    "title": "W. Blackstone, Commentaries",
+    "page": 495,
+    "level": 5
+  },
+  {
+    "title": "J.F. Stephen, A History of the Criminal Law of England",
+    "page": 495,
+    "level": 5
+  },
+  {
+    "title": "G. Dworkin & G. Blumenfeld, Punishments for Intentions",
+    "page": 495,
+    "level": 5
+  },
+  {
+    "title": "G. Williams, Criminal Law: The General Part 2",
+    "page": 496,
+    "level": 5
+  },
+  {
+    "title": "A. Goldstein, Conspiracy to Defraud the United States",
+    "page": 496,
+    "level": 5
+  },
+  {
+    "title": "b. Omissions",
+    "page": 496,
+    "level": 4
+  },
+  {
+    "title": "Jones v. United States",
+    "page": 496,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 498,
+    "level": 5
+  },
+  {
+    "title": "Pope v. State",
+    "page": 499,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 502,
+    "level": 5
+  },
+  {
+    "title": "J. Kleinig, Good Samaritanism",
+    "page": 507,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Duties of a Bystander",
+    "page": 510,
+    "level": 5
+  },
+  {
+    "title": "Notes on Duties Triggered by Special Circumstances",
+    "page": 515,
+    "level": 5
+  },
+  {
+    "title": "Note on Possession",
+    "page": 525,
+    "level": 5
+  },
+  {
+    "title": "c. Distinguishing Omissions from Acts",
+    "page": 527,
+    "level": 4
+  },
+  {
+    "title": "Barber v. Superior Court",
+    "page": 527,
+    "level": 5
+  },
+  {
+    "title": "Airedale NHS Trust v. Bland",
+    "page": 530,
+    "level": 5
+  },
+  {
+    "title": "Note",
+    "page": 531,
+    "level": 5
+  },
+  {
+    "title": "J. Robertson, Respect for Life in Bioethical Dilemmas \u2014 The Case of Physician-Assisted Suicide",
+    "page": 531,
+    "level": 5
+  },
+  {
+    "title": "2. Mens Rea \u2014 Culpable Mental States",
+    "page": 532,
+    "level": 3
+  },
+  {
+    "title": "a. Basic Conceptions",
+    "page": 532,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 532,
+    "level": 5
+  },
+  {
+    "title": "Regina v. Cunningham",
+    "page": 534,
+    "level": 5
+  },
+  {
+    "title": "Regina v. Faulkner",
+    "page": 538,
+    "level": 5
+  },
+  {
+    "title": "Notes on Common-Law Terminology",
+    "page": 539,
+    "level": 5
+  },
+  {
+    "title": "State v. Hazelwood",
+    "page": 547,
+    "level": 5
+  },
+  {
+    "title": "Santillanes v. New Mexico",
+    "page": 549,
+    "level": 5
+  },
+  {
+    "title": "Elonis v. United States",
+    "page": 550,
+    "level": 5
+  },
+  {
+    "title": "Questions on Elonis",
+    "page": 553,
+    "level": 5
+  },
+  {
+    "title": "Note on the Model Penal Code Reforms",
+    "page": 553,
+    "level": 5
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a72.02",
+    "page": 555,
+    "level": 5
+  },
+  {
+    "title": "Notes on Applying the MPC Approach",
+    "page": 558,
+    "level": 5
+  },
+  {
+    "title": "Burglary (N.Y. Penal Law \u00a7140.25) (2020)",
+    "page": 559,
+    "level": 5
+  },
+  {
+    "title": "Burglary (Cal. Penal Code \u00a7\u00a7459-460) (2020)",
+    "page": 559,
+    "level": 5
+  },
+  {
+    "title": "Destruction of Property (D.C. Code Ann. \u00a722-303) (2021)",
+    "page": 559,
+    "level": 5
+  },
+  {
+    "title": "b. Willful Blindness",
+    "page": 566,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 566,
+    "level": 5
+  },
+  {
+    "title": "United States v. Jewell",
+    "page": 566,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 569,
+    "level": 5
+  },
+  {
+    "title": "c. Mistake of Fact",
+    "page": 578,
+    "level": 4
+  },
+  {
+    "title": "Regina v. Prince",
+    "page": 578,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions on Mistakes of Fact",
+    "page": 581,
+    "level": 5
+  },
+  {
+    "title": "Model Penal Codes and Commentaries, Comment to \u00a72.04",
+    "page": 586,
+    "level": 5
+  },
+  {
+    "title": "Note on Current Law",
+    "page": 587,
+    "level": 5
+  },
+  {
+    "title": "People v. Olsen",
+    "page": 590,
+    "level": 5
+  },
+  {
+    "title": "Questions on Olsen",
+    "page": 594,
+    "level": 5
+  },
+  {
+    "title": "B (A Minor) v. Director of Public Prosecutions",
+    "page": 595,
+    "level": 5
+  },
+  {
+    "title": "Garnett v. State",
+    "page": 598,
+    "level": 5
+  },
+  {
+    "title": "Note on Statutory Rape",
+    "page": 600,
+    "level": 5
+  },
+  {
+    "title": "d. Strict Liability",
+    "page": 603,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 604,
+    "level": 5
+  },
+  {
+    "title": "United States v. Balint",
+    "page": 604,
+    "level": 5
+  },
+  {
+    "title": "United States v. Dotterweich",
+    "page": 605,
+    "level": 5
+  },
+  {
+    "title": "Morissette v. United States",
+    "page": 606,
+    "level": 5
+  },
+  {
+    "title": "Staples v. United States",
+    "page": 612,
+    "level": 5
+  },
+  {
+    "title": "Problems",
+    "page": 615,
+    "level": 5
+  },
+  {
+    "title": "State v. Guminga",
+    "page": 618,
+    "level": 5
+  },
+  {
+    "title": "Notes on Vicarious Liability",
+    "page": 621,
+    "level": 5
+  },
+  {
+    "title": "Regina v. City of Sault Ste. Marie",
+    "page": 625,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 627,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Academic Debate",
+    "page": 631,
+    "level": 5
+  },
+  {
+    "title": "A. Goodhart, Possession of Drugs and Absolute Liability",
+    "page": 631,
+    "level": 5
+  },
+  {
+    "title": "M. Kelman, Strict Liability: An Unorthodox View",
+    "page": 631,
+    "level": 5
+  },
+  {
+    "title": "P. Johnson, Strict Liability: The Prevalent View",
+    "page": 632,
+    "level": 5
+  },
+  {
+    "title": "S.J. Schulhofer, Harm and Punishment: A Critique of Emphasis on the Results of Conduct in the Criminal Law",
+    "page": 633,
+    "level": 5
+  },
+  {
+    "title": "D. Husak, Strict Liability, Justice, and Proportionality",
+    "page": 633,
+    "level": 5
+  },
+  {
+    "title": "V. Bergelson, Does Fault Matter?",
+    "page": 633,
+    "level": 5
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a72.05",
+    "page": 634,
+    "level": 5
+  },
+  {
+    "title": "e. Mistake of Law",
+    "page": 635,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 635,
+    "level": 5
+  },
+  {
+    "title": "People v. Marrero",
+    "page": 635,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Rationale of Ignorantia Legis",
+    "page": 643,
+    "level": 5
+  },
+  {
+    "title": "Notes on Scope of the Ignorantia Legis Doctrine",
+    "page": 645,
+    "level": 5
+  },
+  {
+    "title": "Cheek v. United States",
+    "page": 651,
+    "level": 5
+  },
+  {
+    "title": "Note on \u201cWillfully\u201d and \u201cKnowingly\u201d",
+    "page": 654,
+    "level": 5
+  },
+  {
+    "title": "United States v. International Minerals & Chemical Corp.",
+    "page": 655,
+    "level": 5
+  },
+  {
+    "title": "Liparota v. United States",
+    "page": 655,
+    "level": 5
+  },
+  {
+    "title": "United States v. Ansaldi",
+    "page": 656,
+    "level": 5
+  },
+  {
+    "title": "Problem",
+    "page": 657,
+    "level": 5
+  },
+  {
+    "title": "Note on Mens Rea Reform",
+    "page": 658,
+    "level": 5
+  },
+  {
+    "title": "Notes on Official Reliance",
+    "page": 660,
+    "level": 5
+  },
+  {
+    "title": "Lambert v. California",
+    "page": 667,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 670,
+    "level": 5
+  },
+  {
+    "title": "Problem: The \u201cCultural Defense\u201d",
+    "page": 674,
+    "level": 5
+  },
+  {
+    "title": "Chapter 4 Rape",
+    "page": 690,
+    "level": 1
+  },
+  {
+    "title": "A. Perspectives",
+    "page": 692,
+    "level": 2
+  },
+  {
+    "title": "R. Karuturi, Rape Anxiety",
+    "page": 692,
+    "level": 3
+  },
+  {
+    "title": "A. Taub, Rape Culture Isn\u2019t a Myth. It\u2019s Real, and It\u2019s Dangerous",
+    "page": 692,
+    "level": 3
+  },
+  {
+    "title": "M. McEwan, Rape Culture",
+    "page": 693,
+    "level": 3
+  },
+  {
+    "title": "L. Gorman, Walking While Female: A Story of Sexual Assault in Broad Daylight",
+    "page": 693,
+    "level": 3
+  },
+  {
+    "title": "L. Hirschman, Reckoning",
+    "page": 694,
+    "level": 3
+  },
+  {
+    "title": "A. Semuels, Low-Wage Workers Aren\u2019t Getting Justice for Sexual Harassment",
+    "page": 695,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 695,
+    "level": 3
+  },
+  {
+    "title": "B. Statutory Frameworks",
+    "page": 705,
+    "level": 2
+  },
+  {
+    "title": "Introductory Note",
+    "page": 705,
+    "level": 3
+  },
+  {
+    "title": "California Penal Code, Title 9 (1950)",
+    "page": 706,
+    "level": 3
+  },
+  {
+    "title": "Model Penal Code (Proposed Official Draft 1962)",
+    "page": 706,
+    "level": 3
+  },
+  {
+    "title": "California Penal Code, Title 9 (2021)",
+    "page": 708,
+    "level": 3
+  },
+  {
+    "title": "New York Penal Law (2021)",
+    "page": 710,
+    "level": 3
+  },
+  {
+    "title": "Wisconsin Statutes (2021)",
+    "page": 712,
+    "level": 3
+  },
+  {
+    "title": "Model Penal Code, Tentative Draft No. 5 (2021)",
+    "page": 713,
+    "level": 3
+  },
+  {
+    "title": "C. Actus Reus",
+    "page": 715,
+    "level": 2
+  },
+  {
+    "title": "1. Force and Coercion",
+    "page": 716,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 716,
+    "level": 4
+  },
+  {
+    "title": "State v. Rusk",
+    "page": 716,
+    "level": 4
+  },
+  {
+    "title": "Note on Force and Resistance",
+    "page": 723,
+    "level": 4
+  },
+  {
+    "title": "State v. DiPetrillo",
+    "page": 728,
+    "level": 4
+  },
+  {
+    "title": "Commonwealth v. Torres",
+    "page": 731,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Varieties of \u201cForce\u201d",
+    "page": 734,
+    "level": 4
+  },
+  {
+    "title": "S. Estrich, Real Rape",
+    "page": 736,
+    "level": 4
+  },
+  {
+    "title": "Notes on Nonphysical Coercion",
+    "page": 738,
+    "level": 4
+  },
+  {
+    "title": "Problems",
+    "page": 741,
+    "level": 4
+  },
+  {
+    "title": "S. Schulhofer, The Feminist Challenge in Criminal Law",
+    "page": 743,
+    "level": 4
+  },
+  {
+    "title": "S. Schulhofer, Unwanted Sex",
+    "page": 744,
+    "level": 4
+  },
+  {
+    "title": "M. Chamallas, Consent, Equality, and the Legal Control of Sexual Conduct",
+    "page": 745,
+    "level": 4
+  },
+  {
+    "title": "D.P. Bryden, Redefining Rape",
+    "page": 745,
+    "level": 4
+  },
+  {
+    "title": "2. Absence of Consent",
+    "page": 745,
+    "level": 3
+  },
+  {
+    "title": "a. Replacing Force with Non-Consent",
+    "page": 746,
+    "level": 4
+  },
+  {
+    "title": "State in the Interest of M.T.S.",
+    "page": 746,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 751,
+    "level": 5
+  },
+  {
+    "title": "b. The Meaning of Consent",
+    "page": 753,
+    "level": 4
+  },
+  {
+    "title": "State v. McFadden",
+    "page": 753,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 756,
+    "level": 5
+  },
+  {
+    "title": "D.N. Husak & G.C. Thomas III, Date Rape, Social Convention and Reasonable Mistakes",
+    "page": 762,
+    "level": 5
+  },
+  {
+    "title": "V. Berger, Rape Law Reform at the Millennium",
+    "page": 763,
+    "level": 5
+  },
+  {
+    "title": "S.J. Schulhofer, Taking Sexual Autonomy Seriously",
+    "page": 763,
+    "level": 5
+  },
+  {
+    "title": "M.J. Anderson, Negotiating Sex",
+    "page": 764,
+    "level": 5
+  },
+  {
+    "title": "Notes on Defective Consent",
+    "page": 765,
+    "level": 5
+  },
+  {
+    "title": "3. Deception",
+    "page": 771,
+    "level": 3
+  },
+  {
+    "title": "People v. Evans",
+    "page": 771,
+    "level": 4
+  },
+  {
+    "title": "Boro v. Superior Court",
+    "page": 774,
+    "level": 4
+  },
+  {
+    "title": "Notes on Deception",
+    "page": 777,
+    "level": 4
+  },
+  {
+    "title": "D. Mens Rea",
+    "page": 781,
+    "level": 2
+  },
+  {
+    "title": "Commonwealth v. Sherry",
+    "page": 781,
+    "level": 3
+  },
+  {
+    "title": "Commonwealth v. Fischer",
+    "page": 784,
+    "level": 3
+  },
+  {
+    "title": "Note on the Fischer Case",
+    "page": 790,
+    "level": 3
+  },
+  {
+    "title": "Notes on Mistake as to Consent",
+    "page": 790,
+    "level": 3
+  },
+  {
+    "title": "D.N. Husak & G.C. Thomas III, Date Rape, Social Convention and Reasonable Mistakes",
+    "page": 799,
+    "level": 3
+  },
+  {
+    "title": "C.A. MacKinnon, Feminism, Marxism, Method, and the State: Toward a Feminist Jurisprudence",
+    "page": 799,
+    "level": 3
+  },
+  {
+    "title": "E. The Marital Exemption",
+    "page": 801,
+    "level": 2
+  },
+  {
+    "title": "M. Hale, The History of the Pleas of the Crown",
+    "page": 801,
+    "level": 3
+  },
+  {
+    "title": "People v. Liberta",
+    "page": 801,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 801,
+    "level": 3
+  },
+  {
+    "title": "F. The Dynamics of Reform",
+    "page": 805,
+    "level": 2
+  },
+  {
+    "title": "G. Problems of Proof",
+    "page": 811,
+    "level": 2
+  },
+  {
+    "title": "Introductory Notes",
+    "page": 811,
+    "level": 3
+  },
+  {
+    "title": "State v. DeLawder",
+    "page": 815,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 818,
+    "level": 3
+  },
+  {
+    "title": "Chapter 5 Homicide",
+    "page": 831,
+    "level": 1
+  },
+  {
+    "title": "A. Introduction",
+    "page": 832,
+    "level": 2
+  },
+  {
+    "title": "Report of the Royal Commission on Capital Punishment, 1945-1953",
+    "page": 833,
+    "level": 3
+  },
+  {
+    "title": "California Penal Code (2021)",
+    "page": 835,
+    "level": 3
+  },
+  {
+    "title": "Pennsylvania Consolidated Statutes, Title 18 (2021)",
+    "page": 838,
+    "level": 3
+  },
+  {
+    "title": "New York Penal Law (2021)",
+    "page": 840,
+    "level": 3
+  },
+  {
+    "title": "Model Penal Code",
+    "page": 843,
+    "level": 3
+  },
+  {
+    "title": "The Penal Code of Sweden",
+    "page": 843,
+    "level": 3
+  },
+  {
+    "title": "B. Legislative Grading of Intended Killings",
+    "page": 845,
+    "level": 2
+  },
+  {
+    "title": "1. The Premeditation-Deliberation Formula",
+    "page": 845,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 845,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a7210.2",
+    "page": 845,
+    "level": 4
+  },
+  {
+    "title": "Commonwealth v. Carroll",
+    "page": 845,
+    "level": 4
+  },
+  {
+    "title": "State v. Guthrie",
+    "page": 852,
+    "level": 4
+  },
+  {
+    "title": "Notes on Premeditation",
+    "page": 856,
+    "level": 4
+  },
+  {
+    "title": "2. Mitigation to Manslaughter",
+    "page": 862,
+    "level": 3
+  },
+  {
+    "title": "a. The Concept of Provocation",
+    "page": 862,
+    "level": 4
+  },
+  {
+    "title": "Girouard v. State",
+    "page": 862,
+    "level": 5
+  },
+  {
+    "title": "Maher v. People",
+    "page": 865,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 870,
+    "level": 5
+  },
+  {
+    "title": "S.J. Morse, Undiminished Confusion in Diminished Capacity",
+    "page": 876,
+    "level": 5
+  },
+  {
+    "title": "E.L. Miller (Comment), (Wo)manslaughter: Voluntary Manslaughter, Gender, and the Model Penal Code",
+    "page": 877,
+    "level": 5
+  },
+  {
+    "title": "A. Gruber, A Provocative Defense",
+    "page": 877,
+    "level": 5
+  },
+  {
+    "title": "Law Commission (U.K.), Report No. 290, Partial Defences to Murder",
+    "page": 878,
+    "level": 5
+  },
+  {
+    "title": "Note on Nonprovoking Victims and Provoking Defendants",
+    "page": 885,
+    "level": 5
+  },
+  {
+    "title": "b. The Model Penal Code Approach",
+    "page": 887,
+    "level": 4
+  },
+  {
+    "title": "People v. Casassa",
+    "page": 887,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Model Penal Code",
+    "page": 893,
+    "level": 5
+  },
+  {
+    "title": "c. The Reasonable Person Requirement",
+    "page": 896,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 896,
+    "level": 5
+  },
+  {
+    "title": "C. Legislative Grading of Unintended Killings",
+    "page": 905,
+    "level": 2
+  },
+  {
+    "title": "1. The Creation of Homicidal Risk",
+    "page": 905,
+    "level": 3
+  },
+  {
+    "title": "a. Distinguishing Civil and Criminal Liability",
+    "page": 905,
+    "level": 4
+  },
+  {
+    "title": "Commonwealth v. Welansky",
+    "page": 905,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 909,
+    "level": 5
+  },
+  {
+    "title": "Rex v. Bateman",
+    "page": 910,
+    "level": 5
+  },
+  {
+    "title": "State v. Barnett",
+    "page": 910,
+    "level": 5
+  },
+  {
+    "title": "J. Hall, General Principles of Criminal Law",
+    "page": 911,
+    "level": 5
+  },
+  {
+    "title": "People v. Hall",
+    "page": 913,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 916,
+    "level": 5
+  },
+  {
+    "title": "b. Objectivity and Individualization in Criminal Negligence",
+    "page": 917,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 917,
+    "level": 5
+  },
+  {
+    "title": "State v. Williams",
+    "page": 918,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 922,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Objective Standard",
+    "page": 924,
+    "level": 5
+  },
+  {
+    "title": "Problem",
+    "page": 931,
+    "level": 5
+  },
+  {
+    "title": "c. Distinguishing Murder from Manslaughter",
+    "page": 933,
+    "level": 4
+  },
+  {
+    "title": "Commonwealth v. Malone",
+    "page": 933,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 935,
+    "level": 5
+  },
+  {
+    "title": "United States v. Fleming",
+    "page": 939,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 941,
+    "level": 5
+  },
+  {
+    "title": "2. The Felony-Murder Rule",
+    "page": 945,
+    "level": 3
+  },
+  {
+    "title": "a. The Basic Doctrine",
+    "page": 945,
+    "level": 4
+  },
+  {
+    "title": "Regina v. Sern\u00e9",
+    "page": 945,
+    "level": 5
+  },
+  {
+    "title": "People v. Stamp",
+    "page": 949,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Scope of the Felony-Murder Rule",
+    "page": 950,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Rationale of the Felony-Murder Rule",
+    "page": 952,
+    "level": 5
+  },
+  {
+    "title": "People v. Washington",
+    "page": 954,
+    "level": 5
+  },
+  {
+    "title": "T.B. Macaulay, A Penal Code Prepared by the Indian Law Commissioners, Note M",
+    "page": 954,
+    "level": 5
+  },
+  {
+    "title": "G.P. Fletcher, Reflections on Felony-Murder",
+    "page": 955,
+    "level": 5
+  },
+  {
+    "title": "J.J. Tomkovicz, The Endurance of the Felony-Murder Rule",
+    "page": 956,
+    "level": 5
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a7210.2",
+    "page": 957,
+    "level": 5
+  },
+  {
+    "title": "Note on the MPC Solution",
+    "page": 958,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Misdemeanor-Manslaughter Rule",
+    "page": 958,
+    "level": 5
+  },
+  {
+    "title": "Notes on Statutory Reform",
+    "page": 960,
+    "level": 5
+  },
+  {
+    "title": "Notes on Judicial Reform",
+    "page": 962,
+    "level": 5
+  },
+  {
+    "title": "b. The \u201cInherently Dangerous Felony\u201d Limitation",
+    "page": 965,
+    "level": 4
+  },
+  {
+    "title": "People v. Phillips",
+    "page": 965,
+    "level": 5
+  },
+  {
+    "title": "Notes on Inherent Danger \u201cIn the Abstract\u201d",
+    "page": 967,
+    "level": 5
+  },
+  {
+    "title": "Hines v. State",
+    "page": 969,
+    "level": 5
+  },
+  {
+    "title": "Notes on Inherent Danger \u201cAs Committed\u201d",
+    "page": 972,
+    "level": 5
+  },
+  {
+    "title": "c. The Merger Doctrine",
+    "page": 974,
+    "level": 4
+  },
+  {
+    "title": "People v. Burton",
+    "page": 975,
+    "level": 5
+  },
+  {
+    "title": "Notes on the Merger Doctrine",
+    "page": 979,
+    "level": 5
+  },
+  {
+    "title": "People v. Chun",
+    "page": 983,
+    "level": 5
+  },
+  {
+    "title": "Questions",
+    "page": 985,
+    "level": 5
+  },
+  {
+    "title": "d. Killings Not \u201cIn Furtherance\u201d of the Felony",
+    "page": 985,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 986,
+    "level": 5
+  },
+  {
+    "title": "State v. Canola",
+    "page": 988,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 991,
+    "level": 5
+  },
+  {
+    "title": "Chapter 6 The Significance of Resulting Harm",
+    "page": 1004,
+    "level": 1
+  },
+  {
+    "title": "A. Causation",
+    "page": 1005,
+    "level": 2
+  },
+  {
+    "title": "1. Foreseeability and Coincidence",
+    "page": 1006,
+    "level": 3
+  },
+  {
+    "title": "People v. Acosta",
+    "page": 1006,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1011,
+    "level": 4
+  },
+  {
+    "title": "Notes on \u201cFactual\u201d and \u201cProximate\u201d Cause",
+    "page": 1013,
+    "level": 4
+  },
+  {
+    "title": "People v. Arzon",
+    "page": 1017,
+    "level": 4
+  },
+  {
+    "title": "People v. Warner-Lambert Co.",
+    "page": 1019,
+    "level": 4
+  },
+  {
+    "title": "Notes on Foreseeability and Risk",
+    "page": 1021,
+    "level": 4
+  },
+  {
+    "title": "M. Hale, Pleas of the Crown",
+    "page": 1024,
+    "level": 4
+  },
+  {
+    "title": "Regina v. Cheshire",
+    "page": 1024,
+    "level": 4
+  },
+  {
+    "title": "State v. Shabazz",
+    "page": 1024,
+    "level": 4
+  },
+  {
+    "title": "United States v. Main",
+    "page": 1025,
+    "level": 4
+  },
+  {
+    "title": "Note on Omissions as Causes",
+    "page": 1026,
+    "level": 4
+  },
+  {
+    "title": "Note on the Rationale of the Causation Requirement",
+    "page": 1027,
+    "level": 4
+  },
+  {
+    "title": "Notes on Transferred Intent",
+    "page": 1029,
+    "level": 4
+  },
+  {
+    "title": "2. Subsequent Human Actions",
+    "page": 1032,
+    "level": 3
+  },
+  {
+    "title": "a. Subsequent Actions Intended to Produce the Result",
+    "page": 1032,
+    "level": 4
+  },
+  {
+    "title": "People v. Campbell",
+    "page": 1032,
+    "level": 5
+  },
+  {
+    "title": "People v. Kevorkian",
+    "page": 1033,
+    "level": 5
+  },
+  {
+    "title": "Notes on Assisted Suicide",
+    "page": 1037,
+    "level": 5
+  },
+  {
+    "title": "Notes on Intervening Human Action",
+    "page": 1039,
+    "level": 5
+  },
+  {
+    "title": "Notes on Subsequent Acts of Third Parties",
+    "page": 1045,
+    "level": 5
+  },
+  {
+    "title": "b. Subsequent Actions That Recklessly Risk the Result",
+    "page": 1048,
+    "level": 4
+  },
+  {
+    "title": "Introductory Notes",
+    "page": 1048,
+    "level": 5
+  },
+  {
+    "title": "Commonwealth v. Root",
+    "page": 1050,
+    "level": 5
+  },
+  {
+    "title": "Problems",
+    "page": 1052,
+    "level": 5
+  },
+  {
+    "title": "State v. McFadden",
+    "page": 1054,
+    "level": 5
+  },
+  {
+    "title": "Commonwealth v. Atencio",
+    "page": 1056,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1058,
+    "level": 5
+  },
+  {
+    "title": "B. Attempt",
+    "page": 1060,
+    "level": 2
+  },
+  {
+    "title": "1. Introduction",
+    "page": 1060,
+    "level": 3
+  },
+  {
+    "title": "J.F. Stephen, A History of the Criminal Law",
+    "page": 1061,
+    "level": 4
+  },
+  {
+    "title": "H.L.A. Hart, The Morality of the Criminal Law",
+    "page": 1062,
+    "level": 4
+  },
+  {
+    "title": "J. Feinberg, Equal Punishment for Failed Attempts",
+    "page": 1062,
+    "level": 4
+  },
+  {
+    "title": "A. Gruber, A Distributive Theory of Criminal Law",
+    "page": 1062,
+    "level": 4
+  },
+  {
+    "title": "S.J. Schulhofer, Attempt",
+    "page": 1063,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code \u00a75.05(1)",
+    "page": 1063,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a75.05",
+    "page": 1063,
+    "level": 4
+  },
+  {
+    "title": "Note",
+    "page": 1064,
+    "level": 4
+  },
+  {
+    "title": "2. Mens Rea",
+    "page": 1064,
+    "level": 3
+  },
+  {
+    "title": "Smallwood v. State",
+    "page": 1065,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1068,
+    "level": 4
+  },
+  {
+    "title": "3. Preparation versus Attempt",
+    "page": 1076,
+    "level": 3
+  },
+  {
+    "title": "King v. Barker",
+    "page": 1076,
+    "level": 4
+  },
+  {
+    "title": "People v. Rizzo",
+    "page": 1077,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1079,
+    "level": 4
+  },
+  {
+    "title": "Note on the Interaction Between Actus Reus and Abandonment",
+    "page": 1081,
+    "level": 4
+  },
+  {
+    "title": "McQuirter v. State",
+    "page": 1084,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1086,
+    "level": 4
+  },
+  {
+    "title": "Notes on Substantive Crimes of Preparation",
+    "page": 1091,
+    "level": 4
+  },
+  {
+    "title": "Notes on Stalking",
+    "page": 1095,
+    "level": 4
+  },
+  {
+    "title": "United States v. Jackson",
+    "page": 1100,
+    "level": 4
+  },
+  {
+    "title": "Note on Statutory Reform",
+    "page": 1105,
+    "level": 4
+  },
+  {
+    "title": "Problems",
+    "page": 1106,
+    "level": 4
+  },
+  {
+    "title": "4. Solicitation",
+    "page": 1111,
+    "level": 3
+  },
+  {
+    "title": "State v. Davis",
+    "page": 1111,
+    "level": 4
+  },
+  {
+    "title": "United States v. Church",
+    "page": 1112,
+    "level": 4
+  },
+  {
+    "title": "Note",
+    "page": 1113,
+    "level": 4
+  },
+  {
+    "title": "Notes on Solicitation",
+    "page": 1115,
+    "level": 4
+  },
+  {
+    "title": "5. Impossibility",
+    "page": 1117,
+    "level": 3
+  },
+  {
+    "title": "People v. Jaffe",
+    "page": 1117,
+    "level": 4
+  },
+  {
+    "title": "People v. Dlugash",
+    "page": 1120,
+    "level": 4
+  },
+  {
+    "title": "Notes on Impossibility",
+    "page": 1124,
+    "level": 4
+  },
+  {
+    "title": "United States v. Berrigan",
+    "page": 1126,
+    "level": 4
+  },
+  {
+    "title": "United States v. Oviedo",
+    "page": 1128,
+    "level": 4
+  },
+  {
+    "title": "The Case of Lady Eldon\u2019s French Lace",
+    "page": 1129,
+    "level": 4
+  },
+  {
+    "title": "Comment",
+    "page": 1134,
+    "level": 4
+  },
+  {
+    "title": "Note",
+    "page": 1137,
+    "level": 4
+  },
+  {
+    "title": "Chapter 7 Group Criminality",
+    "page": 1144,
+    "level": 1
+  },
+  {
+    "title": "A. Accountability for the Acts of Others",
+    "page": 1145,
+    "level": 2
+  },
+  {
+    "title": "Introductory Notes",
+    "page": 1145,
+    "level": 3
+  },
+  {
+    "title": "S.H. Kadish, A Theory of Complicity",
+    "page": 1145,
+    "level": 3
+  },
+  {
+    "title": "1. Mens Rea",
+    "page": 1151,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1151,
+    "level": 4
+  },
+  {
+    "title": "a. Mens Rea for Actions of the Principal",
+    "page": 1152,
+    "level": 4
+  },
+  {
+    "title": "Hicks v. United States",
+    "page": 1152,
+    "level": 5
+  },
+  {
+    "title": "Problem: Variations on Hicks",
+    "page": 1156,
+    "level": 5
+  },
+  {
+    "title": "State v. Gladstone",
+    "page": 1156,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1159,
+    "level": 5
+  },
+  {
+    "title": "Rosemond v. United States",
+    "page": 1165,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1171,
+    "level": 5
+  },
+  {
+    "title": "Note on Substantive Crimes of Facilitation",
+    "page": 1173,
+    "level": 5
+  },
+  {
+    "title": "b. Mens Rea for Results and Attendant Circumstances",
+    "page": 1180,
+    "level": 4
+  },
+  {
+    "title": "State v. McVay",
+    "page": 1180,
+    "level": 5
+  },
+  {
+    "title": "Commonwealth v. Roebuck",
+    "page": 1182,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1185,
+    "level": 5
+  },
+  {
+    "title": "People v. Russell",
+    "page": 1189,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 1191,
+    "level": 5
+  },
+  {
+    "title": "c. The Natural and Probable Consequences Theory",
+    "page": 1192,
+    "level": 4
+  },
+  {
+    "title": "People v. Luparello",
+    "page": 1192,
+    "level": 5
+  },
+  {
+    "title": "Roy v. United States",
+    "page": 1196,
+    "level": 5
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1198,
+    "level": 5
+  },
+  {
+    "title": "2. Actus Reus",
+    "page": 1201,
+    "level": 3
+  },
+  {
+    "title": "a. Encouragement",
+    "page": 1201,
+    "level": 4
+  },
+  {
+    "title": "Wilcox v. Jeffery",
+    "page": 1201,
+    "level": 5
+  },
+  {
+    "title": "Questions on Encouragement as Actus Reus",
+    "page": 1204,
+    "level": 5
+  },
+  {
+    "title": "b. The Materiality of the Aid",
+    "page": 1205,
+    "level": 4
+  },
+  {
+    "title": "State ex rel. Attorney General v. Tally, Judge",
+    "page": 1205,
+    "level": 5
+  },
+  {
+    "title": "Problems on the Materiality of the Aid or Encouragement Given",
+    "page": 1207,
+    "level": 5
+  },
+  {
+    "title": "3. The Relationship Between the Liability of the Parties",
+    "page": 1211,
+    "level": 3
+  },
+  {
+    "title": "State v. Hayes",
+    "page": 1212,
+    "level": 4
+  },
+  {
+    "title": "Vaden v. State",
+    "page": 1214,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1215,
+    "level": 4
+  },
+  {
+    "title": "Notes and Problems on the Derivative Nature of Accomplice Liability",
+    "page": 1218,
+    "level": 4
+  },
+  {
+    "title": "Notes on Differences in the Degree of Culpability",
+    "page": 1223,
+    "level": 4
+  },
+  {
+    "title": "B. Conspiracy",
+    "page": 1228,
+    "level": 2
+  },
+  {
+    "title": "Introductory Notes",
+    "page": 1228,
+    "level": 3
+  },
+  {
+    "title": "1. Conspiracy as a Form of Accessorial Liability",
+    "page": 1237,
+    "level": 3
+  },
+  {
+    "title": "Pinkerton v. United States",
+    "page": 1238,
+    "level": 4
+  },
+  {
+    "title": "State v. Bridges",
+    "page": 1241,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Merits of Pinkerton",
+    "page": 1245,
+    "level": 4
+  },
+  {
+    "title": "Notes on Pinkerton and Minor Participants",
+    "page": 1251,
+    "level": 4
+  },
+  {
+    "title": "Transitional Note",
+    "page": 1258,
+    "level": 4
+  },
+  {
+    "title": "2. The Actus Reus of Conspiracy",
+    "page": 1259,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1259,
+    "level": 4
+  },
+  {
+    "title": "United States v. Alvarez",
+    "page": 1260,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1263,
+    "level": 4
+  },
+  {
+    "title": "United States v. Apple, Inc.",
+    "page": 1264,
+    "level": 4
+  },
+  {
+    "title": "Problems",
+    "page": 1266,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Overt-Act Requirement",
+    "page": 1267,
+    "level": 4
+  },
+  {
+    "title": "3. The Mens Rea of Conspiracy",
+    "page": 1270,
+    "level": 3
+  },
+  {
+    "title": "People v. Lauria",
+    "page": 1270,
+    "level": 4
+  },
+  {
+    "title": "Notes on Mens Rea",
+    "page": 1278,
+    "level": 4
+  },
+  {
+    "title": "4. The Duration and Scope of a Conspiracy",
+    "page": 1285,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 1285,
+    "level": 4
+  },
+  {
+    "title": "5. Single or Multiple Conspiracies?",
+    "page": 1292,
+    "level": 3
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a75.03",
+    "page": 1292,
+    "level": 4
+  },
+  {
+    "title": "Kotteakos v. United States",
+    "page": 1292,
+    "level": 4
+  },
+  {
+    "title": "Anderson v. Superior Court",
+    "page": 1296,
+    "level": 4
+  },
+  {
+    "title": "United States v. Bruno",
+    "page": 1296,
+    "level": 4
+  },
+  {
+    "title": "United States v. Borelli",
+    "page": 1298,
+    "level": 4
+  },
+  {
+    "title": "Problem",
+    "page": 1299,
+    "level": 4
+  },
+  {
+    "title": "United States v. McDermott",
+    "page": 1301,
+    "level": 4
+  },
+  {
+    "title": "Questions",
+    "page": 1304,
+    "level": 4
+  },
+  {
+    "title": "Note on Multiple Objectives",
+    "page": 1305,
+    "level": 4
+  },
+  {
+    "title": "Note on the Model Penal Code Approach",
+    "page": 1307,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a75.03",
+    "page": 1307,
+    "level": 4
+  },
+  {
+    "title": "6. Parties",
+    "page": 1309,
+    "level": 3
+  },
+  {
+    "title": "Gebardi v. United States",
+    "page": 1309,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1311,
+    "level": 4
+  },
+  {
+    "title": "Garcia v. State",
+    "page": 1315,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1318,
+    "level": 4
+  },
+  {
+    "title": "7. Reassessing the Law of Conspiracy",
+    "page": 1321,
+    "level": 3
+  },
+  {
+    "title": "P. Johnson, The Unnecessary Crime of Conspiracy",
+    "page": 1321,
+    "level": 4
+  },
+  {
+    "title": "N.K. Katyal, Conspiracy Theory",
+    "page": 1322,
+    "level": 4
+  },
+  {
+    "title": "C. Liability Within the Corporate Framework",
+    "page": 1324,
+    "level": 2
+  },
+  {
+    "title": "1. Liability of the Corporate Entity",
+    "page": 1324,
+    "level": 3
+  },
+  {
+    "title": "New York Central & Hudson River Railroad Co. v. United States",
+    "page": 1324,
+    "level": 4
+  },
+  {
+    "title": "Questions",
+    "page": 1327,
+    "level": 4
+  },
+  {
+    "title": "United States v. Hilton Hotels Corp.",
+    "page": 1328,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1332,
+    "level": 4
+  },
+  {
+    "title": "Problem",
+    "page": 1347,
+    "level": 4
+  },
+  {
+    "title": "Commonwealth v. Beneficial Finance Co.",
+    "page": 1347,
+    "level": 4
+  },
+  {
+    "title": "State v. Community Alternatives Missouri, Inc.",
+    "page": 1353,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1354,
+    "level": 4
+  },
+  {
+    "title": "2. Punishing the Corporate Entity: The Problem of Sanctions",
+    "page": 1359,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1359,
+    "level": 4
+  },
+  {
+    "title": "United States v. Guidant LLC",
+    "page": 1359,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1362,
+    "level": 4
+  },
+  {
+    "title": "3. Liability of Corporate Agents",
+    "page": 1368,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1368,
+    "level": 4
+  },
+  {
+    "title": "Gordon v. United States",
+    "page": 1369,
+    "level": 4
+  },
+  {
+    "title": "Note",
+    "page": 1372,
+    "level": 4
+  },
+  {
+    "title": "United States v. Park",
+    "page": 1373,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1379,
+    "level": 4
+  },
+  {
+    "title": "United States v. MacDonald & Watson Waste Oil Co.",
+    "page": 1382,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1385,
+    "level": 4
+  },
+  {
+    "title": "Chapter 8 Exculpation",
+    "page": 1397,
+    "level": 1
+  },
+  {
+    "title": "A. Introduction: The Concepts of Justification and Excuse",
+    "page": 1398,
+    "level": 2
+  },
+  {
+    "title": "J.L. Austin, A Plea for Excuses",
+    "page": 1398,
+    "level": 3
+  },
+  {
+    "title": "B. Principles of Justification",
+    "page": 1400,
+    "level": 2
+  },
+  {
+    "title": "1. Protection of Life and Person",
+    "page": 1400,
+    "level": 3
+  },
+  {
+    "title": "United States v. Peterson",
+    "page": 1400,
+    "level": 4
+  },
+  {
+    "title": "Note on Self-Defense as a Justification",
+    "page": 1401,
+    "level": 4
+  },
+  {
+    "title": "People v. Goetz",
+    "page": 1401,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Goetz Case",
+    "page": 1407,
+    "level": 4
+  },
+  {
+    "title": "J. Berger, Goetz Case: Commentary on Nature of Urban Life",
+    "page": 1408,
+    "level": 4
+  },
+  {
+    "title": "S.L. Carter, When Victims Happen to Be Black",
+    "page": 1410,
+    "level": 4
+  },
+  {
+    "title": "Notes on Self-Defense and Race",
+    "page": 1411,
+    "level": 4
+  },
+  {
+    "title": "A. Gruber, Race to Incarcerate: Punitive Impulse and the Bid to Repeal Stand Your Ground",
+    "page": 1412,
+    "level": 4
+  },
+  {
+    "title": "American Bar Association, Report to the House of Delegates (National Task Force on and Your Ground Laws)",
+    "page": 1412,
+    "level": 4
+  },
+  {
+    "title": "L.S. Richardson & P.A. Goff, Self-Defense and the Suspicion Heuristic",
+    "page": 1413,
+    "level": 4
+  },
+  {
+    "title": "J.D. Armour, Race Ipsa Loquitur: Of Reasonable Racists, Intelligent Bayesians, and Involuntary Negrophobes",
+    "page": 1414,
+    "level": 4
+  },
+  {
+    "title": "L.S. Richardson & P.A. Goff, Self-Defense and the Suspicion Heuristic",
+    "page": 1414,
+    "level": 4
+  },
+  {
+    "title": "J. Markovitz, \u201cA Spectacle of Slavery Unwilling to Die\u201d: Curbing Reliance on Racial Stereotyping in Self-Defense Cases",
+    "page": 1416,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Meaning of \u201cDeadly Force\u201d",
+    "page": 1417,
+    "level": 4
+  },
+  {
+    "title": "Notes on Standards of Judgment",
+    "page": 1418,
+    "level": 4
+  },
+  {
+    "title": "State v. Kelly",
+    "page": 1426,
+    "level": 4
+  },
+  {
+    "title": "Notes on Battering and Its Effects",
+    "page": 1433,
+    "level": 4
+  },
+  {
+    "title": "E. Schneider, Describing and Changing: Women\u2019s Self-Defense Work and the Problem of Expert Testimony on Battering",
+    "page": 1442,
+    "level": 4
+  },
+  {
+    "title": "S. Estrich, Defending Women",
+    "page": 1443,
+    "level": 4
+  },
+  {
+    "title": "Note on Nonpsychological Defenses",
+    "page": 1449,
+    "level": 4
+  },
+  {
+    "title": "State v. Norman",
+    "page": 1450,
+    "level": 4
+  },
+  {
+    "title": "R.A. Rosen, On Self-Defense, Imminence, and Women Who Kill Their Batterers",
+    "page": 1457,
+    "level": 4
+  },
+  {
+    "title": "D. McCord & S.K. Lyons, Moral Reasoning and the Criminal Law: The Example of Self-Defense",
+    "page": 1457,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Imminent Danger Requirement",
+    "page": 1460,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions on Other Issues of Self-Defense",
+    "page": 1467,
+    "level": 4
+  },
+  {
+    "title": "State v. Abbott",
+    "page": 1471,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Duty to Retreat",
+    "page": 1474,
+    "level": 4
+  },
+  {
+    "title": "United States v. Peterson",
+    "page": 1481,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1484,
+    "level": 4
+  },
+  {
+    "title": "2. Protection of Property",
+    "page": 1489,
+    "level": 3
+  },
+  {
+    "title": "People v. Ceballos",
+    "page": 1490,
+    "level": 4
+  },
+  {
+    "title": "Notes on Defense of Habitation",
+    "page": 1494,
+    "level": 4
+  },
+  {
+    "title": "Note on Defense of Other Types of Property",
+    "page": 1498,
+    "level": 4
+  },
+  {
+    "title": "3. The Use of Force in Law Enforcement",
+    "page": 1499,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1499,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Legal Framework",
+    "page": 1502,
+    "level": 4
+  },
+  {
+    "title": "S. Mullainathan, Police Killings of Blacks: Here Is What the Data Say",
+    "page": 1510,
+    "level": 4
+  },
+  {
+    "title": "4. Choice of the Lesser Evil",
+    "page": 1513,
+    "level": 3
+  },
+  {
+    "title": "People v. Unger",
+    "page": 1513,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code \u00a73.02",
+    "page": 1518,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a73.02",
+    "page": 1518,
+    "level": 4
+  },
+  {
+    "title": "Notes on Prison Escape",
+    "page": 1519,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Boundaries of the Necessity Defense",
+    "page": 1520,
+    "level": 4
+  },
+  {
+    "title": "Notes on Medical Necessity",
+    "page": 1524,
+    "level": 4
+  },
+  {
+    "title": "Notes on Economic Necessity",
+    "page": 1526,
+    "level": 4
+  },
+  {
+    "title": "United States v. Schoon",
+    "page": 1529,
+    "level": 4
+  },
+  {
+    "title": "Note",
+    "page": 1533,
+    "level": 4
+  },
+  {
+    "title": "Regina v. Dudley and Stephens",
+    "page": 1534,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1534,
+    "level": 4
+  },
+  {
+    "title": "Note on Taking Life to Save Life",
+    "page": 1537,
+    "level": 4
+  },
+  {
+    "title": "Note on Rights versus Lives",
+    "page": 1538,
+    "level": 4
+  },
+  {
+    "title": "Problems",
+    "page": 1541,
+    "level": 4
+  },
+  {
+    "title": "5. Euthanasia",
+    "page": 1543,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1544,
+    "level": 4
+  },
+  {
+    "title": "Cruzan v. Director, Missouri Dept. of Health",
+    "page": 1544,
+    "level": 4
+  },
+  {
+    "title": "Washington v. Glucksberg",
+    "page": 1547,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1550,
+    "level": 4
+  },
+  {
+    "title": "New York State Task Force on Life and the Law, When DeathIs Sought \u2014 Assisted Suicide in the Medical Context",
+    "page": 1554,
+    "level": 4
+  },
+  {
+    "title": "J. Feinberg, Overlooking the Merits of the Individual Case: An Unpromising Approach to the Right to Die",
+    "page": 1555,
+    "level": 4
+  },
+  {
+    "title": "S.H. Kadish, Letting Patients Die: Legal and Moral Reflections",
+    "page": 1555,
+    "level": 4
+  },
+  {
+    "title": "C. Principles of Excuse",
+    "page": 1557,
+    "level": 2
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1557,
+    "level": 3
+  },
+  {
+    "title": "1. Introduction: What Are Excuses and Why Do We Have Them?",
+    "page": 1557,
+    "level": 3
+  },
+  {
+    "title": "E.R. Milhizer, Justification and Excuse: What They Were, What They Are, and What They Ought to Be",
+    "page": 1557,
+    "level": 4
+  },
+  {
+    "title": "S.H. Kadish, Excusing Crime",
+    "page": 1559,
+    "level": 4
+  },
+  {
+    "title": "2. Duress",
+    "page": 1560,
+    "level": 3
+  },
+  {
+    "title": "State v. Toscano",
+    "page": 1560,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code \u00a72.09",
+    "page": 1565,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a72.09",
+    "page": 1566,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Model Penal Code",
+    "page": 1568,
+    "level": 4
+  },
+  {
+    "title": "Note: Necessity and Duress Compared",
+    "page": 1573,
+    "level": 4
+  },
+  {
+    "title": "Notes on Duress",
+    "page": 1575,
+    "level": 4
+  },
+  {
+    "title": "United States v. Fleming",
+    "page": 1578,
+    "level": 4
+  },
+  {
+    "title": "United States v. Contento-Pachon",
+    "page": 1580,
+    "level": 4
+  },
+  {
+    "title": "Regina v. Ruzic",
+    "page": 1581,
+    "level": 4
+  },
+  {
+    "title": "Problem",
+    "page": 1586,
+    "level": 4
+  },
+  {
+    "title": "Note on Positive Inducements",
+    "page": 1589,
+    "level": 4
+  },
+  {
+    "title": "3. Intoxication",
+    "page": 1590,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1590,
+    "level": 4
+  },
+  {
+    "title": "a. Voluntary Intoxication",
+    "page": 1590,
+    "level": 4
+  },
+  {
+    "title": "G. Williams, Criminal Law: The General Part",
+    "page": 1591,
+    "level": 5
+  },
+  {
+    "title": "Roberts v. People",
+    "page": 1591,
+    "level": 5
+  },
+  {
+    "title": "People v. Hood",
+    "page": 1591,
+    "level": 5
+  },
+  {
+    "title": "State v. Stasio",
+    "page": 1593,
+    "level": 5
+  },
+  {
+    "title": "Notes on Voluntary Intoxication as Evidence Negating Mens Rea",
+    "page": 1596,
+    "level": 5
+  },
+  {
+    "title": "Model Penal Code \u00a72.08",
+    "page": 1599,
+    "level": 5
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a72.08",
+    "page": 1599,
+    "level": 5
+  },
+  {
+    "title": "b. Involuntary Intoxication",
+    "page": 1605,
+    "level": 4
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1605,
+    "level": 5
+  },
+  {
+    "title": "Regina v. Kingston",
+    "page": 1606,
+    "level": 5
+  },
+  {
+    "title": "Notes",
+    "page": 1609,
+    "level": 5
+  },
+  {
+    "title": "4. Mental Disorder",
+    "page": 1611,
+    "level": 3
+  },
+  {
+    "title": "a. The Defense of Legal Insanity",
+    "page": 1611,
+    "level": 4
+  },
+  {
+    "title": "Introductory Notes",
+    "page": 1611,
+    "level": 5
+  },
+  {
+    "title": "Notes on Administering the Insanity Defense",
+    "page": 1621,
+    "level": 5
+  },
+  {
+    "title": "i. Competing Formulations",
+    "page": 1629,
+    "level": 5
+  },
+  {
+    "title": "M\u2019Naghten\u2019s Case",
+    "page": 1629,
+    "level": 6
+  },
+  {
+    "title": "The King v. Porter",
+    "page": 1631,
+    "level": 6
+  },
+  {
+    "title": "Blake v. United States",
+    "page": 1633,
+    "level": 6
+  },
+  {
+    "title": "Model Penal Code and Commentaries (1985), \u00a74.01",
+    "page": 1636,
+    "level": 6
+  },
+  {
+    "title": "United States v. Lyons",
+    "page": 1639,
+    "level": 6
+  },
+  {
+    "title": "Notes on the \u201cVolitional Prong\u201d Controversy",
+    "page": 1645,
+    "level": 6
+  },
+  {
+    "title": "Notes on Changes in the Law",
+    "page": 1647,
+    "level": 6
+  },
+  {
+    "title": "Kahler v. Kansas",
+    "page": 1652,
+    "level": 6
+  },
+  {
+    "title": "Notes and Questions on Kahler",
+    "page": 1658,
+    "level": 6
+  },
+  {
+    "title": "Note on Abolition of the Insanity Defense",
+    "page": 1659,
+    "level": 6
+  },
+  {
+    "title": "H. Wechsler, Insanity as a Defense: A Panel Discussion",
+    "page": 1661,
+    "level": 6
+  },
+  {
+    "title": "S.J. Morse & R.J. Bonnie, Abolition of the Insanity Defense Violates Due Process",
+    "page": 1662,
+    "level": 6
+  },
+  {
+    "title": "N. Morris, Psychiatry and the Dangerous Criminal",
+    "page": 1662,
+    "level": 6
+  },
+  {
+    "title": "S.J. Morse & R.J. Bonnie, Abolition of the Insanity Defense Violates Due Process",
+    "page": 1663,
+    "level": 6
+  },
+  {
+    "title": "S.J. Morse, Internal and External Challenges to Culpability",
+    "page": 1663,
+    "level": 6
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a74.01",
+    "page": 1664,
+    "level": 6
+  },
+  {
+    "title": "ii. The Meaning of Wrong",
+    "page": 1666,
+    "level": 5
+  },
+  {
+    "title": "State v. Crenshaw",
+    "page": 1666,
+    "level": 6
+  },
+  {
+    "title": "Notes",
+    "page": 1669,
+    "level": 6
+  },
+  {
+    "title": "iii. The Meaning of \u201cMental Disease or Defect\u201d",
+    "page": 1673,
+    "level": 5
+  },
+  {
+    "title": "State v. Guido",
+    "page": 1673,
+    "level": 6
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1675,
+    "level": 6
+  },
+  {
+    "title": "Note on the Psychopath",
+    "page": 1678,
+    "level": 6
+  },
+  {
+    "title": "Notes on Automatism \u2014 Sane and Insane",
+    "page": 1680,
+    "level": 6
+  },
+  {
+    "title": "b. Diminished Capacity",
+    "page": 1683,
+    "level": 4
+  },
+  {
+    "title": "United States v. Brawner",
+    "page": 1683,
+    "level": 5
+  },
+  {
+    "title": "Clark v. Arizona",
+    "page": 1685,
+    "level": 5
+  },
+  {
+    "title": "Notes on Mental Disorder to Negate Mens Rea",
+    "page": 1687,
+    "level": 5
+  },
+  {
+    "title": "Note on Mental Disorder as a Ground for Mitigation",
+    "page": 1691,
+    "level": 5
+  },
+  {
+    "title": "5. Changing Patterns of Excuse",
+    "page": 1695,
+    "level": 3
+  },
+  {
+    "title": "Robinson v. California",
+    "page": 1695,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1698,
+    "level": 4
+  },
+  {
+    "title": "Powell v. Texas",
+    "page": 1699,
+    "level": 4
+  },
+  {
+    "title": "State ex rel. Harper v. Zegeer",
+    "page": 1708,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1709,
+    "level": 4
+  },
+  {
+    "title": "United States v. Moore",
+    "page": 1713,
+    "level": 4
+  },
+  {
+    "title": "M. Dan-Cohen, Actus Reus",
+    "page": 1718,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1718,
+    "level": 4
+  },
+  {
+    "title": "Note on Structural and Environmental Deprivation",
+    "page": 1719,
+    "level": 4
+  },
+  {
+    "title": "R. Delgado, \u201cRotten Social Background\u201d: Should the Criminal Law Recognize a Defense of Severe Environmental Deprivation?",
+    "page": 1719,
+    "level": 4
+  },
+  {
+    "title": "Note",
+    "page": 1721,
+    "level": 4
+  },
+  {
+    "title": "H.L.A. Hart, Punishment and Responsibility",
+    "page": 1723,
+    "level": 4
+  },
+  {
+    "title": "C. Thomas, Punishment and Personhood",
+    "page": 1724,
+    "level": 4
+  },
+  {
+    "title": "Questions",
+    "page": 1727,
+    "level": 4
+  },
+  {
+    "title": "Chapter 9 Theft Offenses",
+    "page": 1747,
+    "level": 1
+  },
+  {
+    "title": "A. The Means of Acquisition",
+    "page": 1748,
+    "level": 2
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a7223.1",
+    "page": 1748,
+    "level": 3
+  },
+  {
+    "title": "1. Trespassory Takings",
+    "page": 1750,
+    "level": 3
+  },
+  {
+    "title": "People v. Williams",
+    "page": 1750,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1755,
+    "level": 4
+  },
+  {
+    "title": "Topolewski v. State",
+    "page": 1758,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1761,
+    "level": 4
+  },
+  {
+    "title": "Note on Robbery and Extortion",
+    "page": 1762,
+    "level": 4
+  },
+  {
+    "title": "Note, A Rationale of the Law of Aggravated Theft",
+    "page": 1762,
+    "level": 4
+  },
+  {
+    "title": "California Penal Code (2021) \u00a7211",
+    "page": 1763,
+    "level": 4
+  },
+  {
+    "title": "California Penal Code (2021) \u00a7212",
+    "page": 1763,
+    "level": 4
+  },
+  {
+    "title": "California Penal Code (2021) \u00a7518",
+    "page": 1763,
+    "level": 4
+  },
+  {
+    "title": "California Penal Code (2021) \u00a7519",
+    "page": 1764,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code \u00a7222.1",
+    "page": 1764,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code \u00a7223.4",
+    "page": 1764,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a7223.4",
+    "page": 1764,
+    "level": 4
+  },
+  {
+    "title": "2. Misappropriation",
+    "page": 1766,
+    "level": 3
+  },
+  {
+    "title": "Nolan v. State",
+    "page": 1766,
+    "level": 4
+  },
+  {
+    "title": "Note on Embezzlement",
+    "page": 1768,
+    "level": 4
+  },
+  {
+    "title": "Notes on Appropriation of Lost Property and Property Transferred by Mistake",
+    "page": 1771,
+    "level": 4
+  },
+  {
+    "title": "Problem",
+    "page": 1776,
+    "level": 4
+  },
+  {
+    "title": "State v. Riggins",
+    "page": 1777,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code, \u00a7223.8",
+    "page": 1781,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code and Commentaries, Comment to \u00a7223.8",
+    "page": 1781,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1785,
+    "level": 4
+  },
+  {
+    "title": "3. Fraud",
+    "page": 1787,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1787,
+    "level": 4
+  },
+  {
+    "title": "Hufstetler v. State",
+    "page": 1790,
+    "level": 4
+  },
+  {
+    "title": "Graham v. United States",
+    "page": 1791,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1794,
+    "level": 4
+  },
+  {
+    "title": "People v. Ashley",
+    "page": 1795,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1799,
+    "level": 4
+  },
+  {
+    "title": "Nelson v. United States",
+    "page": 1801,
+    "level": 4
+  },
+  {
+    "title": "Problem",
+    "page": 1805,
+    "level": 4
+  },
+  {
+    "title": "4. Blackmail",
+    "page": 1808,
+    "level": 3
+  },
+  {
+    "title": "State v. Harrington",
+    "page": 1808,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1811,
+    "level": 4
+  },
+  {
+    "title": "People v. Fichtner",
+    "page": 1817,
+    "level": 4
+  },
+  {
+    "title": "Note",
+    "page": 1820,
+    "level": 4
+  },
+  {
+    "title": "Problem",
+    "page": 1821,
+    "level": 4
+  },
+  {
+    "title": "Note on the Rationale of Blackmail",
+    "page": 1821,
+    "level": 4
+  },
+  {
+    "title": "J. Lindgren, Unraveling the Paradox of Blackmail",
+    "page": 1822,
+    "level": 4
+  },
+  {
+    "title": "G.P. Fletcher, Blackmail: The Paradigmatic Crime",
+    "page": 1822,
+    "level": 4
+  },
+  {
+    "title": "D.H. Ginsburg & P. Shechtman, Blackmail: An Economic Analysis of the Law",
+    "page": 1823,
+    "level": 4
+  },
+  {
+    "title": "W.J. Gordon, Truth and Consequences: The Force of Blackmail\u2019s Central Case",
+    "page": 1823,
+    "level": 4
+  },
+  {
+    "title": "5. Consolidation",
+    "page": 1825,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 1825,
+    "level": 4
+  },
+  {
+    "title": "Model Penal Code \u00a7223.1",
+    "page": 1825,
+    "level": 4
+  },
+  {
+    "title": "New York Penal Law \u00a7155.05 (2021)",
+    "page": 1825,
+    "level": 4
+  },
+  {
+    "title": "New York Penal Law \u00a7155.45 (2021)",
+    "page": 1826,
+    "level": 4
+  },
+  {
+    "title": "Illinois Compiled Statutes Chapter 720, Section 5/16-1 (2021)",
+    "page": 1826,
+    "level": 4
+  },
+  {
+    "title": "California Penal Code \u00a7484(a) (2021)",
+    "page": 1827,
+    "level": 4
+  },
+  {
+    "title": "California Penal Code \u00a7952 (2021)",
+    "page": 1827,
+    "level": 4
+  },
+  {
+    "title": "B. The Property Subject to Theft",
+    "page": 1829,
+    "level": 2
+  },
+  {
+    "title": "1. Traditional Theft",
+    "page": 1829,
+    "level": 3
+  },
+  {
+    "title": "State v. Miller",
+    "page": 1829,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1832,
+    "level": 4
+  },
+  {
+    "title": "2. Theft of Information",
+    "page": 1837,
+    "level": 3
+  },
+  {
+    "title": "United States v. Girard",
+    "page": 1837,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1839,
+    "level": 4
+  },
+  {
+    "title": "Regina v. Stewart",
+    "page": 1849,
+    "level": 4
+  },
+  {
+    "title": "Note",
+    "page": 1852,
+    "level": 4
+  },
+  {
+    "title": "3. Honest Services",
+    "page": 1852,
+    "level": 3
+  },
+  {
+    "title": "Skilling v. United States",
+    "page": 1855,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1861,
+    "level": 4
+  },
+  {
+    "title": "C. Mens Rea",
+    "page": 1868,
+    "level": 2
+  },
+  {
+    "title": "People v. Brown",
+    "page": 1868,
+    "level": 3
+  },
+  {
+    "title": "Note",
+    "page": 1869,
+    "level": 3
+  },
+  {
+    "title": "People v. Jennings",
+    "page": 1870,
+    "level": 3
+  },
+  {
+    "title": "Regina v. Feely",
+    "page": 1872,
+    "level": 3
+  },
+  {
+    "title": "Notes and Questions on Intent to Restore or Pay",
+    "page": 1875,
+    "level": 3
+  },
+  {
+    "title": "People v. Reid",
+    "page": 1878,
+    "level": 3
+  },
+  {
+    "title": "Notes",
+    "page": 1880,
+    "level": 3
+  },
+  {
+    "title": "Chapter 10 Imposing Punishment",
+    "page": 1884,
+    "level": 1
+  },
+  {
+    "title": "A. What Is Punishment?",
+    "page": 1885,
+    "level": 2
+  },
+  {
+    "title": "1. Imprisonment",
+    "page": 1885,
+    "level": 3
+  },
+  {
+    "title": "R. Delaney, S. Subramanian, A. Shames & N. Turner, Reimagining Prison",
+    "page": 1886,
+    "level": 4
+  },
+  {
+    "title": "R. Wright, Prisons: Prisoners, Encyclopedia of Crime and Justice",
+    "page": 1887,
+    "level": 4
+  },
+  {
+    "title": "Notes on Prison Conditions",
+    "page": 1888,
+    "level": 4
+  },
+  {
+    "title": "Note on Civil Sanctions",
+    "page": 1895,
+    "level": 4
+  },
+  {
+    "title": "2. Kinds of Punishment",
+    "page": 1898,
+    "level": 3
+  },
+  {
+    "title": "United States v. Gementera",
+    "page": 1898,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1904,
+    "level": 4
+  },
+  {
+    "title": "D.M. Kahan, What Do Alternative Sanctions Mean?",
+    "page": 1907,
+    "level": 4
+  },
+  {
+    "title": "T.M. Massaro, Shame, Culture, and American Criminal Law",
+    "page": 1907,
+    "level": 4
+  },
+  {
+    "title": "J. Gilligan, Violence",
+    "page": 1908,
+    "level": 4
+  },
+  {
+    "title": "J.Q. Whitman, What Is Wrong with Inflicting Shame Sanctions?",
+    "page": 1908,
+    "level": 4
+  },
+  {
+    "title": "B. Sentencing in Non-Capital Cases",
+    "page": 1914,
+    "level": 2
+  },
+  {
+    "title": "1. Discretionary Sentencing Systems",
+    "page": 1914,
+    "level": 3
+  },
+  {
+    "title": "Williams v. New York",
+    "page": 1914,
+    "level": 4
+  },
+  {
+    "title": "Note, Due Process and Legislative Standards in Sentencing",
+    "page": 1919,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1920,
+    "level": 4
+  },
+  {
+    "title": "F. Allen, The Borderland of Criminal Justice",
+    "page": 1924,
+    "level": 4
+  },
+  {
+    "title": "M. Frankel, Criminal Sentencing: Law Without Order",
+    "page": 1925,
+    "level": 4
+  },
+  {
+    "title": "Twentieth Century Fund, Task Force on Criminal Sentencing, Fair and Certain Punishment",
+    "page": 1926,
+    "level": 4
+  },
+  {
+    "title": "2. Sentencing Reform",
+    "page": 1926,
+    "level": 3
+  },
+  {
+    "title": "Introductory Notes",
+    "page": 1926,
+    "level": 4
+  },
+  {
+    "title": "United States v. Vasquez",
+    "page": 1930,
+    "level": 4
+  },
+  {
+    "title": "F.O. Bowman, III, The Failure of the Federal Sentencing Guidelines: A Structural Analysis",
+    "page": 1937,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Sentencing Guideline Approach",
+    "page": 1941,
+    "level": 4
+  },
+  {
+    "title": "United States v. Deegan",
+    "page": 1950,
+    "level": 4
+  },
+  {
+    "title": "D.B. Henriques & J. Healy, Madoff Goes to Jail After Guilty Pleas",
+    "page": 1956,
+    "level": 4
+  },
+  {
+    "title": "United States v. Bernard L. Madoff",
+    "page": 1957,
+    "level": 4
+  },
+  {
+    "title": "Notes and Questions",
+    "page": 1961,
+    "level": 4
+  },
+  {
+    "title": "Notes on the Jury\u2019s Role in Sentencing",
+    "page": 1966,
+    "level": 4
+  },
+  {
+    "title": "Taking a Second Look at a Defendant\u2019s Sentence",
+    "page": 1968,
+    "level": 4
+  },
+  {
+    "title": "3. Constitutional Limits",
+    "page": 1970,
+    "level": 3
+  },
+  {
+    "title": "Ewing v. California",
+    "page": 1971,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1978,
+    "level": 4
+  },
+  {
+    "title": "Graham v. Florida",
+    "page": 1980,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 1985,
+    "level": 4
+  },
+  {
+    "title": "C. Sentencing in Capital Cases",
+    "page": 1989,
+    "level": 2
+  },
+  {
+    "title": "1. The Current Context",
+    "page": 1989,
+    "level": 3
+  },
+  {
+    "title": "2. Theories of Punishment Applied to the Death Penalty",
+    "page": 1991,
+    "level": 3
+  },
+  {
+    "title": "3. Error",
+    "page": 1995,
+    "level": 3
+  },
+  {
+    "title": "4. Bias",
+    "page": 1998,
+    "level": 3
+  },
+  {
+    "title": "5. Constitutional Limitations",
+    "page": 2000,
+    "level": 3
+  },
+  {
+    "title": "Introductory Note",
+    "page": 2000,
+    "level": 4
+  },
+  {
+    "title": "Gregg v. Georgia",
+    "page": 2004,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 2011,
+    "level": 4
+  },
+  {
+    "title": "Atkins v. Virginia",
+    "page": 2022,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 2029,
+    "level": 4
+  },
+  {
+    "title": "McCleskey v. Kemp",
+    "page": 2036,
+    "level": 4
+  },
+  {
+    "title": "Notes",
+    "page": 2047,
+    "level": 4
+  },
+  {
+    "title": "Appendix, American Law Institute, Model Penal Code",
+    "page": 2069,
+    "level": 1
+  },
+  {
+    "title": "Table of Cases",
+    "page": 2196,
+    "level": 1
+  },
+  {
+    "title": "Table of Authorities",
+    "page": 2240,
+    "level": 1
+  },
+  {
+    "title": "Index",
+    "page": 2342,
+    "level": 1
+  }
+]

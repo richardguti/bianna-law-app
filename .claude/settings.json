@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -c \"VITE_SUPABASE\" \"f:/Bianna - Law/Bianna-Law-Final/dist-react/assets/\"*.js)",
+      "Bash(node -e ':*)",
+      "Bash(ls \"f:/Bianna - Law/Bianna-Law-Final/\"*.ts)",
+      "Bash(ls \"f:/Bianna - Law/Bianna-Law-Final/\"*.json)",
+      "Bash(ls \"f:/Bianna - Law/Bianna-Law-Final/\"*.html)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('f:/Bianna - Law/Bianna-Law-Final/jsons/package.json','utf8'\\)\\); console.log\\('JSON valid'\\)\")",
+      "Bash(node_modules/.bin/electron-builder --mac --help)",
+      "Bash(where 7z)",
+      "Bash(where 7za)",
+      "Read(//c/Program Files/7-Zip/**)",
+      "Bash(node_modules/.bin/electron-builder --version)",
+      "Bash(../node_modules/.bin/electron-builder --mac --dir)",
+      "Bash(node_modules/.bin/electron-builder --project jsons --mac --dir)",
+      "Bash(node -e \"const pkg = require\\('./node_modules/vite/package.json'\\); console.log\\('Vite:', pkg.version\\)\")",
+      "Bash(node -e \"const pkg = require\\('./node_modules/react/package.json'\\); console.log\\('React:', pkg.version\\)\")",
+      "Bash(node -e \"const v = require\\('./node_modules/vite/package.json'\\).version; console.log\\('Installed Vite:', v\\)\")",
+      "Bash(node_modules/.bin/vite build:*)",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(cmd /c \"cd \\\\\"f:\\\\\\\\Bianna - Law\\\\\\\\Bianna-Law-App\\\\\" && node_modules\\\\\\\\.bin\\\\\\\\tsc --noEmit 2>&1\")",
+      "Bash(cmd /c \"cd /d \\\\\"f:\\\\\\\\Bianna - Law\\\\\\\\Bianna-Law-App\\\\\" && node_modules\\\\\\\\.bin\\\\\\\\tsc --noEmit\")",
+      "Bash(powershell -Command \"Set-Location 'f:/Bianna - Law/Bianna-Law-App'; ./node_modules/.bin/tsc --noEmit 2>&1 | Select-Object -First 50\")",
+      "Bash(powershell -Command \"Set-Location 'f:/Bianna - Law/Bianna-Law-App'; node node_modules/electron-builder/out/cli/cli.js --mac --arm64 2>&1 | Select-Object -First 100\")",
+      "Bash(powershell -Command \"Set-Location 'f:/Bianna - Law/Bianna-Law-App'; git status 2>&1 | Select-Object -First 20\")",
+      "Bash(powershell -Command \"Set-Location 'f:/Bianna - Law/Bianna-Law-App'; git diff package.json\")",
+      "Bash(powershell -Command \"Start-Sleep -Seconds 30; gh run view 24168143111 --repo richardguti/bianna-law-app 2>&1\")",
+      "Bash(powershell -Command \"Start-Sleep -Seconds 60; gh run view --job=70534012216 --repo richardguti/bianna-law-app 2>&1 | Select-Object -First 40\")",
+      "Bash(powershell -Command \"gh release view v1.1.1 --repo richardguti/bianna-law-app 2>&1\")",
+      "Bash(powershell -Command \"gh run view 24168143125 --log-failed --repo richardguti/bianna-law-app 2>&1 | Select-Object -First 50\")",
+      "Bash(powershell -Command \"Start-Sleep -Seconds 30; gh run list --repo richardguti/bianna-law-app --limit 5 2>&1\")"
+    ],
+    "additionalDirectories": [
+      "f:\\Bianna - Law\\Bianna-Law-App"
+    ]
+  }
+}

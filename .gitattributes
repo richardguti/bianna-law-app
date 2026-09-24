@@ -1,0 +1,5 @@
+# The Florida statute corpus is 24,671 files of public-domain text copied straight
+# into the app on the runner. Storing it verbatim stops git rewriting line endings
+# on every add and checkout -- which on Windows emitted a warning per file and made
+# staging the repo take tens of minutes.
+icm/references/florida-statutes/** -text

@@ -1,0 +1,55 @@
+SKILL: bia-outline-style
+PURPOSE: Enforce Bianna's strict procedural outline formatting for all law school outlines, case briefs, and midterm/final study outlines.
+
+FORMATTING RULES — ALWAYS APPLY WHEN GENERATING OUTLINES:
+
+1. TOP-LEVEL STRUCTURE
+   Use Roman numerals (I. II. III.) for major topics/claims.
+   Each Roman numeral heading is a LEGAL ISSUE or DOCTRINE.
+
+2. SECOND-LEVEL — RULE STATEMENT
+   Use capital letters (A. B. C.) for sub-rules, elements, and tests.
+   State the black-letter rule precisely. Cite the source (case name, statute, rule number).
+
+3. THIRD-LEVEL — ELEMENT BREAKDOWN
+   Use Arabic numerals (1. 2. 3.) for individual elements of each test/rule.
+   Each element must be stated as a standalone testable proposition.
+
+4. FOURTH-LEVEL — APPLICATION / EXCEPTIONS
+   Use lowercase letters (a. b. c.) for exceptions, policy rationale, or key applications.
+   Include landmark cases that illustrate each element.
+
+5. IRAC MINI-BRIEFS
+   For any case cited in the outline, use this compact format:
+   CASE: [Name v. Name]
+   ISSUE: [Single-sentence legal question]
+   RULE: [Rule of law the case stands for]
+   HOLDING: [Court's answer to the issue]
+   SIGNIFICANCE: [Why it matters — what doctrine it establishes]
+
+6. FORMATTING STRICTNESS
+   - NO flowing paragraphs in outline mode. Every line is a bullet or numbered item.
+   - NO conversational language. Use legal terminology throughout.
+   - Section headers must be BOLD and UNDERLINED when the format allows.
+   - Leave a blank line between each Roman numeral section.
+   - Use parallel grammatical structure within each level.
+
+7. COVERAGE — ALWAYS INCLUDE FOR EACH DOCTRINE:
+   - Definition / black-letter rule
+   - Elements (numbered)
+   - Key cases (name + one-line holding)
+   - Exceptions / limitations
+   - Policy rationale (1-2 lines max)
+   - Common exam issues / traps
+
+EXAMPLE STRUCTURE:
+I. PERSONAL JURISDICTION
+   A. Traditional Bases (Pennoyer v. Neff, 1877)
+      1. Presence — defendant physically served in state
+      2. Domicile — defendant's permanent home
+      3. Consent — express or implied
+   B. Modern Standard — Minimum Contacts (Int'l Shoe v. Washington, 1945)
+      1. Defendant must have minimum contacts with forum state
+      2. Assertion of jurisdiction must not offend "traditional notions of fair play and substantial justice"
+      a. Continuous and systematic contacts → general jurisdiction
+      b. Single purposeful act directed at forum → specific jurisdiction

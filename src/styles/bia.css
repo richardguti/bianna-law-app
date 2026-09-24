@@ -1,0 +1,40 @@
+/* ── Shared BIA rendering tokens (Part 3) ──────────────────────────────────────
+   One source for the way model answers look, imported by every chat surface. The chat
+   pages previously carried their own inline <style> blocks, which is precisely how they
+   drifted away from the Outline Generator's four-tier language: two style sources.
+
+   Tier markup itself carries its styles inline (it is generated to the house stylesheet),
+   so this file only sets the surrounding defaults and the IRAC labels. */
+
+/* Streaming text: readable monospace-free body copy, pre-wrapped by the component. */
+.chat-stream {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Finished artifact: sane rhythm for the tier <div>s. white-space is reset because chat
+   bubbles inherit pre-wrap from their container, and the newlines between tier divs would
+   otherwise render as extra blank lines. */
+.chat-bia {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  white-space: normal;
+}
+.chat-bia > div {
+  margin-bottom: 6px;
+}
+.chat-bia em strong,
+.chat-bia strong em {
+  font-style: italic;
+}
+
+/* IRAC labels — Study Sessions grade mode and IRAC mode. */
+.irac-label { font-weight: 700; padding: 4px 0; }
+.irac-issue      { color: #546345; border-left: 3px solid #a4b491; padding-left: 8px; margin: 8px 0; }
+.irac-rule       { color: #556349; border-left: 3px solid #bcccac; padding-left: 8px; margin: 8px 0; }
+.irac-analysis   { color: #45483f; border-left: 3px solid #c5c8bc; padding-left: 8px; margin: 8px 0; }
+.irac-conclusion { color: #546345; border-left: 3px solid #a4b491; padding-left: 8px; margin: 8px 0; }
+.irac-missed     { color: #ba1a1a; border-left: 3px solid #ffdad6; padding-left: 8px; margin: 8px 0; }
+.irac-hook       { color: #38462b; background: #d8e8c2; padding: 4px 8px; border-radius: 4px; margin: 8px 0; }

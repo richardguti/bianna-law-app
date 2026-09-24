@@ -1,0 +1,3185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Constitutional Law Supplement &mdash; Bianna L. Estrella</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap');
+
+@page {
+    size: letter;
+    margin: 0.75in;
+}
+
+@media print {
+    body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .cover { page-break-after: always; }
+    .toc-page { page-break-after: always; }
+    .part-break { page-break-before: always; }
+    h1, h2, h3 { page-break-after: avoid; }
+    table, pre, blockquote { page-break-inside: avoid; }
+    .no-print { display: none !important; }
+}
+
+:root {
+    --navy: #1a2744;
+    --gold: #c9a227;
+    --gold-light: #f5e6b8;
+    --cream: #faf8f3;
+    --charcoal: #2c2c2c;
+    --brown: #5a4a3a;
+    --blue: #2e5090;
+    --red: #8b2232;
+    --teal: #1a6b5a;
+    --rule: #d4c9b0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Source Sans Pro', 'Segoe UI', Arial, sans-serif;
+    font-size: 10.5pt; line-height: 1.55; color: var(--charcoal);
+    max-width: 8.5in; margin: 0 auto; padding: 0.5in;
+}
+.print-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 999;
+    background: var(--navy); color: #fff; border: none;
+    padding: 12px 28px; font-size: 14px; font-weight: 700;
+    border-radius: 6px; cursor: pointer; letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+}
+.print-btn:hover { background: var(--gold); color: var(--navy); }
+
+/* COVER */
+.cover {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; padding: 2.5in 0.5in 2in;
+    min-height: 95vh;
+}
+.cover .seal { font-size: 54pt; margin-bottom: 8pt; }
+.cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28pt; color: var(--navy); letter-spacing: 2px;
+    text-transform: uppercase; margin: 0 0 4pt; border: none;
+}
+.cover h2 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 13pt; color: var(--gold); font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6pt;
+    border: none;
+}
+.cover h3 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 11pt; color: var(--teal); font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; margin: 0 0 18pt;
+    border: none;
+}
+.cover .bar {
+    width: 260pt; height: 2.5pt; margin: 10pt auto;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.cover .meta {
+    font-size: 11pt; color: var(--brown); line-height: 2;
+}
+.cover .meta strong { color: var(--navy); }
+
+/* TABLE OF CONTENTS PAGE */
+.toc-page {
+    padding: 0.5in 0;
+}
+.toc-page .toc-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20pt; color: var(--navy); text-align: center;
+    border-bottom: 2.5pt solid var(--gold); padding-bottom: 6pt;
+    margin-bottom: 18pt; letter-spacing: 2px;
+}
+.toc-section {
+    margin-bottom: 14pt;
+}
+.toc-section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 11pt; color: var(--navy); font-weight: 700;
+    background: var(--cream); padding: 4pt 8pt;
+    border-left: 3pt solid var(--gold);
+    margin-bottom: 4pt;
+}
+.toc-entry {
+    display: flex; align-items: baseline;
+    padding: 2pt 0 2pt 16pt;
+    font-size: 9.5pt;
+}
+.toc-entry.level-1 {
+    padding-left: 8pt;
+    font-weight: 700;
+    font-size: 10pt;
+    color: var(--navy);
+    margin-top: 4pt;
+}
+.toc-entry.level-2 {
+    padding-left: 20pt;
+    font-weight: 600;
+    color: var(--blue);
+}
+.toc-entry.level-3 {
+    padding-left: 34pt;
+    font-weight: 400;
+    color: var(--charcoal);
+    font-size: 9pt;
+}
+.toc-entry a {
+    color: inherit; text-decoration: none;
+    flex: 1;
+}
+.toc-entry a:hover {
+    color: var(--gold);
+}
+.toc-dots {
+    flex: 1;
+    border-bottom: 1pt dotted var(--rule);
+    margin: 0 6pt;
+    min-width: 20pt;
+}
+
+/* HEADINGS */
+h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18pt; color: var(--navy);
+    border-bottom: 2.5pt solid var(--gold);
+    padding-bottom: 4pt; margin: 26pt 0 10pt;
+}
+h2 {
+    font-size: 13pt; color: var(--blue); font-weight: 700;
+    border-bottom: 1pt solid var(--rule);
+    padding-bottom: 3pt; margin: 20pt 0 8pt;
+}
+h3 { font-size: 11pt; color: var(--navy); font-weight: 700; margin: 14pt 0 5pt; }
+h4 { font-size: 10pt; color: var(--brown); font-weight: 700; margin: 10pt 0 4pt; }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; margin: 8pt 0 14pt; font-size: 9.5pt; }
+thead th {
+    background: var(--navy); color: #fff; font-weight: 700;
+    text-align: left; padding: 5pt 8pt; font-size: 8.5pt;
+    letter-spacing: 0.5px; text-transform: uppercase;
+}
+td { padding: 4pt 8pt; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+tr:nth-child(even) { background: var(--cream); }
+
+/* CODE / FLOWCHARTS */
+code {
+    font-family: 'Fira Code', Consolas, monospace;
+    background: #f0ebe0; padding: 1pt 3pt; border-radius: 2pt;
+    font-size: 8.5pt; color: var(--red);
+}
+pre {
+    background: var(--navy); color: #e8dcc8;
+    padding: 12pt 16pt; border-radius: 4pt;
+    font-size: 8.5pt; line-height: 1.5;
+    margin: 8pt 0 14pt; border-left: 3pt solid var(--gold);
+    white-space: pre-wrap; word-wrap: break-word;
+}
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+
+/* BLOCKQUOTES — Fisher Tips/Traps */
+blockquote {
+    border-left: 3pt solid var(--gold); background: var(--cream);
+    margin: 8pt 0; padding: 8pt 14pt;
+    font-style: italic; color: var(--brown); font-size: 9.5pt;
+}
+blockquote strong { color: var(--red); font-style: normal; }
+
+/* LISTS */
+ul, ol { margin: 4pt 0 8pt 20pt; }
+li { margin-bottom: 2pt; }
+li strong { color: var(--navy); }
+
+hr { border: none; border-top: 1.5pt solid var(--gold); margin: 18pt 0; }
+a { color: var(--blue); text-decoration: none; }
+em { color: var(--brown); }
+p { margin: 4pt 0; }
+
+/* HEADER BAR */
+.header-bar {
+    text-align: center; font-size: 7.5pt; color: var(--brown);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    border-bottom: 0.5pt solid var(--rule); padding-bottom: 4pt; margin-bottom: 8pt;
+}
+</style>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">EXPORT TO PDF</button>
+
+    <div class="cover">
+        <div class="seal">&#9878;&#65039;</div>
+        <h1>Constitutional Law</h1>
+        <h2>Complete Supplement</h2>
+        <h3>Parts 1&ndash;4 Combined Edition</h3>
+        <div class="bar"></div>
+        <div class="meta">
+            <strong>Professor Keith R. Fisher</strong><br>
+            Spring 2026<br><br>
+            <strong>Bianna L. Estrella</strong><br>
+            St. Thomas University College of Law<br><br>
+            <em>Companion to the V2 Master Attack Outline<br>
+            Deep IRACs &middot; Decision Trees &middot; Fisher Traps &middot; Amendments 1&ndash;27</em>
+        </div>
+        <div class="bar"></div>
+    </div>
+    
+<div class="toc-page">
+  <div class="toc-heading">Table of Contents</div>
+  <div class="toc-entry level-1">
+    <a href="#constitutional-law-supplement-part-1">CONSTITUTIONAL LAW SUPPLEMENT — PART 1</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#federalism-the-commerce-power-deep-irac">FEDERALISM &amp; THE COMMERCE POWER (Deep IRAC)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#covering-material-not-in-the-v2-master-attack-outline">Covering Material NOT in the V2 Master Attack Outline</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-section">
+    <div class="toc-section-title">PART 1: Federalism & The Commerce Power</div>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#chapter-1-the-structural-constitution-federalism">CHAPTER 1: THE STRUCTURAL CONSTITUTION — FEDERALISM</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#i-the-foundation-mcculloch-v-maryland-1819">I. The Foundation: McCulloch v. Maryland (1819)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#mcculloch-v-maryland">McCulloch v. Maryland</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-trap-the-necessary-spectrum">🏛️ Fisher Trap: The "Necessary" Spectrum</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-pretext-limitation">The "Pretext" Limitation</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#ii-modern-necessary-proper-united-states-v-comstock-2010">II. Modern Necessary &amp; Proper: United States v. Comstock (2010)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#united-states-v-comstock">United States v. Comstock</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-dissents">The Dissents</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-tip-comstock-vs-lopez">🏛️ Fisher Tip: Comstock vs. Lopez</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#iii-term-limits-the-structural-constitution">III. Term Limits &amp; the Structural Constitution</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#us-term-limits-inc-v-thornton-1995">U.S. Term Limits, Inc. v. Thornton (1995)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#justice-thomass-dissent-critical-for-fisher">Justice Thomas's Dissent (Critical for Fisher)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-alert-the-source-of-power-debate">🏛️ Fisher Alert: The "Source of Power" Debate</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#chapter-2-the-commerce-power-full-case-briefs">CHAPTER 2: THE COMMERCE POWER — FULL CASE BRIEFS</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#i-the-modern-commerce-power-framework">I. The Modern Commerce Power Framework</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#ii-the-civil-rights-era-commerce-cases">II. The Civil Rights Era Commerce Cases</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#heart-of-atlanta-motel-v-united-states-1964">Heart of Atlanta Motel v. United States (1964)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#katzenbach-v-mcclung-1964">Katzenbach v. McClung (1964)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-tip-the-commerce-clause-side-door">🏛️ Fisher Tip: The Commerce Clause "Side-Door"</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#iii-the-rehnquist-revolution-limiting-the-commerce-power">III. The Rehnquist Revolution: Limiting the Commerce Power</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#united-states-v-lopez-1995">United States v. Lopez (1995)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-critical-concurrences-dissents">The Critical Concurrences &amp; Dissents</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-decision-tree-commerce-clause-analysis">🏛️ Fisher Decision Tree: Commerce Clause Analysis</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#united-states-v-morrison-2000-commerce-clause-prong">United States v. Morrison (2000) — Commerce Clause Prong</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#gonzales-v-raich-2005">Gonzales v. Raich (2005)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-trap-the-lopezraich-distinction">🏛️ Fisher Trap: The Lopez/Raich Distinction</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#iv-the-aca-and-the-outer-limit-nfib-v-sebelius-2012">IV. The ACA and the "Outer Limit": NFIB v. Sebelius (2012)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#national-federation-of-independent-business-v-sebelius">National Federation of Independent Business v. Sebelius</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-medicaid-expansion-7-2-rejection">The Medicaid Expansion (7-2 Rejection)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-flowchart-taxing-spending-power">🏛️ Fisher Flowchart: Taxing &amp; Spending Power</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#constitutional-law-supplement-part-2">CONSTITUTIONAL LAW SUPPLEMENT — PART 2</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#dormant-commerce-clause-preemption-separation-of-powers">DORMANT COMMERCE CLAUSE, PREEMPTION &amp; SEPARATION OF POWERS</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#covering-material-not-in-the-v2-master-attack-outline-2">Covering Material NOT in the V2 Master Attack Outline</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-section">
+    <div class="toc-section-title">PART 2: Dormant Commerce Clause, Preemption & Separation of Powers</div>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#chapter-3-the-dormant-commerce-clause-dcc">CHAPTER 3: THE DORMANT COMMERCE CLAUSE (DCC)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#i-the-concept">I. The Concept</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#ii-the-two-track-framework">II. The Two-Track Framework</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#track-1-facial-discrimination-against-interstate-commerce-per-se-invalid">Track 1: Facial Discrimination Against Interstate Commerce → Per Se Invalid</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#track-2-evenhandedly-burdensome-laws-pike-balancing">Track 2: Evenhandedly Burdensome Laws → Pike Balancing</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#iii-key-dcc-cases">III. Key DCC Cases</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#philadelphia-v-new-jersey-1978">Philadelphia v. New Jersey (1978)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#dean-milk-co-v-city-of-madison-1951">Dean Milk Co. v. City of Madison (1951)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#pike-v-bruce-church-inc-1970">Pike v. Bruce Church, Inc. (1970)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-dcc-flowchart">🏛️ Fisher DCC Flowchart</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#iv-the-market-participant-exception">IV. The Market Participant Exception</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#v-privileges-immunities-clause-article-iv-2">V. Privileges &amp; Immunities Clause (Article IV, § 2)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-two-part-test-united-bldg-trades-v-camden-1984">The Two-Part Test (United Bldg. Trades v. Camden, 1984):</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#key-distinctions-from-dcc">Key Distinctions from DCC:</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#chapter-4-preemption">CHAPTER 4: PREEMPTION</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#i-the-supremacy-clause-framework">I. The Supremacy Clause Framework</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#three-types-of-preemption">Three Types of Preemption:</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#arizona-v-united-states-2012">Arizona v. United States (2012)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-preemption-checklist">🏛️ Fisher Preemption Checklist</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#chapter-5-separation-of-powers-the-executive">CHAPTER 5: SEPARATION OF POWERS — THE EXECUTIVE</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#i-executive-power-the-youngstown-framework">I. Executive Power: The Youngstown Framework</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#youngstown-sheet-tube-co-v-sawyer-1952">Youngstown Sheet &amp; Tube Co. v. Sawyer (1952)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-alert-the-youngstown-checklist">🏛️ Fisher Alert: The Youngstown Checklist</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#ii-appointment-removal-powers">II. Appointment &amp; Removal Powers</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-appointments-clause-art-ii-2-cl-2">The Appointments Clause (Art. II, § 2, cl. 2)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-removal-power">The Removal Power</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#iii-executive-privilege-immunity">III. Executive Privilege &amp; Immunity</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#united-states-v-nixon-1974">United States v. Nixon (1974)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#trump-v-united-states-2024">Trump v. United States (2024)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#iv-the-non-delegation-doctrine">IV. The Non-Delegation Doctrine</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#chapter-6-procedural-due-process">CHAPTER 6: PROCEDURAL DUE PROCESS</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#i-the-two-step-framework">I. The Two-Step Framework</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#step-1-is-there-a-protected-interest">Step 1: Is There a Protected Interest?</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#step-2-what-process-is-due">Step 2: What Process is Due?</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#mathews-v-eldridge-1976">Mathews v. Eldridge (1976)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-flowchart-procedural-due-process">🏛️ Fisher Flowchart: Procedural Due Process</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-stigma-plus-doctrine">The "Stigma-Plus" Doctrine</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#summary-table-key-procedural-due-process-cases">Summary Table: Key Procedural Due Process Cases</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#chapter-7-privileges-immunities-14th-amendment-the-right-to-travel">CHAPTER 7: PRIVILEGES &amp; IMMUNITIES (14th AMENDMENT) &amp; THE RIGHT TO TRAVEL</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#i-the-slaughter-house-cases-1873">I. The Slaughter-House Cases (1873)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#ii-saenz-v-roe-1999">II. Saenz v. Roe (1999)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#constitutional-law-supplement-part-3">CONSTITUTIONAL LAW SUPPLEMENT — PART 3</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#master-exam-attack-frameworks-cross-reference">MASTER EXAM ATTACK FRAMEWORKS &amp; CROSS-REFERENCE</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-fisher-checkmate-quick-reference">The "Fisher Checkmate" Quick-Reference</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-section">
+    <div class="toc-section-title">PART 3: Master Exam Attack Frameworks</div>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-a-the-master-issue-spotting-checklist">SECTION A: THE MASTER ISSUE-SPOTTING CHECKLIST</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#step-1-who-is-the-actor">🔍 Step 1: WHO is the Actor?</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#step-2-what-power-is-being-exercised">🔍 Step 2: WHAT Power is Being Exercised?</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#if-congress-is-acting-check">If CONGRESS is acting, check:</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#if-a-state-is-acting-check">If a STATE is acting, check:</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#step-3-what-standard-of-review">🔍 Step 3: WHAT Standard of Review?</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#the-tiers-of-scrutiny-master-table">The Tiers of Scrutiny — Master Table</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-b-cross-reference-v2-outline-to-supplement">SECTION B: CROSS-REFERENCE — V2 OUTLINE TO SUPPLEMENT</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-c-the-fisher-checkmate-quick-attacks">SECTION C: THE "FISHER CHECKMATE" QUICK ATTACKS</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#quick-attack-1-can-congress-do-this">Quick Attack #1: "Can Congress Do This?"</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#quick-attack-2-is-this-state-law-valid">Quick Attack #2: "Is This State Law Valid?"</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#quick-attack-3-did-the-president-overstep">Quick Attack #3: "Did the President Overstep?"</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#quick-attack-4-is-there-state-action">Quick Attack #4: "Is There State Action?"</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#quick-attack-5-can-congress-reach-private-actors">Quick Attack #5: "Can Congress Reach Private Actors?"</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-d-common-fisher-traps-do-not-fall-for-these">SECTION D: COMMON FISHER TRAPS (DO NOT FALL FOR THESE)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-e-the-five-most-testable-tensions">SECTION E: THE FIVE MOST TESTABLE TENSIONS</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#1-formalism-vs-functionalism-separation-of-powers">1. Formalism vs. Functionalism (Separation of Powers)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#2-color-blind-vs-anti-subordination-equal-protection">2. Color-Blind vs. Anti-Subordination (Equal Protection)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#3-glucksberg-vs-obergefell-substantive-due-process">3. Glucksberg vs. Obergefell (Substantive Due Process)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#4-judicial-supremacy-vs-legislative-centrality-5">4. Judicial Supremacy vs. Legislative Centrality (§ 5)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#5-federalism-vs-national-power-commercespending">5. Federalism vs. National Power (Commerce/Spending)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#constitutional-law-supplement-part-4">CONSTITUTIONAL LAW SUPPLEMENT — PART 4</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#branch-checks-balances-complete-amendments-127">BRANCH CHECKS &amp; BALANCES + COMPLETE AMENDMENTS 1–27</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#crossreferenced-to-the-v2-outline-and-supplements-13">(Cross‑referenced to the V2 Outline and Supplements 1‑3)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-section">
+    <div class="toc-section-title">PART 4: Checks & Balances, Amendments 1-27 & Criminal Procedure</div>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-a-the-master-checks-balances-matrix">SECTION A: THE MASTER "CHECKS &amp; BALANCES" MATRIX</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-trap-the-structural-checkmate-pattern">🏛️ Fisher Trap: The "Structural Checkmate" Pattern</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-b-amendments-127-quickreference">SECTION B: AMENDMENTS 1–27 QUICK‑REFERENCE</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-3">
+    <a href="#fisher-alert-the-incorporation-trick">🏛️ Fisher Alert: The "Incorporation Trick"</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-c-criminal-procedure-primer-amendments-48">SECTION C: CRIMINAL PROCEDURE PRIMER (AMENDMENTS 4–8)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#4th-amendment-searches-seizures">4th Amendment — Searches &amp; Seizures</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#5th-amendment-self-incrimination-miranda">5th Amendment — Self-Incrimination &amp; Miranda</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#6th-amendment-right-to-counsel">6th Amendment — Right to Counsel</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#8th-amendment-cruel-unusual-punishment">8th Amendment — Cruel &amp; Unusual Punishment</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-d-the-10th-and-11th-amendments-deeper-dive">SECTION D: THE 10th AND 11th AMENDMENTS — DEEPER DIVE</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#i-the-anti-commandeering-doctrine-10th-amendment">I. The Anti-Commandeering Doctrine (10th Amendment)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-2">
+    <a href="#ii-state-sovereign-immunity-11th-amendment">II. State Sovereign Immunity (11th Amendment)</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-e-final-crossreference-complete-coverage-map">SECTION E: FINAL CROSS‑REFERENCE — COMPLETE COVERAGE MAP</a>
+    <span class="toc-dots"></span>
+  </div>
+  <div class="toc-entry level-1">
+    <a href="#section-f-fisherready-exam-statement">SECTION F: FISHER‑READY EXAM STATEMENT</a>
+    <span class="toc-dots"></span>
+  </div>
+</div>
+<div class="header-bar">
+CONSTITUTIONAL LAW SUPPLEMENT &mdash; PROFESSOR FISHER &mdash; SPRING 2026 &mdash; BIANNA L. ESTRELLA
+</div>
+<h1 id="constitutional-law-supplement-part-1">CONSTITUTIONAL LAW SUPPLEMENT — PART 1</h1>
+
+<h2 id="federalism-the-commerce-power-deep-irac">FEDERALISM &amp; THE COMMERCE POWER (Deep IRAC)</h2>
+
+<h3 id="covering-material-not-in-the-v2-master-attack-outline"><em>Covering Material NOT in the V2 Master Attack Outline</em></h3>
+
+<hr />
+
+<blockquote>
+  <p><strong>🎓 How to Use This Supplement</strong>: This document fills the structural gaps in your V2 outline. The V2 references Commerce, Taxing, Spending, and Necessary &amp; Proper but does NOT provide full Fisher-style IRAC briefs for the foundational cases. This supplement provides them.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="chapter-1-the-structural-constitution-federalism">CHAPTER 1: THE STRUCTURAL CONSTITUTION — FEDERALISM</h1>
+
+<h2 id="i-the-foundation-mcculloch-v-maryland-1819">I. The Foundation: McCulloch v. Maryland (1819)</h2>
+
+<h3 id="mcculloch-v-maryland">McCulloch v. Maryland</h3>
+
+<p><strong>17 U.S. (4 Wheat.) 316 (1819)</strong></p>
+
+<p><strong>FACTS:</strong> Congress chartered the Second Bank of the United States. Maryland imposed a tax on all banks not chartered by the state — effectively targeting the federal bank. James McCulloch, the cashier of the Baltimore branch, refused to pay. Maryland sued.</p>
+
+<p><strong>ISSUE:</strong>
+1. Does Congress have the power to incorporate a bank?
+2. May a state tax a federal instrumentality?</p>
+
+<p><strong>RULE:</strong>
+- <strong>Necessary and Proper Clause (Art. I, § 8, cl. 18):</strong> Congress may enact laws that are a "necessary and proper" means to execute its enumerated powers.
+- <strong>Supremacy Clause (Art. VI):</strong> Federal law is supreme; states cannot impede valid federal action.</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p><em>Issue 1 — The Bank:</em>
+Chief Justice Marshall rejected Maryland's argument that "necessary" means "absolutely indispensable." He read it broadly:</p>
+
+<ul>
+<li><strong>"Let the end be legitimate, let it be within the scope of the Constitution, and all means which are appropriate, which are plainly adapted to that end, which are not prohibited, but consistent with the letter and spirit of the Constitution, are constitutional."</strong></li>
+<li>Congress has enumerated powers over taxation, borrowing, commerce, and war. A national bank is a convenient, useful, and appropriate means to execute those powers.</li>
+<li>The Necessary and Proper Clause is listed among Congress's <strong>powers</strong>, not its <strong>limitations</strong>.</li>
+</ul>
+
+<p><em>Issue 2 — The Tax:</em>
+- <strong>"The power to tax involves the power to destroy."</strong> If Maryland can tax the bank, it can tax it out of existence — giving one state a veto over federal policy.
+- The people of Maryland did not elect the federal government; the people of the <em>whole nation</em> did. Maryland cannot use its taxing power to control an entity answerable to a different sovereign.</p>
+
+<p><strong>CONCLUSION:</strong> Congress has implied powers beyond those enumerated. The bank is constitutional. Maryland's tax is unconstitutional under the Supremacy Clause.</p>
+
+<hr />
+
+<h3 id="fisher-trap-the-necessary-spectrum">🏛️ Fisher Trap: The "Necessary" Spectrum</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Interpretation</th>
+  <th>Meaning</th>
+  <th>Proponent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Strict/Narrow</strong></td>
+  <td>"Absolutely indispensable"</td>
+  <td>Maryland / Jefferson / Strict Constructionists</td>
+</tr>
+<tr>
+  <td><strong>Broad/Liberal</strong></td>
+  <td>"Convenient, useful, conducive to"</td>
+  <td>Marshall / Hamilton / Implied Powers</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Fisher Alert:</strong> On an exam, if a professor asks "Does Congress have the power to do X?", <strong>always start with McCulloch</strong>. Congress doesn't need an enumerated power for every specific action — it needs an enumerated <em>end</em> and a rational <em>means</em>.</p>
+</blockquote>
+
+<hr />
+
+<h3 id="the-pretext-limitation">The "Pretext" Limitation</h3>
+
+<p>Marshall added a crucial limit: Congress cannot use the Necessary and Proper Clause as a <strong>pretext</strong> to achieve ends not entrusted to it.</p>
+
+<ul>
+<li><strong>The Test:</strong> "Should Congress, under the pretext of executing its powers, pass laws for the accomplishment of objects not entrusted to the government, it would become the painful duty of this tribunal... to say that such an act was not the law of the land."</li>
+<li><strong>Modern Application:</strong> This "pretext" limit was revived in <em>NFIB v. Sebelius</em> (2012) when the Court rejected the individual mandate as a valid exercise of the Commerce + N&amp;P power.</li>
+</ul>
+
+<hr />
+
+<h2 id="ii-modern-necessary-proper-united-states-v-comstock-2010">II. Modern Necessary &amp; Proper: United States v. Comstock (2010)</h2>
+
+<h3 id="united-states-v-comstock">United States v. Comstock</h3>
+
+<p><strong>560 U.S. 126 (2010)</strong></p>
+
+<p><strong>FACTS:</strong> A federal statute (18 U.S.C. § 4248) allowed the government to civilly commit "sexually dangerous" federal prisoners <em>beyond the end of their prison sentence</em>. Graydon Comstock, a federal prisoner whose sentence was about to expire, challenged the law, arguing Congress had no enumerated power to civilly commit people.</p>
+
+<p><strong>ISSUE:</strong> Does the Necessary and Proper Clause give Congress the authority to enact a civil commitment statute for sexually dangerous federal prisoners?</p>
+
+<p><strong>RULE:</strong> The Necessary and Proper Clause grants Congress broad authority to enact laws that are "rationally related" to the implementation of a constitutionally enumerated power, provided the law does not violate an independent constitutional prohibition.</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Justice Breyer, writing for the 7-2 majority, identified <strong>five considerations</strong>:</p>
+
+<ol>
+<li><strong>Breadth of the N&amp;P Clause:</strong> McCulloch established that "necessary" does not mean "indispensable." Congress has wide latitude.</li>
+<li><strong>Long History:</strong> The federal government has been responsible for the mental health of federal prisoners for over a century (since 1855).</li>
+<li><strong>Sound Reasoning:</strong> Congress was acting as a "custodian" — it put these people in prison, it knows they are dangerous, and releasing them without treatment would endanger the public.</li>
+<li><strong>Accommodation of State Interests:</strong> The statute requires the government to notify the state where the prisoner is domiciled and give the state the first shot at commitment.</li>
+<li><strong>Narrow Scope:</strong> The statute is limited to federal prisoners already in federal custody.</li>
+</ol>
+
+<p><strong>CONCLUSION:</strong> The statute is constitutional. It is a "necessary and proper" means to effectuate the federal criminal justice system.</p>
+
+<h3 id="the-dissents">The Dissents</h3>
+
+<ul>
+<li><strong>Justice Thomas (joined by Scalia):</strong> Argued the majority conflated "convenient" with "necessary." He demanded a tighter link: Congress must show the law is "carrying into execution" a specific enumerated power, not just a general "custodial" responsibility.</li>
+<li><strong>Justice Kennedy (Concurrence):</strong> Agreed with the result but wanted stricter scrutiny — the law must not be a "substantial expansion" of federal authority.</li>
+<li><strong>Justice Alito (Concurrence):</strong> Focused on the "accommodation" prong — the law was acceptable because it deferred to states.</li>
+</ul>
+
+<hr />
+
+<h3 id="fisher-tip-comstock-vs-lopez">🏛️ Fisher Tip: Comstock vs. Lopez</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Feature</th>
+  <th>Comstock (Valid)</th>
+  <th>Lopez (Invalid)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Federal Nexus</strong></td>
+  <td>Federal prisoners in federal custody</td>
+  <td>Students in local schools</td>
+</tr>
+<tr>
+  <td><strong>History</strong></td>
+  <td>150+ years of federal custodial responsibility</td>
+  <td>No history of federal school-zone regulation</td>
+</tr>
+<tr>
+  <td><strong>State Accommodation</strong></td>
+  <td>States get first shot at commitment</td>
+  <td>No coordination with states</td>
+</tr>
+<tr>
+  <td><strong>Scope</strong></td>
+  <td>Narrow (only federal prisoners)</td>
+  <td>Broad (all school zones nationwide)</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="iii-term-limits-the-structural-constitution">III. Term Limits &amp; the Structural Constitution</h2>
+
+<h3 id="us-term-limits-inc-v-thornton-1995">U.S. Term Limits, Inc. v. Thornton (1995)</h3>
+
+<p><strong>514 U.S. 779 (1995)</strong></p>
+
+<p><strong>FACTS:</strong> Arkansas amended its state constitution to prohibit anyone who had already served three terms in the U.S. House or two terms in the U.S. Senate from appearing on the ballot for re-election.</p>
+
+<p><strong>ISSUE:</strong> May a state impose term limits (or additional qualifications) on its members of Congress beyond those listed in the Constitution?</p>
+
+<p><strong>RULE:</strong> The Qualifications Clauses of Articles I, §§ 2 and 3 set forth the <strong>exclusive</strong> qualifications for membership in Congress: Age, Citizenship, and Residency. States may not add to, subtract from, or alter these qualifications.</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Justice Stevens, writing for the 5-4 majority:</p>
+
+<ul>
+<li><strong>Textual Argument:</strong> The Constitution lists three qualifications. If the Framers intended states to add more, they would have said so (expressio unius).</li>
+<li><strong>Historical Argument:</strong> At the time of the Framing, the dominant view was that the people should choose their representatives freely, without state-imposed barriers.</li>
+<li><strong>Structural Argument — "The People of the Nation":</strong> Members of Congress represent the <em>national</em> interest, not just their state. Allowing states to add qualifications would create a "patchwork" of different eligibility rules, undermining national unity.</li>
+<li><strong>The Powell Precedent:</strong> In <em>Powell v. McCormack</em> (1969), the Court held that even <em>Congress itself</em> could not add qualifications beyond those listed. If Congress can't do it, surely a state can't.</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> The Arkansas amendment is unconstitutional. Only a constitutional amendment (like the 22nd Amendment for the President) can impose term limits on Congress.</p>
+
+<h3 id="justice-thomass-dissent-critical-for-fisher">Justice Thomas's Dissent (Critical for Fisher)</h3>
+
+<p>Thomas argued for a "Reserved Powers" view:
+- <strong>10th Amendment:</strong> Powers not delegated to the federal government are reserved to the states <em>or the people</em>.
+- <strong>Original Understanding:</strong> The states existed before the Constitution and retained the power to set qualifications for their own representatives unless the Constitution explicitly prohibited it.
+- <strong>"The People of the States":</strong> Thomas rejected the "national constituency" idea. He argued that each state's people elect their own representatives, so each state should have the power to set qualifications.</p>
+
+<hr />
+
+<h3 id="fisher-alert-the-source-of-power-debate">🏛️ Fisher Alert: The "Source of Power" Debate</h3>
+
+<table>
+<thead>
+<tr>
+  <th>View</th>
+  <th>Who Holds Sovereignty?</th>
+  <th>Proponent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>National Sovereignty</strong></td>
+  <td>"We the People" of the whole nation</td>
+  <td>Stevens (Majority)</td>
+</tr>
+<tr>
+  <td><strong>State Sovereignty</strong></td>
+  <td>"We the People" of each individual state</td>
+  <td>Thomas (Dissent)</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Exam Tip:</strong> If you see a question about state power vs. federal structure, <em>Thornton</em> is your cite for the principle that the <strong>federal Constitution sets the floor AND the ceiling</strong> for federal qualifications. States cannot freelance.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="chapter-2-the-commerce-power-full-case-briefs">CHAPTER 2: THE COMMERCE POWER — FULL CASE BRIEFS</h1>
+
+<h2 id="i-the-modern-commerce-power-framework">I. The Modern Commerce Power Framework</h2>
+
+<p>After <em>Gibbons v. Ogden</em> (1824) established Congress's broad power over interstate commerce, the modern era recognizes <strong>three categories</strong> of regulable activity under the Commerce Clause:</p>
+
+<ol>
+<li><strong>Channels</strong> of interstate commerce (highways, waterways, internet)</li>
+<li><strong>Instrumentalities</strong> of interstate commerce (trucks, trains, planes, people/things moving in commerce)</li>
+<li><strong>Activities with a substantial effect</strong> on interstate commerce</li>
+</ol>
+
+<blockquote>
+  <p><strong>Fisher's Golden Rule:</strong> Categories 1 and 2 are "easy wins" for Congress. Category 3 is where all the fights happen.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="ii-the-civil-rights-era-commerce-cases">II. The Civil Rights Era Commerce Cases</h2>
+
+<h3 id="heart-of-atlanta-motel-v-united-states-1964">Heart of Atlanta Motel v. United States (1964)</h3>
+
+<p><strong>379 U.S. 241 (1964)</strong></p>
+
+<p><strong>FACTS:</strong> The Heart of Atlanta Motel, located near interstate highways in downtown Atlanta, had 216 rooms and refused to rent to Black guests. It solicited patronage from outside Georgia through national advertising and approximately 75% of its guests were from out of state. The motel challenged Title II of the Civil Rights Act of 1964, which prohibited racial discrimination in "public accommodations" that affected interstate commerce.</p>
+
+<p><strong>ISSUE:</strong> Does Congress have the power under the Commerce Clause to prohibit racial discrimination in a private motel that serves interstate travelers?</p>
+
+<p><strong>RULE:</strong> Congress may regulate local activities that have a "substantial and harmful effect" on interstate commerce, even if the specific business is "local" in nature.</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Justice Clark, writing for a unanimous Court:</p>
+
+<ul>
+<li><strong>The Record:</strong> Congress compiled an extensive record showing that discrimination in hotels and motels deterred Black citizens from traveling interstate, which suppressed commerce.</li>
+<li><strong>Rational Basis:</strong> The Court applied a highly deferential standard: if Congress has a <em>rational basis</em> for finding that a regulated activity affects interstate commerce, the Court will not substitute its judgment.</li>
+<li><strong>The "Moral vs. Commercial" Debate:</strong> The motel argued this was really a "moral" regulation, not a "commercial" one. The Court responded that Congress's <em>motive</em> is irrelevant — as long as the <em>means</em> (regulating commerce) are within Congress's power, the <em>ends</em> (eliminating discrimination) are permissible.</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> Title II is a valid exercise of the Commerce Power. The motel must serve guests of all races.</p>
+
+<hr />
+
+<h3 id="katzenbach-v-mcclung-1964">Katzenbach v. McClung (1964)</h3>
+
+<p><strong>379 U.S. 294 (1964)</strong></p>
+
+<p><strong>FACTS:</strong> Ollie's Barbecue was a family-owned restaurant in Birmingham, Alabama. It was located 11 blocks from an interstate highway and had no out-of-state customers. However, approximately 46% of its food was purchased from a supplier who procured it from out of state. Ollie's refused to serve Black customers in its dining room.</p>
+
+<p><strong>ISSUE:</strong> Can Congress regulate a purely local restaurant under the Commerce Clause simply because it purchases food that has moved in interstate commerce?</p>
+
+<p><strong>RULE:</strong> Same as <em>Heart of Atlanta</em> — Congress may regulate local activities if it has a rational basis for concluding they substantially affect interstate commerce.</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<ul>
+<li><strong>The "Aggregate" Theory:</strong> Even though Ollie's was one small restaurant, the Court looked at the <em>aggregate effect</em> of all restaurants that discriminate. Together, they suppress demand for food shipped interstate, deter interstate travel, and reduce the tax base.</li>
+<li><strong>The Supply-Side Link:</strong> Ollie's purchased meat from a supplier who got it from out of state. This "supply chain" link was enough to establish a connection to interstate commerce.</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> Ollie's Barbecue must comply with Title II. Congress has the rational basis to conclude that discrimination in restaurants collectively affects interstate commerce.</p>
+
+<hr />
+
+<h3 id="fisher-tip-the-commerce-clause-side-door">🏛️ Fisher Tip: The Commerce Clause "Side-Door"</h3>
+
+<p>Remember the <em>Civil Rights Cases</em> (1883)? The Court said Congress <strong>could not</strong> use the 14th Amendment to regulate private discrimination. So how did Congress finally do it?</p>
+
+<ul>
+<li><strong>The Side-Door:</strong> Congress used the <strong>Commerce Clause</strong> (Article I, § 8) instead of the <strong>14th Amendment</strong> (§ 5).</li>
+<li><strong>The Result:</strong> The same goal (ending private discrimination) was achieved through a different constitutional power.</li>
+<li><strong>The Lesson:</strong> If one power source fails, look for another. This is classic "Fisher-level" structural analysis.</li>
+</ul>
+
+<hr />
+
+<h2 id="iii-the-rehnquist-revolution-limiting-the-commerce-power">III. The Rehnquist Revolution: Limiting the Commerce Power</h2>
+
+<h3 id="united-states-v-lopez-1995">United States v. Lopez (1995)</h3>
+
+<p><strong>514 U.S. 549 (1995)</strong></p>
+
+<p><strong>FACTS:</strong> Alfonso Lopez, a 12th-grade student in San Antonio, Texas, carried a concealed .38 caliber handgun to school. He was charged under the federal Gun-Free School Zones Act of 1990 (GFSZA), which made it a federal crime to possess a firearm within 1,000 feet of a school.</p>
+
+<p><strong>ISSUE:</strong> Does the Gun-Free School Zones Act exceed Congress's power under the Commerce Clause?</p>
+
+<p><strong>RULE:</strong> Under the Commerce Clause, Congress may regulate:
+1. The channels of interstate commerce;
+2. The instrumentalities of, or persons/things in, interstate commerce; and
+3. Activities that <strong>substantially affect</strong> interstate commerce.</p>
+
+<p>For Category 3, the activity must have a <strong>substantial effect</strong> on interstate commerce, not merely an attenuated or theoretical one.</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Chief Justice Rehnquist, writing for the 5-4 majority:</p>
+
+<ul>
+<li><strong>Not Commercial Activity:</strong> Gun possession in a school zone is not an "economic" or "commercial" activity. It has nothing to do with buying, selling, or producing goods.</li>
+<li><strong>No Jurisdictional Element:</strong> The statute contained no requirement that the firearm had "moved in interstate commerce."</li>
+<li><strong>No Congressional Findings:</strong> Congress made no formal findings explaining the link between guns near schools and interstate commerce.</li>
+<li><strong>The "Infinity" Problem:</strong> The government argued: Guns → Violence → Bad Education → Less Productive Workers → Lower Commerce. Rehnquist rejected this "costs of crime" reasoning because under that logic, Congress could regulate <em>anything</em> (marriage, divorce, child custody) — obliterating the line between federal and state power.</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> The GFSZA is unconstitutional. It exceeded Congress's Commerce Clause power because gun possession near schools is not economic activity and has no substantial effect on interstate commerce.</p>
+
+<hr />
+
+<h3 id="the-critical-concurrences-dissents">The Critical Concurrences &amp; Dissents</h3>
+
+<p><strong>Justice Kennedy (Concurrence):</strong> Emphasized that the case was about <em>federalism</em> — preserving the states' traditional role in education and criminal law. He warned that if the federal government can regulate local school safety, there is nothing left for states to do.</p>
+
+<p><strong>Justice Thomas (Concurrence):</strong> Went further. He argued the "substantial effects" test itself should be abandoned because it has no limiting principle. He would return to the original meaning: Congress can only regulate the actual <em>movement</em> of goods across state lines.</p>
+
+<p><strong>Justice Breyer (Dissent):</strong> Argued the majority was ignoring "empirical reality." He cited studies showing that gun violence costs the economy billions and that education quality directly impacts the national workforce. He would use a much more deferential rational basis test.</p>
+
+<hr />
+
+<h3 id="fisher-decision-tree-commerce-clause-analysis">🏛️ Fisher Decision Tree: Commerce Clause Analysis</h3>
+
+<pre><code>STEP 1: Is Congress regulating a CHANNEL of interstate commerce?
+  → YES → Valid (Heart of Atlanta)
+  → NO → Go to Step 2
+
+STEP 2: Is Congress regulating an INSTRUMENTALITY or person/thing IN commerce?
+  → YES → Valid
+  → NO → Go to Step 3
+
+STEP 3: Does the regulated activity SUBSTANTIALLY AFFECT interstate commerce?
+  → Ask Sub-Questions:
+    (a) Is the activity ECONOMIC/COMMERCIAL in nature?
+        → YES → Congress may aggregate (Wickard/Raich) → Likely VALID
+        → NO → Go to (b)
+    (b) Does the statute have a JURISDICTIONAL ELEMENT?
+        → YES → Strengthens the case
+        → NO → Weakens the case
+    (c) Did Congress make FINDINGS linking the activity to commerce?
+        → YES → Strengthens (but not dispositive)
+        → NO → Weakens
+    (d) Is the link to commerce ATTENUATED (requires a chain of inference)?
+        → YES → Likely INVALID (Lopez/Morrison)
+        → NO → Likely VALID
+</code></pre>
+
+<hr />
+
+<h3 id="united-states-v-morrison-2000-commerce-clause-prong">United States v. Morrison (2000) — Commerce Clause Prong</h3>
+
+<p><strong>529 U.S. 598 (2000)</strong></p>
+
+<blockquote>
+  <p><strong>Note:</strong> Your V2 covers Morrison's § 5 analysis in detail (lines 4070-4097). This supplement covers the <strong>Commerce Clause</strong> prong that V2 does not brief.</p>
+</blockquote>
+
+<p><strong>FACTS:</strong> Same as V2 — Christy Brzonkala sued under VAWA. Congress also relied on the Commerce Clause as a power source, arguing gender-motivated violence costs the economy $5-10 billion annually.</p>
+
+<p><strong>ISSUE (Commerce Prong):</strong> Does gender-motivated violence "substantially affect" interstate commerce?</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Chief Justice Rehnquist applied the <em>Lopez</em> framework:</p>
+
+<ul>
+<li><strong>Not Economic Activity:</strong> Gender-motivated crimes of violence are not "economic activity" in any meaningful sense. They are violent crimes — traditionally the domain of state criminal law.</li>
+<li><strong>The "Attenuated" Chain:</strong> The government's argument (violence → medical costs → lost productivity → less commerce) was the same "costs of crime" reasoning rejected in <em>Lopez</em>.</li>
+<li><strong>The "Aggregate" Limit:</strong> Rehnquist held that the aggregation principle (<em>Wickard</em>) only applies to <strong>economic</strong> activity. You cannot aggregate non-economic conduct.</li>
+<li><strong>Congressional Findings Don't Save It:</strong> Even though Congress compiled a massive record of gender violence's economic impact, the Court held that "simply because Congress may conclude that a particular activity substantially affects interstate commerce does not necessarily make it so."</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> VAWA's civil remedy is also unconstitutional under the Commerce Clause.</p>
+
+<hr />
+
+<h3 id="gonzales-v-raich-2005">Gonzales v. Raich (2005)</h3>
+
+<p><strong>545 U.S. 1 (2005)</strong></p>
+
+<p><strong>FACTS:</strong> Angel Raich and Diane Monson grew marijuana at home for personal medical use, as permitted under California's Compassionate Use Act. Federal agents seized and destroyed Monson's plants under the Controlled Substances Act (CSA). The plaintiffs argued that purely local, non-commercial cultivation of marijuana for personal medical use was beyond Congress's Commerce Clause power (citing <em>Lopez</em>).</p>
+
+<p><strong>ISSUE:</strong> Can Congress regulate the purely local cultivation and possession of marijuana for personal medical use under the Commerce Clause?</p>
+
+<p><strong>RULE:</strong> Congress may regulate purely local activity if it is part of a broader <strong>"comprehensive regulatory scheme"</strong> and failure to regulate the local activity would undercut the larger scheme.</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Justice Stevens, writing for the 6-3 majority:</p>
+
+<ul>
+<li><strong>The Wickard Principle:</strong> Just as Filburn's homegrown wheat affected the national wheat market, homegrown marijuana affects the national drug market. If people grow their own, they won't buy from the interstate (illegal) market, undercutting Congress's ability to regulate that market.</li>
+<li><strong>Economic Activity:</strong> Unlike the guns in <em>Lopez</em> or the violence in <em>Morrison</em>, marijuana cultivation is <strong>economic</strong> in nature — it involves the production of a commodity (even for personal consumption).</li>
+<li><strong>The "Comprehensive Scheme" Rationale:</strong> The CSA is a comprehensive scheme to regulate all controlled substances. If California can carve out an exception, other states will too, creating a "Swiss cheese" effect that destroys the federal regulatory structure.</li>
+<li><strong>Rational Basis:</strong> Congress need only have a rational basis for believing that homegrown marijuana, in the aggregate, substantially affects the interstate drug market.</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> The CSA is a valid exercise of Commerce Power as applied to local medical marijuana. <em>Lopez</em> and <em>Morrison</em> are distinguished because those cases involved <strong>non-economic</strong> activity.</p>
+
+<hr />
+
+<h3 id="fisher-trap-the-lopezraich-distinction">🏛️ Fisher Trap: The Lopez/Raich Distinction</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Factor</th>
+  <th>Lopez (Invalid)</th>
+  <th>Raich (Valid)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Nature of Activity</strong></td>
+  <td>Gun possession (NOT economic)</td>
+  <td>Marijuana cultivation (IS economic — production of a commodity)</td>
+</tr>
+<tr>
+  <td><strong>Regulatory Scheme</strong></td>
+  <td>Stand-alone statute</td>
+  <td>Part of comprehensive CSA</td>
+</tr>
+<tr>
+  <td><strong>Aggregation</strong></td>
+  <td>Cannot aggregate non-economic conduct</td>
+  <td>CAN aggregate economic conduct</td>
+</tr>
+<tr>
+  <td><strong>State Role</strong></td>
+  <td>Education = traditional state function</td>
+  <td>Drug enforcement = shared federal/state</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Exam Tip:</strong> If the activity is <strong>economic</strong> (production, distribution, consumption of a commodity), Congress can aggregate under <em>Raich</em> and will almost always win. If it is <strong>non-economic</strong> (violence, gun possession, family law), Congress loses under <em>Lopez/Morrison</em>.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="iv-the-aca-and-the-outer-limit-nfib-v-sebelius-2012">IV. The ACA and the "Outer Limit": NFIB v. Sebelius (2012)</h2>
+
+<h3 id="national-federation-of-independent-business-v-sebelius">National Federation of Independent Business v. Sebelius</h3>
+
+<p><strong>567 U.S. 519 (2012)</strong></p>
+
+<p><strong>FACTS:</strong> The Affordable Care Act (ACA) included an "individual mandate" requiring most Americans to purchase health insurance or pay a "shared responsibility payment." Congress argued this was valid under the Commerce Clause (regulating the massive health insurance market), the Necessary and Proper Clause, and the Taxing Power.</p>
+
+<p><strong>ISSUE:</strong> Does the Commerce Clause or the Necessary and Proper Clause authorize Congress to compel individuals to purchase health insurance?</p>
+
+<p><strong>APPLICATION (Commerce Clause — REJECTED 5-4):</strong></p>
+
+<p>Chief Justice Roberts:</p>
+
+<ul>
+<li><strong>Activity vs. Inactivity:</strong> The Commerce Clause regulates existing <em>activity</em>. It does not compel people to <em>enter</em> commerce. Not buying insurance is <strong>inactivity</strong> — the absence of commerce.</li>
+<li><strong>"Everyone is in the market":</strong> The government argued everyone will eventually need health care. Roberts responded: "The Commerce Clause is not a general license to regulate an individual from cradle to grave."</li>
+<li><strong>The "Broccoli" Hypothetical:</strong> If Congress can force you to buy insurance because it's good for you, can they force you to buy broccoli? The limiting principle disappears.</li>
+</ul>
+
+<p><strong>APPLICATION (Necessary &amp; Proper — REJECTED):</strong></p>
+
+<ul>
+<li>Roberts invoked McCulloch's <strong>"pretext"</strong> limitation. If the underlying Commerce power doesn't authorize the mandate, the N&amp;P Clause cannot save it. The N&amp;P Clause is a supplement, not an independent font of power.</li>
+<li>A law that "creates the necessary predicate to the exercise of an enumerated power" is not a proper exercise of that power.</li>
+</ul>
+
+<p><strong>APPLICATION (Taxing Power — UPHELD):</strong></p>
+
+<ul>
+<li>The "shared responsibility payment" functions like a <strong>tax</strong>: it is collected by the IRS, produces revenue, and applies to taxpayers who file returns.</li>
+<li>Under the Taxing Power, Congress need not rely on the Commerce Clause. A tax is valid if it is not so punitive as to be a "penalty."</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> The individual mandate cannot be sustained under the Commerce Clause or the Necessary and Proper Clause. However, it is valid as a <strong>tax</strong> under the Taxing Power.</p>
+
+<hr />
+
+<h3 id="the-medicaid-expansion-7-2-rejection">The Medicaid Expansion (7-2 Rejection)</h3>
+
+<p>The ACA also expanded Medicaid, threatening to withdraw <strong>all</strong> existing Medicaid funding from states that refused to expand coverage.</p>
+
+<ul>
+<li><strong>The "Gun to the Head":</strong> Roberts held this was unconstitutional coercion — not a mere "inducement" like <em>South Dakota v. Dole</em>. Threatening to withdraw an existing, massive program (10% of state budgets) left states with "no real choice."</li>
+<li><strong>The Dole Line:</strong> Congress can attach conditions to <strong>new</strong> funding. It cannot threaten to take away <strong>existing</strong> funding as punishment for not accepting new conditions.</li>
+</ul>
+
+<hr />
+
+<h3 id="fisher-flowchart-taxing-spending-power">🏛️ Fisher Flowchart: Taxing &amp; Spending Power</h3>
+
+<pre><code>TAXING POWER:
+  Is the "penalty" collected by the IRS? → YES
+  Does it produce revenue? → YES
+  Is it imposed on taxpayers filing returns? → YES
+  Is it so punitive it functions as a criminal sanction? → NO
+  → VALID TAX (NFIB)
+
+SPENDING POWER (South Dakota v. Dole):
+  (1) Is spending for the "general welfare"? → YES
+  (2) Are conditions stated "unambiguously"? → YES
+  (3) Are conditions related to the federal interest? → YES
+  (4) Is the spending independently constitutional? → YES
+  (5) Is the financial pressure so great it's COERCION? → IF YES → INVALID (NFIB)
+</code></pre>
+
+<hr />
+
+<blockquote>
+  <p><strong>End of Part 1.</strong> Part 2 covers: Dormant Commerce Clause, Preemption, Separation of Powers (Executive), Procedural Due Process, and Privileges &amp; Immunities.</p>
+</blockquote>
+
+<div class="part-break"></div>
+
+<h1 id="constitutional-law-supplement-part-2">CONSTITUTIONAL LAW SUPPLEMENT — PART 2</h1>
+
+<h2 id="dormant-commerce-clause-preemption-separation-of-powers">DORMANT COMMERCE CLAUSE, PREEMPTION &amp; SEPARATION OF POWERS</h2>
+
+<h3 id="covering-material-not-in-the-v2-master-attack-outline-2"><em>Covering Material NOT in the V2 Master Attack Outline</em></h3>
+
+<hr />
+
+<h1 id="chapter-3-the-dormant-commerce-clause-dcc">CHAPTER 3: THE DORMANT COMMERCE CLAUSE (DCC)</h1>
+
+<h2 id="i-the-concept">I. The Concept</h2>
+
+<p>The Commerce Clause is not just a <em>grant</em> of power to Congress — it is also an <em>implicit limitation</em> on the states. Even when Congress has <strong>not</strong> acted, states cannot pass laws that unduly burden or discriminate against interstate commerce.</p>
+
+<blockquote>
+  <p><strong>Fisher's One-Liner:</strong> "The Commerce Clause speaks not only to what Congress <em>can</em> do, but to what the States <em>cannot</em> do even in Congress's silence."</p>
+</blockquote>
+
+<hr />
+
+<h2 id="ii-the-two-track-framework">II. The Two-Track Framework</h2>
+
+<h3 id="track-1-facial-discrimination-against-interstate-commerce-per-se-invalid">Track 1: Facial Discrimination Against Interstate Commerce → Per Se Invalid</h3>
+
+<p>If a state law <em>facially</em> discriminates against out-of-state commerce (treating in-state goods/services better than out-of-state), it is <strong>virtually per se invalid</strong>.</p>
+
+<p>The state must prove:
+1. A <strong>legitimate local purpose</strong> exists;
+2. <strong>No nondiscriminatory alternative</strong> is available.</p>
+
+<blockquote>
+  <p>This is essentially <strong>strict scrutiny</strong> — and the state almost never wins.</p>
+</blockquote>
+
+<h3 id="track-2-evenhandedly-burdensome-laws-pike-balancing">Track 2: Evenhandedly Burdensome Laws → Pike Balancing</h3>
+
+<p>If a state law is <em>facially neutral</em> (applies equally to in-state and out-of-state) but still burdens interstate commerce, apply the <strong>Pike balancing test</strong>:</p>
+
+<blockquote>
+  <p>"Where the statute regulates even-handedly to effectuate a legitimate local public interest, and its effects on interstate commerce are only incidental, it will be upheld <strong>unless</strong> the burden imposed on such commerce is <strong>clearly excessive</strong> in relation to the putative local benefits." — <em>Pike v. Bruce Church, Inc.</em> (1970)</p>
+</blockquote>
+
+<hr />
+
+<h2 id="iii-key-dcc-cases">III. Key DCC Cases</h2>
+
+<h3 id="philadelphia-v-new-jersey-1978">Philadelphia v. New Jersey (1978)</h3>
+
+<p><strong>437 U.S. 617 (1978)</strong></p>
+
+<p><strong>FACTS:</strong> New Jersey passed a law prohibiting the importation of most solid or liquid waste from other states into New Jersey landfills. New Jersey claimed this was an environmental/health measure.</p>
+
+<p><strong>ISSUE:</strong> Does a state law banning the importation of out-of-state waste violate the Dormant Commerce Clause?</p>
+
+<p><strong>RULE:</strong> A state cannot isolate itself from a national problem by discriminating against out-of-state commerce. Waste is an "article of commerce," even if unwanted.</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Justice Stewart, writing for the 7-2 majority:
+- <strong>Facial Discrimination:</strong> The law explicitly treated waste differently based on its <em>origin</em> (in-state vs. out-of-state). This is textbook discrimination.
+- <strong>Protectionism:</strong> The "evil" of protectionism lies in "differential treatment of in-state and out-of-state economic interests that benefits the former and burdens the latter."
+- <strong>Health Pretext:</strong> New Jersey claimed health concerns. The Court responded: waste from NJ is just as dangerous as waste from NY. If the concern is <em>volume</em>, New Jersey can cap the total waste going into landfills — but it cannot single out out-of-state waste.</p>
+
+<p><strong>CONCLUSION:</strong> The law is unconstitutional. It facially discriminates against interstate commerce with no legitimate, non-discriminatory justification.</p>
+
+<hr />
+
+<h3 id="dean-milk-co-v-city-of-madison-1951">Dean Milk Co. v. City of Madison (1951)</h3>
+
+<p><strong>340 U.S. 349 (1951)</strong></p>
+
+<p><strong>FACTS:</strong> Madison, Wisconsin required all milk sold in the city to be pasteurized within 5 miles of the city center. This effectively excluded all out-of-state milk producers.</p>
+
+<p><strong>HOLDING:</strong> Invalid. The city had <strong>reasonable nondiscriminatory alternatives</strong> — it could have required inspection of out-of-state pasteurization plants or accepted certifications from other states' inspectors.</p>
+
+<blockquote>
+  <p><strong>Fisher Tip:</strong> Dean Milk establishes the "least restrictive means" requirement for discriminatory DCC laws. Always ask: "Could the state achieve its health/safety goal <em>without</em> discriminating against out-of-state commerce?"</p>
+</blockquote>
+
+<hr />
+
+<h3 id="pike-v-bruce-church-inc-1970">Pike v. Bruce Church, Inc. (1970)</h3>
+
+<p><strong>397 U.S. 137 (1970)</strong></p>
+
+<p><strong>FACTS:</strong> Arizona required that all cantaloupes grown in Arizona be packed <em>in Arizona</em> before shipment to other states. Bruce Church, Inc. grew cantaloupes in Arizona but packed them at a nearby California facility (just across the border).</p>
+
+<p><strong>RULE:</strong> The Pike Balancing Test (see above). Even a facially neutral law fails if the burden on interstate commerce clearly outweighs the local benefit.</p>
+
+<p><strong>APPLICATION:</strong> The Court found that Arizona's real purpose was to protect its <em>reputation</em> by having Arizona cantaloupes packed under the Arizona label. This economic protectionism was not a sufficient local benefit to justify the burden of forcing a company to build an entirely new packing facility in Arizona.</p>
+
+<p><strong>CONCLUSION:</strong> The law is unconstitutional.</p>
+
+<hr />
+
+<h3 id="fisher-dcc-flowchart">🏛️ Fisher DCC Flowchart</h3>
+
+<pre><code>STEP 1: Does the state law FACIALLY DISCRIMINATE against out-of-state commerce?
+  → YES → Apply STRICT SCRUTINY (Per Se Invalid)
+    → Does the state have a LEGITIMATE LOCAL PURPOSE?
+      → YES → Is there a NONDISCRIMINATORY ALTERNATIVE?
+        → YES → LAW FAILS (Dean Milk)
+        → NO → Law *might* survive (very rare)
+      → NO → LAW FAILS (Philadelphia v. NJ)
+
+  → NO (law is facially neutral) → Go to Step 2
+
+STEP 2: Does the law INCIDENTALLY BURDEN interstate commerce?
+  → Apply PIKE BALANCING:
+    → Does the BURDEN on interstate commerce CLEARLY EXCEED
+       the PUTATIVE LOCAL BENEFITS?
+      → YES → LAW FAILS (Pike)
+      → NO → LAW SURVIVES
+</code></pre>
+
+<hr />
+
+<h2 id="iv-the-market-participant-exception">IV. The Market Participant Exception</h2>
+
+<p><strong>The Rule:</strong> When a state acts as a <strong>market participant</strong> (buyer or seller) rather than a <strong>market regulator</strong>, the DCC does not apply.</p>
+
+<ul>
+<li><em>Hughes v. Alexandria Scrap Corp.</em> (1976): Maryland offered bounties for scrapping old cars but made it easier for in-state processors to qualify. <strong>Valid</strong> — Maryland was participating in the scrap market, not regulating it.</li>
+<li><em>Reeves, Inc. v. Stake</em> (1980): South Dakota owned a cement plant and gave preference to in-state buyers during shortages. <strong>Valid</strong> — the state was a seller.</li>
+<li><em>South-Central Timber Dev. v. Wunnicke</em> (1984): Alaska required that timber from state lands be processed in Alaska before export. <strong>Invalid</strong> — this was a "downstream" restriction that went beyond the state's role as a seller.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Fisher Trap:</strong> The Market Participant Exception has a <strong>limit</strong> — the state can only impose conditions on the immediate transaction, not on downstream commerce.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="v-privileges-immunities-clause-article-iv-2">V. Privileges &amp; Immunities Clause (Article IV, § 2)</h2>
+
+<p><strong>The Text:</strong> "The Citizens of each State shall be entitled to all Privileges and Immunities of Citizens in the several States."</p>
+
+<p><strong>The Function:</strong> Prevents states from discriminating against out-of-state <strong>citizens</strong> (not corporations) regarding "fundamental" rights (employment, practice of profession, access to courts).</p>
+
+<h3 id="the-two-part-test-united-bldg-trades-v-camden-1984">The Two-Part Test (<em>United Bldg. Trades v. Camden</em>, 1984):</h3>
+
+<ol>
+<li>Does the law burden a <strong>fundamental</strong> privilege or immunity?</li>
+<li>If yes, is there a <strong>substantial reason</strong> for the discrimination, and is the discrimination <strong>closely related</strong> to that reason?</li>
+</ol>
+
+<h3 id="key-distinctions-from-dcc">Key Distinctions from DCC:</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Feature</th>
+  <th>Dormant Commerce Clause</th>
+  <th>Privileges &amp; Immunities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Protects</strong></td>
+  <td>Interstate commerce (goods &amp; services)</td>
+  <td>Out-of-state citizens (natural persons)</td>
+</tr>
+<tr>
+  <td><strong>Corporations?</strong></td>
+  <td>Yes</td>
+  <td><strong>No</strong> (only natural persons)</td>
+</tr>
+<tr>
+  <td><strong>Market Participant Exception?</strong></td>
+  <td>Yes</td>
+  <td><strong>No</strong></td>
+</tr>
+<tr>
+  <td><strong>Congressional Override?</strong></td>
+  <td>Yes (Congress can authorize discrimination)</td>
+  <td>No</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Fisher Exam Strategy:</strong> If a state discriminates against out-of-state <em>people</em> (not just goods), argue <strong>both</strong> the DCC and Art. IV P&amp;I. P&amp;I is especially useful when the Market Participant Exception would block the DCC claim.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="chapter-4-preemption">CHAPTER 4: PREEMPTION</h1>
+
+<h2 id="i-the-supremacy-clause-framework">I. The Supremacy Clause Framework</h2>
+
+<p><strong>Art. VI, cl. 2:</strong> Federal law is the "supreme Law of the Land." When federal and state law conflict, federal law wins.</p>
+
+<h3 id="three-types-of-preemption">Three Types of Preemption:</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Type</th>
+  <th>Definition</th>
+  <th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Express</strong></td>
+  <td>Federal statute explicitly says "states may not regulate in this area"</td>
+  <td>ERISA preempts state regulation of employee benefit plans</td>
+</tr>
+<tr>
+  <td><strong>Field</strong></td>
+  <td>Federal regulation is so pervasive it "occupies the field," leaving no room for states</td>
+  <td>Immigration (Arizona v. US)</td>
+</tr>
+<tr>
+  <td><strong>Conflict</strong></td>
+  <td>State law directly conflicts with federal law (compliance with both is impossible, OR state law stands as an obstacle to federal objectives)</td>
+  <td>State law requiring more than federal minimum</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="arizona-v-united-states-2012">Arizona v. United States (2012)</h3>
+
+<p><strong>567 U.S. 387 (2012)</strong></p>
+
+<p><strong>FACTS:</strong> Arizona passed SB 1070 in response to perceived federal inaction on immigration. Key provisions:
+- Made it a state misdemeanor to fail to carry alien registration documents (§ 3);
+- Made it a state crime for unauthorized aliens to seek employment (§ 5(C));
+- Authorized warrantless arrest of anyone an officer had probable cause to believe had committed a deportable offense (§ 6);
+- Required officers to verify immigration status during lawful stops (§ 2(B) — the "show me your papers" provision).</p>
+
+<p><strong>ISSUE:</strong> Are these provisions preempted by federal immigration law?</p>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Justice Kennedy, writing for the 5-3 majority:</p>
+
+<ul>
+<li><strong>§ 3 (Registration):</strong> Preempted by <strong>field preemption</strong>. Congress created a comprehensive federal alien registration scheme. Arizona cannot create a parallel state registration crime.</li>
+<li><strong>§ 5(C) (Employment):</strong> Preempted by <strong>conflict preemption</strong>. Congress specifically chose to punish <em>employers</em> who hire unauthorized workers (IRCA), not the <em>workers</em> themselves. Arizona's law stands as an "obstacle" to that congressional choice.</li>
+<li><strong>§ 6 (Warrantless Arrest):</strong> Preempted. It gave state officers authority that even federal officers didn't have and could lead to the prolonged detention of lawful aliens.</li>
+<li><strong>§ 2(B) (Status Check):</strong> <strong>Not preempted</strong> (at this stage). The Court found it was not facially invalid because it merely required officers to check status during <em>otherwise lawful</em> stops. However, the Court warned it could be challenged "as applied" if it led to racial profiling or prolonged detention.</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> Three of four provisions are preempted. Federal immigration law occupies the field.</p>
+
+<hr />
+
+<h3 id="fisher-preemption-checklist">🏛️ Fisher Preemption Checklist</h3>
+
+<pre><code>When you see a state law touching a federal area:
+
+1. EXPRESS PREEMPTION: Does the federal statute say "states cannot..."?
+   → If YES → State law is preempted. Done.
+
+2. FIELD PREEMPTION: Is federal regulation so PERVASIVE that it
+   "occupies the field"?
+   → Look for: comprehensive federal scheme, federal agency involvement,
+     dominant federal interest (immigration, foreign affairs, nuclear energy)
+   → If YES → State law is preempted.
+
+3. CONFLICT PREEMPTION:
+   (a) IMPOSSIBILITY: Can someone comply with BOTH laws simultaneously?
+       → If NO → State law is preempted.
+   (b) OBSTACLE: Does the state law stand as an OBSTACLE to the full
+       purposes and objectives of Congress?
+       → If YES → State law is preempted.
+
+4. PRESUMPTION AGAINST PREEMPTION: In areas of TRADITIONAL STATE
+   REGULATION (health, safety, family law), courts presume Congress
+   did NOT intend to preempt unless clearly stated.
+</code></pre>
+
+<hr />
+
+<h1 id="chapter-5-separation-of-powers-the-executive">CHAPTER 5: SEPARATION OF POWERS — THE EXECUTIVE</h1>
+
+<h2 id="i-executive-power-the-youngstown-framework">I. Executive Power: The Youngstown Framework</h2>
+
+<h3 id="youngstown-sheet-tube-co-v-sawyer-1952">Youngstown Sheet &amp; Tube Co. v. Sawyer (1952)</h3>
+
+<p><strong>343 U.S. 579 (1952)</strong> — <em>"The Steel Seizure Case"</em></p>
+
+<p><strong>FACTS:</strong> During the Korean War, steelworkers threatened to strike. President Truman, fearing a steel shortage would jeopardize the war effort, issued an executive order directing the Secretary of Commerce to seize and operate the nation's steel mills. Truman did <strong>not</strong> invoke the Taft-Hartley Act (which Congress had passed and which gave the President the power to seek an injunction — a tool Truman deliberately rejected). The steel companies sued.</p>
+
+<p><strong>ISSUE:</strong> Does the President have inherent constitutional authority to seize private property during a national emergency without congressional authorization?</p>
+
+<p><strong>RULE (Justice Black — Majority):</strong> The President's power to issue orders must stem from an act of Congress or the Constitution itself. There is no "inherent" executive power to seize private property. The President is a law-<em>executor</em>, not a law-<em>maker</em>.</p>
+
+<p><strong>RULE (Justice Jackson — Concurrence — THE GOLD STANDARD):</strong></p>
+
+<p>Jackson's famous <strong>Three-Zone Framework:</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Zone</th>
+  <th>Scenario</th>
+  <th>Presidential Power</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Zone 1</strong></td>
+  <td>President acts with <strong>express or implied congressional authorization</strong></td>
+  <td>Power at its <strong>MAXIMUM</strong>. President has his own power + Congress's delegated power. Presumptively valid.</td>
+</tr>
+<tr>
+  <td><strong>Zone 2</strong></td>
+  <td>President acts in the <strong>absence</strong> of congressional grant or denial ("Zone of Twilight")</td>
+  <td>Power is <strong>UNCERTAIN</strong>. Depends on the "imperatives of events." Congressional inertia may enable executive action.</td>
+</tr>
+<tr>
+  <td><strong>Zone 3</strong></td>
+  <td>President acts <strong>contrary to the express or implied will of Congress</strong></td>
+  <td>Power at its <strong>LOWEST EBB</strong>. President can only rely on his own constitutional powers minus any Congress has over the matter. Court will scrutinize carefully.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>APPLICATION:</strong></p>
+
+<ul>
+<li>Truman's seizure was in <strong>Zone 3</strong> — Congress had considered and rejected giving the President seizure power when it passed the Taft-Hartley Act. By choosing a method Congress had specifically denied, Truman was acting against the expressed will of Congress.</li>
+<li>In Zone 3, the President can only prevail if Congress lacks any power over the subject. Here, Congress clearly had power over property seizure and labor disputes.</li>
+</ul>
+
+<p><strong>CONCLUSION:</strong> The seizure is unconstitutional. The President exceeded his authority.</p>
+
+<hr />
+
+<h3 id="fisher-alert-the-youngstown-checklist">🏛️ Fisher Alert: The Youngstown Checklist</h3>
+
+<blockquote>
+  <p>On any Separation of Powers question involving executive action:</p>
+  
+  <ol>
+  <li><strong>Identify the Zone.</strong> Did Congress authorize, stay silent, or prohibit the action?</li>
+  <li><strong>Zone 1:</strong> Almost always valid. The government will win.</li>
+  <li><strong>Zone 2:</strong> Gray area. Analyze the "imperatives of events" and historical practice.</li>
+  <li><strong>Zone 3:</strong> Almost always invalid. The President is fighting uphill.</li>
+  </ol>
+</blockquote>
+
+<hr />
+
+<h2 id="ii-appointment-removal-powers">II. Appointment &amp; Removal Powers</h2>
+
+<h3 id="the-appointments-clause-art-ii-2-cl-2">The Appointments Clause (Art. II, § 2, cl. 2)</h3>
+
+<ul>
+<li><strong>Principal Officers:</strong> Must be appointed by the President with Senate confirmation.</li>
+<li><strong>Inferior Officers:</strong> Congress may vest appointment in the President alone, the Courts, or Heads of Departments.</li>
+</ul>
+
+<p><strong>Key Case — Morrison v. Olson (1988):</strong>
+- Upheld the Independent Counsel Act. The independent counsel was an "inferior officer" because (1) she could be removed by the AG, (2) her duties were limited, and (3) her jurisdiction was narrow.
+- <strong>Scalia's Lone Dissent:</strong> Argued that all executive prosecution power belongs to the President. An independent counsel who can't be fired at will violates Article II. This dissent has become increasingly influential.</p>
+
+<h3 id="the-removal-power">The Removal Power</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Type</th>
+  <th>Who Can Remove?</th>
+  <th>Standard</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Pure Executive Officers</strong></td>
+  <td>President alone</td>
+  <td>At will</td>
+  <td><em>Myers v. United States</em> (1926)</td>
+</tr>
+<tr>
+  <td><strong>Officers with Quasi-Judicial/Legislative Functions</strong></td>
+  <td>Congress can limit removal to "good cause"</td>
+  <td>"For cause" protection</td>
+  <td><em>Humphrey's Executor v. United States</em> (1935)</td>
+</tr>
+<tr>
+  <td><strong>Inferior Officers</strong></td>
+  <td>Congress can limit removal</td>
+  <td>Reasonable restrictions OK</td>
+  <td><em>Morrison v. Olson</em> (1988)</td>
+</tr>
+<tr>
+  <td><strong>Double Layer of Protection</strong></td>
+  <td>❌ UNCONSTITUTIONAL</td>
+  <td>Congress cannot insulate officers behind <em>two</em> layers of for-cause protection</td>
+  <td><em>Free Enterprise Fund v. PCAOB</em> (2010)</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Fisher Trap:</strong> If a question asks about a federal agency head who "can only be removed for good cause," check: Is this a <em>single</em> layer of protection (valid per <em>Humphrey's</em>) or a <em>double</em> layer (invalid per <em>Free Enterprise Fund</em>)?</p>
+</blockquote>
+
+<hr />
+
+<h2 id="iii-executive-privilege-immunity">III. Executive Privilege &amp; Immunity</h2>
+
+<h3 id="united-states-v-nixon-1974">United States v. Nixon (1974)</h3>
+
+<p><strong>418 U.S. 683 (1974)</strong></p>
+
+<ul>
+<li><strong>Holding:</strong> The President has a <strong>qualified</strong> executive privilege to protect confidential communications with advisors. However, this privilege is <strong>not absolute</strong> — it must yield to the demonstrated needs of the criminal justice system (here, the Watergate special prosecutor's subpoena for tape recordings).</li>
+<li><strong>The Balance:</strong> The need for evidence in a criminal trial outweighs the generalized claim of confidentiality.</li>
+</ul>
+
+<h3 id="trump-v-united-states-2024">Trump v. United States (2024)</h3>
+
+<p><strong>600 U.S. __ (2024)</strong></p>
+
+<ul>
+<li><strong>Holding:</strong> A former President has <strong>absolute immunity</strong> from criminal prosecution for acts within the "conclusive and preclusive" core constitutional powers of the presidency (e.g., pardons, commanding the military).</li>
+<li><strong>Presumptive Immunity:</strong> For all other "official acts," there is a presumption of immunity that the prosecution must overcome.</li>
+<li><strong>No Immunity:</strong> For <strong>unofficial/private</strong> acts, there is no immunity.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Fisher Alert:</strong> <em>Trump v. United States</em> is the most significant Separation of Powers decision since <em>Youngstown</em>. The key exam issue is drawing the line between "official" and "unofficial" presidential conduct.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="iv-the-non-delegation-doctrine">IV. The Non-Delegation Doctrine</h2>
+
+<p><strong>The Principle:</strong> Congress cannot delegate its legislative power to the Executive Branch. Any delegation must include an "intelligible principle" to guide the executive's discretion.</p>
+
+<p><strong>The Test (<em>J.W. Hampton Jr. &amp; Co. v. United States</em>, 1928):</strong> A delegation is valid if Congress provides an "intelligible principle" to which the executive must conform.</p>
+
+<p><strong>The Two Historical Failures:</strong>
+- <em>Panama Refining Co. v. Ryan</em> (1935): Struck down a provision giving the President unlimited power to ban oil shipments. No standards.
+- <em>A.L.A. Schechter Poultry Corp. v. United States</em> (1935): Struck down the NIRA's delegation of power to set "fair competition" codes. No limits on what the codes could contain.</p>
+
+<p><strong>Modern Reality:</strong> Since 1935, the Court has <strong>never</strong> struck down a delegation. Standards like "public interest," "just and reasonable," and "necessary and appropriate" have all been upheld.</p>
+
+<blockquote>
+  <p><strong>Fisher Prediction:</strong> Justice Gorsuch has signaled interest in reviving the non-delegation doctrine. Watch for cases involving broad EPA or agency authority.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="chapter-6-procedural-due-process">CHAPTER 6: PROCEDURAL DUE PROCESS</h1>
+
+<h2 id="i-the-two-step-framework">I. The Two-Step Framework</h2>
+
+<h3 id="step-1-is-there-a-protected-interest">Step 1: Is There a Protected Interest?</h3>
+
+<p>The Due Process Clause protects <strong>life</strong>, <strong>liberty</strong>, and <strong>property</strong>. But "property" doesn't just mean land — it includes government <em>entitlements</em>.</p>
+
+<p><strong>The "New Property" Doctrine (<em>Goldberg v. Kelly</em>, 1970):</strong>
+- Welfare benefits are a <strong>property interest</strong> if the recipient has a legitimate claim of entitlement under existing rules.
+- The government cannot terminate them without Due Process.</p>
+
+<p><strong>Board of Regents v. Roth (1972):</strong>
+- A non-tenured professor had <strong>no</strong> property interest in being rehired because his contract gave him no entitlement to renewal. Property interests must be created by an independent source of law (statute, contract, regulation).</p>
+
+<p><strong>Perry v. Sindermann (1972):</strong>
+- Even without a formal contract, an <strong>implied</strong> promise of continued employment (like an unwritten tenure system) can create a property interest.</p>
+
+<h3 id="step-2-what-process-is-due">Step 2: What Process is Due?</h3>
+
+<h3 id="mathews-v-eldridge-1976">Mathews v. Eldridge (1976)</h3>
+
+<p><strong>424 U.S. 319 (1976)</strong></p>
+
+<p><strong>FACTS:</strong> George Eldridge's Social Security disability benefits were terminated after an internal review. He was not given an evidentiary hearing <em>before</em> termination — only after. He sued, arguing <em>Goldberg v. Kelly</em> required a pre-termination hearing.</p>
+
+<p><strong>ISSUE:</strong> Does the Due Process Clause require an evidentiary hearing before (rather than after) the termination of Social Security disability benefits?</p>
+
+<p><strong>RULE — The Mathews Balancing Test:</strong></p>
+
+<p>The Court weighs <strong>three factors</strong>:</p>
+
+<ol>
+<li><strong>The Private Interest:</strong> How important is the benefit to the individual? How severe is the deprivation?</li>
+<li><strong>The Risk of Error:</strong> How likely is the current procedure to produce a wrong result? Would additional safeguards reduce that risk?</li>
+<li><strong>The Government Interest:</strong> How much would additional procedures cost? What is the administrative burden?</li>
+</ol>
+
+<p><strong>APPLICATION:</strong></p>
+
+<p>Justice Powell distinguished <em>Goldberg</em>:
+- <strong>Welfare (Goldberg):</strong> Recipients are typically on the "brutal edge of subsistence." A wrongful termination could mean starvation. Pre-termination hearing required.
+- <strong>Disability (Eldridge):</strong> Recipients can turn to other sources (welfare, savings). The determination is based on <strong>medical records</strong> (objective), not credibility (subjective). A pre-termination hearing would add enormous cost for marginal accuracy improvement.</p>
+
+<p><strong>CONCLUSION:</strong> No pre-termination hearing required. The existing procedures (written questionnaire + post-termination hearing) provide adequate due process.</p>
+
+<hr />
+
+<h3 id="fisher-flowchart-procedural-due-process">🏛️ Fisher Flowchart: Procedural Due Process</h3>
+
+<pre><code>STEP 1: Is there a PROTECTED INTEREST?
+  → LIFE: Always protected.
+  → LIBERTY: Includes physical freedom, reputation (if combined with
+     loss of a tangible interest — "stigma plus"), parental rights.
+  → PROPERTY: Must have a "legitimate claim of entitlement" created
+     by statute, contract, or regulation (Roth).
+  → If NO protected interest → NO DUE PROCESS REQUIRED. Stop.
+
+STEP 2: What PROCESS is DUE?
+  → Apply MATHEWS v. ELDRIDGE Balancing:
+    (1) PRIVATE INTEREST: How important? How severe?
+    (2) RISK OF ERROR: Is the current process reliable?
+        Would more process help?
+    (3) GOVERNMENT INTEREST: Cost and administrative burden.
+
+  → RESULT: The more important the private interest AND the higher
+    the risk of error AND the lower the government's cost,
+    the MORE process is due (approaching Goldberg's
+    full pre-deprivation hearing).
+</code></pre>
+
+<hr />
+
+<h3 id="the-stigma-plus-doctrine">The "Stigma-Plus" Doctrine</h3>
+
+<p>A government statement that damages your <strong>reputation</strong> alone is NOT a deprivation of liberty. But if the stigma is combined with a <strong>tangible loss</strong> (loss of employment, inability to get another job), then Due Process applies.</p>
+
+<ul>
+<li><em>Paul v. Davis</em> (1976): Police posted a "shoplifters" flyer with Davis's photo. No tangible loss beyond stigma → No Due Process claim.</li>
+<li><em>Wisconsin v. Constantineau</em> (1971): Being publicly posted as a "drunkard" and banned from buying alcohol → Stigma PLUS loss of a legal right → Due Process applies.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Fisher Trap:</strong> Students often think any government attack on reputation triggers Due Process. It doesn't. You need "stigma <strong>plus</strong>" a concrete deprivation.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="summary-table-key-procedural-due-process-cases">Summary Table: Key Procedural Due Process Cases</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>Interest</th>
+  <th>Process Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>Goldberg v. Kelly</em> (1970)</td>
+  <td>Welfare benefits</td>
+  <td>YES — Full pre-termination hearing</td>
+</tr>
+<tr>
+  <td><em>Roth</em> (1972)</td>
+  <td>Non-tenured job (no entitlement)</td>
+  <td>NO — No property interest</td>
+</tr>
+<tr>
+  <td><em>Perry</em> (1972)</td>
+  <td>De facto tenure (implied entitlement)</td>
+  <td>YES — Some process</td>
+</tr>
+<tr>
+  <td><em>Mathews v. Eldridge</em> (1976)</td>
+  <td>Disability benefits</td>
+  <td>YES — But post-termination hearing suffices</td>
+</tr>
+<tr>
+  <td><em>Cleveland Bd. v. Loudermill</em> (1985)</td>
+  <td>Tenured public employment</td>
+  <td>YES — Pre-termination notice + opportunity to respond</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="chapter-7-privileges-immunities-14th-amendment-the-right-to-travel">CHAPTER 7: PRIVILEGES &amp; IMMUNITIES (14th AMENDMENT) &amp; THE RIGHT TO TRAVEL</h1>
+
+<h2 id="i-the-slaughter-house-cases-1873">I. The Slaughter-House Cases (1873)</h2>
+
+<p><strong>The Holding:</strong> The 14th Amendment's Privileges or Immunities Clause protects only a narrow set of <strong>federal</strong> citizenship rights (access to federal offices, protection on the high seas, right to travel to Washington D.C.). It does NOT incorporate the Bill of Rights or protect general civil liberties.</p>
+
+<p><strong>The Effect:</strong> This decision effectively <em>gutted</em> the Privileges or Immunities Clause for over 100 years. That's why the Court later used the <strong>Due Process Clause</strong> (not Privileges or Immunities) to incorporate the Bill of Rights.</p>
+
+<blockquote>
+  <p><strong>Fisher Note:</strong> Justice Thomas has repeatedly argued that <em>Slaughter-House</em> was wrong and that the Privileges or Immunities Clause should be revived as the proper vehicle for incorporation (<em>McDonald v. Chicago</em> concurrence).</p>
+</blockquote>
+
+<hr />
+
+<h2 id="ii-saenz-v-roe-1999">II. Saenz v. Roe (1999)</h2>
+
+<p><strong>526 U.S. 489 (1999)</strong></p>
+
+<p><strong>FACTS:</strong> California limited new residents' welfare benefits to the amount they would have received in their prior state of residence for their first year. A family moving from a state with low benefits to California would get less than longtime California residents.</p>
+
+<p><strong>ISSUE:</strong> Does this violate the right to travel?</p>
+
+<p><strong>RULE:</strong> The <strong>right to travel</strong> has three components:
+1. The right to enter and leave another state (Art. IV);
+2. The right to be treated as a welcome visitor (Art. IV P&amp;I);
+3. <strong>The right of new citizens to be treated the same as established citizens</strong> (14th Amendment Privileges or Immunities Clause).</p>
+
+<p><strong>HOLDING:</strong> California's law violates component 3. Once you become a citizen of a state, you are entitled to the <strong>same</strong> benefits as every other citizen. A state cannot create a two-tier system based on how long you've lived there.</p>
+
+<blockquote>
+  <p><strong>Fisher Alert:</strong> <em>Saenz</em> is the <strong>only</strong> modern case to successfully rely on the 14th Amendment's Privileges or Immunities Clause. It remains an extremely narrow doctrine.</p>
+</blockquote>
+
+<hr />
+
+<blockquote>
+  <p><strong>End of Part 2.</strong> Your V2 outline already covers the remaining topics (Equal Protection tiers, State Action, Congressional Enforcement under 13th/14th/15th) in exhaustive detail.</p>
+</blockquote>
+
+<div class="part-break"></div>
+
+<h1 id="constitutional-law-supplement-part-3">CONSTITUTIONAL LAW SUPPLEMENT — PART 3</h1>
+
+<h2 id="master-exam-attack-frameworks-cross-reference">MASTER EXAM ATTACK FRAMEWORKS &amp; CROSS-REFERENCE</h2>
+
+<h3 id="the-fisher-checkmate-quick-reference"><em>The "Fisher Checkmate" Quick-Reference</em></h3>
+
+<hr />
+
+<h1 id="section-a-the-master-issue-spotting-checklist">SECTION A: THE MASTER ISSUE-SPOTTING CHECKLIST</h1>
+
+<blockquote>
+  <p><strong>Instructions:</strong> When you open your exam, scan the fact pattern and check every box that applies. Each checked box tells you which chapter of your outline to deploy.</p>
+</blockquote>
+
+<h2 id="step-1-who-is-the-actor">🔍 Step 1: WHO is the Actor?</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Actor</th>
+  <th>Constitutional Constraint</th>
+  <th>Key Citation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Congress</strong></td>
+  <td>Limited to enumerated powers (Art. I, § 8)</td>
+  <td><em>McCulloch</em>, <em>Lopez</em></td>
+</tr>
+<tr>
+  <td><strong>President</strong></td>
+  <td>Art. II powers; Youngstown Zones</td>
+  <td><em>Youngstown</em>, <em>Trump v. US</em></td>
+</tr>
+<tr>
+  <td><strong>State Government</strong></td>
+  <td>14th Amendment, DCC, Preemption, Art. IV P&amp;I</td>
+  <td><em>Philadelphia v. NJ</em>, <em>Arizona v. US</em></td>
+</tr>
+<tr>
+  <td><strong>Private Person</strong></td>
+  <td>Generally NO constitutional constraint</td>
+  <td><em>Civil Rights Cases</em>, <em>DeShaney</em></td>
+</tr>
+<tr>
+  <td><strong>Private Person + State Involvement</strong></td>
+  <td>State Action doctrine triggers 14th Amend.</td>
+  <td><em>Shelley</em>, <em>Burton</em>, <em>Jackson</em></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="step-2-what-power-is-being-exercised">🔍 Step 2: WHAT Power is Being Exercised?</h2>
+
+<h3 id="if-congress-is-acting-check">If CONGRESS is acting, check:</h3>
+
+<pre><code>□ Commerce Clause (Art. I, § 8, cl. 3)
+  → Is the activity economic? (Raich = valid)
+  → Is it non-economic? (Lopez/Morrison = invalid)
+  → Heart of Atlanta / McClung for civil rights
+
+□ Taxing Power (Art. I, § 8, cl. 1)
+  → NFIB: Does it function like a tax? (IRS collection, revenue)
+
+□ Spending Power (Art. I, § 8, cl. 1)
+  → Dole 5-factor test
+  → NFIB: Is the condition coercive? (Gun to the head)
+
+□ Necessary &amp; Proper (Art. I, § 8, cl. 18)
+  → McCulloch: Legitimate end + appropriate means
+  → NFIB: Cannot create the predicate for its own exercise
+
+□ § 5 of the 14th Amendment
+  → Boerne: Congruence &amp; Proportionality
+  → Must target STATE actors (Morrison)
+  → Record of unconstitutional state behavior required
+
+□ § 2 of the 13th Amendment
+  → Jones v. Mayer: CAN reach private conduct
+  → Limited to racial discrimination (badges of slavery)
+
+□ § 2 of the 15th Amendment
+  → Katzenbach/Shelby County
+  → Must be justified by CURRENT needs
+</code></pre>
+
+<h3 id="if-a-state-is-acting-check">If a STATE is acting, check:</h3>
+
+<pre><code>□ Does the law discriminate against interstate commerce?
+  → DCC: Philadelphia v. NJ (per se invalid)
+  → Pike balancing (if facially neutral)
+  → Market Participant Exception?
+
+□ Does federal law preempt the state law?
+  → Express / Field / Conflict preemption
+  → Arizona v. US for immigration
+
+□ Does the law discriminate against out-of-state CITIZENS?
+  → Art. IV Privileges &amp; Immunities
+
+□ Does the law burden a FUNDAMENTAL RIGHT?
+  → Strict Scrutiny (compelling interest + narrow tailoring)
+  → Travel (Saenz), Vote (Harper), Marriage (Loving/Obergefell)
+
+□ Does the law classify by a SUSPECT trait?
+  → Race → Strict Scrutiny
+  → Sex → Intermediate Scrutiny ("exceedingly persuasive")
+  → Alienage → Strict (state) / Rational Basis (federal)
+  → Age/Disability/Poverty → Rational Basis
+
+□ Does the law affect a PROPERTY or LIBERTY interest?
+  → Procedural Due Process: Mathews balancing
+  → Substantive Due Process: Glucksberg history &amp; tradition
+</code></pre>
+
+<hr />
+
+<h2 id="step-3-what-standard-of-review">🔍 Step 3: WHAT Standard of Review?</h2>
+
+<h3 id="the-tiers-of-scrutiny-master-table">The Tiers of Scrutiny — Master Table</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Tier</th>
+  <th>Burden on</th>
+  <th>Test</th>
+  <th>Government Wins?</th>
+  <th>Triggers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Strict Scrutiny</strong></td>
+  <td>Government</td>
+  <td>Compelling interest + Narrowly tailored</td>
+  <td>Rarely (~5%)</td>
+  <td>Race, National Origin, Alienage (state), Fundamental Rights</td>
+</tr>
+<tr>
+  <td><strong>Intermediate Scrutiny</strong></td>
+  <td>Government</td>
+  <td>Important interest + Substantially related</td>
+  <td>Sometimes (~50%)</td>
+  <td>Sex/Gender, Legitimacy</td>
+</tr>
+<tr>
+  <td><strong>"Exceedingly Persuasive"</strong></td>
+  <td>Government</td>
+  <td>Enhanced Intermediate</td>
+  <td>Rarely</td>
+  <td>Sex (post-VMI)</td>
+</tr>
+<tr>
+  <td><strong>Rational Basis</strong></td>
+  <td>Challenger</td>
+  <td>Legitimate interest + Rationally related</td>
+  <td>Almost always (~95%)</td>
+  <td>Economic regulation, Age, Disability, Poverty</td>
+</tr>
+<tr>
+  <td><strong>Rational Basis "with Bite"</strong></td>
+  <td>Government (effectively)</td>
+  <td>Legitimate interest, but Court actually scrutinizes</td>
+  <td>Sometimes</td>
+  <td>Animus suspected (<em>Moreno</em>, <em>Romer</em>, <em>Cleburne</em>, <em>Windsor</em>)</td>
+</tr>
+<tr>
+  <td><strong>Undue Burden</strong></td>
+  <td>~~Challenger~~ <em>OVERRULED</em></td>
+  <td>~~Substantial obstacle before viability~~</td>
+  <td>N/A</td>
+  <td>~~Abortion (Casey)~~ → Now Rational Basis post-<em>Dobbs</em></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="section-b-cross-reference-v2-outline-to-supplement">SECTION B: CROSS-REFERENCE — V2 OUTLINE TO SUPPLEMENT</h1>
+
+<table>
+<thead>
+<tr>
+  <th>Topic</th>
+  <th>V2 Coverage (Lines)</th>
+  <th>Supplement Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>McCulloch v. Maryland</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 1, Ch. 1</strong> — Full IRAC</td>
+</tr>
+<tr>
+  <td><strong>Comstock</strong></td>
+  <td>Not covered</td>
+  <td><strong>Part 1, Ch. 1</strong> — Full IRAC</td>
+</tr>
+<tr>
+  <td><strong>Term Limits (Thornton)</strong></td>
+  <td>Not covered</td>
+  <td><strong>Part 1, Ch. 1</strong> — Full IRAC</td>
+</tr>
+<tr>
+  <td><strong>Heart of Atlanta / McClung</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 1, Ch. 2</strong> — Full IRAC</td>
+</tr>
+<tr>
+  <td><strong>Lopez</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 1, Ch. 2</strong> — Full IRAC + Decision Tree</td>
+</tr>
+<tr>
+  <td><strong>Morrison (Commerce prong)</strong></td>
+  <td>14th Amend. only (4070-4097)</td>
+  <td><strong>Part 1, Ch. 2</strong> — Commerce Clause prong</td>
+</tr>
+<tr>
+  <td><strong>Raich</strong></td>
+  <td>Not covered</td>
+  <td><strong>Part 1, Ch. 2</strong> — Full IRAC</td>
+</tr>
+<tr>
+  <td><strong>NFIB v. Sebelius</strong></td>
+  <td>Not covered</td>
+  <td><strong>Part 1, Ch. 2</strong> — Full IRAC (Commerce + Tax + Spending)</td>
+</tr>
+<tr>
+  <td><strong>Dormant Commerce Clause</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 2, Ch. 3</strong> — Full framework + cases</td>
+</tr>
+<tr>
+  <td><strong>Pike Balancing</strong></td>
+  <td>Not covered</td>
+  <td><strong>Part 2, Ch. 3</strong> — Full rule + flowchart</td>
+</tr>
+<tr>
+  <td><strong>Philadelphia v. NJ</strong></td>
+  <td>Not covered</td>
+  <td><strong>Part 2, Ch. 3</strong> — Full IRAC</td>
+</tr>
+<tr>
+  <td><strong>Market Participant Exception</strong></td>
+  <td>Not covered</td>
+  <td><strong>Part 2, Ch. 3</strong> — Framework</td>
+</tr>
+<tr>
+  <td><strong>Preemption</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 2, Ch. 4</strong> — Full framework + Arizona v. US</td>
+</tr>
+<tr>
+  <td><strong>Youngstown</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 2, Ch. 5</strong> — Full IRAC + Jackson Zones</td>
+</tr>
+<tr>
+  <td><strong>Appointment/Removal</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 2, Ch. 5</strong> — Framework table</td>
+</tr>
+<tr>
+  <td><strong>Executive Privilege/Immunity</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 2, Ch. 5</strong> — Nixon + Trump</td>
+</tr>
+<tr>
+  <td><strong>Non-Delegation</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 2, Ch. 5</strong> — Framework</td>
+</tr>
+<tr>
+  <td><strong>Procedural Due Process</strong></td>
+  <td>Notes only (2586-2596)</td>
+  <td><strong>Part 2, Ch. 6</strong> — Full Goldberg/Mathews framework</td>
+</tr>
+<tr>
+  <td><strong>Slaughter-House / Saenz</strong></td>
+  <td>Referenced only</td>
+  <td><strong>Part 2, Ch. 7</strong> — Full IRAC</td>
+</tr>
+<tr>
+  <td><strong>Incorporation</strong></td>
+  <td>V2 lines 1600-1700</td>
+  <td>✅ Already comprehensive</td>
+</tr>
+<tr>
+  <td><strong>2nd Amendment</strong></td>
+  <td>V2 lines 1654-1743</td>
+  <td>✅ Already comprehensive</td>
+</tr>
+<tr>
+  <td><strong>Substantive Due Process</strong></td>
+  <td>V2 lines 1744-2575</td>
+  <td>✅ Already comprehensive</td>
+</tr>
+<tr>
+  <td><strong>Equal Protection (all tiers)</strong></td>
+  <td>V2 lines 2599-3460</td>
+  <td>✅ Already comprehensive</td>
+</tr>
+<tr>
+  <td><strong>State Action</strong></td>
+  <td>V2 lines 3462-3665</td>
+  <td>✅ Already comprehensive</td>
+</tr>
+<tr>
+  <td><strong>Congressional Enforcement</strong></td>
+  <td>V2 lines 3666-4127</td>
+  <td>✅ Already comprehensive</td>
+</tr>
+<tr>
+  <td><strong>First Amendment</strong></td>
+  <td>Separate supplement (Conv. d70825d5)</td>
+  <td>See prior session</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="section-c-the-fisher-checkmate-quick-attacks">SECTION C: THE "FISHER CHECKMATE" QUICK ATTACKS</h1>
+
+<h2 id="quick-attack-1-can-congress-do-this">Quick Attack #1: "Can Congress Do This?"</h2>
+
+<pre><code>1. ENUMERATE: Identify the power source
+   → Commerce? Taxing? Spending? N&amp;P? § 5?
+
+2. VALIDATE: Apply the relevant test
+   → Commerce: Lopez 3-category + economic/non-economic
+   → Taxing: NFIB functional tax test
+   → Spending: Dole 5 factors + coercion check
+   → N&amp;P: McCulloch (legitimate end + appropriate means)
+   → § 5: Boerne (congruence &amp; proportionality)
+
+3. LIMIT: Check for constitutional prohibitions
+   → 10th Amendment (commandeering)
+   → 11th Amendment (state sovereign immunity)
+   → Individual rights (Bill of Rights)
+</code></pre>
+
+<h2 id="quick-attack-2-is-this-state-law-valid">Quick Attack #2: "Is This State Law Valid?"</h2>
+
+<pre><code>1. PREEMPTION CHECK: Does federal law control this field?
+   → Express / Field / Conflict
+
+2. DCC CHECK: Does it discriminate against interstate commerce?
+   → Facial discrimination → Per se invalid
+   → Neutral but burdensome → Pike balancing
+   → Market Participant Exception?
+
+3. INDIVIDUAL RIGHTS CHECK: Does it burden a right?
+   → Fundamental right → Strict Scrutiny
+   → Suspect classification → Strict / Intermediate
+   → Economic regulation → Rational Basis
+
+4. P&amp;I CHECK: Does it discriminate against out-of-state persons?
+   → Art. IV P&amp;I: substantial reason + close relation?
+</code></pre>
+
+<h2 id="quick-attack-3-did-the-president-overstep">Quick Attack #3: "Did the President Overstep?"</h2>
+
+<pre><code>1. YOUNGSTOWN ZONE:
+   → Zone 1 (Congress authorized) → Power at maximum → Valid
+   → Zone 2 (Congressional silence) → Twilight → Analyze custom/history
+   → Zone 3 (Congress prohibited) → Lowest ebb → Almost always invalid
+
+2. APPOINTMENT/REMOVAL:
+   → Principal officer? → Senate confirmation required
+   → Inferior officer? → Congress can vest appointment
+   → "For cause" protection? → Valid if single layer (Humphrey's)
+   → Double layer? → Invalid (Free Enterprise Fund)
+
+3. IMMUNITY:
+   → Official act, core power? → Absolute immunity (Trump)
+   → Official act, non-core? → Presumptive immunity
+   → Unofficial/private act? → No immunity
+</code></pre>
+
+<h2 id="quick-attack-4-is-there-state-action">Quick Attack #4: "Is There State Action?"</h2>
+
+<pre><code>1. PUBLIC FUNCTION TEST:
+   → Does the private entity exercise powers TRADITIONALLY
+      and EXCLUSIVELY reserved to the state?
+   → Elections (Smith/Terry) → YES
+   → Company town (Marsh) → YES
+   → Utility/Shopping center (Jackson/Hudgens) → NO
+
+2. ENTWINEMENT/SYMBIOSIS TEST:
+   → Is the state physically or financially intertwined? (Burton)
+   → Is the state an active participant in management? (Brentwood)
+   → Mere regulation/licensing → NOT enough (Moose Lodge)
+
+3. JUDICIAL ENFORCEMENT:
+   → Is a court enforcing a discriminatory private agreement? (Shelley)
+   → Distinguish from neutral property enforcement (trespass)
+
+4. JOINT PARTICIPATION:
+   → Is a state official actively helping? (Lugar/Price)
+   → State acquiescence alone → NOT enough (Flagg Bros.)
+</code></pre>
+
+<h2 id="quick-attack-5-can-congress-reach-private-actors">Quick Attack #5: "Can Congress Reach Private Actors?"</h2>
+
+<pre><code>1. 14th AMENDMENT (§ 5):
+   → NO — Cannot reach private conduct (Civil Rights Cases/Morrison)
+   → UNLESS joint participation with state officials (Price/Guest)
+
+2. 13th AMENDMENT (§ 2):
+   → YES — Can reach private RACIAL discrimination (Jones v. Mayer)
+   → "Badges and incidents of slavery" = Congress decides
+   → Limited to RACE (not gender, age, etc.)
+
+3. COMMERCE CLAUSE (Art. I):
+   → YES — Can reach private conduct if it affects commerce
+   → Heart of Atlanta / McClung
+   → But activity must be "economic" (Lopez limit)
+</code></pre>
+
+<hr />
+
+<h1 id="section-d-common-fisher-traps-do-not-fall-for-these">SECTION D: COMMON FISHER TRAPS (DO NOT FALL FOR THESE)</h1>
+
+<table>
+<thead>
+<tr>
+  <th>Trap</th>
+  <th>What Students Write</th>
+  <th>What Fisher Wants</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>"Strict Scrutiny for sex"</strong></td>
+  <td>"Sex is a suspect class → strict scrutiny"</td>
+  <td>Sex gets <strong>Intermediate</strong> scrutiny with "exceedingly persuasive justification" (<em>Craig</em>, <em>VMI</em>)</td>
+</tr>
+<tr>
+  <td><strong>"Impact = Intent"</strong></td>
+  <td>"The law hurts minorities, so it's unconstitutional"</td>
+  <td>Impact alone is NOT enough. Must prove <strong>discriminatory purpose</strong> (<em>Washington v. Davis</em>)</td>
+</tr>
+<tr>
+  <td><strong>"The 14th Amend. applies to everyone"</strong></td>
+  <td>"The private company violated my equal protection"</td>
+  <td>14th Amend. only applies to <strong>STATE actors</strong> (<em>Civil Rights Cases</em>)</td>
+</tr>
+<tr>
+  <td><strong>"Congress can do anything under Commerce"</strong></td>
+  <td>"This affects the economy, so Congress can regulate"</td>
+  <td>Activity must be <strong>economic</strong> in nature. Non-economic = <em>Lopez/Morrison</em> fail</td>
+</tr>
+<tr>
+  <td><strong>"Rational Basis always saves the law"</strong></td>
+  <td>"Any hypothetical reason works"</td>
+  <td>Not if the law is based on <strong>animus</strong> (<em>Moreno</em>, <em>Romer</em>, <em>Cleburne</em>, <em>Windsor</em>)</td>
+</tr>
+<tr>
+  <td><strong>"Separate can be equal"</strong></td>
+  <td>"They gave women their own program"</td>
+  <td>Separate is almost NEVER equal when intangibles differ (<em>Sweatt</em>, <em>VMI</em>)</td>
+</tr>
+<tr>
+  <td><strong>"History and tradition = unchangeable"</strong></td>
+  <td>"It wasn't a right in 1868, so it can't be one now"</td>
+  <td><em>Obergefell</em> said tradition "guides but does not set outer boundaries" — but <em>Dobbs</em> reinstalled <em>Glucksberg</em>. <strong>Argue BOTH sides.</strong></td>
+</tr>
+<tr>
+  <td><strong>"Congressional findings save everything"</strong></td>
+  <td>"Congress held hearings, so the law is valid"</td>
+  <td>Findings don't matter if the <strong>target</strong> is wrong (<em>Morrison</em>: targeted private actors) or the <strong>fit</strong> is wrong (<em>Boerne</em>: sledgehammer)</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="section-e-the-five-most-testable-tensions">SECTION E: THE FIVE MOST TESTABLE TENSIONS</h1>
+
+<p>For your exam essay, these are the five doctrinal tensions Fisher will test. You MUST argue both sides.</p>
+
+<h3 id="1-formalism-vs-functionalism-separation-of-powers">1. Formalism vs. Functionalism (Separation of Powers)</h3>
+
+<ul>
+<li><strong>Formalist:</strong> The Constitution draws bright lines. If it says "legislative power" in Art. I, only Congress can make laws. Period. (<em>Black in Youngstown</em>)</li>
+<li><strong>Functionalist:</strong> The Constitution creates a flexible system. As long as one branch doesn't aggrandize power or encroach too far, overlapping authority is fine. (<em>Jackson in Youngstown</em>)</li>
+</ul>
+
+<h3 id="2-color-blind-vs-anti-subordination-equal-protection">2. Color-Blind vs. Anti-Subordination (Equal Protection)</h3>
+
+<ul>
+<li><strong>Color-Blind:</strong> The Constitution forbids ALL racial classifications, even "benign" ones. (<em>Roberts: "The way to stop discriminating on the basis of race is to stop discriminating on the basis of race."</em>)</li>
+<li><strong>Anti-Subordination:</strong> The 14th Amendment targets the <em>caste system</em>. It was written to help Black Americans, so helping them isn't the same as oppressing them. (<em>Marshall in Bakke</em>)</li>
+</ul>
+
+<h3 id="3-glucksberg-vs-obergefell-substantive-due-process">3. Glucksberg vs. Obergefell (Substantive Due Process)</h3>
+
+<ul>
+<li><strong>Glucksberg (Narrow):</strong> Only rights "deeply rooted in history and tradition" qualify as fundamental. (<em>Dobbs</em> majority)</li>
+<li><strong>Obergefell (Broad):</strong> History "guides but does not set outer boundaries." Rights can evolve as our understanding of injustice deepens. (<em>Kennedy</em>)</li>
+</ul>
+
+<h3 id="4-judicial-supremacy-vs-legislative-centrality-5">4. Judicial Supremacy vs. Legislative Centrality (§ 5)</h3>
+
+<ul>
+<li><strong>Judicial Supremacy (<em>Boerne</em>):</strong> The Court defines the right. Congress can only remedy violations the Court has recognized.</li>
+<li><strong>Legislative Centrality (<em>Morgan</em>):</strong> Congress can independently determine what violates Equal Protection using its superior fact-finding power.</li>
+</ul>
+
+<h3 id="5-federalism-vs-national-power-commercespending">5. Federalism vs. National Power (Commerce/Spending)</h3>
+
+<ul>
+<li><strong>Federalism:</strong> States are sovereign. The 10th Amendment reserves vast areas (education, criminal law, family law) to the states. (<em>Lopez</em>, <em>NFIB Medicaid</em>)</li>
+<li><strong>National Power:</strong> "We the People" created a national government with implied powers broad enough to address national problems. (<em>McCulloch</em>, <em>Raich</em>)</li>
+</ul>
+
+<hr />
+
+<blockquote>
+  <p><strong>🎓 FINAL NOTE:</strong> This three-part supplement, combined with your V2 Master Attack Outline and the First Amendment Supplement from your prior session, provides <strong>complete coverage</strong> of a standard 1L Constitutional Law course. You are exam-ready.</p>
+  
+  <p><strong>The Fisher Commandments:</strong>
+  1. Always start with the TEXT.
+  2. Identify the ACTOR and the POWER SOURCE.
+  3. Apply the correct STANDARD OF REVIEW.
+  4. Argue BOTH SIDES (never be conclusory).
+  5. Write with EXPOSITION, not narration.</p>
+</blockquote>
+
+<div class="part-break"></div>
+
+<h1 id="constitutional-law-supplement-part-4">CONSTITUTIONAL LAW SUPPLEMENT — PART 4</h1>
+
+<h2 id="branch-checks-balances-complete-amendments-127">BRANCH CHECKS &amp; BALANCES + COMPLETE AMENDMENTS 1–27</h2>
+
+<h3 id="crossreferenced-to-the-v2-outline-and-supplements-13"><em>(Cross‑referenced to the V2 Outline and Supplements 1‑3)</em></h3>
+
+<hr />
+
+<h1 id="section-a-the-master-checks-balances-matrix">SECTION A: THE MASTER "CHECKS &amp; BALANCES" MATRIX</h1>
+
+<p><em>This matrix lays out every formal check each branch can wield against the others. Use it when an exam question asks about a conflict between branches, or when you need to argue whether a branch has exceeded its power.</em></p>
+
+<table>
+<thead>
+<tr>
+  <th><strong>Branch Being Checked</strong></th>
+  <th><strong>Check Exercised By</strong></th>
+  <th><strong>Mechanism</strong></th>
+  <th><strong>Constitutional Source</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Congress</strong></td>
+  <td>President</td>
+  <td>Veto (regular &amp; pocket); threat of veto influences legislation.</td>
+  <td>Art. I, §7</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Calling special sessions of Congress.</td>
+  <td>Art. II, §3</td>
+</tr>
+<tr>
+  <td></td>
+  <td>Judiciary</td>
+  <td>Judicial review — declaring acts of Congress unconstitutional.</td>
+  <td><em>Marbury v. Madison</em> (1803)</td>
+</tr>
+<tr>
+  <td><strong>President</strong></td>
+  <td>Congress</td>
+  <td>Impeachment (House impeaches; Senate tries &amp; convicts by 2/3 vote).</td>
+  <td>Art. I, §§2-3; Art. II, §4</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Override presidential veto (2/3 both houses).</td>
+  <td>Art. I, §7</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Senate confirmation of appointments (simple majority).</td>
+  <td>Art. II, §2</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Senate ratification of treaties (2/3).</td>
+  <td>Art. II, §2</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>"Power of the purse" — appropriation of funds; can defund executive actions.</td>
+  <td>Art. I, §9</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Congressional oversight &amp; subpoenas.</td>
+  <td>Implied from Art. I</td>
+</tr>
+<tr>
+  <td></td>
+  <td>Judiciary</td>
+  <td>Judicial review — declaring executive actions unconstitutional or illegal.</td>
+  <td><em>Youngstown</em>, <em>Marbury</em></td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Criminal prosecution of a former president (no immunity for unofficial acts).</td>
+  <td><em>Trump v. United States</em> (2024)</td>
+</tr>
+<tr>
+  <td><strong>Judiciary</strong></td>
+  <td>Congress</td>
+  <td>Control over the size and budget of the Supreme Court (court‑packing).</td>
+  <td>Art. I, §8; Art. III, §1</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Power to make "exceptions and regulations" to Supreme Court appellate jurisdiction.</td>
+  <td>Art. III, §2 cl.2; <em>Ex parte McCardle</em></td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Senate confirmation of federal judges.</td>
+  <td>Art. II, §2</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Impeachment of judges.</td>
+  <td>Art. I, §§2-3</td>
+</tr>
+<tr>
+  <td></td>
+  <td>President</td>
+  <td>Appointment of federal judges (with Senate confirmation).</td>
+  <td>Art. II, §2</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Pardon power — can pardon federal criminal contempt.</td>
+  <td>Art. II, §2</td>
+</tr>
+<tr>
+  <td><strong>States</strong> (collective)</td>
+  <td>Federal Government</td>
+  <td>Article V amendment process — states must ratify amendments (3/4 of states).</td>
+  <td>Art. V</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Senate representation (each state gets two senators).</td>
+  <td>Art. I, §3</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Electoral College — states choose electors.</td>
+  <td>Art. II, §1</td>
+</tr>
+<tr>
+  <td><strong>Federal Government</strong></td>
+  <td>States</td>
+  <td>Supremacy Clause — federal law preempts conflicting state law.</td>
+  <td>Art. VI, cl.2</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Federal courts can review state court decisions involving federal questions.</td>
+  <td><em>Martin v. Hunter's Lessee</em>; Art. III</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Fisher Exam Tip:</strong> If you see a question that asks "Can Congress / the President do X?" immediately check this matrix to see if the other branch has a tool to stop it. Fisher loves questions that force you to argue <em>both</em> the action's validity and the available checks.</p>
+</blockquote>
+
+<hr />
+
+<h3 id="fisher-trap-the-structural-checkmate-pattern">🏛️ Fisher Trap: The "Structural Checkmate" Pattern</h3>
+
+<p>When a branch overreaches, the exam answer should:
+1. <strong>Identify the overreach</strong> (cite the relevant Article/case)
+2. <strong>Identify the check</strong> the other branch could deploy
+3. <strong>Argue both sides</strong> — is this really an overreach, or is it within the "zone of twilight"?</p>
+
+<pre><code>Example: President issues an executive order regulating emissions.
+→ STEP 1: Is there congressional authorization? (Youngstown Zone analysis)
+→ STEP 2: If Zone 3, Congress's check = legislation overriding the order + override veto
+→ STEP 3: Judiciary's check = judicial review (standing + merits)
+</code></pre>
+
+<hr />
+
+<h1 id="section-b-amendments-127-quickreference">SECTION B: AMENDMENTS 1–27 QUICK‑REFERENCE</h1>
+
+<p><em>The V2 outline covers the substance of the 1st, 2nd, 5th, 13th, 14th, and 15th in depth. This table gives you a complete map, including amendments rarely tested but that may appear as "minor" issues.</em></p>
+
+<table>
+<thead>
+<tr>
+  <th>Amend.</th>
+  <th>One‑Line Holding</th>
+  <th>Key Cases</th>
+  <th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>1</strong></td>
+  <td>Protects freedom of religion, speech, press, assembly, petition.</td>
+  <td><em>Brandenburg</em>, <em>N.Y. Times v. Sullivan</em>, <em>Reed v. Gilbert</em>, <em>Kennedy v. Bremerton</em></td>
+  <td>Fully incorporated; extensive doctrine.</td>
+</tr>
+<tr>
+  <td><strong>2</strong></td>
+  <td>Right to keep &amp; bear arms for self‑defense.</td>
+  <td><em>Heller</em>, <em>McDonald</em>, <em>Bruen</em></td>
+  <td>Incorporated; "history &amp; tradition" test.</td>
+</tr>
+<tr>
+  <td><strong>3</strong></td>
+  <td>No quartering of soldiers in private homes without consent.</td>
+  <td>Rarely litigated</td>
+  <td>Not formally incorporated; generally respected.</td>
+</tr>
+<tr>
+  <td><strong>4</strong></td>
+  <td>Protects against unreasonable searches &amp; seizures; warrant requirement.</td>
+  <td><em>Katz</em>, <em>Terry</em>, <em>Mapp</em> (exclusionary rule)</td>
+  <td>Fully incorporated; voluminous case law.</td>
+</tr>
+<tr>
+  <td><strong>5</strong></td>
+  <td>Grand jury (not incorp.); no double jeopardy; self‑incrimination privilege; due process; takings.</td>
+  <td><em>Miranda</em>, <em>Kelo v. New London</em></td>
+  <td>Partially incorporated (grand jury NOT required against states).</td>
+</tr>
+<tr>
+  <td><strong>6</strong></td>
+  <td>Right to speedy &amp; public trial, impartial jury, confrontation, right to counsel.</td>
+  <td><em>Gideon v. Wainwright</em>, <em>Crawford v. Washington</em></td>
+  <td>Fully incorporated.</td>
+</tr>
+<tr>
+  <td><strong>7</strong></td>
+  <td>Right to jury trial in civil cases at common law (&gt;$20).</td>
+  <td>—</td>
+  <td><strong>Not incorporated</strong> against states.</td>
+</tr>
+<tr>
+  <td><strong>8</strong></td>
+  <td>No excessive bail, excessive fines, or cruel &amp; unusual punishment.</td>
+  <td><em>Gregg v. Georgia</em>, <em>Roper v. Simmons</em>, <em>Timbs v. Indiana</em></td>
+  <td>Fully incorporated; "evolving standards of decency."</td>
+</tr>
+<tr>
+  <td><strong>9</strong></td>
+  <td>Enumeration of rights does not deny other rights retained by the people.</td>
+  <td><em>Griswold</em> (right to privacy)</td>
+  <td>Rule of construction; not independent source of rights.</td>
+</tr>
+<tr>
+  <td><strong>10</strong></td>
+  <td>Reserved powers to states or people.</td>
+  <td><em>Printz</em>, <em>New York v. U.S.</em> (anti‑commandeering)</td>
+  <td>Mostly a "truism" (<em>Darby</em>), but anti‑commandeering has teeth.</td>
+</tr>
+<tr>
+  <td><strong>11</strong></td>
+  <td>Bars suits against states in federal court without consent.</td>
+  <td><em>Seminole Tribe</em>, <em>Alden v. Maine</em></td>
+  <td>Sovereign immunity; Congress may abrogate under § 5 of 14th.</td>
+</tr>
+<tr>
+  <td><strong>12</strong></td>
+  <td>Separate electoral votes for President &amp; VP.</td>
+  <td><em>Bush v. Gore</em> (context)</td>
+  <td>Resolved 1800 election crisis; now standard.</td>
+</tr>
+<tr>
+  <td><strong>13</strong></td>
+  <td>Abolishes slavery &amp; involuntary servitude; Congress may enforce.</td>
+  <td><em>Jones v. Alfred H. Mayer Co.</em></td>
+  <td>Reaches <strong>private</strong> conduct; limited to race.</td>
+</tr>
+<tr>
+  <td><strong>14</strong></td>
+  <td>Citizenship; P&I; Due Process; Equal Protection.</td>
+  <td><em>Brown</em>, <em>Dobbs</em>, <em>Obergefell</em>, <em>Slaughter‑House</em></td>
+  <td>The most litigated amendment. See V2.</td>
+</tr>
+<tr>
+  <td><strong>15</strong></td>
+  <td>No denial of vote based on race.</td>
+  <td><em>Shelby County</em>, <em>Brnovich</em></td>
+  <td>Coverage formula struck down; § 2 narrowed.</td>
+</tr>
+<tr>
+  <td><strong>16</strong></td>
+  <td>Allows federal income tax without apportionment.</td>
+  <td><em>NFIB</em> (taxing power context)</td>
+  <td>Basis for modern income tax.</td>
+</tr>
+<tr>
+  <td><strong>17</strong></td>
+  <td>Direct election of Senators by the people.</td>
+  <td>—</td>
+  <td>Structural change; increased democratic accountability.</td>
+</tr>
+<tr>
+  <td><strong>18</strong></td>
+  <td>Prohibition of alcohol.</td>
+  <td>Repealed by 21st</td>
+  <td>Historical only.</td>
+</tr>
+<tr>
+  <td><strong>19</strong></td>
+  <td>Women's right to vote.</td>
+  <td>—</td>
+  <td>Fully enforceable.</td>
+</tr>
+<tr>
+  <td><strong>20</strong></td>
+  <td>Shortened lame‑duck period; Inauguration → January 20.</td>
+  <td>—</td>
+  <td>Procedural; ensures quicker transition.</td>
+</tr>
+<tr>
+  <td><strong>21</strong></td>
+  <td>Repealed Prohibition; grants states alcohol regulatory authority.</td>
+  <td><em>Granholm v. Heald</em> (states can regulate but not discriminate against out‑of‑state wineries)</td>
+  <td>Only amendment explicitly granting states commerce authority.</td>
+</tr>
+<tr>
+  <td><strong>22</strong></td>
+  <td>Limits President to two elected terms.</td>
+  <td>—</td>
+  <td>No current challenge.</td>
+</tr>
+<tr>
+  <td><strong>23</strong></td>
+  <td>Grants D.C. Electoral College electors (minimum 3).</td>
+  <td>—</td>
+  <td>D.C. residents may vote for President.</td>
+</tr>
+<tr>
+  <td><strong>24</strong></td>
+  <td>Prohibits poll taxes in federal elections.</td>
+  <td><em>Harper v. Virginia</em> (extended to state elections via 14th)</td>
+  <td>Part of voting‑rights canon.</td>
+</tr>
+<tr>
+  <td><strong>25</strong></td>
+  <td>Presidential succession &amp; disability procedures.</td>
+  <td>Invoked after JFK; briefly after Reagan</td>
+  <td>Vital machinery; rarely tested.</td>
+</tr>
+<tr>
+  <td><strong>26</strong></td>
+  <td>Lowers voting age to 18.</td>
+  <td><em>Oregon v. Mitchell</em></td>
+  <td>Fully enforced.</td>
+</tr>
+<tr>
+  <td><strong>27</strong></td>
+  <td>Congressional pay raises take effect only after intervening election.</td>
+  <td>—</td>
+  <td>Proposed 1789; ratified 1992 — slowest ratification in history.</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="fisher-alert-the-incorporation-trick">🏛️ Fisher Alert: The "Incorporation Trick"</h3>
+
+<p>Not all Bill of Rights protections apply against the states. The exam trap:</p>
+
+<table>
+<thead>
+<tr>
+  <th><strong>Incorporated</strong> (Apply to States via 14th Amend. Due Process)</th>
+  <th><strong>NOT Incorporated</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1st (speech, religion, press, assembly, petition)</td>
+  <td>3rd (quartering — not formally decided)</td>
+</tr>
+<tr>
+  <td>2nd (arms — <em>McDonald</em>)</td>
+  <td>5th Grand Jury indictment requirement</td>
+</tr>
+<tr>
+  <td>4th (searches &amp; seizures)</td>
+  <td>7th (civil jury trial)</td>
+</tr>
+<tr>
+  <td>5th (self-incrimination, double jeopardy, due process, takings)</td>
+  <td></td>
+</tr>
+<tr>
+  <td>6th (all rights)</td>
+  <td></td>
+</tr>
+<tr>
+  <td>8th (cruel &amp; unusual, excessive fines — <em>Timbs</em>)</td>
+  <td></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Fisher Trap:</strong> If a fact pattern involves a STATE (not federal) government denying someone a grand jury hearing, the answer is: <strong>No constitutional violation.</strong> The 5th Amendment Grand Jury Clause is one of the few Bill of Rights provisions NOT incorporated against the states.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="section-c-criminal-procedure-primer-amendments-48">SECTION C: CRIMINAL PROCEDURE PRIMER (AMENDMENTS 4–8)</h1>
+
+<p><em>The V2 outline assumes Fisher's course focuses on structural constitution, due process, and equal protection. But if your exam includes a search, confession, or criminal trial fact pattern, deploy these frameworks.</em></p>
+
+<h2 id="4th-amendment-searches-seizures">4th Amendment — Searches &amp; Seizures</h2>
+
+<p><strong>Core Rule:</strong> Government needs a warrant based on probable cause to search, UNLESS an exception applies.</p>
+
+<p><strong>Key Exceptions:</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Exception</th>
+  <th>Rule</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Consent</td>
+  <td>Voluntary consent = no warrant needed</td>
+  <td><em>Schneckloth v. Bustamonte</em></td>
+</tr>
+<tr>
+  <td>Search Incident to Arrest</td>
+  <td>May search person + area within immediate control</td>
+  <td><em>Chimel v. California</em></td>
+</tr>
+<tr>
+  <td>Plain View</td>
+  <td>Officer lawfully present sees contraband in plain view</td>
+  <td><em>Arizona v. Hicks</em></td>
+</tr>
+<tr>
+  <td>Automobile</td>
+  <td>Cars get reduced expectation of privacy; need PC but no warrant</td>
+  <td><em>Carroll v. United States</em></td>
+</tr>
+<tr>
+  <td>Exigent Circumstances</td>
+  <td>Emergency (destruction of evidence, hot pursuit, danger)</td>
+  <td><em>Kentucky v. King</em></td>
+</tr>
+<tr>
+  <td>Stop &amp; Frisk</td>
+  <td>Reasonable suspicion → brief stop + pat-down for weapons</td>
+  <td><em>Terry v. Ohio</em></td>
+</tr>
+<tr>
+  <td>Special Needs</td>
+  <td>Drug testing, school searches, border searches</td>
+  <td><em>Vernonia</em>, <em>T.L.O.</em></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Exclusionary Rule (<em>Mapp v. Ohio</em>):</strong> Evidence obtained in violation of 4th Amend. is inadmissible ("fruit of the poisonous tree"). Exception: Good faith reliance on warrant (<em>Leon</em>).</p>
+
+<hr />
+
+<h2 id="5th-amendment-self-incrimination-miranda">5th Amendment — Self-Incrimination &amp; Miranda</h2>
+
+<p><strong>Miranda v. Arizona (1966):</strong>
+Before custodial interrogation, officers must warn:
+1. Right to remain silent
+2. Anything said can be used against you
+3. Right to an attorney
+4. If you can't afford one, one will be appointed</p>
+
+<p><strong>Triggers:</strong> Both (1) <strong>custody</strong> AND (2) <strong>interrogation</strong> must be present. Public encounters or voluntary conversations don't require Miranda.</p>
+
+<hr />
+
+<h2 id="6th-amendment-right-to-counsel">6th Amendment — Right to Counsel</h2>
+
+<ul>
+<li><strong>Attaches</strong> at the initiation of formal adversarial proceedings (indictment, arraignment).</li>
+<li><em>Gideon v. Wainwright</em>: Right to appointed counsel for indigent defendants in ALL felony cases.</li>
+<li><em>Strickland v. Washington</em>: Ineffective assistance = (1) deficient performance + (2) prejudice (reasonable probability result would have been different).</li>
+</ul>
+
+<hr />
+
+<h2 id="8th-amendment-cruel-unusual-punishment">8th Amendment — Cruel &amp; Unusual Punishment</h2>
+
+<p><strong>"Evolving Standards of Decency" Test (<em>Trop v. Dulles</em>):</strong>
+- Death penalty: Constitutional for murder (<em>Gregg</em>), unconstitutional for rape of adult (<em>Coker</em>), unconstitutional for non-homicide crimes (<em>Kennedy v. Louisiana</em>)
+- Juveniles: No death penalty (<em>Roper</em>); no mandatory LWOP (<em>Miller v. Alabama</em>)
+- <em>Timbs v. Indiana</em> (2019): Excessive Fines Clause incorporated against states</p>
+
+<hr />
+
+<h1 id="section-d-the-10th-and-11th-amendments-deeper-dive">SECTION D: THE 10th AND 11th AMENDMENTS — DEEPER DIVE</h1>
+
+<h2 id="i-the-anti-commandeering-doctrine-10th-amendment">I. The Anti-Commandeering Doctrine (10th Amendment)</h2>
+
+<p><strong>The Rule:</strong> Congress cannot <strong>commandeer</strong> state governments — it cannot force state legislatures to pass laws or force state executive officials to enforce federal programs.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Case</th>
+  <th>What Congress Tried</th>
+  <th>Holding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><em>New York v. United States</em> (1992)</td>
+  <td>Forced states to either regulate radioactive waste or "take title" to it</td>
+  <td>INVALID — commandeers state legislatures</td>
+</tr>
+<tr>
+  <td><em>Printz v. United States</em> (1997)</td>
+  <td>Required local sheriffs to conduct background checks under the Brady Act</td>
+  <td>INVALID — commandeers state executive officials</td>
+</tr>
+<tr>
+  <td><em>Murphy v. NCAA</em> (2018)</td>
+  <td>Federal law prohibited states from authorizing sports betting</td>
+  <td>INVALID — commandeers by telling states what laws they <em>cannot</em> pass</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Fisher Distinction:</strong> Congress CAN:
+  - Attach conditions to <strong>federal funding</strong> (Spending Power — <em>Dole</em>)
+  - <strong>Preempt</strong> state law entirely (Supremacy Clause)
+  - Regulate <strong>individuals</strong> directly (Commerce Clause)</p>
+  
+  <p>Congress CANNOT:
+  - Order state officials to implement federal programs (<em>Printz</em>)
+  - Order state legislatures to legislate (<em>New York</em>)
+  - Prohibit states from changing their own laws (<em>Murphy</em>)</p>
+</blockquote>
+
+<hr />
+
+<h2 id="ii-state-sovereign-immunity-11th-amendment">II. State Sovereign Immunity (11th Amendment)</h2>
+
+<p><strong>The Rule:</strong> States cannot be sued in federal court by their own citizens or citizens of other states, unless:</p>
+
+<ol>
+<li>The state <strong>consents</strong> to the suit;</li>
+<li>Congress <strong>abrogates</strong> sovereign immunity using a valid power source; OR</li>
+<li>The suit is against a <strong>state officer</strong> for prospective injunctive relief (<em>Ex parte Young</em> fiction).</li>
+</ol>
+
+<p><strong>The Abrogation Question:</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Power Source</th>
+  <th>Can Congress Abrogate?</th>
+  <th>Key Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Commerce Clause</td>
+  <td><strong>NO</strong></td>
+  <td><em>Seminole Tribe v. Florida</em> (1996)</td>
+</tr>
+<tr>
+  <td>Art. I powers generally</td>
+  <td><strong>NO</strong></td>
+  <td><em>Seminole Tribe</em></td>
+</tr>
+<tr>
+  <td>§ 5 of the 14th Amendment</td>
+  <td><strong>YES</strong> — if congruent &amp; proportional to documented violations</td>
+  <td><em>Fitzpatrick v. Bitzer</em> (1976)</td>
+</tr>
+<tr>
+  <td>§ 2 of the 13th Amendment</td>
+  <td><strong>YES</strong> (probably)</td>
+  <td>Not yet definitively resolved</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Fisher Connection:</strong> This links directly to <em>Boerne</em>. Congress must demonstrate a <em>pattern</em> of unconstitutional state behavior to abrogate immunity under § 5. A prophylactic law that sweeps too broadly fails <em>Boerne</em>'s "congruence and proportionality" test.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="section-e-final-crossreference-complete-coverage-map">SECTION E: FINAL CROSS‑REFERENCE — COMPLETE COVERAGE MAP</h1>
+
+<table>
+<thead>
+<tr>
+  <th>Topic</th>
+  <th>V2</th>
+  <th>Supp 1</th>
+  <th>Supp 2</th>
+  <th>Supp 3</th>
+  <th><strong>Supp 4</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Judicial Review / Justiciability</td>
+  <td>✅</td>
+  <td>—</td>
+  <td>—</td>
+  <td>✅</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>Federal Legislative Power</td>
+  <td>✅ (summary)</td>
+  <td>✅ (Deep IRACs)</td>
+  <td>—</td>
+  <td>✅</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>DCC &amp; P&amp;I (Art. IV)</td>
+  <td>✅ (summary)</td>
+  <td>—</td>
+  <td>✅ (Full)</td>
+  <td>✅</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>Preemption</td>
+  <td>✅ (summary)</td>
+  <td>—</td>
+  <td>✅ (Full)</td>
+  <td>✅</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>Separation of Powers</td>
+  <td>✅ (Youngstown)</td>
+  <td>—</td>
+  <td>✅ (Deep)</td>
+  <td>✅</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>Procedural Due Process</td>
+  <td>✅ (short)</td>
+  <td>—</td>
+  <td>✅ (Goldberg/Mathews)</td>
+  <td>—</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>SDP / Privacy / Abortion / Marriage</td>
+  <td>✅ (exhaustive)</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>Equal Protection (all tiers)</td>
+  <td>✅ (exhaustive)</td>
+  <td>—</td>
+  <td>—</td>
+  <td>✅</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>State Action</td>
+  <td>✅ (exhaustive)</td>
+  <td>—</td>
+  <td>—</td>
+  <td>✅</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>Congressional Enforcement (13,14,15)</td>
+  <td>✅ (exhaustive)</td>
+  <td>—</td>
+  <td>—</td>
+  <td>✅</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>First Amendment</td>
+  <td>✅ (addendum)</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td>Second Amendment</td>
+  <td>✅</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><strong>Checks &amp; Balances Matrix</strong></td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td><strong>✅</strong></td>
+</tr>
+<tr>
+  <td><strong>Amendments 1‑27</strong></td>
+  <td>(partial)</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td><strong>✅</strong></td>
+</tr>
+<tr>
+  <td><strong>Criminal Procedure (4‑8)</strong></td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td><strong>✅</strong></td>
+</tr>
+<tr>
+  <td><strong>Anti-Commandeering (10th)</strong></td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td><strong>✅</strong></td>
+</tr>
+<tr>
+  <td><strong>Sovereign Immunity (11th)</strong></td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td><strong>✅</strong></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="section-f-fisherready-exam-statement">SECTION F: FISHER‑READY EXAM STATEMENT</h1>
+
+<p>With the V2 Master Attack Outline, the First Amendment extension, Supplements 1–3, and now Supplement 4, <strong>every single topic</strong> — structural, rights, enforcement, separation of powers, and all 27 amendments — is at your fingertips.</p>
+
+<p>Whether the question calls for a <em>Lopez</em> analysis, a <em>Youngstown</em> zone classification, a <em>Glucksberg</em> history‑and‑tradition test, a <em>Boerne</em> congruence check, or a 4th Amendment search‑and‑seizure issue, you have the doctrine, the decision tree, and the Fisher traps ready to deploy.</p>
+
+<blockquote>
+  <p><strong>The Fisher Commandments:</strong>
+  1. Always start with the <strong>TEXT</strong> of the Constitution.
+  2. Identify the <strong>ACTOR</strong> and the <strong>POWER SOURCE</strong>.
+  3. Apply the correct <strong>STANDARD OF REVIEW</strong>.
+  4. Argue <strong>BOTH SIDES</strong> (never be conclusory).
+  5. Write with <strong>EXPOSITION</strong>, not narration.</p>
+</blockquote>
+
+<p><strong>You are now 100% covered. Good luck.</strong></p>
+
+</body>
+</html>
