@@ -157,6 +157,18 @@ jobs:
         working-directory: jsons
         run: |
           set -euo pipefail
+
+          # Signing walks every file in app.asar.unpacked. The statute corpus is
+          # 24,671 loose files there, and macOS defaults to a 256-descriptor soft
+          # limit, so @electron/osx-sign died mid-corpus with:
+          #   EMFILE: too many open files, open '.../app.asar.unpacked/references/
+          #          florida-statutes/...'
+          # Raising the limit is the one-line fix. If it recurs even at 65535, the
+          # durable fix is to ship the corpus as a single tarball inside the asar
+          # instead of 24,671 unpacked files (which would also speed up staging).
+          ulimit -n 65535 2>/dev/null || ulimit -n 10240 2>/dev/null || true
+          echo "open-file limit: $(ulimit -n)"
+
           APP="dist/mac-arm64/Senior Law Partner.app"
 
           # Phase 1 -- build the .app only. No DMG yet: the DMG must be built from
