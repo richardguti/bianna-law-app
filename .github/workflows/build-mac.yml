@@ -205,12 +205,22 @@ jobs:
 
           # Phase 4 -- prove the statute corpus actually shipped. An app that opens
           # but has no statutes is not a working app.
+          #
+          # The corpus ships INSIDE app.asar, not unpacked: 24,671 loose files in
+          # app.asar.unpacked made @electron/osx-sign exhaust file descriptors while
+          # signing (EMFILE, even at ulimit -n 65535). Count the .md entries in the
+          # archive instead, and assert the unpacked tree is gone so the two cannot
+          # silently drift apart again.
           echo "--- statute corpus inside the bundle ---"
-          UNPACKED="$APP/Contents/Resources/app.asar.unpacked/references/florida-statutes"
-          [ -d "$UNPACKED" ] || { echo "FAIL: corpus not unpacked at $UNPACKED"; find "$APP/Contents/Resources" -maxdepth 2 | head -20; exit 1; }
-          N=$(find "$UNPACKED" -name '*.md' | wc -l | tr -d ' ')
-          echo "  .md files: $N"
+          ASAR="$APP/Contents/Resources/app.asar"
+          [ -f "$ASAR" ] || { echo "FAIL: no app.asar at $ASAR"; ls -la "$APP/Contents/Resources" | head; exit 1; }
+          N=$(node -e "const a=require('@electron/asar');const n=a.listPackage(process.argv[1]).filter(p=>p.includes('florida-statutes')&&p.endsWith('.md')).length;console.log(n)" "$ASAR")
+          echo "  .md files inside app.asar: $N"
           [ "$N" -ge 24670 ] || { echo "FAIL: corpus incomplete in bundle ($N)"; exit 1; }
+          if [ -d "$APP/Contents/Resources/app.asar.unpacked/references/florida-statutes" ]; then
+            echo "FAIL: corpus is unpacked again -- that is what caused EMFILE during signing"
+            exit 1
+          fi
 
           # Phase 5 -- the DMG, built from the app we just signed and verified.
           npx electron-builder --mac dmg --arm64 --prepackaged "$APP" --publish never

@@ -149,6 +149,13 @@ function statuteInstallDir() {
 
 function bundledStatuteDir() {
   const candidates = [
+    // Inside the archive. The corpus used to ship unpacked, but 24,671 loose files
+    // in app.asar.unpacked made @electron/osx-sign exhaust file descriptors while
+    // signing (EMFILE, even with ulimit -n 65535 -- the usage there is unbounded,
+    // not merely above the default 256). Electron's fs shim reads and walks asar
+    // paths transparently, so keeping the corpus packed removes that walk entirely.
+    // The unpacked candidates stay as fallbacks for any older staged build tree.
+    path.join(app.getAppPath(), 'references', 'florida-statutes'),
     `${app.getAppPath()}.unpacked/references/florida-statutes`,
     path.join(path.dirname(app.getAppPath()), 'app.asar.unpacked', 'references', 'florida-statutes'),
     path.join(__dirname, '..', 'icm', 'references', 'florida-statutes'), // dev tree

@@ -18,8 +18,7 @@
     "asar": true,
     "asarUnpack": [
       "**/node_modules/@napi-rs/**",
-      "**/node_modules/pdf-parse/lib/**",
-      "references/florida-statutes/**"
+      "**/node_modules/pdf-parse/lib/**"
     ],
     "files": [
       "main.js",
