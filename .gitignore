@@ -52,3 +52,16 @@ Thumbs.db
 *.pem
 *.p12
 *.key
+
+# One-off dev scripts from the mock-exam era. They contain a hardcoded API key
+# (sk-4d35...daff, a third credential predating the rotated one) and are not part of
+# the shipped app. Kept on disk so they keep working locally, kept out of the repo so
+# the literal never lands in history. The proper fix next cycle is to read
+# os.environ.get('DEEPSEEK_KEY') in each, at which point they can be committed.
+apply_dewolf_style.py
+fix_set3.py
+fix_set3_properly.py
+gen_set2_key.py
+gen_set3_key.py
+generate_exam_variants.py
+generate_mock_exam.py
