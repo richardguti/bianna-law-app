@@ -107,6 +107,19 @@ jobs:
           # The value is never echoed. Confirm only that the file arrived.
           if [ -f .env.local ]; then echo ".env.local present"; fi
 
+      # src/ sits at the repo root while dependencies install into jsons/node_modules,
+      # because jsons/package.json is the only manifest. TypeScript and Vite resolve
+      # bare imports by walking up from the importing file, so root-level sources need
+      # the root to see those packages. Locally a root node_modules happens to exist;
+      # in CI it did not, and the type check died with:
+      #   error TS2688: Cannot find type definition file for 'vite/client'.
+      # The symlink makes CI resolve the same way local does.
+      - name: Link dependencies so root-level sources can resolve them
+        run: |
+          ln -s jsons/node_modules node_modules
+          ls -ld node_modules
+          test -d node_modules/vite || { echo "FAIL: vite not resolvable from the root"; exit 1; }
+
       # Cheap check first: compares source to itself, so it catches wiring mistakes
       # before anything is packaged. This is the gate that caught the Part 2 defect
       # while the packaged build shipped anyway.
