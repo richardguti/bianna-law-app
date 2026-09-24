@@ -61,8 +61,20 @@ jobs:
 
       # jsons/package.json is both the app manifest and the electron-builder config.
       # There is no root package.json, so every tool is invoked from jsons/.
+      #
+      # --legacy-peer-deps deliberately matches the developer's machine. `npm ci` is
+      # strict about peer ranges and fails here with ERESOLVE:
+      #   eslint-plugin-react-hooks@7.0.1 peers eslint ^3.0.0 || ... || ^9.0.0
+      #   but jsons/package.json pulls eslint@10.1.0
+      # The tolerant resolver installs the same tree that builds successfully locally,
+      # so CI and local agree. It is a match, not a workaround.
+      #
+      # TODO(next cycle): downgrade to eslint@^9.39.5 in jsons/package.json, run
+      # `npm install` locally to regenerate jsons/package-lock.json, then return to
+      # `npm ci --prefix jsons` so the lockfile guarantee is restored. Needs a lint
+      # config check first -- verify nothing depends on ESLint 10 behaviour.
       - name: Install dependencies
-        run: npm ci --prefix jsons
+        run: npm install --legacy-peer-deps --prefix jsons
 
       # The macOS zip-target regression (26.15.0/26.15.1) dereferences .framework
       # symlinks and produces exactly the "bundle format is ambiguous" failure seen
