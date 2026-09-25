@@ -190,3 +190,55 @@ checkable per section, which requires the boundary to be right in the first plac
 3.42% marker audit is a floor. Comparing every section in the corpus against its
 extracted counterpart would give the true rate for the invisible class (a clause missing
 with no stray markup). That comparison is the natural first use of the bulk download.
+
+## Phase 1 probe result (2026-09-25) - the container is XHTML, and the bug is provenance-proven
+
+The Folio container''s payload is the Florida Legislature''s own XHTML 1.0 Transitional, one
+document per section, with explicit markup:
+
+```html
+<title>F.S. 732.603</title>
+<div class="Section">
+  <span class="SectionNumber">732.603</span>
+  <span class="Catchline"><span class="CatchlineText">Antilapse; deceased devisee; class gifts.</span></span>
+  <div class="Subsection"><span class="Number">(4)</span><span class="Text Intro Justify">...</span></div>
+  <div class="History"><span class="HistoryTitle">History.</span>...<HISTORY>...</HISTORY></div>
+  <div class="Note"><span class="NoteTitle">Note.</span>...<NOTES>...</NOTES></div>
+</div></body></html>
+```
+
+**The corpus''s `jss="CatchlineText">` remnant is a mid-attribute break in exactly this
+markup.** The bundled corpus was scraped from this library. Provenance is no longer a
+hypothesis.
+
+**The wrong metadata is the immediately preceding section''s.** Two complete records sit
+adjacent in the container:
+
+```
+<HISTORY>s. 1, ch. 74-106; ss. 33, 35, ch. 75-220; s. 965, ... s. 49, ...
+<NOTES>Created from former ss. 732.41 and 732.602.      <- attached to 732.601 in the corpus
+
+<HISTORY>s. 1, ch. 74-106; s. 34, ch. 75-220; s. 966, ... s. 50, ...
+<NOTES>Created from former s. 736.05.                  <- the real 732.601
+```
+
+The off-by-one boundary error is observed directly, not inferred from the shape of the
+damage.
+
+**The extraction key is unambiguous, which is what makes the defect class impossible to
+repeat.** Each record carries its own section number inside it (`<title>F.S. NNN.NNN</title>`
+and `<span class="SectionNumber">`), so boundaries cannot be mis-detected by adjacency.
+Per record the extractor can assert: filename == SectionNumber, subsection count from
+`<span class="Number">` occurrences, History from `<HISTORY>`, Note from `<NOTES>`, and
+absence of stray markup.
+
+**Implementation constraint: the container is a record store, not a contiguous document.**
+Byte order is not document order - a raw byte window straddles record boundaries and
+produces interleaved fragments (one window showed an apparent duplicate `(4)`, which is
+two different records, not a markup defect). Segmentation must key on the HTML records,
+never on offsets. That also means the P-0 gate should compare subsection counts against
+`<span class="Number">` within a single record, not against text patterns.
+
+**Conclusion:** the .nxt route works. No scrape fallback is needed. Phase 1''s fixture -
+§ 732.601 with all four subsections, History `s. 34, ch. 75-220` / `s. 966` / `s. 50`, and
+Note `Created from former s. 736.05` - is present in the container exactly as required.
