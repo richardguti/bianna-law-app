@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { supabase, BIANNA_USER_ID, type DocumentRow } from '../lib/supabase'
+import { supabase, BIANNA_USER_ID, isSupabaseConfigured, type DocumentRow } from '../lib/supabase'
 
 type DocumentMode    = 'full_outline' | 'case_brief' | 'irac_memo' | 'checklist_audit' | 'flash_card' | 'custom'
 type DocumentSubject = 'contracts' | 'torts' | 'civ_pro' | 'constitutional' | 'property' | 'other'
@@ -32,6 +32,15 @@ const MODE_ICON: Record<DocumentMode, string> = {
   custom:          'edit_note',
 }
 
+/**
+ * A row as this page needs it: either a cloud row or one of the local Vault records.
+ *
+ * `origin` exists because the two stores fail differently. A local record always has a
+ * file on disk; a cloud row exists only if a project, a table and an RLS policy all line
+ * up. The page shows and opens both without pretending they are the same thing.
+ */
+type VaultDoc = DocumentRow & { origin: 'cloud' | 'local'; tags?: string[] }
+
 export function DocumentVault() {
   const qc = useQueryClient()
   const [search,      setSearch]      = useState('')
@@ -47,21 +56,57 @@ export function DocumentVault() {
   const [upText,      setUpText]      = useState('')
   const [upFileName,  setUpFileName]  = useState<string | null>(null)
 
-  const { data: docs = [] } = useQuery<DocumentRow[]>({
+  const { data: docs = [] } = useQuery<VaultDoc[]>({
     queryKey: ['documents', filterSub, filterMode, search],
     queryFn: async () => {
-      let q = supabase.from('documents').select('*').eq('user_id', BIANNA_USER_ID)
-      if (filterSub  !== 'all') q = q.eq('subject', filterSub)
-      if (filterMode !== 'all') q = q.eq('mode', filterMode)
-      if (search)               q = q.ilike('topic', `%${search}%`)
-      const { data } = await q.order('created_at', { ascending: false })
-      return (data ?? []) as DocumentRow[]
+      // Local first, always. These are files on this Mac, so they are available with no
+      // network and no Supabase project -- the difference between "her outline is safe"
+      // and "her outline was never stored anywhere".
+      const localRes = await (window as any).seniorPartner?.vaultList?.()
+      const local: VaultDoc[] = (localRes?.records ?? []).map((r: any) => ({
+        id:           r.id,
+        user_id:      BIANNA_USER_ID,
+        subject:      (r.subject ?? 'other') as DocumentSubject,
+        mode:         (r.mode ?? 'full_outline') as DocumentMode,
+        topic:        r.topic ?? 'Untitled',
+        html_content: '',   // read on demand: the list does not need the body
+        pdf_url:      null,
+        created_at:   r.created_at,
+        origin:       'local' as const,
+        tags:         r.tags ?? [],
+      }))
+
+      // Cloud second, and only when this build was actually configured for it. Skipping
+      // the request entirely is more honest than firing one that must fail.
+      let cloud: VaultDoc[] = []
+      if (isSupabaseConfigured) {
+        let q = supabase.from('documents').select('*').eq('user_id', BIANNA_USER_ID)
+        if (filterSub  !== 'all') q = q.eq('subject', filterSub)
+        if (filterMode !== 'all') q = q.eq('mode', filterMode)
+        if (search)               q = q.ilike('topic', `%${search}%`)
+        const { data } = await q.order('created_at', { ascending: false })
+        cloud = ((data ?? []) as DocumentRow[]).map((d) => ({ ...d, origin: 'cloud' as const }))
+      }
+
+      // The local store has no SQL, so the filters are applied here for both sources.
+      const matches = (d: VaultDoc) =>
+        (filterSub  === 'all' || d.subject === filterSub) &&
+        (filterMode === 'all' || d.mode    === filterMode) &&
+        (!search || d.topic.toLowerCase().includes(search.toLowerCase()))
+
+      return [...local, ...cloud]
+        .filter(matches)
+        .sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
     },
   })
 
   const deleteDoc = useMutation({
-    mutationFn: async (id: string) => {
-      await supabase.from('documents').delete().eq('id', id)
+    mutationFn: async (doc: VaultDoc) => {
+      if (doc.origin === 'local') {
+        await (window as any).seniorPartner?.vaultDelete?.({ id: doc.id })
+        return
+      }
+      await supabase.from('documents').delete().eq('id', doc.id)
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['documents'] })
@@ -69,21 +114,29 @@ export function DocumentVault() {
     },
   })
 
-  function openDoc(id: string, html: string) {
-    setViewId(id)
-    setViewContent(html)
+  /** The body of a document. A local record is read from disk only when it is opened. */
+  async function resolveHtml(doc: VaultDoc): Promise<string> {
+    if (doc.origin !== 'local' || doc.html_content) return doc.html_content
+    const res = await (window as any).seniorPartner?.vaultRead?.({ id: doc.id })
+    return res?.html ?? ''
   }
 
-  function copyHtml(html: string) {
-    navigator.clipboard.writeText(html)
+  async function openDoc(doc: VaultDoc) {
+    setViewId(doc.id)
+    setViewContent(await resolveHtml(doc))
   }
 
-  function downloadHtml(topic: string, html: string) {
+  async function copyHtml(doc: VaultDoc) {
+    navigator.clipboard.writeText(await resolveHtml(doc))
+  }
+
+  async function downloadHtml(doc: VaultDoc) {
+    const html = await resolveHtml(doc)
     const blob = new Blob([html], { type: 'text/html' })
     const url  = URL.createObjectURL(blob)
     const a    = document.createElement('a')
     a.href     = url
-    a.download = `${topic.replace(/\s+/g, '_')}_outline.html`
+    a.download = `${doc.topic.replace(/\s+/g, '_')}_outline.html`
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -167,7 +220,7 @@ export function DocumentVault() {
                     className={`bg-surface-container-lowest rounded-xl p-5 border transition-all cursor-pointer shadow-[var(--shadow-sm)] ${
                       viewId === doc.id ? 'border-primary' : 'border-outline-variant/10 hover:border-primary/30'
                     }`}
-                    onClick={() => openDoc(doc.id, doc.html_content)}
+                    onClick={() => void openDoc(doc)}
                   >
                     <div className="flex items-start gap-3 mb-3">
                       <span className="material-symbols-outlined text-primary-container text-xl mt-0.5">{MODE_ICON[doc.mode as DocumentMode]}</span>
@@ -188,21 +241,21 @@ export function DocumentVault() {
                     </div>
                     <div className="flex gap-1 mt-3 pt-3 border-t border-outline-variant/10">
                       <button
-                        onClick={(e) => { e.stopPropagation(); copyHtml(doc.html_content) }}
+                        onClick={(e) => { e.stopPropagation(); void copyHtml(doc) }}
                         className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-on-surface-variant hover:bg-surface-container-high transition-colors"
                         title="Copy HTML"
                       >
                         <span className="material-symbols-outlined text-sm">content_copy</span>
                       </button>
                       <button
-                        onClick={(e) => { e.stopPropagation(); downloadHtml(doc.topic, doc.html_content) }}
+                        onClick={(e) => { e.stopPropagation(); void downloadHtml(doc) }}
                         className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-on-surface-variant hover:bg-surface-container-high transition-colors"
                         title="Download HTML"
                       >
                         <span className="material-symbols-outlined text-sm">download</span>
                       </button>
                       <button
-                        onClick={(e) => { e.stopPropagation(); if (confirm('Delete this outline?')) deleteDoc.mutate(doc.id) }}
+                        onClick={(e) => { e.stopPropagation(); if (confirm('Delete this outline?')) deleteDoc.mutate(doc) }}
                         className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-on-surface-variant hover:text-error hover:bg-error-container/30 transition-colors"
                         title="Delete"
                       >
@@ -321,20 +374,35 @@ export function DocumentVault() {
                   setUploading(true)
                   try {
                     const html = `<div class="bia-outline"><pre style="white-space:pre-wrap;font-family:inherit">${upText.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre></div>`
-                    const { error } = await supabase.from('documents').insert({
-                      user_id: BIANNA_USER_ID,
+
+                    // Local first, for the same reason the generator does it: an upload that
+                    // fails in the cloud must not be an upload that lost her document.
+                    const sp = (window as any).seniorPartner
+                    const local = await sp?.vaultSave?.({
                       topic:   upTopic.trim(),
                       subject: upSubject,
                       mode:    upMode,
-                      html_content: html,
+                      html,
                     })
-                    if (!error) {
-                      qc.invalidateQueries({ queryKey: ['documents'] })
-                      setUploadModal(false)
-                      setUpText('')
-                      setUpFileName(null)
-                      setUpTopic('')
+
+                    if (local?.success !== true) return
+
+                    // Cloud mirror, only in a build that was configured for it.
+                    if (isSupabaseConfigured) {
+                      await supabase.from('documents').insert({
+                        user_id: BIANNA_USER_ID,
+                        topic:   upTopic.trim(),
+                        subject: upSubject,
+                        mode:    upMode,
+                        html_content: html,
+                      })
                     }
+
+                    qc.invalidateQueries({ queryKey: ['documents'] })
+                    setUploadModal(false)
+                    setUpText('')
+                    setUpFileName(null)
+                    setUpTopic('')
                   } finally {
                     setUploading(false)
                   }

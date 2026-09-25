@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { supabase, BIANNA_USER_ID } from '../lib/supabase'
+import { supabase, BIANNA_USER_ID, isSupabaseConfigured } from '../lib/supabase'
 import { useAppStore } from '../store/appStore'
 import { streamAi } from '../lib/aiStream'
 import { EditableChipGroup } from '../components/EditableChipGroup'
@@ -115,11 +115,90 @@ export function OutlineGenerator() {
   const [attachMsg,       setAttachMsg]       = useState<string | null>(null)
   const [output,          setOutput]          = useState<string | null>(null)
   const [saveMsg,         setSaveMsg]         = useState<string | null>(null)
+
+  // ── Save fallback: format choice, then folder-or-Vault ───────────────────────
+  // Opened whenever the cloud Vault cannot take the outline, and whenever the app is
+  // asked to close with unsaved work. Word or PDF is preselected because a file is useful
+  // in ways a database row is not: it can be printed, emailed or edited, and it can live
+  // in whichever folder she actually wants.
+  const [exportOpen,      setExportOpen]      = useState(false)
+  const [exportFormat,    setExportFormat]    = useState<'docx' | 'pdf' | 'html'>('docx')
+  const [exportBusy,      setExportBusy]      = useState(false)
+  const [exportNote,      setExportNote]      = useState<string | null>(null)
+  const [vaultTags,       setVaultTags]       = useState('')
+  const [savedLocally,    setSavedLocally]    = useState(false)
+  const [exitPrompt,      setExitPrompt]      = useState(false)
   const [lastUserContent, setLastUserContent] = useState<string | null>(null)
   // ── Live stream state: answer tokens + the model's reasoning trace ──
   const [streamBuffer,    setStreamBuffer]    = useState('')
   const [reasoning,       setReasoning]       = useState('')
   const [elapsed,         setElapsed]         = useState(0)
+
+  // ── Unsaved-work tracking ────────────────────────────────────────────────────
+  // The generator can hold tens of thousands of tokens of work. Anything rendered but not
+  // yet stored anywhere is reported to the main process, which intercepts the first
+  // close/quit and hands it back here instead of discarding it silently.
+  function markUnsaved() { (window as any).seniorPartner?.setUnsaved?.(true) }
+  function markSaved()   { (window as any).seniorPartner?.setUnsaved?.(false) }
+
+  // A completed generation starts unsaved; storing it anywhere clears that.
+  useEffect(() => {
+    if (output) markUnsaved()
+  }, [output])
+
+  // The main process refused to close because work is unsaved. Ask, never discard.
+  useEffect(() => {
+    const bridge = window.seniorPartner
+    bridge?.on?.('app:unsaved-exit', () => { setExitPrompt(true); setExportOpen(true) })
+  }, [])
+
+  /**
+   * The route she chose: a real file in a folder she picks, or the in-app Vault.
+   *
+   * Both are offered because they solve different problems. A folder is for handing work
+   * in, printing or editing. The Vault is for keeping work organised and tagged next to
+   * everything else she has written.
+   */
+  async function exportOutline(destination: 'folder' | 'vault') {
+    if (!output) return
+    const sp = (window as any).seniorPartner
+    const topicLabel = topic || chips[0] || 'Untitled'
+
+    if (destination === 'vault') {
+      // Already written by addToVault; reveal it so she can see where it went.
+      setExportOpen(false)
+      setSaveMsg('Kept in the app Vault \u2713')
+      setTimeout(() => setSaveMsg(null), 4000)
+      sp?.vaultOpenFolder?.()
+      if (exitPrompt) { setExitPrompt(false); sp?.exitNow?.() }
+      return
+    }
+
+    setExportBusy(true)
+    try {
+      const res = await sp?.exportDocument?.({
+        topic:  topicLabel,
+        subject,
+        mode:   primaryMode,
+        html:   output,
+        format: exportFormat,
+      })
+      if (res?.success) {
+        setSaveMsg('Saved to ' + res.filePath)
+        markSaved()
+        setExportOpen(false)
+        setExportNote(null)
+        if (exitPrompt) { setExitPrompt(false); sp?.exitNow?.() }
+        setTimeout(() => setSaveMsg(null), 8000)
+      } else if (!res?.canceled) {
+        // Cancelling the native dialog is not an error; anything else is, and she should
+        // see why rather than watch the dialog vanish.
+        setExportNote(res?.error || 'Export failed.')
+      }
+    } finally {
+      setExportBusy(false)
+    }
+  }
   const fileRef = useRef<HTMLInputElement>(null)
 
   /** Runs fn while ticking a once-per-second elapsed timer for the "thinking" UI. */
@@ -248,11 +327,56 @@ export function OutlineGenerator() {
     onError:   () => setStreamBuffer(''),
   })
 
-  /* Save to Vault */
-  async function saveToVault() {
+  /* ── Save: local Vault first, cloud second, file export as the standing fallback ── */
+
+  /**
+   * Stores the outline somewhere durable.
+   *
+   * Order matters. The local Vault is written FIRST because it is the step that cannot
+   * fail for environmental reasons: no network, no Supabase project, no table, no RLS
+   * policy. This used to be one Supabase insert, so a misconfigured or unprovisioned
+   * project meant her work was stored nowhere and the UI said only "Save failed".
+   */
+  async function addToVault() {
     if (!output) return
 
     const topicLabel = topic || chips[0] || 'Untitled'
+
+    const sp = (window as any).seniorPartner
+    const tagList = vaultTags.split(',').map((t) => t.trim()).filter(Boolean)
+
+    // 1. Disk first. This is the step that cannot fail for environmental reasons, so the
+    //    artifact is safe before any network call is made.
+    const local = await sp?.vaultSave?.({
+      topic: topicLabel,
+      subject,
+      mode:  primaryMode,
+      tags:  tagList,
+      html:  output,
+    })
+
+    if (!local || !local.success) {
+      // Nothing durable happened (e.g. no preload bridge). Go straight to the file route
+      // rather than reporting a failure and leaving her with nothing.
+      setExportNote(local?.error || 'This build cannot write to the Vault folder.')
+      setExportOpen(true)
+      return
+    }
+
+    markSaved()
+    setSavedLocally(true)
+
+    // 2. No cloud project in this build. The local copy is the answer, and the file route
+    //    is offered immediately because that is what she asked for: a Word or PDF copy of
+    //    the exact outline, in a folder she chooses.
+    if (!isSupabaseConfigured) {
+      setSaveMsg('Saved in the app Vault \u2713')
+      setTimeout(() => setSaveMsg(null), 4000)
+      setExportOpen(true)
+      return
+    }
+
+    // 3. Cloud mirror. Best effort by design; the local copy above is already durable.
     const { error } = await supabase.from('documents').insert({
       user_id:      BIANNA_USER_ID,
       subject,
@@ -269,8 +393,16 @@ export function OutlineGenerator() {
     }
     setTimeout(() => setSaveMsg(null), 4000)
 
-    // Push outline summary to local long-term memory
-    const sp = (window as any).seniorPartner
+    if (error) {
+      // The local copy above is already on disk, so a cloud failure is a sync problem, not
+      // a lost outline. Correct the message that branch just wrote and offer the file
+      // route she asked for instead of leaving a dead end.
+      setSaveMsg('Saved in the app Vault \u2713  (cloud sync unavailable)')
+      setExportNote(error.message)
+      setExportOpen(true)
+    }
+
+    // Push outline summary to local long-term memory. `sp` is already in scope above.
     sp?.memoryWrite?.({
       content: `**Subject:** ${subject} | **Mode:** ${primaryMode}\n\n${output.slice(0, 1200)}${output.length > 1200 ? '\n\n…[truncated]' : ''}`,
       type:    'longterm',
@@ -457,10 +589,16 @@ export function OutlineGenerator() {
               <span className="material-symbols-outlined text-base">content_copy</span> Copy HTML
             </button>
             <button
-              onClick={saveToVault}
+              onClick={addToVault}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-label text-on-surface-variant hover:bg-surface-container-high transition-colors"
             >
               <span className="material-symbols-outlined text-base">save</span> Add to Vault
+            </button>
+            <button
+              onClick={() => { setExportNote(null); setExportOpen(true) }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-label text-on-surface-variant hover:bg-surface-container-high transition-colors"
+            >
+              <span className="material-symbols-outlined text-base">download</span> Save as Word / PDF
             </button>
             <button
               onClick={() => generate.mutate()}
@@ -555,6 +693,93 @@ export function OutlineGenerator() {
           )}
         </div>
       </section>
+
+      {/* ── Save fallback ───────────────────────────────────────────────────────
+          Reached in two situations: the cloud Vault cannot take the outline, or the app
+          was asked to close with work still unsaved. The exact rendered outline is
+          written out -- never a summary and never a re-generation -- first as a Word or
+          PDF file for a folder she chooses, or alternatively into the in-app Vault where
+          it can be tagged and organised alongside everything else. */}
+      {exportOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6">
+          <div className="w-full max-w-lg rounded-2xl bg-surface-container-low shadow-2xl border border-outline-variant/20">
+            <div className="px-6 py-5 border-b border-outline-variant/10">
+              <h2 className="font-serif text-xl text-on-surface">
+                {exitPrompt ? 'Save this outline before closing?' : 'Save your outline'}
+              </h2>
+              <p className="text-xs text-on-surface-variant mt-1">
+                {exportNote ?? 'Choose a file format, then where it should go.'}
+              </p>
+            </div>
+
+            <div className="px-6 py-5 space-y-5">
+              <div>
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Format</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {([['docx', 'Word', 'description'], ['pdf', 'PDF', 'picture_as_pdf'], ['html', 'Web page', 'language']] as const).map(([value, label, icon]) => (
+                    <button
+                      key={value}
+                      onClick={() => setExportFormat(value)}
+                      className={`flex flex-col items-center gap-1 py-3 rounded-xl border text-xs font-label transition-colors ${exportFormat === value ? 'border-primary text-primary bg-primary/5' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/60'}`}
+                    >
+                      <span className="material-symbols-outlined text-lg">{icon}</span>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">Tags for the Vault (optional)</label>
+                <input
+                  value={vaultTags}
+                  onChange={(e) => setVaultTags(e.target.value)}
+                  placeholder="e.g. Final, Professor Hook, Torts"
+                  className="w-full bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none border border-outline-variant/20 focus:border-primary transition-colors"
+                />
+                {savedLocally && (
+                  <p className="text-[10px] text-primary mt-1.5">
+                    Already kept in the app Vault &#8212; tags are applied when you save again.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2 justify-end px-6 py-4 border-t border-outline-variant/10">
+              {exitPrompt && (
+                <button
+                  onClick={() => { setExitPrompt(false); (window as any).seniorPartner?.exitNow?.() }}
+                  className="px-4 py-2 rounded-full text-xs font-bold text-on-surface-variant hover:bg-surface-container-high transition-colors mr-auto"
+                >
+                  Discard and close
+                </button>
+              )}
+              <button
+                onClick={() => { setExportOpen(false); setExitPrompt(false) }}
+                className="px-4 py-2 rounded-full text-xs font-bold text-on-surface-variant hover:bg-surface-container-high transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                disabled={exportBusy}
+                onClick={() => exportOutline('vault')}
+                className="flex items-center gap-1.5 px-5 py-2 rounded-full border border-primary/40 text-primary text-xs font-bold hover:bg-primary/5 transition-colors disabled:opacity-40"
+              >
+                <span className="material-symbols-outlined text-sm">inventory_2</span>
+                Keep in app Vault
+              </button>
+              <button
+                disabled={exportBusy}
+                onClick={() => exportOutline('folder')}
+                className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-primary text-on-primary text-xs font-bold hover:opacity-90 transition-opacity disabled:opacity-40"
+              >
+                <span className="material-symbols-outlined text-sm">{exportBusy ? 'hourglass_empty' : 'folder_open'}</span>
+                {exportBusy ? 'Saving…' : 'Save to a folder…'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

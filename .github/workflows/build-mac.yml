@@ -89,23 +89,44 @@ jobs:
             26.15.0|26.15.1) echo "FAIL: $V is known-bad for macOS packaging"; exit 1 ;;
           esac
 
-      # The API key is not in the repository. Vite inlines VITE_DEEPSEEK_KEY from
-      # .env.local, which is gitignored; on CI it comes from the DEEPSEEK_KEY
-      # repository secret instead, written here so the build step is identical in
-      # both places. If the secret is unset the build still succeeds and the app
-      # simply ships without a default key, which Settings can supply at runtime.
-      - name: Inject API key
+      # Secrets are not in the repository. Vite inlines VITE_* from .env.local, which is
+      # gitignored; on CI the values come from repository secrets instead, written here so
+      # the build step is identical in both places.
+      #
+      # VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are REQUIRED, not optional. Absent
+      # them Vite inlines `void 0`, so src/lib/supabase.ts builds its client from
+      # createClient(void 0, void 0), supabase-js throws "supabaseUrl is required." while
+      # the bundle is still evaluating, React never mounts, and the window opens white --
+      # while did-finish-load and ready-to-show both still fire. Three DMGs shipped that
+      # way. supabase.ts now degrades to the local Vault instead of throwing, and the
+      # assertion in the verify step fails the build if they never reached the bundle.
+      - name: Inject secrets
         env:
-          DEEPSEEK_KEY: ${{ secrets.DEEPSEEK_KEY }}
+          DEEPSEEK_KEY:      ${{ secrets.DEEPSEEK_KEY }}
+          SUPABASE_URL:      ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
+          set -euo pipefail
+          : > .env.local
           if [ -n "${DEEPSEEK_KEY:-}" ]; then
-            printf 'VITE_DEEPSEEK_KEY=%s\n' "$DEEPSEEK_KEY" > .env.local
-            echo "key injected from repository secret (${#DEEPSEEK_KEY} chars)"
+            printf 'VITE_DEEPSEEK_KEY=%s\n' "$DEEPSEEK_KEY" >> .env.local
+            echo "deepseek key injected (${#DEEPSEEK_KEY} chars)"
           else
-            echo "DEEPSEEK_KEY secret is not set - building with no default key"
+            echo "DEEPSEEK_KEY secret is not set - the app ships with no default key"
           fi
-          # The value is never echoed. Confirm only that the file arrived.
-          if [ -f .env.local ]; then echo ".env.local present"; fi
+          if [ -n "${SUPABASE_URL:-}" ] && [ -n "${SUPABASE_ANON_KEY:-}" ]; then
+            printf 'VITE_SUPABASE_URL=%s\n'      "$SUPABASE_URL"      >> .env.local
+            printf 'VITE_SUPABASE_ANON_KEY=%s\n' "$SUPABASE_ANON_KEY" >> .env.local
+            echo "supabase url + anon key injected"
+          else
+            echo "FAIL: SUPABASE_URL and SUPABASE_ANON_KEY repository secrets must both be"
+            echo "      set. Without them the packaged renderer cannot construct its client"
+            echo "      and the app opens a white window. Refusing to build a broken DMG."
+            exit 1
+          fi
+          # Values are never echoed. Confirm only which keys arrived.
+          echo "--- keys present in .env.local ---"
+          cut -d= -f1 .env.local | sort
 
       # src/ sits at the repo root while dependencies install into jsons/node_modules,
       # because jsons/package.json is the only manifest. TypeScript and Vite resolve
@@ -126,7 +147,8 @@ jobs:
       - name: Type check
         run: jsons/node_modules/.bin/tsc --noEmit -p .tsc-check.json
 
-      # vite root is jsons/ (index.html lives there); output goes to ../dist-react.
+      # vite root is jsons/ (index.html lives there); output goes to jsons/dist-react/,
+       # which is where electron-builder reads it from.
       - name: Build renderer
         run: jsons/node_modules/.bin/vite build --config jsons/vite.config.ts
 
@@ -138,11 +160,16 @@ jobs:
       # dev tree. The source of truth on disk is icm/references/florida-statutes
       # (24,671 files, ~88 MB) -- jsons/references/florida-statutes does not exist,
       # which is why this copy is required rather than assumed.
-      - name: Stage renderer and statute corpus for packaging
+      - name: Stage the statute corpus for packaging
         run: |
           set -euo pipefail
-          rm -rf jsons/dist-react jsons/references
-          cp -R dist-react jsons/dist-react
+          # vite build wrote jsons/dist-react directly -- the directory
+          # electron-builder reads -- so there is one renderer tree and no `cp -R`
+          # that can silently ship a stale bundle, which is exactly what made every
+          # local --dir test disagree with the shipped artifact.
+          test -f jsons/dist-react/index.html \
+            || { echo "FAIL: jsons/dist-react/index.html is missing; vite build did not write where the packager reads"; exit 1; }
+          rm -rf jsons/references
           mkdir -p jsons/references
           cp -R icm/references/florida-statutes jsons/references/florida-statutes
           echo "renderer: $(ls jsons/dist-react | wc -l | tr -d ' ') entries"
@@ -230,6 +257,18 @@ jobs:
             echo "FAIL: corpus is unpacked again -- that is what caused EMFILE during signing"
             exit 1
           fi
+
+          # The white-window regression gate. Vite inlines VITE_SUPABASE_URL at build time;
+          # when it is absent the renderer's Supabase client is constructed from `void 0`,
+          # supabase-js throws "supabaseUrl is required." while the bundle is still being
+          # evaluated, React never mounts, and the window opens white -- while
+          # did-finish-load and ready-to-show both still fire, so every liveness check says
+          # the app is fine. Assert the INLINED host, not the source: the source looked
+          # correct all three times this shipped.
+          BUNDLE=$(ls dist-react/assets/*.js | head -1)
+          SB=$(node -e "const a=require('@electron/asar');process.stdout.write(a.extractFile(process.argv[1],process.argv[2]).toString('utf8'))" "$ASAR" "dist-react/assets/$(basename "$BUNDLE")" | grep -oE 'https://[a-z0-9-]+\.supabase\.co' | wc -l)
+          echo "  inlined Supabase host occurrences: $SB (expect >= 1)"
+          [ "$SB" -ge 1 ] || { echo "FAIL: the packaged bundle contains no Supabase URL. That is the build that opens a white window."; exit 1; }
 
           # Phase 5 -- the DMG, built from the app we just signed and verified.
           npx electron-builder --mac dmg --arm64 --prepackaged "$APP" --publish never

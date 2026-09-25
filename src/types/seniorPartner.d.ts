@@ -117,6 +117,34 @@ declare global {
 
       /* ── Diagnostics, calendar & generic channel ─────────────────────────── */
       getDiagnostics:      () => Promise<{ apiKeyPresent?: boolean; [key: string]: unknown }>
+
+      /* ── Boot diagnostics (renderer → boot.log) ── */
+      /** Report a genuine React mount. The only signal that proves the bundle ran. */
+      rendererMounted: () => void
+      /** Report an uncaught renderer error so it reaches boot.log instead of nowhere. */
+      bootFault: (payload: { kind: string; detail: string }) => void
+      /** Tell the main process whether an unsaved outline is open (quit guard). */
+      setUnsaved: (flag: boolean) => void
+      /** Resolve the quit guard and exit the app. */
+      exitNow: () => Promise<{ success: boolean }>
+
+      /* ── Local Document Vault (works with no Supabase project) ── */
+      vaultSave:       (args: { topic: string; subject: string; mode: string; tags?: string[]; html: string }) =>
+                         Promise<{ success: boolean; record?: unknown; dir?: string; error?: string }>
+      vaultList:       () => Promise<{ success: boolean; records: unknown[]; dir?: string; error?: string }>
+      vaultRead:       (args: { id: string }) =>
+                         Promise<{ success: boolean; record?: unknown; html?: string; error?: string }>
+      vaultUpdate:     (args: { id: string; tags?: string[]; topic?: string }) =>
+                         Promise<{ success: boolean; record?: unknown; error?: string }>
+      vaultDelete:     (args: { id: string }) => Promise<{ success: boolean; error?: string }>
+      vaultOpenFolder: () => Promise<{ success: boolean }>
+
+      /* ── Export (Word / PDF / HTML / Markdown) ── */
+      exportDocument:  (args: {
+                         topic: string; subject: string; mode: string; html: string;
+                         format: 'docx' | 'pdf' | 'html' | 'md'; filePath?: string;
+                       }) => Promise<{ success: boolean; filePath?: string; format?: string; canceled?: boolean; error?: string }>
+
       openExternalUrl:     (url: string) => Promise<unknown>
       syncGoogleCalendar:  (events: unknown[]) => Promise<unknown>
       on:                  (channel: string, cb: (...args: unknown[]) => void) => void

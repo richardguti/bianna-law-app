@@ -7,6 +7,29 @@ import App from './App.tsx'
 import { initTheme } from './lib/theme'
 import { useAppStore } from './store/appStore'
 
+// ─── Renderer fault reporting ────────────────────────────────────────────────
+// A renderer that dies during module evaluation is invisible to the main process: the
+// window simply stays white while did-finish-load and ready-to-show both fire, because
+// the window's backgroundColor is a paint. Forwarding the two global error events to
+// boot.log means the next failure names itself instead of being inferred from a
+// screenshot -- which is exactly how a missing build-time environment variable was
+// misread as a rendering problem for three releases.
+function reportRendererFault(kind: string, detail: string) {
+  try {
+    window.seniorPartner?.bootFault?.({ kind, detail: String(detail).slice(0, 2000) })
+  } catch { /* diagnostics must never become a fault themselves */ }
+}
+
+window.addEventListener('error', (event) => {
+  const err = event.error as Error | undefined
+  reportRendererFault('error', err?.stack || event.message || 'unknown')
+})
+
+window.addEventListener('unhandledrejection', (event) => {
+  const reason = event.reason as { stack?: string } | undefined
+  reportRendererFault('unhandledrejection', reason?.stack || String(event.reason))
+})
+
 // Apply the stored palette before first paint (and follow the OS for 'system').
 void initTheme()
 // Hydrate the persisted student profile (name/school/year/photo) on boot.

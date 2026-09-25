@@ -21,6 +21,26 @@ const queryClient = new QueryClient({
   },
 })
 
+/**
+ * Reports a genuine React mount to the main process.
+ *
+ * This exists because `ready-to-show` cannot answer the question it was being asked to
+ * answer. Electron fires that event as soon as the window has anything to display, and
+ * `backgroundColor: '#F8F9FA'` is something -- so it fired on builds whose renderer
+ * bundle threw at module scope, before React ever ran. Three releases were signed off on
+ * the strength of that event while the window was in fact blank.
+ *
+ * An effect can only run after a real commit, and this component sits inside the whole
+ * provider tree, so the ping reaches boot.log only if the bundle evaluated, App rendered
+ * and every provider mounted. It is the one signal that means what it says.
+ */
+function BootSignal() {
+  useEffect(() => {
+    window.seniorPartner?.rendererMounted?.()
+  }, [])
+  return null
+}
+
 export default function App() {
   // One-shot: move pre-1.2.0 custom preset values out of localStorage and into the
   // app's store. Best-effort by design - boot must never depend on the migration, and
@@ -49,6 +69,7 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <BootSignal />
       <HashRouter>
         <Routes>
           <Route element={<Layout />}>

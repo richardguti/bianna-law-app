@@ -69,6 +69,17 @@ function getNotionClient() {
 
 let mainWindow;
 
+// Set inside createWindow. The renderer calls this over IPC once React has actually
+// committed. `ready-to-show` cannot stand in for it: that event fires on the window's
+// first paint, and backgroundColor supplies one even when the renderer bundle threw
+// before React ran. See the assignment below.
+let onRendererMounted = () => {};
+
+// Quit guard. The generator can hold a 24,576-token artifact in memory, and closing the
+// window used to discard it silently. The renderer reports whether anything is unsaved.
+let hasUnsavedOutline = false;
+let exitConfirmed      = false;
+
 // ─── Window ──────────────────────────────────────────────────────────────────
 // ─── Launch diagnostics: safe mode and failure escalation ────────────────────
 // Three DMGs went out with the same white window because the failing layer was never
@@ -121,7 +132,7 @@ function createWindow() {
       if (!readyToShowFired) {
         const next = FAILED_LAUNCHES + 1;
         try { store.set('failedLaunches', next); } catch { /* non-fatal */ }
-        bootLog('WHITE_SCREEN_DETECTED: ready-to-show did not fire within 15s; ' +
+        bootLog('WHITE_SCREEN_DETECTED: the renderer never reported a mount within 15s; ' +
                 'failedLaunches -> ' + next +
                 (next >= 2 ? '  (next launch will skip the corpus install)' : ''));
       }
@@ -136,10 +147,35 @@ function createWindow() {
   wc.on('console-message', (_e, level, message, line, source) =>
     bootLog('renderer console[' + level + '] ' + source + ':' + line + ' ' + message));
   let readyToShowFired = false;
+
+  // An initial-paint signal, NOT a React-mount signal. Electron fires this as soon as
+  // the window has anything to display, and `backgroundColor: '#F8F9FA'` is something --
+  // so it fired happily on the builds whose renderer bundle threw "supabaseUrl is
+  // required." before React ever ran. Any "the renderer paints" conclusion drawn from
+  // this event was unfounded. The failedLaunches reset has moved to onRendererMounted;
+  // this listener now only records that a paint happened.
   mainWindow.on('ready-to-show', () => {
     readyToShowFired = true;
+    bootLog('ready-to-show  (window has an initial paint; this does NOT prove React mounted)');
+  });
+
+  // The honest mount signal. It arrives from an effect running inside App.tsx's provider
+  // tree, so it can only fire if the whole bundle evaluated and React committed. This is
+  // what clears the consecutive-failure counter, so escalation to SKIP_CORPUS is now
+  // driven by a real failure rather than by a paint that a white window also produces.
+  onRendererMounted = () => {
+    readyToShowFired = true;
     try { store.set('failedLaunches', 0); } catch { /* non-fatal */ }
-    bootLog('ready-to-show  (renderer painted; failedLaunches reset to 0)');
+    bootLog('renderer MOUNTED  (React committed in the provider tree; failedLaunches -> 0)');
+  };
+
+  // Never let the red button discard an unsaved outline. The renderer resolves this by
+  // saving, exporting, or explicitly discarding.
+  mainWindow.on('close', (event) => {
+    if (exitConfirmed || !hasUnsavedOutline) return;
+    event.preventDefault();
+    bootLog('window close intercepted: an unsaved outline is open');
+    mainWindow.webContents.send('app:unsaved-exit');
   });
 
   const indexPath = path.join(__dirname, 'dist-react', 'index.html');
@@ -3267,3 +3303,294 @@ ipcMain.handle('sync-google-calendar', async (_event, eventsList) => {
     return { success: false, error: err.message || 'Google Calendar sync failed.' };
   }
 });
+
+// ─── IPC: renderer boot signals ──────────────────────────────────────────────
+// The renderer's half of the diagnostics at the top of this file. `on`, not `handle`:
+// these are fire-and-forget reports, and nothing in the renderer should wait on a log
+// write.
+ipcMain.on('app:renderer-mounted', () => onRendererMounted());
+
+ipcMain.on('app:boot-fault', (_event, payload) => {
+  const kind   = payload && payload.kind   ? String(payload.kind)   : 'fault';
+  const detail = payload && payload.detail ? String(payload.detail) : '(no detail)';
+  bootLog('RENDERER FAULT [' + kind + '] ' + detail.replace(/\s+/g, ' ').slice(0, 1500));
+});
+
+// ─── Local Document Vault ────────────────────────────────────────────────────
+// The Vault used to be Supabase-only, so a missing project, table or RLS policy meant an
+// outline Bianna had just generated could not be saved anywhere: the insert failed and
+// the UI said only "Save failed". Keeping her work must not depend on a network service
+// being provisioned correctly, so the artifact is written to disk first and mirrored to
+// Supabase as a bonus rather than as a precondition.
+//
+// Layout:  Documents/Bianna_Law/Vault/<slug>_<stamp>.html   the artifact itself
+//          Documents/Bianna_Law/Vault/index.json            taggable metadata
+const VAULT_DIRNAME = 'Vault';
+const VAULT_INDEX   = 'index.json';
+
+function getVaultDir() {
+  const dir = path.join(getBiannaLawDir(), VAULT_DIRNAME);
+  fs.mkdirSync(dir, { recursive: true });
+  return dir;
+}
+
+function readVaultIndex() {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(path.join(getVaultDir(), VAULT_INDEX), 'utf8'));
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    // Absent or corrupt index: an empty list is the only safe reading, because the
+    // artifacts on disk remain the source of truth and can be listed again.
+    return [];
+  }
+}
+
+function writeVaultIndex(records) {
+  const file = path.join(getVaultDir(), VAULT_INDEX);
+  // Write-then-rename so a crash mid-write cannot truncate the index and lose every tag.
+  const tmp = file + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(records, null, 2), 'utf8');
+  fs.renameSync(tmp, file);
+}
+
+/** Filesystem-safe, human-readable stem. Never returns an empty string. */
+function slugify(value, fallback = 'outline') {
+  const s = String(value || '').trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '_')
+    .slice(0, 60);
+  return s || fallback;
+}
+
+/** Sortable, filesystem-safe timestamp: 2026-09-25_17-46-06 */
+function vaultStamp() {
+  return new Date().toISOString().replace(/[:.]/g, '-').replace('T', '_').slice(0, 19);
+}
+
+/** Wrap a bare HTML fragment so it stands alone in a browser or a PDF renderer. */
+function wrapHtmlFragment(html, title) {
+  const safeTitle = String(title || 'Outline').replace(/[<>&]/g, '');
+  return '<!doctype html><html><head><meta charset="utf-8">' +
+    '<title>' + safeTitle + '</title>' +
+    '<style>body{font-family:Georgia,serif;line-height:1.55;margin:48px;color:#1a1a1a}' +
+    'h1,h2,h3,h4{color:#546345}table{border-collapse:collapse}' +
+    'td,th{border:1px solid #cccccc;padding:4px 8px}</style></head><body>' +
+    html + '</body></html>';
+}
+
+ipcMain.handle('vault:save', (_event, { topic, subject, mode, tags, html } = {}) => {
+  try {
+    const clean = String(html || '').trim();
+    if (!clean) return { success: false, error: 'Nothing to save: the outline is empty.' };
+
+    const dir   = getVaultDir();
+    const title = String(topic || 'Untitled').trim() || 'Untitled';
+    const file  = slugify(title) + '_' + vaultStamp() + '.html';
+    fs.writeFileSync(path.join(dir, file), wrapHtmlFragment(clean, title), 'utf8');
+
+    const record = {
+      id:         'local-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      topic:      title,
+      subject:    String(subject || 'other'),
+      mode:       String(mode || 'full_outline'),
+      tags:       Array.isArray(tags) ? tags.map(String).slice(0, 24) : [],
+      created_at: new Date().toISOString(),
+      file,
+      origin:     'local',
+    };
+    const records = readVaultIndex();
+    records.unshift(record);
+    writeVaultIndex(records);
+    bootLog('vault: saved locally -> ' + file);
+    return { success: true, record, dir };
+  } catch (err) {
+    console.error('[vault:save]', err);
+    return { success: false, error: err.message || 'Could not write to the Vault folder.' };
+  }
+});
+
+ipcMain.handle('vault:list', () => {
+  try { return { success: true, records: readVaultIndex(), dir: getVaultDir() }; }
+  catch (err) { return { success: false, error: err.message, records: [] }; }
+});
+
+ipcMain.handle('vault:read', (_event, { id } = {}) => {
+  try {
+    const record = readVaultIndex().find((r) => r.id === id);
+    if (!record) return { success: false, error: 'That Vault item no longer exists.' };
+    return { success: true, record, html: fs.readFileSync(path.join(getVaultDir(), record.file), 'utf8') };
+  } catch (err) {
+    return { success: false, error: err.message || 'Could not read that Vault item.' };
+  }
+});
+
+ipcMain.handle('vault:update', (_event, { id, tags, topic } = {}) => {
+  try {
+    const records = readVaultIndex();
+    const record  = records.find((r) => r.id === id);
+    if (!record) return { success: false, error: 'That Vault item no longer exists.' };
+    // Only metadata moves. The artifact is never rewritten, so re-tagging cannot damage
+    // a saved document.
+    if (Array.isArray(tags)) record.tags = tags.map(String).slice(0, 24);
+    if (typeof topic === 'string' && topic.trim()) record.topic = topic.trim();
+    record.updated_at = new Date().toISOString();
+    writeVaultIndex(records);
+    return { success: true, record };
+  } catch (err) {
+    return { success: false, error: err.message || 'Could not update that Vault item.' };
+  }
+});
+
+ipcMain.handle('vault:delete', (_event, { id } = {}) => {
+  try {
+    const records = readVaultIndex();
+    const record  = records.find((r) => r.id === id);
+    if (!record) return { success: false, error: 'That Vault item no longer exists.' };
+    try { fs.unlinkSync(path.join(getVaultDir(), record.file)); } catch { /* already gone */ }
+    writeVaultIndex(records.filter((r) => r.id !== id));
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: err.message || 'Could not delete that Vault item.' };
+  }
+});
+
+ipcMain.handle('vault:open-folder', () => {
+  shell.openPath(getVaultDir());
+  return { success: true };
+});
+
+// ─── IPC: Export an outline to Word / PDF / HTML / Markdown ──────────────────
+// "Save it to a folder I choose" is a first-class outcome, not a consolation prize: a
+// student printing, emailing or editing her own work needs a real file in a real folder.
+// Word and PDF are both offered because which one is useful depends on what she is doing
+// with it, and she is the only one who knows that.
+const EXPORT_FORMATS = {
+  docx: { name: 'Microsoft Word', ext: 'docx' },
+  pdf:  { name: 'PDF',            ext: 'pdf'  },
+  html: { name: 'Web page',       ext: 'html' },
+  md:   { name: 'Markdown',       ext: 'md'   },
+};
+
+/** Flatten an HTML fragment to text lines, preserving the block structure. */
+function htmlToLines(html) {
+  const lines = String(html || '')
+    .replace(/<\s*(script|style)[\s\S]*?<\s*\/\s*\1\s*>/gi, '')
+    .replace(/<\s*br\s*\/?\s*>/gi, '\n')
+    .replace(/<\s*\/\s*(p|div|li|tr|h[1-6]|table)\s*>/gi, '\n')
+    .replace(/<\s*h[1-6][^>]*>/gi, '\n')
+    .replace(/<\s*li[^>]*>/gi, '  - ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .split('\n')
+    .map((l) => l.replace(/\s+$/, ''));
+  // Collapse runs of blank lines to at most one, without dropping real paragraphs.
+  return lines.filter((l, i) => l.trim() || (i > 0 && lines[i - 1].trim()));
+}
+
+/** Word: real .docx, using the same `docx` dependency the IRAC generator already uses. */
+async function writeDocx(filePath, { title, subtitle, html }) {
+  const { Document, Paragraph, TextRun, HeadingLevel, Packer } = require('docx');
+  const children = [new Paragraph({
+    heading:  HeadingLevel.TITLE,
+    children: [new TextRun({ text: String(title || 'Outline'), bold: true, size: 32 })],
+  })];
+  if (subtitle) {
+    children.push(new Paragraph({
+      spacing:  { after: 260 },
+      children: [new TextRun({ text: subtitle, italics: true, size: 20, color: '6B7280' })],
+    }));
+  }
+  for (const line of htmlToLines(html)) {
+    children.push(new Paragraph({
+      spacing:  { after: 90 },
+      children: [new TextRun({ text: line || '', size: 22 })],
+    }));
+  }
+  fs.writeFileSync(filePath, await Packer.toBuffer(new Document({ sections: [{ children }] })));
+}
+
+/** PDF: Chromium's own print pipeline, so wrapping and fonts match what she saw on screen. */
+async function writePdf(filePath, { title, html }) {
+  const win = new BrowserWindow({ show: false, webPreferences: { sandbox: true } });
+  try {
+    await win.loadURL('data:text/html;charset=utf-8,' +
+      encodeURIComponent(wrapHtmlFragment(html, title)));
+    const pdf = await win.webContents.printToPDF({ printBackground: true });
+    fs.writeFileSync(filePath, pdf);
+  } finally {
+    // Always destroy: an orphaned hidden window keeps the app alive after the last
+    // visible window closes.
+    win.destroy();
+  }
+}
+
+ipcMain.handle('document:export', async (_event, {
+  topic, subject, mode, html, format = 'docx', filePath: presetPath,
+} = {}) => {
+  try {
+    const clean = String(html || '').trim();
+    if (!clean) return { success: false, error: 'Nothing to export: the outline is empty.' };
+
+    const fmt  = EXPORT_FORMATS[format] ? format : 'docx';
+    const meta = EXPORT_FORMATS[fmt];
+    const title = String(topic || 'Untitled').trim() || 'Untitled';
+
+    let target = presetPath;
+    if (!target) {
+      // The native dialog is the point of this feature, not an afterthought: it is the
+      // only way she can put the file in the folder she actually wants, which is how
+      // everything else she does with a Mac works.
+      const chosen = await dialog.showSaveDialog(mainWindow, {
+        title:       'Save outline',
+        defaultPath: path.join(app.getPath('documents'), slugify(title) + '.' + meta.ext),
+        filters:     [{ name: meta.name, extensions: [meta.ext] }],
+      });
+      if (chosen.canceled || !chosen.filePath) return { success: false, canceled: true };
+      target = chosen.filePath;
+    }
+
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    const subtitle = [String(subject || ''), String(mode || '')].filter(Boolean).join('  •  ');
+
+    if (fmt === 'docx')      await writeDocx(target, { title, subtitle, html: clean });
+    else if (fmt === 'pdf')  await writePdf(target, { title, html: clean });
+    else if (fmt === 'html') fs.writeFileSync(target, wrapHtmlFragment(clean, title), 'utf8');
+    else                     fs.writeFileSync(target,
+                               '# ' + title + '\n\n' + htmlToLines(clean).join('\n') + '\n', 'utf8');
+
+    shell.showItemInFolder(target);
+    bootLog('document:export -> ' + target);
+    return { success: true, filePath: target, format: fmt };
+  } catch (err) {
+    console.error('[document:export]', err);
+    return { success: false, error: err.message || 'Export failed.' };
+  }
+});
+
+// ─── Quit guard ──────────────────────────────────────────────────────────────
+// A generated outline can be tens of thousands of tokens of work. Closing the window
+// used to discard it without a word. The renderer reports whether anything is unsaved;
+// the first quit or close is intercepted and handed back for her to resolve.
+ipcMain.on('app:set-unsaved', (_event, flag) => { hasUnsavedOutline = !!flag; });
+
+ipcMain.handle('app:exit-now', () => {
+  exitConfirmed = true;
+  app.quit();
+  return { success: true };
+});
+
+app.on('before-quit', (event) => {
+  if (exitConfirmed || !hasUnsavedOutline) return;
+  if (!mainWindow || mainWindow.isDestroyed()) { exitConfirmed = true; return; }
+  event.preventDefault();
+  bootLog('quit intercepted: an unsaved outline is open');
+  mainWindow.webContents.send('app:unsaved-exit');
+});
+
+
+

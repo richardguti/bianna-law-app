@@ -88,13 +88,36 @@ contextBridge.exposeInMainWorld('seniorPartner', {
    */
   generateDocument: (args) => ipcRenderer.invoke('generate-document', args),
 
+  // ── Boot diagnostics (main → boot.log) ──
+  /** Report a genuine React mount. The only signal that proves the renderer ran. */
+  rendererMounted: () => ipcRenderer.send('app:renderer-mounted'),
+  /** Report an uncaught renderer error so it lands in boot.log instead of nowhere. */
+  bootFault: (payload) => ipcRenderer.send('app:boot-fault', payload),
+  /** Tell the main process whether an unsaved outline is open (quit guard). */
+  setUnsaved: (flag) => ipcRenderer.send('app:set-unsaved', !!flag),
+  /** Resolve the quit guard and exit. */
+  exitNow: () => ipcRenderer.invoke('app:exit-now'),
+
+  // ── Local Document Vault ──
+  // Local-first: these work with no Supabase project, no table and no network.
+  vaultSave:       (args) => ipcRenderer.invoke('vault:save', args),
+  vaultList:       ()     => ipcRenderer.invoke('vault:list'),
+  vaultRead:       (args) => ipcRenderer.invoke('vault:read', args),
+  vaultUpdate:     (args) => ipcRenderer.invoke('vault:update', args),
+  vaultDelete:     (args) => ipcRenderer.invoke('vault:delete', args),
+  vaultOpenFolder: ()     => ipcRenderer.invoke('vault:open-folder'),
+
+  // ── Export (Word / PDF / HTML / Markdown) ──
+  exportDocument:  (args) => ipcRenderer.invoke('document:export', args),
+
   // ── Settings ───────────────────────────────────────────────────────────────
   openSettings: () => ipcRenderer.invoke('open-settings'),
 
   // ── Listeners (main → renderer) ────────────────────────────────────────────
   /** Listen for main-process events (e.g., show settings modal) */
   on: (channel, callback) => {
-    const allowed = ['show-settings-modal', 'ai-response-chunk', 'ai-response-done'];
+    const allowed = ['show-settings-modal', 'ai-response-chunk', 'ai-response-done',
+                     'app:unsaved-exit'];
     if (!allowed.includes(channel)) {
       console.warn(`[preload] Blocked attempt to listen on disallowed channel: ${channel}`);
       return;
