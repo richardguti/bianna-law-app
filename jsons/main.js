@@ -70,6 +70,26 @@ function getNotionClient() {
 let mainWindow;
 
 // ─── Window ──────────────────────────────────────────────────────────────────
+// ─── Launch diagnostics: safe mode and failure escalation ────────────────────
+// Three DMGs went out with the same white window because the failing layer was never
+// named. These three values name it without requiring any UI:
+//
+//   SAFE_MODE     --safe-mode on argv, or SLP_SAFE_MODE=1 in the environment
+//   FAILED_LAUNCHES  consecutive launches where the renderer never painted
+//   SKIP_CORPUS   skip the statute install entirely
+//
+// Bianna cannot pass a flag from Finder, so the counter is what makes this reachable:
+// two failed launches escalate the third to SKIP_CORPUS automatically. If that launch
+// paints, the corpus walk is the blocker and boot.log says so. If it still does not
+// paint, the fault is above the corpus install. Either way the question is answered on
+// the machine that fails, with no Terminal and no setup step for the student.
+//
+// Assigned inside app.whenReady() because reading electron-store at module scope would
+// run before the store is constructed.
+let SAFE_MODE = false;
+let FAILED_LAUNCHES = 0;
+let SKIP_CORPUS = false;
+
 function createWindow() {
   bootLog('createWindow start');
   mainWindow = new BrowserWindow({
@@ -92,7 +112,21 @@ function createWindow() {
   // recorded rather than inferred. ready-to-show is the one that matters most: if it
   // never fires, the renderer never painted, and the window stays white.
   const wc = mainWindow.webContents;
-  wc.on('did-finish-load', () => bootLog('did-finish-load'));
+  wc.on('did-finish-load', () => {
+    bootLog('did-finish-load');
+    // The white-screen signature: HTML loaded, but the renderer never painted. 15s is
+    // safe because the corpus install is deferred and yielding, so a slow first-run
+    // copy cannot hold the first paint back.
+    setTimeout(() => {
+      if (!readyToShowFired) {
+        const next = FAILED_LAUNCHES + 1;
+        try { store.set('failedLaunches', next); } catch { /* non-fatal */ }
+        bootLog('WHITE_SCREEN_DETECTED: ready-to-show did not fire within 15s; ' +
+                'failedLaunches -> ' + next +
+                (next >= 2 ? '  (next launch will skip the corpus install)' : ''));
+      }
+    }, 15000);
+  });
   wc.on('did-fail-load', (_e, code, desc, url) =>
     bootLog('did-fail-load: code=' + code + ' desc=' + desc + ' url=' + url));
   wc.on('render-process-gone', (_e, details) =>
@@ -101,7 +135,12 @@ function createWindow() {
     bootLog('preload-error: ' + preloadPath + ' :: ' + (err && err.message ? err.message : err)));
   wc.on('console-message', (_e, level, message, line, source) =>
     bootLog('renderer console[' + level + '] ' + source + ':' + line + ' ' + message));
-  mainWindow.on('ready-to-show', () => bootLog('ready-to-show'));
+  let readyToShowFired = false;
+  mainWindow.on('ready-to-show', () => {
+    readyToShowFired = true;
+    try { store.set('failedLaunches', 0); } catch { /* non-fatal */ }
+    bootLog('ready-to-show  (renderer painted; failedLaunches reset to 0)');
+  });
 
   const indexPath = path.join(__dirname, 'dist-react', 'index.html');
   bootLog('loadFile start: ' + indexPath + '  exists=' + fs.existsSync(indexPath));
@@ -134,6 +173,17 @@ function bootLog(msg) {
 app.whenReady().then(() => {
   bootLog('whenReady fired  electron=' + process.versions.electron +
           ' chrome=' + process.versions.chrome + ' packaged=' + app.isPackaged);
+
+  // Safe mode and escalation. Wrapped because a store failure must never block boot.
+  try {
+    SAFE_MODE = process.argv.includes('--safe-mode') || process.env.SLP_SAFE_MODE === '1';
+    FAILED_LAUNCHES = Number(store.get('failedLaunches', 0)) || 0;
+  } catch (err) {
+    bootLog('diagnostics init failed (continuing normally): ' + err.message);
+  }
+  SKIP_CORPUS = SAFE_MODE || FAILED_LAUNCHES >= 2;
+  bootLog('diagnostics: safe_mode=' + SAFE_MODE + ' failed_launches=' + FAILED_LAUNCHES +
+          ' skip_corpus=' + SKIP_CORPUS + (FAILED_LAUNCHES >= 2 ? '  (ESCALATED after 2 failed launches)' : ''));
   try { ensureBiannaLawDir(); } catch (e) { console.warn('[fs] Could not create Bianna_Law dir:', e.message); }
   createWindow();
 
@@ -143,6 +193,9 @@ app.whenReady().then(() => {
   // through the asar index, and any of that work landing on the boot path blocks the
   // event loop before the renderer's loadFile completes -- which is a white window.
   // Belt and braces: the function also yields before doing anything at all.
+  if (SKIP_CORPUS) {
+    bootLog('corpus install SKIPPED  safe_mode=' + SAFE_MODE + ' escalated=' + (FAILED_LAUNCHES >= 2));
+  } else {
   setImmediate(() => {
     bootLog('corpus setImmediate fired (renderer should be past loadFile by now)');
     ensureStatuteCorpusInstalled()
@@ -155,6 +208,7 @@ app.whenReady().then(() => {
         console.warn('[corpus] startup install skipped:', err.message);
       });
   });
+  }
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
