@@ -3089,18 +3089,34 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
       videoIds.map((id) => withTimeout(YoutubeTranscript.fetchTranscript(id), 15000, `transcript ${id}`)),
     );
     const transcripts = [];
+    // The failure reasons were discarded here, so "N skipped" said nothing about why. A
+    // refusal, a timeout and a genuinely caption-less video were indistinguishable from the UI.
+    const transcriptErrors = [];
     settled.forEach((res, i) => {
-      if (res.status !== 'fulfilled') return;
+      if (res.status !== 'fulfilled') {
+        transcriptErrors.push(`${videoIds[i]}: ${res.reason?.message || res.reason}`);
+        return;
+      }
       const text = res.value.map((s) => s.text.trim()).join(' ').slice(0, 3500);
       if (text.length > 50) transcripts.push({ id: videoIds[i], text });
+      else transcriptErrors.push(`${videoIds[i]}: transcript too short to outline`);
     });
     const skipped = videoIds.length - transcripts.length;
+    if (transcriptErrors.length) bootLog('[youtube] transcript failures: ' + transcriptErrors.join(' | '));
     send('transcripts-ready',
       `${transcripts.length} transcripts${skipped ? `, ${skipped} skipped` : ''}`,
       { current: transcripts.length, total: videoIds.length, skipped });
 
     if (transcripts.length === 0) {
-      const error = 'No transcripts available. Captions may be disabled on all videos.';
+      // Name the actual reason. "Captions may be disabled" was the only explanation the UI
+      // could offer, and it is only one of several -- and the least likely of them.
+      const reason = transcriptErrors[0] || 'no reason reported';
+      const error = /timed? ?out|abort/i.test(reason)
+        ? `Every caption request timed out (${reason}). Check your connection, then try a shorter playlist or a single video.`
+        : /429|rate ?limit|too many requests/i.test(reason)
+        ? `YouTube rate-limited the caption requests (${reason}). Wait a few minutes and try again.`
+        : `No captions could be retrieved: ${reason}`;
+      bootLog('[youtube] all transcripts failed: ' + reason);
       send('error', error);
       return { success: false, error };
     }
@@ -3111,6 +3127,10 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
     // video be skipped instead of failing the whole run.
     const apiKey = getDeepSeekKey();
     const perVideo = [];
+    // Failure reasons used to be thrown away here, which is precisely what made a provider
+    // error look like a YouTube/captions problem: the transcripts had already succeeded, and
+    // nothing in the error said so.
+    const outlineErrors = [];
     for (let i = 0; i < transcripts.length; i++) {
       if (youtubeRunCancelled) {
         send('error', 'Cancelled.');
@@ -3127,13 +3147,26 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
           maxTokens: 8192,
         }), 120000, `outline for video ${i + 1}`);
         if (outline && outline.trim()) perVideo.push({ index: i + 1, outline: outline.trim() });
+        else outlineErrors.push(`video ${i + 1}: provider returned an empty outline`);
       } catch (err) {
-        // One video failing must not lose the other eleven.
+        // One video failing must not lose the other eleven, but the reason has to survive:
+        // "failed for every video" with no cause is unactionable, and misleading.
+        outlineErrors.push(`video ${i + 1}: ${err.name}: ${err.message}`);
         console.warn(`[youtube] video ${i + 1} outline failed:`, err.message);
       }
     }
     if (perVideo.length === 0) {
-      const error = 'Outline generation failed for every video. Try again, or use a shorter playlist.';
+      const reason = outlineErrors[0] || 'no reason reported';
+      bootLog('[youtube] every outline failed: ' + outlineErrors.join(' | '));
+      // Distinguish the causes the transcripts cannot explain. An auth or balance failure and
+      // a slow provider need completely different actions from her.
+      const error = /401|authentication|invalid api key|api key.*invalid/i.test(reason)
+        ? `DeepSeek rejected the API key, so no outline could be generated (${reason}). Add a valid key in Settings and try again.`
+        : /402|insufficient|balance|quota|exceeded/i.test(reason)
+        ? `The DeepSeek account could not cover the request (${reason}). Check the account balance and try again.`
+        : /timed? ?out|abort/i.test(reason)
+        ? `Every outline request timed out (${reason}). DeepSeek was slow to respond: try a single video, or a shorter playlist.`
+        : `Outline generation failed for every video (${reason}).`;
       send('error', error);
       return { success: false, error };
     }
