@@ -163,7 +163,12 @@ function createWindow() {
 // a fault themselves.
 function bootLog(msg) {
   try {
-    const dir = path.join(app.getPath('userData'), 'logs');
+    // A LITERAL folder name, deliberately not app.getPath('userData'). The packaged
+    // package.json declares productName only under `build`, which Electron does not
+    // read, so userData resolved via `name` and the first Windows harness looked in
+    // %APPDATA%\Senior Law Partner and found nothing while the app was running fine.
+    // Diagnostics must not depend on a value that can be spelled two ways.
+    const dir = path.join(app.getPath('appData'), 'senior-law-partner-diagnostics');
     fs.mkdirSync(dir, { recursive: true });
     fs.appendFileSync(path.join(dir, 'boot.log'),
       new Date().toISOString() + '  ' + msg + '\n', 'utf8');
