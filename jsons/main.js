@@ -3368,14 +3368,24 @@ function vaultStamp() {
 }
 
 /** Wrap a bare HTML fragment so it stands alone in a browser or a PDF renderer. */
-function wrapHtmlFragment(html, title) {
-  const safeTitle = String(title || 'Outline').replace(/[<>&]/g, '');
+function wrapHtmlFragment(html, title, subtitle) {
+  const esc = (s) => String(s || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // The title is rendered as a visible heading as well as the document title. It used to
+  // live only in <title>, which is head metadata and never draws -- so an exported PDF or
+  // Web page arrived with no title on it.
+  const heading = title
+    ? '<header><h1>' + esc(title) + '</h1>' +
+      (subtitle ? '<p class="slp-subtitle">' + esc(subtitle) + '</p>' : '') +
+      '</header>'
+    : '';
   return '<!doctype html><html><head><meta charset="utf-8">' +
-    '<title>' + safeTitle + '</title>' +
+    '<title>' + esc(title || 'Outline') + '</title>' +
     '<style>body{font-family:Georgia,serif;line-height:1.55;margin:48px;color:#1a1a1a}' +
-    'h1,h2,h3,h4{color:#546345}table{border-collapse:collapse}' +
-    'td,th{border:1px solid #cccccc;padding:4px 8px}</style></head><body>' +
-    html + '</body></html>';
+    'h1,h2,h3,h4{color:#546345}header h1{margin:0 0 4px}' +
+    '.slp-subtitle{color:#6B7280;font-style:italic;margin:0 0 28px}' +
+    'table{border-collapse:collapse}td,th{border:1px solid #cccccc;padding:4px 8px}</style>' +
+    '</head><body>' + heading + html + '</body></html>';
 }
 
 ipcMain.handle('vault:save', (_event, { topic, subject, mode, tags, html } = {}) => {
@@ -3488,8 +3498,15 @@ function htmlToLines(html) {
     .replace(/&gt;/g, '>')
     .split('\n')
     .map((l) => l.replace(/\s+$/, ''));
-  // Collapse runs of blank lines to at most one, without dropping real paragraphs.
-  return lines.filter((l, i) => l.trim() || (i > 0 && lines[i - 1].trim()));
+  // Collapse runs of blank lines to at most one, without dropping real paragraphs, then
+  // trim blanks at the very start and end. Every block tag closes with a newline, so the
+  // naive result otherwise ends in an empty paragraph on every export.
+  const collapsed = lines.filter((l, i) => l.trim() || (i > 0 && lines[i - 1].trim()));
+  let start = 0;
+  let end = collapsed.length;
+  while (start < end && !collapsed[start].trim()) start++;
+  while (end > start && !collapsed[end - 1].trim()) end--;
+  return collapsed.slice(start, end);
 }
 
 /** Word: real .docx, using the same `docx` dependency the IRAC generator already uses. */
@@ -3515,11 +3532,11 @@ async function writeDocx(filePath, { title, subtitle, html }) {
 }
 
 /** PDF: Chromium's own print pipeline, so wrapping and fonts match what she saw on screen. */
-async function writePdf(filePath, { title, html }) {
+async function writePdf(filePath, { title, subtitle, html }) {
   const win = new BrowserWindow({ show: false, webPreferences: { sandbox: true } });
   try {
     await win.loadURL('data:text/html;charset=utf-8,' +
-      encodeURIComponent(wrapHtmlFragment(html, title)));
+      encodeURIComponent(wrapHtmlFragment(html, title, subtitle)));
     const pdf = await win.webContents.printToPDF({ printBackground: true });
     fs.writeFileSync(filePath, pdf);
   } finally {
@@ -3558,8 +3575,8 @@ ipcMain.handle('document:export', async (_event, {
     const subtitle = [String(subject || ''), String(mode || '')].filter(Boolean).join('  •  ');
 
     if (fmt === 'docx')      await writeDocx(target, { title, subtitle, html: clean });
-    else if (fmt === 'pdf')  await writePdf(target, { title, html: clean });
-    else if (fmt === 'html') fs.writeFileSync(target, wrapHtmlFragment(clean, title), 'utf8');
+    else if (fmt === 'pdf')  await writePdf(target, { title, subtitle, html: clean });
+    else if (fmt === 'html') fs.writeFileSync(target, wrapHtmlFragment(clean, title, subtitle), 'utf8');
     else                     fs.writeFileSync(target,
                                '# ' + title + '\n\n' + htmlToLines(clean).join('\n') + '\n', 'utf8');
 
