@@ -127,3 +127,40 @@ Tracked separately; none of them is part of the white-window fault:
   mechanical cause in § 732.601: a mid-attribute splice that dropped the tail of (3) and all of
   (4), and an off-by-one section number in the metadata lines. Regeneration is deferred and
   gated behind the P-0 structural check described there.
+
+## The verified artifact
+
+Built by CI from `d07fde97` on `v1.2.0-release` (run 36173526264), then checked by reading the
+shipped `app.asar` rather than trusting the build log:
+
+```
+bundle: dist-react/assets/index-B_xwjl13.js (621,413 bytes)
+  guard "supabaseUrl is required" present : true   (the library is there, as it always was)
+  inlined Supabase host                   : https://aparjezcomoxlbicyegm.supabase.co
+  client built from void 0                : no
+SHIPPED_ARTIFACT_VERDICT=PASS
+```
+
+| file | sha256 | bytes |
+|---|---|---|
+| `Senior Law Partner-1.2.2-arm64.dmg` | `e98dc84aa55ba546ab96a7fb2d344ca922916463367c428daaec3d1068f942a9` | 168,402,101 |
+| `Senior-Law-Partner-1.2.2-arm64.zip` | `6230e8dde5051712c1ea13304b4f94f93c0499237715ce0fdd132e789ef3aa3b` | 167,843,215 |
+
+For contrast, the previous DMG — kept as
+`archive/Senior-Law-Partner-1.2.2-arm64-BROKEN-white-screen.dmg` — contained
+`Ml = Al(void 0, void 0)` and no Supabase host at all.
+
+Both export formats were verified by reading the generated files back, not by assuming:
+the `.docx` unzips to a `word/document.xml` carrying the title (with Word's `Title` heading
+style), the subtitle and the section symbol; and `pdf-parse` reads the title, subtitle,
+heading and body text out of the PDF. That check is what caught the untitled-PDF defect,
+which a structural "is it a valid PDF" test could not.
+
+### Required before the next release
+
+CI now refuses to build without the Supabase credentials, and asserts the inlined host is
+present in the packaged bundle. `SUPABASE_URL` and `SUPABASE_ANON_KEY` are set on the
+repository. The unused `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` pair that had been
+sitting there unread for six months was removed: two plausible sources for the same credential
+is part of how this went unnoticed.
+
