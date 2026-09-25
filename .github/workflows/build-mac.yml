@@ -158,14 +158,15 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Signing walks every file in app.asar.unpacked. The statute corpus is
-          # 24,671 loose files there, and macOS defaults to a 256-descriptor soft
-          # limit, so @electron/osx-sign died mid-corpus with:
+          # Kept after the corpus moved INSIDE app.asar. Signing still walks the whole
+          # bundle and the raised limit costs nothing. Retained with the diagnosis that
+          # prompted it: 24,671 loose files in app.asar.unpacked exhausted macOS's
+          # 256-descriptor soft limit and @electron/osx-sign died with
           #   EMFILE: too many open files, open '.../app.asar.unpacked/references/
           #          florida-statutes/...'
-          # Raising the limit is the one-line fix. If it recurs even at 65535, the
-          # durable fix is to ship the corpus as a single tarball inside the asar
-          # instead of 24,671 unpacked files (which would also speed up staging).
+          # Raising the limit did not fix it, which is why the corpus was packed into
+          # the archive instead. If signing is ever slowed by a large bundle again,
+          # this is the first knob.
           ulimit -n 65535 2>/dev/null || ulimit -n 10240 2>/dev/null || true
           echo "open-file limit: $(ulimit -n)"
 
@@ -279,7 +280,7 @@ jobs:
         run: |
           VERSION=$(node -p "require('./jsons/package.json').version")
           TAG="v${VERSION}-mac"
-          NOTES="Built and ad-hoc signed on a macOS runner. Verified: 14 framework symlinks, valid signature, executable bits set, statute corpus unpacked. First launch on any non-notarized app shows a security prompt: System Settings > Privacy & Security > Open Anyway."
+          NOTES="Built and ad-hoc signed on a macOS runner. Verified: 14 framework symlinks, valid signature, executable bits set, and 24,670 statute files inside app.asar. First launch on any non-notarized app shows a security prompt: System Settings > Privacy & Security > Open Anyway."
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" --clobber jsons/dist/*.dmg "${{ env.OUT }}" SHA256-mac.txt
           else
