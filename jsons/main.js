@@ -71,6 +71,7 @@ let mainWindow;
 
 // ─── Window ──────────────────────────────────────────────────────────────────
 function createWindow() {
+  bootLog('createWindow start');
   mainWindow = new BrowserWindow({
     width: 1400,
     height: 900,
@@ -87,7 +88,26 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadFile(path.join(__dirname, 'dist-react', 'index.html'));
+  // Attach the renderer lifecycle listeners BEFORE loading, so a failure to load is
+  // recorded rather than inferred. ready-to-show is the one that matters most: if it
+  // never fires, the renderer never painted, and the window stays white.
+  const wc = mainWindow.webContents;
+  wc.on('did-finish-load', () => bootLog('did-finish-load'));
+  wc.on('did-fail-load', (_e, code, desc, url) =>
+    bootLog('did-fail-load: code=' + code + ' desc=' + desc + ' url=' + url));
+  wc.on('render-process-gone', (_e, details) =>
+    bootLog('renderer gone: ' + JSON.stringify(details)));
+  wc.on('preload-error', (_e, preloadPath, err) =>
+    bootLog('preload-error: ' + preloadPath + ' :: ' + (err && err.message ? err.message : err)));
+  wc.on('console-message', (_e, level, message, line, source) =>
+    bootLog('renderer console[' + level + '] ' + source + ':' + line + ' ' + message));
+  mainWindow.on('ready-to-show', () => bootLog('ready-to-show'));
+
+  const indexPath = path.join(__dirname, 'dist-react', 'index.html');
+  bootLog('loadFile start: ' + indexPath + '  exists=' + fs.existsSync(indexPath));
+  mainWindow.loadFile(indexPath)
+    .then(() => bootLog('loadFile resolved'))
+    .catch((err) => bootLog('loadFile FAILED: ' + (err && err.message ? err.message : err)));
 
   // DevTools: open in dev or when launched with --devtools flag
   if (!app.isPackaged || process.argv.includes('--devtools')) {
@@ -95,7 +115,25 @@ function createWindow() {
   }
 }
 
+// ─── Boot diagnostics ────────────────────────────────────────────────────────
+// The white-window failure was never tracked to a layer. Static checks proved the
+// yield markers were present in the packaged main.js; they did not prove the renderer
+// ever loaded. Those are different claims, and only the machine that fails can settle
+// which layer breaks. This appends one timestamped line per boot step to
+// userData/logs/boot.log. It must never throw: diagnostics are not allowed to become
+// a fault themselves.
+function bootLog(msg) {
+  try {
+    const dir = path.join(app.getPath('userData'), 'logs');
+    fs.mkdirSync(dir, { recursive: true });
+    fs.appendFileSync(path.join(dir, 'boot.log'),
+      new Date().toISOString() + '  ' + msg + '\n', 'utf8');
+  } catch { /* never break boot for a log line */ }
+}
+
 app.whenReady().then(() => {
+  bootLog('whenReady fired  electron=' + process.versions.electron +
+          ' chrome=' + process.versions.chrome + ' packaged=' + app.isPackaged);
   try { ensureBiannaLawDir(); } catch (e) { console.warn('[fs] Could not create Bianna_Law dir:', e.message); }
   createWindow();
 
@@ -106,11 +144,16 @@ app.whenReady().then(() => {
   // event loop before the renderer's loadFile completes -- which is a white window.
   // Belt and braces: the function also yields before doing anything at all.
   setImmediate(() => {
+    bootLog('corpus setImmediate fired (renderer should be past loadFile by now)');
     ensureStatuteCorpusInstalled()
       .then((res) => {
+        bootLog('corpus install done: ' + JSON.stringify(res));
         if (res && res.ok && !res.skipped && res.installed) syncIcmAfterCorpusInstall();
       })
-      .catch((err) => console.warn('[corpus] startup install skipped:', err.message));
+      .catch((err) => {
+        bootLog('corpus install threw: ' + (err && err.message ? err.message : err));
+        console.warn('[corpus] startup install skipped:', err.message);
+      });
   });
 
   app.on('activate', () => {
