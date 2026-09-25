@@ -152,3 +152,41 @@ ending `...in the proportion that one bears to the number of joint tenants.`, (4
 History carrying `s. 34`, `s. 966` and `s. 50`, Note reading `Created from former
 s. 736.05.`, and no occurrence of `CatchlineText`.
 
+
+## The upstream bulk download (2026DL) - and what it settles
+
+The official bulk library is present at `FLDL-/2026DL/`: 16 files, 355.6 MB, Folio Views
+format (`.nxt`), with `fs2026.nxt` (230.8 MB) holding the 2026 Florida Statutes.
+
+Findings from probing that container directly:
+
+**1. The text is plain ASCII, so no proprietary reader is needed.** The container measured
+90.0% printable, and every probe string matched in ASCII form (not UTF-16). `fs2026.nxt`
+is therefore extractable locally. This changes P-1c from a polite scrape of 24,670 HTML
+pages into an extraction and segmentation pass over one 231 MB file: same authority, no
+rate limits, no network dependency.
+
+**2. The corpus''s wrong metadata is official, from an adjacent section.** Both of the
+following are present in `fs2026.nxt`:
+
+```
+official  : Created from former s. 736.05.        ascii@138,866,605
+corpus    : Created from former ss. 732.41 and 732.602   ascii@138,862,496
+corpus    : ss. 33, 35, ch. 75-220                ascii@138,862,114
+official  : s. 34, ch. 75-220                     ascii@138,866,228
+```
+
+The scraper did not fabricate the History or the Note. Both are real official text belonging to a neighbouring section, which the scraper attached to 732.601. That is the
+same off-by-one section-boundary fault that spliced the neighbouring body into 732.601
+and truncated subsection (3). One bug, not three.
+
+**3. What this means for the rebuild.** Segment by section boundary and validate each
+section against its OWN block: the History and Note must sit inside the region the
+section owns, not merely appear somewhere in the library. Assertions 3 and 4 of the P-0
+gate (subsection count, History/Note verbatim) are what catch this, and they must be
+checkable per section, which requires the boundary to be right in the first place.
+
+**4. Still unknown, and only this source can settle it: the silent-omission rate.** The
+3.42% marker audit is a floor. Comparing every section in the corpus against its
+extracted counterpart would give the true rate for the invisible class (a clause missing
+with no stray markup). That comparison is the natural first use of the bulk download.
