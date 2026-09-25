@@ -38,7 +38,16 @@ const QUICK_DRILLS: Record<DocumentSubject, string[]> = {
 
 // `mode` is a string, not just SessionMode: the chip group allows the student to add a
 // custom mode, and any unmapped value falls through to the full-IRAC instruction below.
-function buildSystem(mode: string): string {
+// Socratic is a three-turn cycle, so its instruction has to change with the turn.
+//
+// It used to be one static string, re-sent on every turn: "Present a 3-5 sentence fact pattern,
+// then ask ONE targeted legal question." On the evaluation turn the student has just *answered*
+// a question, and the model was still being told to ask one -- so it resolved the contradiction
+// the only way it could: it asked, and then answered itself. History was never the problem
+// (the transcript was passed correctly); the instruction was turn-agnostic.
+export type SocraticTurn = 'drill' | 'evaluation'
+
+function buildSystem(mode: string, turn?: SocraticTurn): string {
   const base = `You are the Senior Law Partner, a specialized AI legal study assistant for Bianna, a 1L at St. Thomas University School of Law in Miami, FL.
 
 EXPERTISE: IRAC/CREAC methodology, Common Law vs. UCC Article 2, intentional torts, negligence (Hand Formula B < P × L), personal jurisdiction (minimum contacts), subject matter jurisdiction, and all standard 1L doctrine.
@@ -47,8 +56,32 @@ HALLUCINATION GUARD: Never fabricate case citations or holdings. If a doctrine i
 
 TONE: Professional, high-stakes legal mentorship. You are a senior partner reviewing a junior associate's work.`
 
-  if (mode === 'socratic')
-    return base + '\n\nMODE: SOCRATIC. Present a 3-5 sentence fact pattern, then ask ONE targeted legal question. Wait for the student\'s answer before delivering the full IRAC analysis. Never give the answer upfront.'
+  if (mode === 'socratic') {
+    if (turn === 'evaluation')
+      return base + `\n\nMODE: SOCRATIC \u2014 EVALUATION TURN. The student has just answered your question.
+
+1. Evaluate their answer specifically and honestly: what was right, what was missing, and why the
+   missing element matters under the rule.
+2. Then reveal the rule and the correct analysis, including the model answer.
+3. If the student's message is instead a request for a new drill or a new question rather than an
+   answer, follow that request instead.
+
+This is the one Socratic turn where full doctrinal analysis is expected.`
+
+    return base + `\n\nMODE: SOCRATIC \u2014 DRILL TURN. NON-NEGOTIABLE.
+
+Your ENTIRE response is: a 3-5 sentence fact pattern, then ONE targeted legal question.
+- No analysis. No rule statements. No IRAC. No answer. No "here is the analysis".
+- The question is the LAST thing in your response. Nothing after the question mark: no hint,
+  no rule, no explanation, no encouragement.
+- Then stop. The student will answer, and your next turn is to evaluate that answer.
+- If you feel the urge to explain the answer, do not. That is what the evaluation turn is for,
+  and it only comes after the student responds.
+- If the student asked a doctrinal question rather than requesting a drill, convert it into a
+  drill on that doctrine: present the fact pattern that tests it, then ask the question. In this
+  mode you never hand over the rule directly.
+Use plain prose. Do not use HTML tiers or headings in this mode.`
+  }
 
   if (mode === 'grade')
     return base + '\n\nMODE: GRADE. When given a student IRAC answer, score each section 1-10 in this exact format:\n\nISSUE:      X/10\nRULE:       X/10\nANALYSIS:   X/10\nCONCLUSION: X/10\n\nMISSED: [strongest counterargument the student missed]\nHOOK:   [flag if this is a Professor Hook case]\n\nThen ask ONE Socratic follow-up question before revealing the corrected full answer.'
@@ -113,6 +146,18 @@ export function StudySessions() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
+  /** Which half of a Socratic exchange the student's next message is. */
+  function socraticTurn(): SocraticTurn {
+    // An assistant turn that ended by asking something is the question the student is now
+    // answering. Trailing quotes and emphasis markers are stripped first: the model sometimes
+    // wraps or decorates the question, and one stray character would otherwise flip every
+    // evaluation turn back into a fresh drill -- the exact bug this function exists to prevent.
+    const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant')
+    if (!lastAssistant) return 'drill'
+    const tail = lastAssistant.content.trim().replace(/[\s"'`*_)\]]+$/, '')
+    return tail.endsWith('?') ? 'evaluation' : 'drill'
+  }
+
   async function send(prompt: string) {
     if (!prompt.trim() || loading || !apiKey) return
     const userMsg: Message = { role: 'user', content: prompt }
@@ -120,6 +165,10 @@ export function StudySessions() {
     setMessages(newMessages)
     setInput('')
     setLoading(true)
+
+    // Computed from the transcript that existed when send was pressed, so it reflects what the
+    // student was actually responding to.
+    const turn: SocraticTurn | undefined = mode === 'socratic' ? socraticTurn() : undefined
 
     try {
       let text = ''
@@ -129,10 +178,21 @@ export function StudySessions() {
       if (!text) {
         setStreamText('')
         setReasoning('')
+        // The drill marker rides on the API payload ONLY. It is not stored in `messages`, so it
+        // never reaches the transcript, the memory write, or the history replayed next turn.
+        // Belt and braces on top of the system prompt, because this model resists the
+        // instruction when it is stated once.
+        const apiMessages = newMessages.map((m, i) => ({
+          role: m.role,
+          content:
+            turn === 'drill' && i === newMessages.length - 1 && m.role === 'user'
+              ? `${m.content}\n\n[SOCRATIC DRILL \u2014 RESPOND WITH FACT PATTERN + ONE QUESTION ONLY. DO NOT PROVIDE THE ANSWER. THE STUDENT MUST ANSWER FIRST.]`
+              : m.content,
+        }))
         const outcome = await streamAi({
           messages: [
-            { role: 'system', content: buildSystem(mode) },
-            ...newMessages.map((m) => ({ role: m.role, content: m.content })),
+            { role: 'system', content: buildSystem(mode, turn) },
+            ...apiMessages,
           ],
           apiKey,
           maxTokens: 8192,
@@ -144,14 +204,20 @@ export function StudySessions() {
         if (!text) throw new Error('Empty response — verify your DeepSeek API key in Settings.')
       }
 
-      // Part 3: render the answer in the house four-tier language. Off the critical
-      // path and failure-tolerant: if the formatter is unavailable the plain answer is
-      // kept, so a formatting outage never costs her the response.
+      // Part 3: render the answer in the house four-tier language, but never for a Socratic
+      // drill turn. A fact pattern plus one question has no Tier 1-4 to map onto, and the
+      // formatter's own system prompt asks for doctrinal analysis, so formatting a drill turn
+      // both dropped the question and manufactured the answer it was meant to withhold. The
+      // evaluation turn is doctrinal, formats well, and is the one Socratic turn that wants
+      // the tiers. Off the critical path and failure-tolerant: if the formatter is unavailable
+      // the plain answer is kept, so a formatting outage never costs her the response.
       let biaHtml: string | null = null
-      try {
-        const bia = await window.seniorPartner?.aiFormatBia?.({ text })
-        if (bia?.success && bia.biaHtml) biaHtml = bia.biaHtml
-      } catch { /* keep the plain answer */ }
+      if (mode !== 'socratic' || turn === 'evaluation') {
+        try {
+          const bia = await window.seniorPartner?.aiFormatBia?.({ text, mode, turn })
+          if (bia?.success && bia.biaHtml) biaHtml = bia.biaHtml
+        } catch { /* keep the plain answer */ }
+      }
 
       setMessages([...newMessages, { role: 'assistant', content: text, biaHtml }])
       setStreamText('')

@@ -821,6 +821,35 @@ async function formatAsBia({ apiKey, rawText, mode = 'chat' }) {
   });
 }
 
+// ─── Formatting is mode- and turn-aware ──────────────────────────────────────
+// formatAsBia is not a lossy filter, it is a SECOND GENERATIVE CALL: it sends the answer
+// back to the chat model with biaSystemChat() -- the four-tier contract -- as the system
+// prompt. Run over a Socratic turn, whose entire content is "here is a fact pattern, what
+// do you think?", that has two effects at once:
+//
+//   1. A bare question has no Tier 1-4 structure to map onto, so it is dropped. That is the
+//      visible bug: the question streams in, then the formatter's artifact replaces it.
+//   2. The formatter's own system prompt instructs the model to express doctrinal content in
+//      the tiers, so it produces exactly the analysis. That is the invisible bug: the second
+//      stage is literally asking for the answer Socratic mode exists to withhold.
+//
+// So dialogue modes bypass it. The model's own words are the artifact; there is nothing to
+// reformat.
+const DIALOGUE_MODES = new Set(['socratic']);
+
+/**
+ * True when this content must NOT be rewritten into the house stylesheet.
+ *
+ * `turn` separates the two halves of a Socratic exchange. A drill turn is a fact pattern plus
+ * one question and must survive verbatim; an evaluation turn carries the rule, the analysis
+ * and the model answer, which is precisely the doctrinal shape the tiers were built for.
+ */
+function isDialogueShape(mode, turn) {
+  const m = String(mode || '').toLowerCase();
+  if (!DIALOGUE_MODES.has(m)) return false;
+  return !(m === 'socratic' && String(turn || '').toLowerCase() === 'evaluation');
+}
+
 /**
  * IPC: reformat text into the house stylesheet.
  *
@@ -828,9 +857,17 @@ async function formatAsBia({ apiKey, rawText, mode = 'chat' }) {
  * has a passing 8/8 packaged gate against it, and this way that path stays byte-identical;
  * a chat surface streams its readable answer, then swaps in this finished artifact.
  */
-ipcMain.handle('ai:bia-format', async (_event, { text, mode = 'chat' } = {}) => {
+ipcMain.handle('ai:bia-format', async (_event, { text, mode = 'chat', turn } = {}) => {
   const apiKey = getDeepSeekKey();
   if (!text || !String(text).trim()) return { success: false, error: 'No text to format.' };
+
+  // Passthrough, and reported as success. Callers render `plainText` when biaHtml is absent,
+  // so the model's answer is kept verbatim and no second call is made at all.
+  if (isDialogueShape(mode, turn)) {
+    bootLog('ai:bia-format bypassed (dialogue shape): mode=' + mode + ' turn=' + (turn || '-'));
+    return { success: true, passthrough: true, mode, biaHtml: null };
+  }
+
   try {
     const biaHtml = await formatAsBia({ apiKey, rawText: text, mode });
     if (!biaHtml.trim()) return { success: false, error: 'The formatter returned nothing.' };
@@ -878,8 +915,9 @@ ipcMain.handle('ai-prompt-send', async (_event, { prompt, systemPrompt, mode, mo
     }
 
     // Part 3: render chat answers in the same four-tier language as outlines. Opt-in, so
-    // only surfaces that ask for it pay the extra formatting call.
-    if (bia && responseText.trim()) {
+    // only surfaces that ask for it pay the extra formatting call -- and never for a
+    // dialogue-shaped answer, which would be rewritten into the answer it must not contain.
+    if (bia && responseText.trim() && !isDialogueShape(mode, undefined)) {
       try {
         const biaHtml = await formatAsBia({ apiKey, rawText: responseText, mode: 'chat' });
         if (biaHtml.trim()) {

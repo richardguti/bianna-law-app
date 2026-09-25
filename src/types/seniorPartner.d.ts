@@ -28,7 +28,7 @@ declare global {
        * Reformat a finished answer into the house four-tier stylesheet. The returned HTML
        * MUST be passed through sanitizeBia before it reaches the DOM.
        */
-      aiFormatBia: (args: { text: string; mode?: 'chat' | 'outline' }) => Promise<{ success: boolean; biaHtml?: string; error?: string }>
+      aiFormatBia: (args: { text: string; mode?: string; turn?: 'drill' | 'evaluation' }) => Promise<{ success: boolean; biaHtml?: string | null; passthrough?: boolean; error?: string }>
       /** Fired whenever a BIA artifact is produced. */
       onAiBia: (cb: (data: { html: string; mode?: string }) => void) => void
       /* ── Persistent chat threads (Part 4) ─────────────────────────────────── */
