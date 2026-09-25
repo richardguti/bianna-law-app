@@ -100,13 +100,18 @@ app.whenReady().then(() => {
   createWindow();
 
   // First launch: copy the bundled Florida Statutes into her corpus, then index it.
-  // Runs after the window exists so corpus:install-progress has somewhere to land;
-  // deliberately not awaited so a slow copy never delays app start.
-  ensureStatuteCorpusInstalled()
-    .then((res) => {
-      if (res && res.ok && !res.skipped && res.installed) syncIcmAfterCorpusInstall();
-    })
-    .catch((err) => console.warn('[corpus] startup install skipped:', err.message));
+  // Runs after the window exists so corpus:install-progress has somewhere to land.
+  // Deferred via setImmediate AND left unawaited: the install walks ~24,670 entries
+  // through the asar index, and any of that work landing on the boot path blocks the
+  // event loop before the renderer's loadFile completes -- which is a white window.
+  // Belt and braces: the function also yields before doing anything at all.
+  setImmediate(() => {
+    ensureStatuteCorpusInstalled()
+      .then((res) => {
+        if (res && res.ok && !res.skipped && res.installed) syncIcmAfterCorpusInstall();
+      })
+      .catch((err) => console.warn('[corpus] startup install skipped:', err.message));
+  });
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -195,6 +200,10 @@ function corpusProgress(done, total) {
  * is missing or differs in size. Never throws — a failure must not block app start.
  */
 async function ensureStatuteCorpusInstalled({ force = false } = {}) {
+  // Yield before any synchronous work. Reading entries out of an asar is a lookup in
+  // the archive's metadata tree, not a filesystem read, so the walk below is far
+  // slower than it looks. Without this, no caller can help but block the event loop.
+  await new Promise((r) => setImmediate(r));
   try {
     const src = bundledStatuteDir();
     if (!src) return { ok: false, reason: 'no bundled corpus' };
@@ -206,14 +215,22 @@ async function ensureStatuteCorpusInstalled({ force = false } = {}) {
     }
 
     const files = [];
-    (function collect(dir, rel) {
+    let seen = 0;
+    // Yielding walk. This is the actual blocking site: it enumerates ~24,670 entries
+    // through the asar index before anything else runs, and while it was a synchronous
+    // IIFE the event loop could not serve the renderer's loadFile -- the app opened to
+    // a white window. 25 per yield keeps the UI responsive; a setImmediate that often
+    // costs nothing measurable.
+    async function collect(dir, rel) {
       for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
         const s = path.join(dir, e.name);
         const r = rel ? `${rel}/${e.name}` : e.name;
-        if (e.isDirectory()) collect(s, r);
+        if (e.isDirectory()) await collect(s, r);
         else if (e.name !== '.version') files.push({ s, r });
+        if (++seen % 25 === 0) await new Promise((r2) => setImmediate(r2));
       }
-    })(src, '');
+    }
+    await collect(src, '');
 
     const total = files.length;
     let done = 0, copied = 0;
@@ -228,9 +245,9 @@ async function ensureStatuteCorpusInstalled({ force = false } = {}) {
         }
       } catch { /* skip unreadable entry rather than abort the install */ }
       done++;
-      // Yield periodically: the copy is ~22k files, and a fully synchronous loop
-      // would freeze the window (and stall progress repaints) for a minute or more.
-      if (done % 500 === 0) {
+      // Yield often. Asar entry lookups are slower than filesystem reads, and the
+      // copy touches ~24,670 of them; 25 per breath keeps progress repaints alive.
+      if (done % 25 === 0) {
         corpusProgress(done, total);
         await new Promise((r2) => setImmediate(r2));
       }

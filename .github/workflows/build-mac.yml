@@ -217,6 +217,14 @@ jobs:
           N=$(node -e "const a=require('@electron/asar');const n=a.listPackage(process.argv[1]).filter(p=>p.includes('florida-statutes')&&p.endsWith('.md')).length;console.log(n)" "$ASAR")
           echo "  .md files inside app.asar: $N"
           [ "$N" -ge 24670 ] || { echo "FAIL: corpus incomplete in bundle ($N)"; exit 1; }
+          # Regression guard for the 1.2.2 white-window bug. The corpus install must
+          # yield both before it starts and during its walk of ~24,670 asar entries; a
+          # synchronous walk blocks the event loop and the window opens blank. The
+          # markers are: the setImmediate at the call site, the unconditional await at
+          # the top of the function, the yielding walk, and the yielding copy loop.
+          MJ=$(node -e "const a=require('@electron/asar');process.stdout.write(a.extractFile(process.argv[1],'main.js').toString('utf8'))" "$ASAR" | grep -c setImmediate || true)
+          echo "  main.js setImmediate markers: $MJ (expect >= 3)"
+          [ "$MJ" -ge 3 ] || { echo "FAIL: packaged main.js does not yield around the corpus walk"; exit 1; }
           if [ -d "$APP/Contents/Resources/app.asar.unpacked/references/florida-statutes" ]; then
             echo "FAIL: corpus is unpacked again -- that is what caused EMFILE during signing"
             exit 1
