@@ -165,7 +165,24 @@ export function OutlineGenerator() {
     const topicLabel = topic || chips[0] || 'Untitled'
 
     if (destination === 'vault') {
-      // Already written by addToVault; reveal it so she can see where it went.
+      // She may have reached this dialog from the toolbar rather than from a failed cloud
+      // save, in which case the outline is not in the Vault yet. Write it now instead of
+      // telling her it is already there.
+      if (!savedLocally) {
+        const res = await sp?.vaultSave?.({
+          topic: topicLabel,
+          subject,
+          mode:  primaryMode,
+          tags:  vaultTags.split(',').map((t) => t.trim()).filter(Boolean),
+          html:  output,
+        })
+        if (!res?.success) {
+          setExportNote(res?.error || 'Could not write to the Vault folder.')
+          return
+        }
+        setSavedLocally(true)
+      }
+      markSaved()
       setExportOpen(false)
       setSaveMsg('Kept in the app Vault \u2713')
       setTimeout(() => setSaveMsg(null), 4000)
