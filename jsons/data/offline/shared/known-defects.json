@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "note": "Confirmed content errors. Any read of these sections is flagged, never presented as verified.",
+  "sections": {
+    "732.601": {
+      "catchline": "Simultaneous Death Law.",
+      "severity": "wrong_proposition",
+      "detail": "The bundled text is missing the tail of subsection (3) and the whole of subsection (4) (life and accident insurance makes simultaneous death a rebuttable presumption), and its metadata lines belong to an adjacent section. Mechanically diffed against the official 2026 text: identical to 2025, so this is a scrape defect, not a currency issue.",
+      "action": "Do not present this section as complete. Read it from flsenate.gov/Statutes before relying on it."
+    }
+  },
+  "non_corpus_issues": [
+    {
+      "where": "Heien v. North Carolina",
+      "detail": "A concurrence is labelled a dissent in the bundled packet."
+    },
+    {
+      "where": "J.L. v. State",
+      "detail": "A quotation in the bundled packet is fabricated, not in the opinion."
+    }
+  ]
+}

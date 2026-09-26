@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "match": "^\\s*what (?:is|are)\\s+(.+?)\\??\\s*$",
+      "response": "I don't have a verified entry for \"{{1}}\" offline. Which statute, case, or doctrine are you working from?"
+    },
+    {
+      "match": "^\\s*how (?:do|does|can|should)\\s+(.+?)\\??\\s*$",
+      "response": "Walk me through what you have so far on \"{{1}}\" — what does your outline say?"
+    },
+    {
+      "match": "^\\s*why\\s+(.+?)\\??\\s*$",
+      "response": "What rule are you applying to \"{{1}}\", and to which facts?"
+    },
+    {
+      "match": "^\\s*(?:i\\s+)?(?:don'?t|do not)\\s+(?:get|understand)\\s+(.+?)\\s*$",
+      "response": "Which part of \"{{1}}\" is unclear — the elements, or how it applies to your facts?"
+    },
+    {
+      "match": "^\\s*(?:can you )?(?:explain|tell me about)\\s+(.+?)\\??\\s*$",
+      "response": "Try me on the elements of \"{{1}}\" first: what do you remember without looking?"
+    }
+  ],
+  "suggestions": [
+    "What does Florida say about elective share?",
+    "Define ademption.",
+    "What are the elements of a valid will?",
+    "What happens if a will is not self-proved?"
+  ]
+}

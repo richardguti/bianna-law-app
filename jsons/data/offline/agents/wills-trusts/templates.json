@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "rule-lookup": {
+    "header": "Fla. Stat. § {section} — {catchline}",
+    "body": "{body}",
+    "gloss_prefix": "In plain terms: ",
+    "integrity_warning": "Heads up: this bundled copy of § {section} shows {anomaly}. The quoted text stops where another section’s text began, so it is not the complete section — read flsenate.gov/Statutes for the full text.",
+    "known_defect_warning": "This is a known bad copy in the bundle: {detail}",
+    "attribution": "Source: {source} (bundled offline corpus) — {file}",
+    "related": "Related in this doctrine: {related}"
+  },
+  "definition": {
+    "header": "{term}",
+    "body": "{definition}",
+    "cite_prefix": "See ",
+    "attribution": "Source: {source} (bundled offline corpus)"
+  },
+  "reflection": {
+    "body": "{response}"
+  },
+  "clarify": {
+    "body": "I could not tell which doctrine that is about, and I will not guess. Which course is it for — {courses}?"
+  },
+  "unavailable": {
+    "body": "I do not have that offline. My bundled corpus covers Florida statutes; for anything beyond it I would need the online model. Try one of these instead: {suggestions}"
+  }
+}

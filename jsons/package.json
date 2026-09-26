@@ -26,6 +26,8 @@
       "rag.js",
       "icm.js",
       "renderer.js",
+      "offline/**/*",
+      "data/offline/**/*",
       "dist-react/**/*",
       "assets/**/*",
       "legal-data/**/*",

@@ -139,6 +139,24 @@ declare global {
       vaultDelete:     (args: { id: string }) => Promise<{ success: boolean; error?: string }>
       vaultOpenFolder: () => Promise<{ success: boolean }>
 
+      /* ── Offline mode (works with no network and no API key) ── */
+      /**
+       * Answer from the bundled Florida Statutes. `text` is always present so the caller can
+       * render it as plain text; `citation` and `integrity` let the UI show provenance and
+       * warn when a bundled section is known to be an imperfect copy.
+       */
+      offlineAsk: (text: string) => Promise<{
+        ok: boolean
+        source: 'offline'
+        type: 'rule-lookup' | 'definition' | 'reflection' | 'clarify' | 'unavailable' | 'error'
+        agent?: string
+        text: string
+        citation?: { section: string; catchline: string; source: string | null; file: string } | null
+        integrity?: { ok: boolean; note?: string; anomalies?: string[] }
+        suggestions?: string[]
+        doctrine?: { id: string; label: string } | null
+      }>
+
       /* ── Export (Word / PDF / HTML / Markdown) ── */
       exportDocument:  (args: {
                          topic: string; subject: string; mode: string; html: string;

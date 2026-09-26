@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "active": [
+    "wills-trusts"
+  ],
+  "agents": {
+    "wills-trusts": {
+      "path": "agents/wills-trusts",
+      "title": "Wills & Trusts",
+      "strong_signals": [
+        "testator",
+        "testatrix",
+        "devise",
+        "devisee",
+        "codicil",
+        "intestate",
+        "intestacy",
+        "per stirpes",
+        "ademption",
+        "adempt",
+        "elective share",
+        "homestead",
+        "probate",
+        "personal representative",
+        "executor",
+        "executrix",
+        "trustee",
+        "settlor",
+        "testamentary",
+        "attestation",
+        "self-proving",
+        "pretermitted",
+        "lapse",
+        "antilapse",
+        "residuary",
+        "codicil",
+        "trust",
+        "beneficiary",
+        "fiduciary",
+        "spendthrift",
+        "principal and income",
+        "estates and trusts",
+        "732.",
+        "733.",
+        "736.",
+        "738."
+      ],
+      "chapter_scope": [
+        "731",
+        "732",
+        "733",
+        "734",
+        "735",
+        "736",
+        "738",
+        "739",
+        "740"
+      ]
+    }
+  },
+  "fallback": "reflection"
+}

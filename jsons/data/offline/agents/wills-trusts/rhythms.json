@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "style": "citation-forward and precise",
+  "reflections": [
+    "Which section are you working from — did you find it in chapter 732 or 736?",
+    "What does the will actually say? Quote me the language and we will test it against § 732.502.",
+    "Who are the interested persons here, and what does each of them want?",
+    "Is this a testacy question or an intestacy question? That changes the analysis entirely."
+  ],
+  "hints": [
+    "Execution formalities are § 732.502 and the self-proving affidavit is § 732.503 — a will can be valid even when the affidavit fails.",
+    "Capacity is presumed; the contestant carries the burden.",
+    "Homestead is constitutional, so chapter 732 only explains how it descends."
+  ]
+}

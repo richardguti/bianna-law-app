@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "register": "statutory-formal",
+  "strong": [
+    "testator",
+    "testatrix",
+    "devise",
+    "devisee",
+    "codicil",
+    "testamentary",
+    "intestate",
+    "elective share",
+    "homestead",
+    "probate",
+    "personal representative",
+    "pretermitted",
+    "antilapse",
+    "ademption",
+    "spendthrift",
+    "settlor",
+    "residuary",
+    "attestation"
+  ],
+  "medium": [
+    "will",
+    "trust",
+    "trustee",
+    "beneficiary",
+    "estate",
+    "heir",
+    "descendant",
+    "fiduciary",
+    "executor",
+    "legatee",
+    "residue",
+    "notary",
+    "witness",
+    "probate code"
+  ],
+  "weak": [
+    "florida",
+    "statute",
+    "section",
+    "rule",
+    "elements",
+    "valid",
+    "law",
+    "step"
+  ],
+  "negative": [
+    "consideration",
+    "mirror image",
+    "proximate cause",
+    "hearsay",
+    "strict scrutiny",
+    "venue",
+    "summary judgment",
+    "mens rea",
+    "fourth amendment"
+  ]
+}

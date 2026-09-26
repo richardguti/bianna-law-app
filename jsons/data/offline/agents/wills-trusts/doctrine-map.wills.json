@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "doctrines": {
+    "intestacy": {
+      "label": "Intestate Succession",
+      "keywords": [
+        "intestate",
+        "intestacy",
+        "heir",
+        "heirs",
+        "descendant",
+        "per stirpes",
+        "per capita",
+        "spouse share",
+        "escheat",
+        "half blood",
+        "afterborn",
+        "adopted",
+        "dies without a will",
+        "no will"
+      ],
+      "statutes": [
+        "732.101",
+        "732.102",
+        "732.103",
+        "732.104",
+        "732.105",
+        "732.106",
+        "732.107",
+        "732.108",
+        "732.109",
+        "732.111"
+      ],
+      "question_shapes": [
+        "what does florida say",
+        "who inherits",
+        "who takes",
+        "how is the estate divided"
+      ]
+    },
+    "elective-share": {
+      "label": "Elective Share",
+      "keywords": [
+        "elective share",
+        "elective estate",
+        "elect",
+        "spousal share",
+        "30 percent",
+        "augmented estate",
+        "surviving spouse share",
+        "omitted spouse elective"
+      ],
+      "statutes": [
+        "732.201",
+        "732.2025",
+        "732.2035",
+        "732.2045",
+        "732.2055",
+        "732.2065",
+        "732.2075",
+        "732.2085",
+        "732.2095",
+        "732.2125",
+        "732.2135"
+      ],
+      "question_shapes": [
+        "how much does the spouse get",
+        "what is the elective share",
+        "can the spouse elect"
+      ]
+    },
+    "homestead": {
+      "label": "Homestead and Family Protection",
+      "keywords": [
+        "homestead",
+        "protected homestead",
+        "family home",
+        "devise of homestead",
+        "constitutional homestead",
+        "spouse and minor child",
+        "who gets the house"
+      ],
+      "statutes": [
+        "732.401",
+        "732.4015",
+        "732.4017",
+        "732.227",
+        "732.7025"
+      ],
+      "question_shapes": [
+        "who gets the house",
+        "can the homestead be devised",
+        "can the home be sold"
+      ]
+    },
+    "will-execution": {
+      "label": "Will Execution Formalities",
+      "keywords": [
+        "execution of wills",
+        "formalities",
+        "attestation",
+        "attesting witness",
+        "witnesses",
+        "signature at the end",
+        "self-proving",
+        "self proof",
+        "affidavit",
+        "notary",
+        "testamentary capacity",
+        "testator",
+        "two witnesses",
+        "valid will"
+      ],
+      "statutes": [
+        "732.501",
+        "732.502",
+        "732.503",
+        "732.504"
+      ],
+      "question_shapes": [
+        "what are the elements of a valid will",
+        "is the will valid",
+        "how many witnesses",
+        "how do you execute a will"
+      ]
+    },
+    "electronic-wills": {
+      "label": "Electronic Wills",
+      "keywords": [
+        "electronic will",
+        "e-will",
+        "digital will",
+        "remote witnessing",
+        "qualified custodian"
+      ],
+      "statutes": [
+        "732.521",
+        "732.522",
+        "732.523",
+        "732.524",
+        "732.526"
+      ],
+      "question_shapes": [
+        "is an electronic will valid",
+        "can a will be signed electronically"
+      ]
+    },
+    "will-revocation": {
+      "label": "Revocation and Revival",
+      "keywords": [
+        "revocation",
+        "revoke",
+        "revoked",
+        "revival",
+        "codicil",
+        "physical act",
+        "burning",
+        "tearing",
+        "subsequent marriage",
+        "divorce",
+        "dissolution",
+        "republication"
+      ],
+      "statutes": [
+        "732.505",
+        "732.506",
+        "732.507",
+        "732.508",
+        "732.509",
+        "732.5105",
+        "732.511",
+        "732.512"
+      ],
+      "question_shapes": [
+        "does divorce revoke a will",
+        "how do you revoke a will",
+        "is the old will revived"
+      ]
+    },
+    "will-contests": {
+      "label": "Will Contests and Undue Influence",
+      "keywords": [
+        "contest",
+        "will contest",
+        "undue influence",
+        "duress",
+        "fraud",
+        "mistake",
+        "no contest clause",
+        "penalty clause",
+        "killer",
+        "slayer",
+        "forfeiture",
+        "procurement",
+        "confidential relationship"
+      ],
+      "statutes": [
+        "732.517",
+        "732.518",
+        "732.5165",
+        "732.802",
+        "732.805",
+        "732.806"
+      ],
+      "question_shapes": [
+        "can the will be challenged",
+        "what is undue influence",
+        "does the no contest clause apply"
+      ]
+    }
+  }
+}

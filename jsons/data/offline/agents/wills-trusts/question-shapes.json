@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "types": [
+    {
+      "type": "rule-lookup",
+      "patterns": [
+        "\\bwhat\\s+does\\s+(?:florida|fl|the\\s+law)\\s+(?:say|provide|require|allow)\\b",
+        "\\b(?:fla\\.?|florida)\\s+stat",
+        "\\bf\\.s\\.\\b",
+        "\\b\\d{3}\\.\\d{3,}\\b",
+        "\\bunder\\s+(?:florida|fl)\\s+law\\b"
+      ]
+    },
+    {
+      "type": "definition",
+      "patterns": [
+        "^\\s*what\\s+(?:is|are)\\s+(?!required\\b)[a-z]",
+        "^\\s*define\\b",
+        "\\bwhat\\s+does\\s+.+\\s+mean\\b",
+        "\\bwhat\\s+is\\s+the\\s+(?:meaning|definition)\\b"
+      ]
+    },
+    {
+      "type": "procedure",
+      "patterns": [
+        "\\b(?:steps?|process|procedure)\\s+(?:to|for)\\b",
+        "\\bhow\\s+do\\s+(?:i|you|we)\\s+(?:file|probate|open\\s+an?\\s+estate)\\b"
+      ]
+    },
+    {
+      "type": "drill",
+      "patterns": [
+        "\\b(?:drill|quiz|test\\s+me|practice|hypothetical)\\b"
+      ]
+    }
+  ]
+}

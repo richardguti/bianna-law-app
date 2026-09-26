@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "doctrines": {
+    "pretermitted": {
+      "label": "Pretermitted Spouse and Children",
+      "keywords": [
+        "pretermitted",
+        "omitted child",
+        "omitted spouse",
+        "born after the will",
+        "not provided for",
+        "after-born"
+      ],
+      "statutes": [
+        "732.301",
+        "732.302"
+      ],
+      "question_shapes": [
+        "what if a child is not mentioned",
+        "what does an omitted child get"
+      ]
+    },
+    "construction-and-lapse": {
+      "label": "Rules of Construction, Lapse and Ademption",
+      "keywords": [
+        "lapse",
+        "antilapse",
+        "anti-lapse",
+        "ademption",
+        "adeemed",
+        "satisfaction",
+        "simultaneous death",
+        "nonademption",
+        "class gift",
+        "rules of construction",
+        "reformation",
+        "power of appointment",
+        "residuary",
+        "residue"
+      ],
+      "statutes": [
+        "732.6005",
+        "732.601",
+        "732.603",
+        "732.604",
+        "732.606",
+        "732.607",
+        "732.609",
+        "732.611",
+        "732.615",
+        "732.616"
+      ],
+      "question_shapes": [
+        "what happens if the beneficiary dies first",
+        "what is ademption",
+        "who takes the residue"
+      ]
+    },
+    "exempt-property-and-allowance": {
+      "label": "Exempt Property and Family Allowance",
+      "keywords": [
+        "exempt property",
+        "family allowance",
+        "protected property",
+        "household furnishings",
+        "two vehicles"
+      ],
+      "statutes": [
+        "732.402",
+        "732.403"
+      ],
+      "question_shapes": [
+        "what is exempt property",
+        "what is the family allowance"
+      ]
+    },
+    "spousal-agreements": {
+      "label": "Agreements and Waivers Between Spouses",
+      "keywords": [
+        "premarital",
+        "prenuptial",
+        "antenuptial",
+        "postnuptial",
+        "waiver of spousal rights",
+        "agreements concerning succession",
+        "contract to make a will"
+      ],
+      "statutes": [
+        "732.701",
+        "732.702"
+      ],
+      "question_shapes": [
+        "does the prenup waive the elective share",
+        "can we contract about inheritance"
+      ]
+    },
+    "trust-creation": {
+      "label": "Creation and Validity of Trusts",
+      "keywords": [
+        "trust",
+        "settlor",
+        "requirements for creation",
+        "trust purposes",
+        "oral trust",
+        "charitable trust",
+        "cy pres",
+        "animal trust",
+        "how is a trust created"
+      ],
+      "statutes": [
+        "736.0101",
+        "736.0102",
+        "736.0402",
+        "736.0404",
+        "736.0405",
+        "736.0406",
+        "736.0407",
+        "736.0408",
+        "736.0413"
+      ],
+      "question_shapes": [
+        "how is a trust created",
+        "what makes a trust valid",
+        "can a trust be oral"
+      ]
+    },
+    "spendthrift-and-creditors": {
+      "label": "Spendthrift Trusts and Creditors",
+      "keywords": [
+        "spendthrift",
+        "creditor",
+        "creditors",
+        "assignee",
+        "reach the trust",
+        "attachment",
+        "settlor claims"
+      ],
+      "statutes": [
+        "736.0501",
+        "736.0502",
+        "736.0503",
+        "736.0505",
+        "736.0506",
+        "736.0507"
+      ],
+      "question_shapes": [
+        "can a creditor reach the trust",
+        "does the spendthrift clause protect it"
+      ]
+    },
+    "trustee-duties": {
+      "label": "Trustee Duties and Removal",
+      "keywords": [
+        "duty of loyalty",
+        "duty to administer",
+        "impartiality",
+        "prudent administration",
+        "trustee removal",
+        "remove the trustee",
+        "resignation of trustee",
+        "vacancy",
+        "cotrustees",
+        "compensation of trustee"
+      ],
+      "statutes": [
+        "736.0801",
+        "736.0802",
+        "736.0803",
+        "736.0804",
+        "736.0805",
+        "736.0806",
+        "736.0703",
+        "736.0704",
+        "736.0705",
+        "736.0706",
+        "736.0708"
+      ],
+      "question_shapes": [
+        "what are the trustees duties",
+        "can the trustee be removed",
+        "can the trustee be paid"
+      ]
+    }
+  }
+}

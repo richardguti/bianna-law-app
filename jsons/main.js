@@ -3666,6 +3666,31 @@ ipcMain.handle('document:export', async (_event, {
 // the first quit or close is intercepted and handed back for her to resolve.
 ipcMain.on('app:set-unsaved', (_event, flag) => { hasUnsavedOutline = !!flag; });
 
+// ─── IPC: Offline mode ───────────────────────────────────────────────────────
+// Answers without a network and without an API key. Every response is either verbatim retrieval
+// from the bundled corpus, a value from a hand-authored JSON file, or a pattern-matched
+// reflection -- there is no model call and no generated legal text. See jsons/offline/index.js.
+// Wrapped so a failure here can never take the app down, and so the caller always receives
+// something renderable.
+ipcMain.handle('offline:ask', async (_event, { text } = {}) => {
+  try {
+    const offline = require('./offline');
+    const res = offline.ask(String(text || ''));
+    bootLog('offline:ask type=' + res.type + ' agent=' + res.agent
+            + ' cite=' + (res.citation ? res.citation.section : '-')
+            + ' integrity=' + (res.integrity ? (res.integrity.ok ? 'ok' : 'flagged') : '-'));
+    return res;
+  } catch (err) {
+    console.error('[offline:ask]', err);
+    return {
+      ok: false,
+      source: 'offline',
+      type: 'error',
+      text: 'Offline mode could not answer that: ' + (err.message || err),
+    };
+  }
+});
+
 ipcMain.handle('app:exit-now', () => {
   exitConfirmed = true;
   app.quit();

@@ -110,6 +110,10 @@ contextBridge.exposeInMainWorld('seniorPartner', {
   // ── Export (Word / PDF / HTML / Markdown) ──
   exportDocument:  (args) => ipcRenderer.invoke('document:export', args),
 
+  // ── Offline mode (no network, no API key) ──
+  /** Answer from the bundled corpus. Always resolves; never throws, never invents text. */
+  offlineAsk: (text) => ipcRenderer.invoke('offline:ask', { text }),
+
   // ── Settings ───────────────────────────────────────────────────────────────
   openSettings: () => ipcRenderer.invoke('open-settings'),
 
