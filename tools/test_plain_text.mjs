@@ -1,0 +1,14 @@
+﻿import { plainFromRich } from '../src/lib/aiText.ts';
+let pass = 0, fail = 0;
+const check = (ok, msg, got) => { console.log((ok ? '  [PASS] ' : '  [FAIL] ') + msg + (ok ? '' : '  got: ' + JSON.stringify(got))); if (ok) pass++; else fail++; };
+check(plainFromRich('<div><strong>Hello</strong> world</div>') === 'Hello world', 'html tags stripped, text kept', plainFromRich('<div><strong>Hello</strong> world</div>'));
+check(plainFromRich('**bold** and *ital*') === 'bold and ital', 'markdown emphasis removed', plainFromRich('**bold** and *ital*'));
+check(!plainFromRich('## Heading').includes('#'), 'heading markers removed', plainFromRich('## Heading'));
+check(plainFromRich('<li>a</li><li>b</li>').includes('- a') && plainFromRich('<li>a</li><li>b</li>').includes('- b'), 'list items become bullets', plainFromRich('<li>a</li><li>b</li>'));
+check(plainFromRich('a&nbsp;b &amp; c').includes('a b & c'), 'entities decoded', plainFromRich('a&nbsp;b &amp; c'));
+check(plainFromRich('x \n\n\n\n y').indexOf('\n\n\n') === -1, 'blank-line damage collapsed', plainFromRich('x \n\n\n\n y'));
+const marker = '(outline continues - regenerate for full version)';
+check(plainFromRich('<em>' + marker + '</em>') === marker, 'continuation marker preserved as text', plainFromRich('<em>' + marker + '</em>'));
+check(!plainFromRich('<strong>x</strong>').includes('<'), 'no angle brackets survive', plainFromRich('<strong>x</strong>'));
+console.log('\n=== PLAIN TEXT: ' + pass + ' passed, ' + fail + ' failed ===');
+process.exit(fail ? 1 : 0);

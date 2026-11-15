@@ -257,12 +257,20 @@ export function Settings() {
   const [icmVerifyResult, setIcmVerifyResult] = useState<string | null>(null)
 
   async function handleIcmVerify() {
-    const res = await window.seniorPartner?.icmVerify?.({ query: 'minimum contacts' })
-    if (!res || !res.success) { setIcmVerifyResult('ICM verification is only available in the desktop app.'); return }
-    const matched = (res.matched ?? []).map((m) => m.rel).join(', ') || '(no matches)'
-    setIcmVerifyResult(
-      `Query "${res.query}" → ${res.filesIndexed} indexed · matched: ${matched} · injected ${res.injectedBlockLength} chars ${res.blockOrderedBeforeRag ? 'before the generic RAG block' : ''}`
-    )
+    // Two probes, because the interesting result is the DIFFERENCE between them.
+    // "minimum contacts" is federal due process — the corpus holds no federal
+    // constitutional text, so the correct answer is a refusal, not a list of Florida
+    // statutes whose body happens to contain the word "contact". "elective share" is
+    // squarely Florida Wills, so it must still match. A test that only checks the
+    // matching case cannot tell "fixed" from "stopped working".
+    const probe = async (q: string) => {
+      const res = await window.seniorPartner?.icmVerify?.({ query: q })
+      if (!res || !res.success) return `"${q}" — ICM verification is only available in the desktop app.`
+      if (res.matched === false) return `"${q}" — REFUSED [${res.scope}]: ${res.refusalReason}`
+      const hits = (res.hits ?? []).map((m) => m.rel.split(/[\\/]/).pop()).join(', ') || '(none)'
+      return `"${q}" — matched ${hits} · injected ${res.injectedBlockLength} chars${res.blockOrderedBeforeRag ? ' before the generic RAG block' : ''}`
+    }
+    setIcmVerifyResult([await probe('minimum contacts'), await probe('elective share')].join('\n'))
   }
 
   async function handleIcmSync(root?: string) {
@@ -750,7 +758,7 @@ export function Settings() {
                   </button>
                 </div>
                 {icmVerifyResult && (
-                  <p className="text-xs text-on-surface-variant bg-surface-container-low rounded-lg px-3 py-2 leading-relaxed">
+                  <p className="text-xs text-on-surface-variant bg-surface-container-low rounded-lg px-3 py-2 leading-relaxed whitespace-pre-line">
                     {icmVerifyResult}
                   </p>
                 )}

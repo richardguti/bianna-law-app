@@ -6,6 +6,16 @@
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "types": ["vite/client"],
+    /*
+     * The React source lives at the repo root (../src) while @excalidraw/excalidraw is
+     * installed in jsons/node_modules. TypeScript resolves bare specifiers by walking up from
+     * the IMPORTING FILE, so it walks the root node_modules, never sees excalidraw, and the
+     * canvas types silently degrade to `any`. This mirrors the matching alias in
+     * vite.config.ts -- both are needed, and for the same reason.
+     */
+    "paths": {
+      "@excalidraw/excalidraw": ["./node_modules/@excalidraw/excalidraw/dist/types/excalidraw/index.d.ts"]
+    },
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -24,5 +34,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["../src"]
 }

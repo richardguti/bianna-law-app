@@ -35,7 +35,12 @@ declare global {
       /** Load a thread, walking backward through days within a token budget. */
       loadChatThread: (args: { action: string; maxTokens?: number }) => Promise<{ success: boolean; messages: ChatStoredMessage[]; daysLoaded?: number; tokens?: number; budget?: number; truncated?: boolean; oldestLoaded?: string | null; error?: string }>
       /** Append one turn to today's file for an action (append-only). */
-      appendChatTurn: (args: { action: string; role: 'user' | 'assistant'; content: string }) => Promise<{ success: boolean; file?: string; dateKey?: string; ts?: string; error?: string }>
+      appendChatTurn: (args: { action: string; role: 'user' | 'assistant'; content: string; id?: string; reasoning?: string | null; biaHtml?: string | null }) => Promise<{ success: boolean; file?: string; dateKey?: string; ts?: string; id?: string; error?: string }>
+      /**
+       * Delete one turn by id. Writes a tombstone in the main process, so the deletion survives a
+       * reload -- a renderer-only delete is what let deleted messages come back.
+       */
+      deleteChatTurn: (args: { action: string; id: string }) => Promise<{ success: boolean; id?: string; error?: string }>
       /** Day keys holding a thread for an action, newest first. */
       listChatDays:   (args: { action: string }) => Promise<{ success: boolean; days: string[]; error?: string }>
       /** Search every stored conversation. */
@@ -78,6 +83,105 @@ declare global {
       getAppVersion:       () => Promise<string>
       openDocumentsFolder: () => Promise<{ success: boolean }>
       listRagSources:      () => Promise<unknown>
+      /** Counts and generation metadata for the bundled legal corpora */
+      ragStats:            () => Promise<{
+        success: boolean
+        chunkCount?: number
+        sourceCount?: number
+        corpora?: Array<{ file: string; chunks: number; version: string | null; generatedAt: string | null }>
+        topSources?: Array<{ source: string; count: number }>
+        /** Chunk counts per practice domain — the partition each attorney is bound to */
+        domains?: Record<string, number>
+        domainSourceCounts?: Record<string, number>
+        error?: string
+      }>
+      /** Which news providers are configured, and how current the doctrine corpus is */
+      realWorldStatus:     () => Promise<{
+        ok: boolean
+        providers?: { rss: boolean; topic: boolean; oxylabs: boolean }
+        corpus?: { chunks: number; domains: Record<string, number>; generatedAt: string | null }
+        /** What the library holds by foundational subject, so gaps are visible */
+        coverage?: Array<{ label: string; chunks: number; present: boolean }>
+        error?: string
+      }>
+      /** Search current news and correlate each headline to doctrine passages */
+      realWorldSearch:     (args: {
+        query?: string
+        topicId?: string
+        domain?: string | null
+        limit?: number
+        provider?: 'rss' | 'topic' | 'oxylabs'
+      }) => Promise<{
+        ok: boolean
+        provider?: string
+        note?: string
+        error?: string
+        items: Array<{
+          title: string
+          link: string
+          published: string
+          outlet: string
+          doctrine: Array<{ source: string; title: string; excerpt: string; domain?: string; score: number }>
+          relaxed?: boolean
+          note?: string | null
+          corpusGeneratedAt?: string | null
+        }>
+      }>
+      /** Store Oxylabs Web API credentials (optional provider) */
+      realWorldSaveCredentials: (args: { username: string; password: string }) => Promise<{ success: boolean; error?: string }>
+      /** Generate a run of exam questions grounded in the corpus */
+      examGenerate: (args: {
+        domain?: string
+        kind?: 'mcq' | 'written' | 'essay'
+        difficulty?: 'foundational' | 'midterm' | 'exam'
+        count?: number
+        /** A free-text topic. Overrides `domain` and searches every shelf. */
+        topic?: string
+        allSources?: boolean
+        /** 'bar' reproduces the Florida examination; 'final' is a law-school final. */
+        mode?: 'bar' | 'final'
+        /** One of the Florida Board of Bar Examiners' sixteen subjects, or an MBE subject. */
+        subject?: string
+        /** Part A (Florida), Part B (Multistate), or both split evenly. */
+        part?: 'A' | 'B' | 'both'
+      }) => Promise<{
+        success: boolean
+        mode?: 'bar' | 'final'
+        part?: 'A' | 'B' | 'both'
+        subject?: string | null
+        domain?: string | null
+        allSources?: boolean
+        topic?: string | null
+        label?: string
+        /** Corpus sources the passages came from, so the grounding is auditable */
+        sources?: string[]
+        kind?: string
+        requested?: number
+        returned?: number
+        error?: string
+        questions: Array<{
+          id: string
+          kind: string
+          prompt: string
+          options?: string[]
+          answerIndex?: number
+          modelAnswer?: string
+          rubric?: string[]
+          hint: string
+          rationale: string
+          doctrine: string
+        }>
+      }>
+      ragSearch:           (args: { query: string; topK?: number; domain?: string }) => Promise<{
+        success: boolean
+        domain?: string | null
+        /** True when the search had to loosen the query to return anything */
+        relaxed?: boolean
+        /** Plain-language explanation of what was loosened, for display */
+        note?: string | null
+        hits: Array<{ id: string; source: string; title: string; domain?: string; excerpt: string; score: number }>
+        error?: string
+      }>
       pickAndReadFile:     () => Promise<{ success: boolean; text?: string; fileName?: string; filePath?: string; canceled?: boolean; noText?: boolean; error?: string }>
       /** Resolve the real path of a dropped File (Electron ≥32) — null when unavailable */
       getPathForFile:      (file: File) => string | null
@@ -155,7 +259,51 @@ declare global {
         integrity?: { ok: boolean; note?: string; anomalies?: string[] }
         suggestions?: string[]
         doctrine?: { id: string; label: string } | null
+        /** Where the quoted text came from: the bundled snapshot, or a copy verified against flsenate.gov. */
+        provenance?: { origin: 'overlay' | 'bundle'; verified_at: string | null; source_url: string | null; hash: string | null }
+        /** Present when a second discipline also claimed the question. */
+        note?: string
+        arbitration?: { resolvedBy: string; note?: string }
+        /** Set instead of a single answer when two disciplines genuinely tied; show both, labelled. */
+        merged?: { id: string; label: string; response: unknown }[]
       }>
+
+      /* ── Corpus verification against the live source ──
+         Never called on a normal ask. The bundled corpus answers by default; the network is used
+         only when a section was flagged damaged, or the user explicitly asked to verify one. */
+      corpusVerifySection: (sectionNumber: string) => Promise<{
+        ok: boolean
+        section?: string
+        error?: string
+        message?: string
+        /** True for a DNS/connection failure. The bundled copy still answers; it just stays unverified. */
+        offline?: boolean
+        source_url?: string
+        verified_on?: string
+        matches?: boolean
+        diff?: { field: string; cached: string; live: string; cached_len?: number; live_len?: number }[]
+        live?: { section: string; catchline: string; body: string; history: string | null; note: string | null }
+        cached?: { found: boolean; catchline?: string | null; body?: string | null; provenance?: { origin: string; verified_at: string | null } | null }
+      }>
+
+      corpusRepairSection: (sectionNumber: string) => Promise<{
+        ok: boolean
+        section?: string
+        error?: string
+        message?: string
+        authority?: string
+        overlay?: { markdown_path: string; meta_path: string; meta: { verified_at: string; source_url: string | null } }
+      }>
+
+      corpusOverlayStatus: () => Promise<{
+        root: string | null
+        count: number
+        sections: { section: string; verified_at: string | null; source_url: string | null; edition: string | null }[]
+        rate?: { minIntervalMs: number; maxPerMinute: number; inWindow: number }
+        edition?: string
+      }>
+
+      corpusRevertSection: (sectionNumber: string) => Promise<{ ok: boolean; removed: boolean }>
 
       /* ── Export (Word / PDF / HTML / Markdown) ── */
       exportDocument:  (args: {
@@ -174,7 +322,12 @@ declare global {
       icmList:       (args?: { limit?: number }) => Promise<{ rel: string; discipline: string; docType: string; chars: number; path: string }[]>
       icmSearch:     (args?: { query?: string; topK?: number }) => Promise<{ score: number; path: string; rel: string; discipline: string; docType: string; excerpt: string }[]>
       icmIndexFile:  (filePath: string) => Promise<{ success: boolean; error?: string }>
-      icmVerify:     (args?: { query?: string }) => Promise<{ success: boolean; query?: string; filesIndexed?: number; byDiscipline?: Record<string, number>; byDocType?: Record<string, number>; matched?: { rel: string; discipline: string; docType: string; score: number }[]; injectedBlockLength?: number; injectedBlockPrefix?: string; blockOrderedBeforeRag?: boolean; error?: string }>
+      icmVerify:     (args?: { query?: string }) => Promise<{ success: boolean; query?: string; filesIndexed?: number; byDiscipline?: Record<string, number>; byDocType?: Record<string, number>; matched?: boolean; scope?: string; refusalReason?: string; hits?: { rel: string; discipline: string; docType: string; score: number }[]; injectedBlockLength?: number; injectedBlockPrefix?: string; blockOrderedBeforeRag?: boolean; error?: string }>
+      /* ── Whiteboard ────────────────────────────────────────────────────────── */
+      whiteboardList:    () => Promise<{ success: boolean; items: { file: string; name: string; title: string; bytes: number; mtime: number; hasPng: boolean; hasMd: boolean }[]; dir?: string; error?: string }>
+      whiteboardLoad:    (args: { file: string }) => Promise<{ success: boolean; file?: string; scene?: unknown; text?: string[]; pngDataUrl?: string | null; error?: string }>
+      whiteboardSave:    (args: { title?: string; scene?: unknown; pngBase64?: string | null }) => Promise<{ success: boolean; file?: string; stem?: string; dir?: string; jsonPath?: string; pngPath?: string; mdPath?: string; textCount?: number; elementCount?: number; error?: string }>
+      whiteboardConvert: (args: { text: string; title?: string }) => Promise<{ success: boolean; outline?: string; docxPath?: string | null; chars?: number; reason?: string; error?: string }>
       /** First-launch install of the bundled Florida Statutes into the user's corpus */
       corpusEnsure:  (args?: { force?: boolean }) => Promise<{ ok: boolean; skipped?: boolean; installed?: number; total?: number; ms?: number; version?: string; dest?: string; files?: number; reason?: string; error?: string }>
       corpusStatus:  () => Promise<{ bundled: string | null; bundledVersion: string | null; bundledFiles: number; installed: string; installedVersion: string | null; installedFiles: number; expectedVersion: string }>
@@ -197,8 +350,13 @@ declare global {
 
   /** One stored chat turn, as written to the markdown thread files. */
   interface ChatStoredMessage {
+    id?: string | null
     role: 'user' | 'assistant' | string
     content: string
+    /** R1's chain-of-thought, delimited in the file so it cannot be confused with the answer. */
+    reasoning?: string | null
+    /** The formatted four-tier artifact. Absent when the formatter was skipped or failed. */
+    biaHtml?: string | null
     ts: string
     date: string
   }

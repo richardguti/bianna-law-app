@@ -96,8 +96,53 @@ const DOC_TYPE_PRIORITY = ['statute', 'syllabus', 'outline', 'case_brief', 'exam
 
 /** A bare citation filename, e.g. "732.108.md" or "11.2421". */
 const CITATION_NAME = /^\d+\.\d+[0-9a-z]*(\.md)?$/i;
-/** A statute citation anywhere in a query, e.g. "732.108", "§ 733.106". */
-const CITATION_IN_TEXT = /\b\d{3}\.\d{3,4}\b/;
+/**
+ * The SHAPE of a statute citation anywhere in a query: chapter.section. Deliberately
+ * loose, because whether a number IS a citation is decided against the corpus rather
+ * than by the regex — see findCitation.
+ *
+ * The previous pattern was /\b\d{3}\.\d{3,4}\b/, which required a THREE-digit chapter
+ * and so silently missed every two-digit Florida chapter: 90 (Evidence), 95 (adverse
+ * possession), 83 (landlord-tenant), 63 (adoption), 48 (process). A query citing one
+ * of those fell through to ordinary keyword scoring and returned unrelated sections as
+ * a confident MATCH — measured: "florida statute 90.404" returned § 404.051.
+ */
+const CITATION_SHAPE   = /\b\d{1,4}\.\d{1,5}\b/;    // non-global: safe for .test()
+const CITATION_SHAPE_G = /\b\d{1,4}\.\d{1,5}\b/g;   // global: for enumerating matches
+
+let _citeSet = null;
+let _citeSetFor = null;
+
+/** Section numbers that actually exist as files — the disambiguator for citations. */
+function citationIndex() {
+  const idx = loadIndex();
+  if (_citeSet && _citeSetFor === idx) return _citeSet;
+  const s = new Set();
+  for (const e of idx.entries) {
+    const n = String(e.name || '').toLowerCase().replace(/\.md$/, '');
+    if (n) s.add(n);
+  }
+  _citeSet = s;
+  _citeSetFor = idx;
+  return s;
+}
+
+/**
+ * Return the first REAL statute citation in the query, or null.
+ *
+ * The corpus decides. "732.108" and "90.404" resolve to section files and are
+ * citations; "5.5" and "1.2" resolve to nothing and are not. That makes this both
+ * WIDER than the old regex — it reaches two-digit chapters — and NARROWER, because it
+ * cannot be fooled by an arbitrary decimal in prose. Widening the regex alone would
+ * have had exactly that flaw.
+ */
+function findCitation(query) {
+  const text = String(query || '');
+  if (!CITATION_SHAPE.test(text)) return null;
+  const set = citationIndex();
+  for (const c of (text.match(CITATION_SHAPE_G) || [])) if (set.has(c)) return c;
+  return null;
+}
 const STATUTE_PATH = /florida-statutes|fla-stat|\bf\.s\./i;
 
 function classifyDocType(haystack, fileName = '') {
@@ -125,7 +170,7 @@ function classifyDiscipline(haystack) {
 /** True when the question is explicitly about a statute (citation or named source). */
 function isStatuteQuery(query) {
   const q = String(query || '');
-  return CITATION_IN_TEXT.test(q)
+  return !!findCitation(q)
     || /florida statute|fla\.?\s*stat|\bf\.s\.\b/i.test(q)
     // "What does the law say about X" is the single most common way a student asks
     // for codified text, so it must count as naming the source.
@@ -151,6 +196,87 @@ const STATUTE_EXPLICIT   = 15;   // + baseline == the previous flat +25
 const STATUTE_CATCHLINE  = 20;
 /** How much an adjacent phrase from the query found verbatim in the catchline is worth. */
 const STATUTE_PHRASE = 40;
+
+/**
+ * Scope classification — is the answer to this question even IN the corpus?
+ *
+ * The bundled corpus is the 2026 Florida Statutes plus the student's own notes. It
+ * contains no federal constitutional text and no case law. A question about a
+ * federal constitutional doctrine therefore has no correct answer here, and the
+ * honest behaviour is to say so rather than hand back whichever statutes happen to
+ * contain the query's common words.
+ *
+ * This is not a hypothetical. Measured on the 24,670-section index:
+ *   "minimum contacts" (federal due process) -> 156  § 39.0139, ch.39 juvenile procedure
+ *   "what does florida say about adopted persons" -> 176  § 732.108  (correct)
+ *   "hearsay" -> 136  § 90.803 (correct)
+ * The bad hit sits BETWEEN the two good ones, so no relevance threshold separates
+ * doctrine questions from corpus questions. The separation has to be structural:
+ * refuse the scope, then require evidence within scope.
+ *
+ * The list is deliberately narrow and high-precision, and the precision is MEASURED
+ * rather than assumed: run against all 24,670 Florida catchlines, only 18 sections
+ * (0.073%) match any marker, and 21 of 24 markers match nothing at all. "equal
+ * protection" collides with zero Florida catchlines. 'bill of rights' was in the
+ * original list and was removed because it matched 11 of those 18 — Florida has a
+ * Patient's Bill of Rights (§ 381.026) and similar, so the phrase is not a reliable
+ * federal-doctrine signal. Widening this list risks refusing questions the corpus can
+ * answer; the catchline audit is the check to re-run if it is ever changed.
+ */
+const FEDERAL_CONSTITUTIONAL_MARKERS = [
+  'minimum contacts', 'international shoe', 'personal jurisdiction',
+  'equal protection', 'due process', 'substantive due process', 'procedural due process',
+  'strict scrutiny', 'intermediate scrutiny', 'rational basis',
+  'commerce clause', 'dormant commerce clause',
+  'first amendment', 'second amendment', 'fourth amendment', 'fifth amendment',
+  'sixth amendment', 'eighth amendment', 'fourteenth amendment',
+  'incorporation doctrine',
+  'marbury', 'brown v. board', 'miranda v. arizona',
+];
+
+/**
+ * Words that name the CORPUS rather than the question. They carry scoring weight
+ * (a query that says "florida" is more likely a Florida-statute question) but they
+ * must never count as EVIDENCE, because "florida" appears in thousands of catchlines
+ * and would hand every statute a pass through the evidence gate. Measured failure:
+ * "what does florida statute say about equal protection" reached § 257.18 on the
+ * strength of the word "florida" alone.
+ */
+const GENERIC_SCOPE_TOKENS = new Set([
+  'florida', 'fla', 'statute', 'statutes', 'law', 'laws', 'state', 'section',
+  'chapter', 'code', 'rule', 'rules', 'floridas',
+]);
+
+/**
+ * Classify what body of law a query asks about, and whether this corpus covers it.
+ *
+ * `inCorpus: false` is a REFUSAL — the caller must not present corpus text as
+ * authority for the question. It is not an error; it is the correct answer to
+ * "is this in the library".
+ */
+function classifyScope(query) {
+  const q = String(query || '').toLowerCase();
+  const markers = FEDERAL_CONSTITUTIONAL_MARKERS.filter((m) => q.includes(m));
+  if (!markers.length) return { scope: 'florida-or-general', inCorpus: true, reason: '', markers: [] };
+  // A real CITATION ("Fla. Stat. § 90.404", "732.108") is unambiguous evidence that a
+  // specific section is wanted, so it overrides the scope refusal. NOTHING ELSE DOES.
+  //
+  // An earlier version also overrode on isStatuteQuery — i.e. on the query merely
+  // containing the words "florida statute". That was a live escape hatch: "what does
+  // florida statute say about equal protection" contains "florida statute", so the
+  // refusal never fired and the retrieval returned § 257.18 (state libraries) with no
+  // signal that it did not answer the question. Naming a jurisdiction does not make a
+  // codified statute state a federal constitutional test.
+  if (findCitation(q)) {
+    return { scope: 'florida-or-general', inCorpus: true, reason: '', markers };
+  }
+  return {
+    scope: 'federal-constitutional',
+    inCorpus: false,
+    markers,
+    reason: `this reads as a federal constitutional question (${markers.join(', ')}), and the offline corpus is the 2026 Florida Statutes — it holds no federal constitutional text and no case law, so it has nothing authoritative to offer on this doctrine.`,
+  };
+}
 
 /**
  * Very light suffix folding, applied at SCORING time only. Scoring matches with
@@ -558,7 +684,7 @@ function search(query, topK = 4, minScore = 1) {
   // "Fla. Stat. § 733.106") or a named-source phrase pins retrieval to the codified
   // text rather than to lecture notes that merely discuss it.
   const statuteQuery = isStatuteQuery(query);
-  const cite = (String(query || '').match(CITATION_IN_TEXT) || [])[0] || null;
+  const cite = findCitation(query);
 
   // Narrow the pool: a citation query only needs the cited chapter, and otherwise
   // the inverted index supplies candidates. Falls back to a full scan when the
@@ -614,32 +740,58 @@ function search(query, topK = 4, minScore = 1) {
     const isStatute = e.discipline === 'florida_statutes';
     const catchline = isStatute ? catchlineOf(e) : '';
     let score = 0;
+    // `evidence` counts only the hits that mean something: the section's own title,
+    // its filename, its topics, or a query phrase found in the title. Scattered
+    // common-word matches in the body do NOT count. This is what separates a real
+    // hit from a statute that merely contains the query's words.
+    let evidence = 0;
     for (let ti = 0; ti < tokens.length; ti++) {
       const t = tokens[ti];
       const w = weights[ti];
       // Fold for matching so "inheriting" also reaches inherit/inherits/inherited.
       const f = foldToken(t);
+      // A scope word ("florida", "statute") still affects RANKING but must never
+      // count as evidence — see GENERIC_SCOPE_TOKENS.
+      const generic = GENERIC_SCOPE_TOKENS.has(f) || GENERIC_SCOPE_TOKENS.has(t);
       const matches = countOcc(hay, f);
       if (matches) score += Math.round(Math.min(matches, 12) * w);
       // Metadata hits are worth more than incidental body matches.
-      if (e.name.toLowerCase().includes(t)) score += 4;
-      if ((e.topics || []).some((x) => x.toLowerCase().includes(t))) score += 3;
+      if (e.name.toLowerCase().includes(t)) { score += 4; if (!generic) evidence += 4; }
+      if ((e.topics || []).some((x) => x.toLowerCase().includes(t))) { score += 3; if (!generic) evidence += 3; }
       // The section's own title is the strongest signal a plain-English question can
       // hit — this is what lets "adopted persons" outrank notes about adoption.
-      if (catchline && catchline.includes(f)) score += STATUTE_CATCHLINE * Math.min(w, 2);
+      if (catchline && catchline.includes(f)) {
+        const add = STATUTE_CATCHLINE * Math.min(w, 2);
+        score += add; if (!generic) evidence += add;
+      }
     }
     if (e.docType === 'outline') score += 1;   // favour her own study artifacts
 
     if (isStatute && DEFAULT_JURISDICTION === 'florida') {
       score += STATUTE_BASELINE;
       if (statuteQuery) score += STATUTE_EXPLICIT;
-      if (catchline) score += catchlinePhrase(catchline, phrases);
+      if (catchline) { const p = catchlinePhrase(catchline, phrases); score += p; evidence += p; }
     }
     if (cite && e.name === `${cite}.md`) score += 500;   // exact section anchor
 
-    return { entry: e, score };
+    return { entry: e, score, evidence };
   })
-    .filter((x) => x.score >= minScore)
+    .filter((x) => {
+      if (x.score < minScore) return false;
+      // ERRORS OF COMMISSION ARE WORSE THAN ERRORS OF OMISSION. A Florida statute
+      // may only be returned on positive evidence — a catchline, filename, topic or
+      // phrase hit — never on the jurisdiction baseline plus scattered common-word
+      // body matches. Without this, "minimum contacts" returned § 39.0139 (juvenile
+      // procedure) at 156, above the correct hit for "hearsay" (136).
+      //
+      // Only a real CITATION bypasses the test, because a citation is itself the
+      // evidence. An earlier version also bypassed on statuteQuery — which let
+      // "what does florida statute say about equal protection" through to § 257.18
+      // (state libraries) purely because the query contains the words "florida
+      // statute". A query that names Florida still has to match a section on merit.
+      if (x.entry.discipline === 'florida_statutes' && !cite && x.evidence <= 0) return false;
+      return true;
+    })
     .sort((a, b) => b.score - a.score)
     .slice(0, topK);
 
@@ -653,20 +805,91 @@ function search(query, topK = 4, minScore = 1) {
   }));
 }
 
-/** Formatted context block injected into the AI system prompt. */
-function getIcmContext(query, topK = 4) {
-  let hits = [];
-  try { hits = search(query, topK); } catch (err) {
-    console.error('[ICM] search failed:', err.message);
-    return '';
-  }
-  if (!hits.length) return '';
-
+/** Format a set of hits as the grounding block injected into the AI system prompt. */
+function renderIcmBlock(hits) {
   const body = hits
     .map((h) => `[${h.discipline}/${h.docType}] ${path.basename(h.rel)}\n${h.excerpt}`)
     .join('\n\n---\n\n');
 
   return `\n\nSTUDENT'S OWN MATERIALS (ICM — mirrored from ${APP_DIR}; these OUTRANK the generic corpus. Prefer these authorities and quote them where relevant):\n\n${body}`;
+}
+
+/**
+ * What the model is told when the corpus has nothing to offer. This is deliberate:
+ * handing the model empty context lets it reason from whatever it did retrieve, or
+ * fall back to unacknowledged training memory. Naming the refusal is the point —
+ * an error of omission is recoverable, a confidently-wrong citation is not.
+ */
+const ICM_NO_MATCH_NOTICE = (reason) =>
+  `\n\nNO RELEVANT CORPUS MATERIAL (ICM): ${reason} ` +
+  'The bundled offline corpus is the 2026 Florida Statutes plus the student\'s own notes. ' +
+  'Do not cite a Florida statute as authority for this question, and do not treat any retrieved text as support for it. ' +
+  'If you answer, answer from general knowledge and state plainly that no primary source was available offline, ' +
+  'so the student must verify against a primary source.';
+
+/**
+ * The single retrieval entry point for AI grounding. Combines a scope refusal (the
+ * question is outside the corpus) with the evidence floor (the question is inside the
+ * corpus but nothing matched on evidence). Returns { matched, reason, scope, hits, block }.
+ */
+function retrieve(query, topK = 4) {
+  const q = String(query || '').trim();
+  if (!q) return { matched: false, empty: true, reason: '', scope: 'none', hits: [], block: '' };
+
+  let scope;
+  try { scope = classifyScope(query); }
+  catch { scope = { scope: 'unknown', inCorpus: true, reason: '', markers: [] }; }
+
+  let hits = [];
+  try { hits = search(query, topK); } catch (err) {
+    return { matched: false, reason: `retrieval failed (${err.message}).`, scope: scope.scope, hits: [], block: '' };
+  }
+
+  // SEARCH FIRST, THEN DECIDE — because the index holds two different things.
+  //
+  // Her own notes, outlines and case briefs are a legitimate source for a federal
+  // doctrine: her Con Law outline really does answer "minimum contacts". The Florida
+  // Statutes are NOT — no statute states a federal constitutional test, so returning
+  // § 39.0139 (juvenile procedure) because its catchline contains the word "contact"
+  // is exactly the bug this fix exists to prevent.
+  //
+  // So the refusal is not "the query is federal" (that would suppress her notes) and
+  // not "the query is federal AND nothing matched" (that lets the statute noise back
+  // in). It is: a federal-doctrine query may be answered from her own materials, and
+  // never from the codified statutes.
+  if (hits.length) {
+    const ownHits = hits.filter((h) => h.discipline !== 'florida_statutes');
+    const statuteHits = hits.filter((h) => h.discipline === 'florida_statutes');
+    if (!scope.inCorpus && !ownHits.length) {
+      return { matched: false, reason: scope.reason, scope: scope.scope, hits: [], block: '' };
+    }
+    // When the doctrine is federal, prefer whatever she owns over the statutes.
+    const use = (!scope.inCorpus && ownHits.length) ? ownHits : (hits.length ? hits : statuteHits);
+    return { matched: true, reason: '', scope: scope.scope, hits: use, block: renderIcmBlock(use) };
+  }
+
+  if (!scope.inCorpus) {
+    return { matched: false, reason: scope.reason, scope: scope.scope, hits: [], block: '' };
+  }
+  return {
+    matched: false,
+    scope: scope.scope,
+    hits: [],
+    block: '',
+    reason: 'no indexed material matched this question on evidence — the sections that share its ordinary words do not actually address it.',
+  };
+}
+
+/**
+ * Formatted context block injected into the AI system prompt. When retrieval finds
+ * nothing, this returns the refusal notice rather than an empty string, so every AI
+ * surface is told the corpus is silent instead of being left to guess. An empty query
+ * still yields '' — there is nothing to say about nothing.
+ */
+function getIcmContext(query, topK = 4) {
+  const r = retrieve(query, topK);
+  if (r.empty) return '';
+  return r.matched ? r.block : ICM_NO_MATCH_NOTICE(r.reason);
 }
 
 function listEntries(limit = 200) {
@@ -675,5 +898,5 @@ function listEntries(limit = 200) {
   }));
 }
 
-module.exports = { sync, upsert, search, getIcmContext, stats, listEntries, buildInverted, APP_DIR, INDEX_PATH, INVERTED_PATH, classify, classifyDocType, classifyDiscipline, isStatuteQuery, statuteCatchline, topicsFromName, tokenize, foldToken, phrasePatterns };
+module.exports = { sync, upsert, search, retrieve, classifyScope, getIcmContext, renderIcmBlock, stats, listEntries, buildInverted, APP_DIR, INDEX_PATH, INVERTED_PATH, classify, classifyDocType, classifyDiscipline, isStatuteQuery, statuteCatchline, topicsFromName, tokenize, foldToken, phrasePatterns, FEDERAL_CONSTITUTIONAL_MARKERS };
 

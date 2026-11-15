@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+  A FIXTURE, not a fetched page.
+
+  This mirrors the markup vocabulary the Legislature publishes: the same class names the
+  fs2026.nxt container uses (SectionNumber, CatchlineText, Subsection, Number, Text Intro Justify)
+  plus the bare <HISTORY> and <NOTES> blocks, styled by the same FSSection.css the website
+  references. It exists so the parser can be tested without a network, and so the *guards* can be
+  tested at all -- a parser that cannot be shown to reject junk is not a parser you can trust to
+  write a repair.
+
+  The first live run still has to be checked by eye. If flsenate.gov's structure has drifted, the
+  parser throws parse_failed rather than writing a plausible-looking wrong file, which is the
+  behaviour the suite asserts.
+-->
+<html>
+<head><title>Statutes &amp; Constitution : View Statutes : Online Sunshine</title></head>
+<body>
+<div id="wrapper">
+  <div id="content">
+    <div class="Section">
+      <span class="SectionNumber">732.102</span>
+      <span class="Catchline"><span class="CatchlineText">Spouse's share of intestate estate.</span></span>
+      <div class="Subsection">
+        <span class="Number">(1)</span><span xml:space="preserve" class="Text Intro Justify">If there is no surviving descendant of the decedent, the entire intestate estate.</span>
+      </div>
+      <div class="Subsection">
+        <span class="Number">(2)</span><span xml:space="preserve" class="Text Intro Justify">If the decedent is survived by one or more descendants, all of whom are also descendants of the surviving spouse, and the surviving spouse has no other descendant, the entire intestate estate.</span>
+      </div>
+      <div class="Subsection">
+        <span class="Number">(3)</span><span xml:space="preserve" class="Text Intro Justify">If there are one or more descendants of the decedent who are not lineal descendants of the surviving spouse, the surviving spouse's share is one-half of the intestate estate.</span>
+      </div>
+      <div class="History">
+        <span class="HistoryTitle">History.</span><span class="HistoryText"><HISTORY>s. 1, ch. 74-106; s. 24, ch. 75-220; s. 13, ch. 2001-226.</HISTORY></span>
+      </div>
+      <div class="Note">
+        <span class="NoteTitle">Note.</span><span class="Text Intro Justify"><NOTES>Created from former s. 731.34.</NOTES></span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

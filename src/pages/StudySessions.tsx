@@ -7,7 +7,7 @@ import { EditableChipGroup } from '../components/EditableChipGroup'
 import { EDITABLE_STORAGE_KEYS } from '../lib/editableFields'
 import { ChatBubble } from '../components/ChatBubble'
 
-type Message = { role: 'user' | 'assistant'; content: string; biaHtml?: string | null }
+type Message = { role: 'user' | 'assistant'; content: string; biaHtml?: string | null; formatFailed?: boolean }
 
 const SUBJECTS: { value: DocumentSubject; label: string }[] = [
   { value: 'contracts',      label: 'Contracts'   },
@@ -212,14 +212,16 @@ export function StudySessions() {
       // the tiers. Off the critical path and failure-tolerant: if the formatter is unavailable
       // the plain answer is kept, so a formatting outage never costs her the response.
       let biaHtml: string | null = null
+      let formatFailed = false
       if (mode !== 'socratic' || turn === 'evaluation') {
         try {
           const bia = await window.seniorPartner?.aiFormatBia?.({ text, mode, turn })
           if (bia?.success && bia.biaHtml) biaHtml = bia.biaHtml
-        } catch { /* keep the plain answer */ }
+          else if (!bia?.passthrough) formatFailed = true
+        } catch { formatFailed = true }
       }
 
-      setMessages([...newMessages, { role: 'assistant', content: text, biaHtml }])
+      setMessages([...newMessages, { role: 'assistant', content: text, biaHtml, formatFailed }])
       setStreamText('')
 
       // Push Q&A to local study memory (fire-and-forget — never blocks UI)
@@ -364,7 +366,7 @@ export function StudySessions() {
                 }`}
               >
                 {msg.role === 'assistant' ? (
-                  <ChatBubble biaHtml={msg.biaHtml} plainText={msg.content} />
+                  <ChatBubble biaHtml={msg.biaHtml} plainText={msg.content} formatFailed={msg.formatFailed} />
                 ) : (
                   msg.content
                 )}

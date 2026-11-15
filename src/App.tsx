@@ -6,6 +6,16 @@ import { useAppStore } from './store/appStore'
 
 import { Layout }          from './components/layout/Layout'
 import { Dashboard }       from './pages/Dashboard'
+import { Practice }        from './pages/Practice'
+import { PracticeArea }    from './pages/PracticeArea'
+import { PracticeProfile } from './pages/PracticeProfile'
+import { Reviews }         from './pages/Reviews'
+import { Sources }         from './pages/Sources'
+import { Simplify }        from './pages/Simplify'
+import { Florida }         from './pages/Florida'
+import { OralArgument }    from './pages/OralArgument'
+import { RealWorld }       from './pages/RealWorld'
+import { Exam }            from './pages/Exam'
 import { OutlineGenerator }from './pages/OutlineGenerator'
 import { ReadingTracker }  from './pages/ReadingTracker'
 import { StudySessions }   from './pages/StudySessions'
@@ -14,6 +24,7 @@ import { Capture }         from './pages/Capture'
 import { Calendar }        from './pages/Calendar'
 import { Settings }        from './pages/Settings'
 import { Assistant }       from './pages/Assistant'
+import { Whiteboard }      from './pages/Whiteboard'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -75,6 +86,16 @@ export default function App() {
           <Route element={<Layout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/practice"  element={<Practice />} />
+            <Route path="/practice/:id" element={<PracticeArea />} />
+            <Route path="/profile"   element={<PracticeProfile />} />
+            <Route path="/reviews"   element={<Reviews />} />
+            <Route path="/sources"   element={<Sources />} />
+            <Route path="/simplify"  element={<Simplify />} />
+            <Route path="/florida"   element={<Florida />} />
+            <Route path="/argument"  element={<OralArgument />} />
+            <Route path="/realworld" element={<RealWorld />} />
+            <Route path="/exam"      element={<Exam />} />
             <Route path="/outline"   element={<OutlineGenerator />} />
             <Route path="/tracker"   element={<ReadingTracker />} />
             <Route path="/sessions"  element={<StudySessions />} />
@@ -83,6 +104,7 @@ export default function App() {
             <Route path="/calendar"  element={<Calendar />} />
             <Route path="/settings"   element={<Settings />} />
             <Route path="/assistant"  element={<Assistant />} />
+            <Route path="/whiteboard" element={<Whiteboard />} />
           </Route>
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>

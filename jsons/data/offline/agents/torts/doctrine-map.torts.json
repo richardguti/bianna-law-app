@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "_note": "Doctrine maps are merged by glob (doctrine-map*.json), so a discipline can grow by adding a file rather than editing one. Every statute listed here was checked present in the bundle with tools/check-citations.js before this file was written.",
+  "doctrines": {
+    "negligence": {
+      "label": "Negligence and Comparative Fault",
+      "keywords": [
+        "negligence",
+        "comparative fault",
+        "comparative negligence",
+        "contributory negligence",
+        "apportionment",
+        "standard of care",
+        "duty of care",
+        "breach of duty",
+        "proximate cause",
+        "cause in fact",
+        "elements of negligence",
+        "reasonable care",
+        "fault"
+      ],
+      "statutes": [
+        "768.81",
+        "768.77",
+        "768.78",
+        "768.091",
+        "768.08"
+      ],
+      "question_shapes": [
+        "what are the elements of negligence",
+        "how does florida apportion fault",
+        "what is the test for proximate cause"
+      ]
+    },
+    "premises-liability": {
+      "label": "Premises Liability",
+      "keywords": [
+        "premises liability",
+        "premises",
+        "slip and fall",
+        "slip-and-fall",
+        "transitory foreign substance",
+        "dangerous condition",
+        "landowner",
+        "possessor of land",
+        "invitee",
+        "licensee",
+        "trespasser",
+        "warning",
+        "floor",
+        "spill"
+      ],
+      "statutes": [
+        "768.0755",
+        "768.075",
+        "768.71"
+      ],
+      "question_shapes": [
+        "does florida handle slip and fall differently",
+        "what is the duty to an invitee",
+        "what is the duty to a trespasser"
+      ]
+    },
+    "wrongful-death": {
+      "label": "Wrongful Death",
+      "keywords": [
+        "wrongful death",
+        "survivors",
+        "survivor",
+        "death of a person",
+        "died as a result",
+        "personal representative wrongful death",
+        "estate damages",
+        "loss of companionship",
+        "survival action"
+      ],
+      "statutes": [
+        "768.16",
+        "768.17",
+        "768.18",
+        "768.19",
+        "768.20",
+        "768.21",
+        "768.22",
+        "768.23",
+        "768.24",
+        "768.25",
+        "768.26"
+      ],
+      "question_shapes": [
+        "who can bring a wrongful death claim",
+        "what damages are recoverable in wrongful death",
+        "who are the survivors"
+      ]
+    },
+    "punitive-damages": {
+      "label": "Punitive Damages and Settlement Offers",
+      "keywords": [
+        "punitive damages",
+        "punitive",
+        "exemplary damages",
+        "punishment damages",
+        "cap on punitive",
+        "remittitur",
+        "additur",
+        "offer of judgment",
+        "demand for judgment",
+        "proposal for settlement",
+        "attorney fees award"
+      ],
+      "statutes": [
+        "768.72",
+        "768.73",
+        "768.74",
+        "768.79"
+      ],
+      "question_shapes": [
+        "how are punitive damages limited",
+        "can punitive damages be pleaded",
+        "how does an offer of judgment work"
+      ]
+    },
+    "contribution-and-release": {
+      "label": "Contribution and Release",
+      "keywords": [
+        "contribution",
+        "contribution among tortfeasors",
+        "joint tortfeasor",
+        "joint and several",
+        "several liability",
+        "apportion between defendants",
+        "release",
+        "covenant not to sue",
+        "settlement with one defendant",
+        "tortfeasor"
+      ],
+      "statutes": [
+        "768.31",
+        "768.041",
+        "768.042"
+      ],
+      "question_shapes": [
+        "can a defendant recover contribution",
+        "does a release bar claims against others",
+        "how is liability shared between defendants"
+      ]
+    }
+  }
+}

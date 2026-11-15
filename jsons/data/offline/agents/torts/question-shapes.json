@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "types": [
+    {
+      "type": "rule-lookup",
+      "patterns": [
+        "\\bwhat\\s+does\\s+(?:florida|fl|the\\s+law)\\s+(?:say|provide|require|allow)\\b",
+        "\\b(?:what|which)\\s+(?:is|are)\\s+the\\s+(?:elements|requirements|test|standard)\\s+(?:of|for)\\b",
+        "\\bwhat\\s+does\\s+(?:florida|fl)\\s+(?:stat|law)\\b",
+        "\\b(?:fla\\.?|florida)\\s+stat\\b",
+        "\\bf\\.s\\.\\b",
+        "\\b\\d{3}\\.\\d{3,}\\b",
+        "\\bunder\\s+(?:florida|fl)\\s+law\\b",
+        "\\b(?:how\\s+)?(?:do|does)\\s+(?:florida|fl)\\s+(?:handle|treat|apportion|allow|require|limit)\\b",
+        "\\bwhat\\s+is\\s+the\\s+(?:test|rule|standard)\\s+for\\b"
+      ]
+    },
+    {
+      "type": "definition",
+      "patterns": [
+        "^\\s*what\\s+(?:is|are)\\s+(?!(?:the\\s+)?(?:elements|requirements|test|standard|duty\\s+to|duty\\s+of)\\b)[a-z]",
+        "^\\s*define\\b",
+        "\\bwhat\\s+does\\s+.+\\s+mean\\b",
+        "\\bwhat\\s+is\\s+the\\s+(?:meaning|definition)\\b",
+        "^\\s*explain\\b"
+      ]
+    },
+    {
+      "type": "analysis",
+      "patterns": [
+        "\\bis\\s+(?:she|he|they|this|that)\\s+liable\\b",
+        "\\bis\\s+there\\s+(?:a\\s+)?(?:duty|breach|proximate cause)\\b",
+        "\\bdoes\\s+(?:this|that)\\s+constitute\\b",
+        "\\bwas\\s+the\\s+duty\\s+breached\\b",
+        "\\bcan\\s+(?:she|he|they)\\s+recover\\b"
+      ]
+    },
+    {
+      "type": "drill",
+      "patterns": [
+        "\\b(?:drill|quiz|test\\s+me|practice|hypothetical)\\b"
+      ]
+    }
+  ]
+}

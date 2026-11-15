@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "_note": "The authority line that accompanies every citation. Which one is used depends on where the text came from: the bundled snapshot, or a copy verified against the live source. Kept here rather than in each agent's templates so eight agents cannot drift on the one line that tells the student how much to trust the quotation.",
+  "verified": "Verified against flsenate.gov on {date}.",
+  "unverified": "From bundled corpus (2026 snapshot) \u2014 not verified against live source.",
+  "verified_badge": "verified",
+  "unverified_badge": "unverified"
+}

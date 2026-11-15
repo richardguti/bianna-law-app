@@ -14,7 +14,7 @@
     {
       "type": "definition",
       "patterns": [
-        "^\\s*what\\s+(?:is|are)\\s+(?!required\\b)[a-z]",
+        "^\\s*what\\s+(?:is|are)\\s+(?!(?:required|the\\s+elements|the\\s+requirements|the\\s+test|the\\s+standard|the\\s+rules?)\\b)[a-z]",
         "^\\s*define\\b",
         "\\bwhat\\s+does\\s+.+\\s+mean\\b",
         "\\bwhat\\s+is\\s+the\\s+(?:meaning|definition)\\b"

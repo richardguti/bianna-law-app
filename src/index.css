@@ -1,5 +1,5 @@
 /* Google Fonts must come before @tailwindcss and @theme */
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Plus+Jakarta+Sans:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Plus+Jakarta+Sans:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 @import "tailwindcss";
@@ -16,82 +16,112 @@
    component's utilities were. */
 @source "../data/**/*.json";
 
-/* ─── Sage Design System — "The Sovereign Editorial" ──────────────────────
-   Tokens sourced directly from the Stitch design files.
-   Tailwind v4 uses @theme instead of tailwind.config.js.
+/* ─── Editorial Dossier — the legal-work design system ────────────────────
+   Replaces "The Sovereign Editorial" (sage on sage). Three decisions carry it:
+
+   1. PAPER, NOT WHITE. The canvas is warm stock (#F2EDE2) and cards are a lighter
+      sheet (#FBF8F1) sitting on it. Nothing is pure #fff except inputs, which must
+      read as recessed wells rather than lit surfaces.
+
+   2. INK, NOT SAGE. Primary is near-black (#1B1B19). The one saturated colour is
+      terracotta (#A8452B), and it is rationed: featured cells, active emphasis,
+      and the RED verdict. A legal interface earns authority by withholding colour.
+
+   3. RULES, NOT SHADOWS. Structure is drawn with a 1px warm hairline (#DAD4C6).
+      Depth comes from the paper stack, not from blur. Corners are near-square.
+
+   The sage palette survives where it belongs: inside generated Bia outlines, which
+   are the student's own document style and part of her work product. It is no
+   longer the colour of the application's chrome.
    ───────────────────────────────────────────────────────────────────────── */
 @theme {
-  /* Surface hierarchy — soft sage layers, no harsh whites */
-  --color-surface:                   #f8faf6;
-  --color-surface-bright:            #f8faf6;
-  --color-surface-dim:               #d8dbd7;
-  --color-surface-container-lowest:  #ffffff;
-  --color-surface-container-low:     #f2f4f0;
-  --color-surface-container:         #eceeeb;
-  --color-surface-container-high:    #e7e9e5;
-  --color-surface-container-highest: #e1e3df;
-  --color-surface-variant:           #e1e3df;
+  /* Surface hierarchy — a stack of warm papers */
+  --color-background:                #f2ede2;
+  --color-surface:                   #fbf8f1;
+  --color-surface-bright:            #fdfbf6;
+  --color-surface-dim:               #e3dccd;
+  --color-surface-container-lowest:  #fffdf8;
+  --color-surface-container-low:     #ece6d9;
+  --color-surface-container:         #e7e0d1;
+  --color-surface-container-high:    #e0d8c8;
+  --color-surface-container-highest: #dad2c1;
+  --color-surface-variant:           #ddd5c4;
 
-  /* Primary — forest sage */
-  --color-primary:                   #546345;
-  --color-on-primary:                #ffffff;
-  --color-primary-container:         #a4b491;
-  --color-on-primary-container:      #38462b;
-  --color-primary-fixed:             #d8e8c2;
-  --color-primary-fixed-dim:         #bccca8;
-  --color-inverse-primary:           #bccca8;
-  --color-surface-tint:              #546345;
+  /* Primary — ink */
+  --color-primary:                   #1b1b19;
+  --color-on-primary:                #f6f1e7;
+  --color-primary-container:         #e7dccb;
+  --color-on-primary-container:      #433d31;
+  --color-primary-fixed:             #efe7d8;
+  --color-primary-fixed-dim:         #ddd2bf;
+  --color-inverse-primary:           #e2d9c7;
+  --color-surface-tint:              #1b1b19;
 
-  /* Secondary */
-  --color-secondary:                 #5b605a;
-  --color-on-secondary:              #ffffff;
-  --color-secondary-container:       #dde1da;
-  --color-on-secondary-container:    #5f645e;
-  --color-secondary-fixed:           #e0e4dd;
-  --color-secondary-fixed-dim:       #c3c8c1;
+  /* Accent — terracotta, rationed */
+  --color-accent:                    #a8452b;
+  --color-on-accent:                 #f7f1e6;
+  --color-accent-soft:               #eed9cd;
+  --color-on-accent-soft:            #5e2413;
 
-  /* Tertiary */
+  /* Secondary — warm neutral */
+  --color-secondary:                 #5b564b;
+  --color-on-secondary:              #fbf8f1;
+  --color-secondary-container:       #e6dfd0;
+  --color-on-secondary-container:    #4a4438;
+  --color-secondary-fixed:           #e9e2d3;
+  --color-secondary-fixed-dim:       #cdc4b2;
+
+  /* Tertiary — muted olive, the only surviving trace of the old ramp */
   --color-tertiary:                  #556349;
   --color-on-tertiary:               #ffffff;
-  --color-tertiary-container:        #a4b495;
-  --color-on-tertiary-container:     #39462e;
-  --color-tertiary-fixed:            #d8e8c7;
-  --color-tertiary-fixed-dim:        #bcccac;
+  --color-tertiary-container:        #dbe0cf;
+  --color-on-tertiary-container:     #36412c;
+  --color-tertiary-fixed:            #dde3d1;
+  --color-tertiary-fixed-dim:        #c2cbb2;
 
   /* On-surface */
-  --color-on-surface:                #191c1a;
-  --color-on-surface-variant:        #45483f;
-  --color-on-background:             #191c1a;
-  --color-background:                #f8faf6;
-  --color-inverse-surface:           #2e312f;
-  --color-inverse-on-surface:        #eff1ed;
+  --color-on-surface:                #1b1b19;
+  --color-on-surface-variant:        #57534a;
+  --color-on-background:             #1b1b19;
+  --color-inverse-surface:           #262420;
+  --color-inverse-on-surface:        #f2ede2;
 
-  /* Outline */
-  --color-outline:                   #75786f;
-  --color-outline-variant:           #c5c8bc;
+  /* Outline — warm hairlines */
+  --color-outline:                   #8a8375;
+  --color-outline-variant:           #dad4c6;
 
-  /* Error */
-  --color-error:                     #ba1a1a;
-  --color-on-error:                  #ffffff;
-  --color-error-container:           #ffdad6;
-  --color-on-error-container:        #93000a;
+  /* Error — terracotta's darker sibling, never fire-engine red */
+  --color-error:                     #8f2d1c;
+  --color-on-error:                  #fbf8f1;
+  --color-error-container:           #f0d8d1;
+  --color-on-error-container:        #541a0f;
+
+  /* Verdicts — the triage scale, muted to sit on paper */
+  --color-verdict-green:             #4a6b45;
+  --color-verdict-yellow:            #8a6a1f;
+  --color-verdict-red:               #a8452b;
+  --color-verdict-green-soft:        #dfe5d6;
+  --color-verdict-yellow-soft:       #eee3c6;
+  --color-verdict-red-soft:          #eed9cd;
 
   /* Typography */
-  --font-headline: 'Newsreader', serif;
-  --font-body:     'Plus Jakarta Sans', sans-serif;
-  --font-label:    'Plus Jakarta Sans', sans-serif;
-  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+  --font-headline: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-body:     'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-label:    'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono:     'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
 
-  /* Border radius */
-  --radius:      0.5rem;
-  --radius-lg:   0.75rem;
-  --radius-xl:   1rem;
+  /* Border radius — near-square. The grid is drawn, not rounded. */
+  --radius:      0.125rem;
+  --radius-sm:   0.0625rem;
+  --radius-md:   0.125rem;
+  --radius-lg:   0.1875rem;
+  --radius-xl:   0.25rem;
   --radius-full: 9999px;
 
-  /* Elevation shadows — ambient, tinted, no heavy drops */
-  --shadow-sm:    0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-  --shadow-float: 0 4px 16px rgba(25,28,26,0.04);
-  --shadow-modal: 0 8px 32px rgba(25,28,26,0.12);
+  /* Elevation — reserved for overlays only; the page itself is flat */
+  --shadow-sm:    0 1px 0 rgba(27,27,25,0.04);
+  --shadow-float: 0 2px 8px rgba(27,27,25,0.06);
+  --shadow-modal: 0 16px 48px rgba(27,27,25,0.18);
 }
 
 /* ─── Base reset ───────────────────────────────────────────────────────── */
@@ -102,12 +132,56 @@ body {
   font-family: var(--font-body);
   background-color: var(--color-surface);
   color: var(--color-on-surface);
+  /* Paper grain. Layered into the background so it paints behind content rather than
+     over it — a fixed ::before with a z-index would sit above in-flow text. */
+  background-image: radial-gradient(circle at 1px 1px, rgba(120,105,80,0.055) 1px, transparent 0);
+  background-size: 3px 3px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, .font-serif {
   font-family: var(--font-headline);
+}
+
+::selection { background: var(--color-accent-soft); color: var(--color-on-accent-soft); }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ─── Editorial primitives ─────────────────────────────────────────────── */
+/* The uppercase micro-label the gallery uses above every heading. */
+.label-micro {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-on-surface-variant);
+}
+
+/* The numbered index in a grid cell: '01', '02', … */
+.cell-index {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--color-outline);
+}
+
+/* A ruled sheet — the one structural device. */
+.hairline { border: 1px solid var(--color-outline-variant); }
+.hairline-t { border-top: 1px solid var(--color-outline-variant); }
+.hairline-b { border-bottom: 1px solid var(--color-outline-variant); }
+
+/* Citations read as slips of paper, monospaced so offsets line up. */
+.citation {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: -0.01em;
+  color: var(--color-on-surface-variant);
 }
 
 /* ─── Material Symbols ─────────────────────────────────────────────────── */
@@ -133,10 +207,12 @@ h1, h2, h3, h4, .font-serif {
 /* ─── Editorial scrollbar ──────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #c5c8bc; border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: #cdc5b4; border-radius: 10px; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ─── Bia 4-tier outline HTML (Claude output rendered in preview pane) ─── */
+/* ─── Bia 4-tier outline HTML (Claude output rendered in preview pane) ───
+   This is the student's own document style and keeps the sage palette: it is
+   work product she hands in, not application chrome. */
 .bia-outline { font-family: sans-serif; font-size: 13px; line-height: 1.6; }
 .bia-outline a { color: #546345; }

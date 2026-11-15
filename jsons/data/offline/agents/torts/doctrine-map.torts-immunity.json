@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "_note": "Second Torts doctrine map. Merged with doctrine-map.torts.json by the loader's glob, which is why a discipline's coverage can be extended by dropping in a file.",
+  "doctrines": {
+    "sovereign-immunity": {
+      "label": "Sovereign Immunity",
+      "keywords": [
+        "sovereign immunity",
+        "governmental immunity",
+        "suing the state",
+        "claim against the state",
+        "notice of claim",
+        "municipal liability",
+        "state agency liability",
+        "waiver of immunity",
+        "recovery limits"
+      ],
+      "statutes": [
+        "768.28",
+        "768.14"
+      ],
+      "question_shapes": [
+        "can you sue the state in tort",
+        "what is the cap on claims against florida",
+        "is there a notice requirement"
+      ]
+    },
+    "dram-shop": {
+      "label": "Dram Shop and Intoxication",
+      "keywords": [
+        "dram shop",
+        "dramshop",
+        "intoxication",
+        "intoxicated",
+        "dram shop liability",
+        "serve alcohol",
+        "serving alcohol",
+        "drunk driver",
+        "drunk driving",
+        "habitual drunkard",
+        "habitually addicted",
+        "underage drinking liability",
+        "alcohol defense"
+      ],
+      "statutes": [
+        "768.125",
+        "768.36"
+      ],
+      "question_shapes": [
+        "is a bar liable for serving a drunk driver",
+        "who can be liable for intoxication",
+        "what is the alcohol defense"
+      ]
+    },
+    "good-samaritan-and-immunity": {
+      "label": "Good Samaritan and Statutory Immunity",
+      "keywords": [
+        "good samaritan",
+        "emergency care",
+        "cpr",
+        "immunity for volunteer",
+        "volunteer immunity",
+        "covid immunity",
+        "liability protection",
+        "civil liability immunity"
+      ],
+      "statutes": [
+        "768.13",
+        "768.37",
+        "768.38",
+        "768.39"
+      ],
+      "question_shapes": [
+        "is a good samaritan protected",
+        "does florida grant immunity for emergency care",
+        "what immunity applies"
+      ]
+    },
+    "animal-liability": {
+      "label": "Animal and Dog Bite Liability",
+      "keywords": [
+        "dog bite",
+        "dog",
+        "dogs",
+        "animal",
+        "animal liability",
+        "owner liability dog",
+        "dangerous dog",
+        "bitten by a dog",
+        "livestock",
+        "domestic animals"
+      ],
+      "statutes": [
+        "767.01",
+        "767.04",
+        "767.11"
+      ],
+      "question_shapes": [
+        "is the owner liable for a dog bite",
+        "do you have to prove the owner knew the dog was dangerous",
+        "what is dog owner liability"
+      ]
+    },
+    "medical-negligence": {
+      "label": "Medical Negligence",
+      "keywords": [
+        "medical negligence",
+        "medical malpractice",
+        "med mal",
+        "standard of care",
+        "standard of care doctor",
+        "physician liability",
+        "expert witness medical",
+        "expert testimony medical",
+        "pre-suit mediation",
+        "hospital liability",
+        "health care provider"
+      ],
+      "statutes": [
+        "766.102",
+        "766.108",
+        "766.106"
+      ],
+      "question_shapes": [
+        "what is the standard of care for a doctor",
+        "what is medical negligence",
+        "is there a pre-suit requirement"
+      ]
+    }
+  }
+}

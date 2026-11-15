@@ -1,0 +1,196 @@
+import { useCallback, useEffect, useState } from 'react'
+import { ReviewModal } from '../components/whiteboard/ReviewModal'
+import {
+  listWhiteboards, loadWhiteboard, saveWhiteboard, convertWhiteboard, textFromScene,
+  type Scene, type WhiteboardItem,
+} from '../lib/whiteboard/store'
+
+/**
+ * Whiteboard.
+ *
+ * The canvas is a label editor whose output is a real Excalidraw scene: every label is a
+ * `{ id, type: 'text', text }` element inside `{ elements, appState }`. That is the shape the
+ * .excalidraw file stores, so a graphical canvas can be mounted later without migrating a
+ * single saved sketch.
+ *
+ * There is deliberately no OCR. Handwriting recognition runs 40-60% on cursive, which for
+ * legal terms means most of what it read would be wrong — and a review step that is really a
+ * retyping step helps nobody. Text-tool labels are exact; freehand strokes are not read at
+ * all, and the UI says so where it matters.
+ */
+export function Whiteboard() {
+  const [items, setItems] = useState<WhiteboardItem[]>([])
+  const [dir, setDir] = useState('')
+  const [title, setTitle] = useState('')
+  const [labels, setLabels] = useState<string[]>([])
+  const [draft, setDraft] = useState('')
+  const [currentFile, setCurrentFile] = useState<string | null>(null)
+  const [status, setStatus] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [busy, setBusy] = useState(false)
+  const [reviewOpen, setReviewOpen] = useState(false)
+  const [reviewError, setReviewError] = useState<string | null>(null)
+
+  const scene = useCallback((): Scene => ({
+    elements: labels.map((text, i) => ({ id: `label-${i}`, type: 'text', text })),
+    appState: { viewBackgroundColor: '#ffffff' },
+  }), [labels])
+
+  const refresh = useCallback(async () => {
+    const r = await listWhiteboards()
+    setItems(r.items)
+    setDir(r.dir)
+    if (r.error) setError(r.error)
+  }, [])
+
+  useEffect(() => { void refresh() }, [refresh])
+
+  function addLabel() {
+    const t = draft.trim()
+    if (!t) return
+    setLabels((prev) => [...prev, t])
+    setDraft('')
+  }
+
+  async function handleSave() {
+    setBusy(true); setError(null); setStatus(null)
+    try {
+      const r = await saveWhiteboard(title || 'Untitled whiteboard', scene(), null)
+      if (!r?.success) { setError(r?.error || 'Could not save.'); return }
+      setStatus(`Saved ${r.file}`)
+      setCurrentFile(r.file ?? null)
+      await refresh()
+    } finally { setBusy(false) }
+  }
+
+  async function handleOpen(file: string) {
+    setError(null); setStatus(null)
+    const r = await loadWhiteboard(file)
+    if (!r?.success) { setError(r?.error || 'Could not open that whiteboard.'); return }
+    setLabels(textFromScene(r.scene as Scene))
+    setCurrentFile(r.file ?? file)
+    setTitle(String(file).replace(/^\d{8}-\d{6}\s*-\s*/, '').replace(/\.excalidraw$/, ''))
+    setStatus(`Opened ${file}`)
+  }
+
+  async function handleConfirm(text: string) {
+    setBusy(true); setReviewError(null)
+    try {
+      const r = await convertWhiteboard(text, title || 'Whiteboard')
+      if (!r?.success) { setReviewError(r?.error || 'The outline could not be generated.'); return }
+      setReviewOpen(false)
+      setStatus(r.docxPath ? `Outline written: ${r.docxPath}` : 'Outline generated.')
+    } finally { setBusy(false) }
+  }
+
+  return (
+    <div className="mx-auto max-w-4xl p-8">
+      <h1 className="text-lg font-label font-bold uppercase tracking-widest text-on-surface">Whiteboard</h1>
+      <p className="mt-1 text-xs text-on-surface-variant">
+        Labels become the outline. Freehand strokes are saved with the sketch but are not read.
+      </p>
+
+      <div className="mt-6 flex flex-wrap items-end gap-3">
+        <label className="flex-1 min-w-[16rem]">
+          <span className="text-[10px] font-label font-bold uppercase tracking-widest text-on-surface-variant">Title</span>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Wills and Trusts - ademption"
+            className="mt-1 w-full rounded-xl border border-outline-variant/30 bg-surface-container-low px-3 py-2 text-sm text-on-surface outline-none focus:border-primary/50"
+          />
+        </label>
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={busy || labels.length === 0}
+          className="rounded-full bg-primary px-5 py-2.5 text-xs font-label font-bold uppercase tracking-widest text-on-primary transition-opacity hover:opacity-90 disabled:opacity-40"
+        >
+          {busy ? 'Saving...' : 'Save'}
+        </button>
+        <button
+          type="button"
+          onClick={() => { setReviewOpen(true); setReviewError(null) }}
+          disabled={labels.length === 0}
+          className="rounded-full border border-outline-variant/30 px-5 py-2.5 text-xs font-label font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:border-primary/40 disabled:opacity-40"
+        >
+          Convert to outline
+        </button>
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low p-5">
+        <div className="flex flex-wrap gap-2">
+          {labels.map((l, i) => (
+            <span key={`${l}-${i}`} className="inline-flex items-center gap-2 rounded-full border border-outline-variant/30 px-3 py-1 text-xs text-on-surface">
+              {l}
+              <button
+                type="button"
+                aria-label={`Remove ${l}`}
+                onClick={() => setLabels((prev) => prev.filter((_, j) => j !== i))}
+                className="text-on-surface-variant transition-colors hover:text-primary"
+              >
+                ×
+              </button>
+            </span>
+          ))}
+          {labels.length === 0 && <span className="text-xs text-on-surface-variant">No labels yet.</span>}
+        </div>
+        <div className="mt-4 flex gap-2">
+          <input
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addLabel() } }}
+            placeholder="Ademption - failure of a specific devise..."
+            className="flex-1 rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-3 py-2 text-sm text-on-surface outline-none focus:border-primary/50"
+          />
+          <button
+            type="button"
+            onClick={addLabel}
+            className="rounded-full border border-outline-variant/30 px-4 py-2 text-xs font-label font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:border-primary/40"
+          >
+            Add label
+          </button>
+        </div>
+        <p className="mt-2 text-[11px] text-on-surface-variant">Enter adds the label.</p>
+      </div>
+
+      {(status || error) && (
+        <p className="mt-4 rounded-lg bg-surface-container-low px-3 py-2 text-xs text-on-surface-variant">
+          {error || status}
+        </p>
+      )}
+      {dir && <p className="mt-2 text-[11px] text-on-surface-variant">Stored in {dir}</p>}
+
+      <h2 className="mt-8 text-xs font-label font-bold uppercase tracking-widest text-on-surface-variant">
+        Saved sketches{currentFile ? ` - ${currentFile}` : ''}
+      </h2>
+      <ul className="mt-2 divide-y divide-outline-variant/10">
+        {items.map((it) => (
+          <li key={it.file}>
+            <button
+              type="button"
+              onClick={() => void handleOpen(it.file)}
+              className="w-full px-1 py-3 text-left transition-colors hover:text-primary"
+            >
+              <span className="text-sm text-on-surface">{it.title}</span>
+              <span className="ml-3 text-[11px] text-on-surface-variant">
+                {new Date(it.mtime).toLocaleString()} - {it.hasMd ? 'text sidecar' : 'no sidecar'}
+              </span>
+            </button>
+          </li>
+        ))}
+        {items.length === 0 && <li className="py-3 text-xs text-on-surface-variant">Nothing saved yet.</li>}
+      </ul>
+
+      <ReviewModal
+        open={reviewOpen}
+        initialText={labels.join('\n')}
+        textCount={labels.length}
+        busy={busy}
+        error={reviewError}
+        onCancel={() => setReviewOpen(false)}
+        onConfirm={(t) => void handleConfirm(t)}
+      />
+    </div>
+  )
+}

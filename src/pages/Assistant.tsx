@@ -36,6 +36,8 @@ type ChatMessage = {
   content: string
   reasoning?: string
   biaHtml?: string | null
+  /** The formatter was attempted and did not return an artifact (vs. intentional bypass). */
+  formatFailed?: boolean
 }
 
 const uid = () => `m-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
@@ -67,10 +69,25 @@ export function Assistant() {
       try {
         const res = await window.seniorPartner?.loadChatThread?.({ action: activeAction })
         if (cancelled || !res?.success) return
+        // No cast and no local alias. loadChatThread returns ChatStoredMessage[], and that
+        // type now carries every field the live view uses - id, reasoning and the formatted
+        // artifact. The alias existed only because the shared type had not been widened yet;
+        // keeping a second definition of the stored-turn shape is precisely how the write and
+        // read paths drift apart.
         setMessages((res.messages || []).map((m) => ({
-          id: uid(),
+          // The STORE's id, not a fresh one. A locally generated id cannot name a stored turn, so
+          // delete had nothing to target and the message came back on reload.
+          id: m.id || uid(),
           role: m.role === 'user' ? 'user' : 'assistant',
           content: m.content,
+          // The reasoning trace was persisted but never read back, so it was visible while
+          // streaming and gone after any reload or thread switch.
+          reasoning: m.reasoning || undefined,
+          // The formatted artifact, read back from its own block. Without this the reload
+          // handed ChatBubble formatted HTML as if it were markdown and the bubble showed
+          // raw tags - the symptom Bianna reported as "formatting does not stay static upon
+          // re-entering the chat window".
+          biaHtml: m.biaHtml || undefined,
         })))
         setThreadMeta((prev) => ({
           ...prev,
@@ -136,28 +153,44 @@ export function Assistant() {
       // Persist the question before answering, so a crash mid-stream cannot lose the
       // exchange entirely (Part 4). `text` is the resolved user turn; bare `prompt` here
       // would be window.prompt.
-      void window.seniorPartner?.appendChatTurn?.({ action: activeAction, role: 'user', content: userMsg.content })
+      void window.seniorPartner?.appendChatTurn?.({ action: activeAction, role: 'user', content: userMsg.content, id: userMsg.id })
 
       // Part 3: render the answer in the house four-tier language. Off the critical path
       // and failure-tolerant: the plain answer is kept if the formatter is unavailable, so
       // a formatting outage never costs her the response. Skipped for an aborted answer.
       let biaHtml: string | null = null
+      // Distinguishes "the formatter failed" from "the formatter was intentionally
+      // bypassed". Both render as plain text, but only the failure earns a visible
+      // notice. Socratic/dialogue returns success with a null artifact on purpose, so
+      // flagging that as a failure would replace a silent bug with a lying one.
+      let formatFailed = false
       if (answer && !outcome.aborted) {
         try {
           const bia = await window.seniorPartner?.aiFormatBia?.({ text: answer })
           if (bia?.success && bia.biaHtml) biaHtml = bia.biaHtml
-        } catch { /* keep the plain answer */ }
+          else if (!bia?.passthrough) formatFailed = true
+        } catch { formatFailed = true }
       }
 
       if (answer) {
+        const assistantId = uid()
         setMessages((prev) => [...prev, {
-          id: uid(),
+          id: assistantId,
           role: 'assistant',
           content: outcome.aborted ? `${answer}\n\n_(stopped)_` : answer,
           reasoning: outcome.reasoning || undefined,
           biaHtml,
+          formatFailed,
         }])
-        void window.seniorPartner?.appendChatTurn?.({ action: activeAction, role: 'assistant', content: biaHtml ?? answer })
+        // Persist the reasoning trace alongside the answer. It was already returned by the stream
+        // and shown live; not storing it is why it vanished on completion-from-reload.
+        void window.seniorPartner?.appendChatTurn?.({
+          action: activeAction, role: 'assistant', id: assistantId,
+          // Both fields, written as separate delimited blocks. Persisting `biaHtml ?? answer`
+          // collapsed them into one and was the reload bug Bianna reported: the formatted HTML
+          // came back as if it were markdown, so the bubble showed raw tags on re-entry.
+          content: answer, reasoning: outcome.reasoning || null, biaHtml: biaHtml || null,
+        })
       } else if (!outcome.aborted) {
         throw new Error('DeepSeek returned an empty answer. Try again or switch models in Settings.')
       }
@@ -182,12 +215,23 @@ export function Assistant() {
     const priorUser = [...messages.slice(0, index)].reverse().find((m) => m.role === 'user')
     if (!priorUser) return
     const cut = messages.findIndex((m) => m.id === priorUser.id)
+    // Tombstone what is being dropped, or the superseded turns stay on disk and return on the next
+    // load alongside their replacements.
+    for (const m of messages.slice(cut)) {
+      if (m.id) void window.seniorPartner?.deleteChatTurn?.({ action: activeAction, id: m.id })
+    }
     setMessages(messages.slice(0, cut))
     await send(priorUser.content)
   }
 
+  /**
+   * Delete a turn from view AND from the store. The store write is the part that was missing:
+   * without it the turn stayed on disk and reappeared the next time the thread loaded.
+   */
   function removeAt(index: number) {
+    const msg = messages[index]
     setMessages((prev) => prev.filter((_, i) => i !== index))
+    if (msg?.id) void window.seniorPartner?.deleteChatTurn?.({ action: activeAction, id: msg.id })
   }
 
   async function copy(msg: ChatMessage) {
@@ -323,7 +367,22 @@ export function Assistant() {
                   }`}
                 >
                   {msg.role === 'assistant' ? (
-                    <ChatBubble biaHtml={msg.biaHtml} plainText={msg.content} />
+                    <ChatBubble
+                      biaHtml={msg.biaHtml}
+                      plainText={msg.content}
+                      formatFailed={msg.formatFailed}
+                      onRetryFormat={async () => {
+                        // Re-runs only the formatter. No new model turn, no new message —
+                        // this re-renders the answer already on screen.
+                        const bia = await window.seniorPartner?.aiFormatBia?.({ text: msg.content })
+                        if (bia?.success && bia.biaHtml) {
+                          const html = bia.biaHtml
+                          setMessages((prev) => prev.map((m) => (m.id === msg.id
+                            ? { ...m, biaHtml: html, formatFailed: false }
+                            : m)))
+                        }
+                      }}
+                    />
                   ) : (
                     msg.content
                   )}

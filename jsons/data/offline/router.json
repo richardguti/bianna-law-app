@@ -1,7 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
   "active": [
-    "wills-trusts"
+    "wills-trusts",
+    "torts"
   ],
   "agents": {
     "wills-trusts": {
@@ -55,6 +56,64 @@
         "738",
         "739",
         "740"
+      ]
+    },
+    "torts": {
+      "path": "agents/torts",
+      "title": "Torts",
+      "strong_signals": [
+        "negligence",
+        "negligent",
+        "proximate cause",
+        "comparative fault",
+        "comparative negligence",
+        "contributory negligence",
+        "strict liability",
+        "premises liability",
+        "slip and fall",
+        "slip-and-fall",
+        "transitory foreign substance",
+        "duty of care",
+        "wrongful death",
+        "punitive damages",
+        "sovereign immunity",
+        "dram shop",
+        "good samaritan",
+        "dog bite",
+        "medical negligence",
+        "medical malpractice",
+        "tortfeasor",
+        "contribution among tortfeasors",
+        "offer of judgment",
+        "proposal for settlement",
+        "demand for judgment",
+        "trespasser",
+        "invitee",
+        "licensee",
+        "landowner",
+        "premises",
+        "dangerous condition",
+        "dangerous dog",
+        "animal liability",
+        "livestock",
+        "emergency care",
+        "standard of care",
+        "remittitur",
+        "additur",
+        "766.",
+        "767.",
+        "768."
+      ],
+      "chapter_scope": [
+        "766",
+        "767",
+        "768",
+        "769",
+        "770",
+        "771",
+        "772",
+        "773",
+        "774"
       ]
     }
   },

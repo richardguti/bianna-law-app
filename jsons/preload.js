@@ -114,6 +114,16 @@ contextBridge.exposeInMainWorld('seniorPartner', {
   /** Answer from the bundled corpus. Always resolves; never throws, never invents text. */
   offlineAsk: (text) => ipcRenderer.invoke('offline:ask', { text }),
 
+  // ── Corpus verification against the live source (never on a normal ask) ──
+  /** Fetch one section from flsenate.gov and diff it against the bundled copy. */
+  corpusVerifySection: (sectionNumber) => ipcRenderer.invoke('corpus:verify-section', { sectionNumber }),
+  /** Write the verified copy. Only what the main process itself fetched is accepted. */
+  corpusRepairSection: (sectionNumber) => ipcRenderer.invoke('corpus:repair-section', { sectionNumber }),
+  /** What has been verified, when, and from where. */
+  corpusOverlayStatus: () => ipcRenderer.invoke('corpus:overlay-status'),
+  /** Revert a section to the bundled copy, deleting its verified overlay. */
+  corpusRevertSection: (sectionNumber) => ipcRenderer.invoke('corpus:revert-section', { sectionNumber }),
+
   // ── Settings ───────────────────────────────────────────────────────────────
   openSettings: () => ipcRenderer.invoke('open-settings'),
 
@@ -134,6 +144,24 @@ contextBridge.exposeInMainWorld('seniorPartner', {
   openDocumentsFolder: () => ipcRenderer.invoke('open-documents-folder'),
   listRagSources:      () => ipcRenderer.invoke('list-rag-sources'),
 
+  // ── Real World Explainer (news ↔ doctrine) ────────────────────────────────
+  /** Which news providers are available, and how current the doctrine corpus is */
+  realWorldStatus: () => ipcRenderer.invoke('realworld:status'),
+  /** Search today's news and correlate each headline to doctrine passages */
+  realWorldSearch: (args) => ipcRenderer.invoke('realworld:search', args),
+  /** Store Oxylabs Web API credentials (optional; enables the paid news provider) */
+  realWorldSaveCredentials: (args) => ipcRenderer.invoke('realworld:credentials-save', args),
+
+  // ── Exam Question Mode ────────────────────────────────────────────────────
+  /** Generate a run of exam questions grounded in the corpus for one practice area */
+  examGenerate: (args) => ipcRenderer.invoke('exam:generate', args),
+
+  // ── Local legal corpora (doctrine library + curated seed set) ──────────────
+  /** Counts and generation metadata for the knowledge-base panel */
+  ragStats:  ()     => ipcRenderer.invoke('rag:stats'),
+  /** Keyword retrieval over the bundled corpora — no model call, no network */
+  ragSearch: (args) => ipcRenderer.invoke('rag:search', args),
+
   // ── ICM: mirror the user's own law files into an internal corpus ───────────
   /** Re-scan + re-index the mirror root (default ~/Documents/Bianna_Law) */
   icmSync:       (args)   => ipcRenderer.invoke('icm:sync', args || {}),
@@ -149,6 +177,11 @@ contextBridge.exposeInMainWorld('seniorPartner', {
   icmIndexFile:  (filePath) => ipcRenderer.invoke('icm:index-file', { filePath }),
   /** End-to-end retrieval check: query the corpus and report matched files + block size */
   icmVerify:     (args)     => ipcRenderer.invoke('icm:verify', args || {}),
+      // Whiteboard: canvas storage + conversion (jsons/whiteboard/index.js)
+      whiteboardList:    ()      => ipcRenderer.invoke('whiteboard:list'),
+      whiteboardLoad:    (args)  => ipcRenderer.invoke('whiteboard:load', args || {}),
+      whiteboardSave:    (args)  => ipcRenderer.invoke('whiteboard:save', args || {}),
+      whiteboardConvert: (args)  => ipcRenderer.invoke('whiteboard:convert', args || {}),
   /** Install the bundled Florida Statutes into the user's corpus (idempotent) */
   corpusEnsure:  (args)     => ipcRenderer.invoke('corpus:ensure', args || {}),
   /** Bundled vs installed statute-corpus state */
@@ -212,6 +245,12 @@ contextBridge.exposeInMainWorld('seniorPartner', {
    * so a conversation from yesterday is still there this morning.
    */
   loadChatThread: (args) => ipcRenderer.invoke('ai-chat:load-thread', args),
+
+  /**
+   * Delete one turn by id. Writes a tombstone in the main process, so the deletion survives a
+   * reload -- a renderer-only delete is what let deleted messages come back.
+   */
+  deleteChatTurn: (args) => ipcRenderer.invoke('ai-chat:delete-turn', args),
   /** Append one turn to today's file for an action (append-only, crash-safe). */
   appendChatTurn: (args) => ipcRenderer.invoke('ai-chat:append-turn', args),
   /** Day keys holding a thread for an action, newest first. */

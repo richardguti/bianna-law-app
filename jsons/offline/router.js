@@ -25,6 +25,17 @@ function load(dataRoot) {
 /** Weights: an explicit citation is the strongest possible signal, then doctrine vocabulary. */
 const W = { citation: 5, strong: 3, medium: 2, weak: 1, negative: -5 };
 
+/**
+ * A discipline may only claim a question on a real signal, never on a weak one.
+ *
+ * Generic words ("rule", "valid", "law", "section") appear in every discipline's weak list, so a
+ * threshold of 1 let "is this a valid conveyance?" dispatch the Wills agent on the single word
+ * "valid", after which it searched its own chapters and returned § 732.703 -- a section about
+ * divorce and beneficiary designations, which has nothing to do with conveyances. One weak token
+ * is not evidence of a topic; a strong signal (3) or medium plus weak (2+) is.
+ */
+const DISPATCH_THRESHOLD = 2;
+
 function scoreAgent(text, agent) {
   const hay = String(text || '').toLowerCase();
   const hits = [];
@@ -54,8 +65,11 @@ function tokenHit(hay, token) {
 }
 
 /**
- * Returns { agentIds, scores, reason }. agentIds is empty when nothing dispatched, which the
- * caller turns into a reflection rather than an answer.
+ * Returns { agentIds, ranked, primary, secondary, scores, reason }.
+ *
+ * `agentIds` is empty when nothing dispatched, which the caller turns into a reflection rather
+ * than an answer. `ranked` carries every agent that fired, strongest first, so the arbitrator
+ * can resolve a collision without re-scoring anything.
  */
 function dispatch(text, router, agentMeta = {}) {
   const ids = router.active || [];
@@ -68,15 +82,20 @@ function dispatch(text, router, agentMeta = {}) {
   }
   scores.sort((a, b) => b.score - a.score);
 
-  const winners = scores.filter((s) => s.score > 0);
-  if (!winners.length) return { agentIds: [], scores, reason: 'no discipline dispatched' };
+  const winners = scores.filter((s) => s.score >= DISPATCH_THRESHOLD);
+  if (!winners.length) {
+    return { agentIds: [], ranked: [], primary: null, secondary: null, scores, reason: 'no discipline dispatched' };
+  }
 
-  // With one agent active this is trivially the winner; the shape is here so a second agent
-  // plugs in without changing this function. The arbitrator (deferred) will resolve ties.
+  // With one agent active `ranked` is trivially that agent; the shape is the same for eight, so
+  // adding a discipline never changes this function.
   const top = winners[0].score;
   const tied = winners.filter((s) => s.score === top);
   return {
     agentIds: tied.map((t) => t.id),
+    ranked: winners.map((w) => ({ id: w.id, score: w.score, hits: w.hits })),
+    primary: winners[0].id,
+    secondary: winners[1] ? winners[1].id : null,
     scores,
     reason: tied.length > 1 ? 'tie between ' + tied.map((t) => t.id).join(' and ') : 'top score',
   };

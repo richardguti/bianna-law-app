@@ -22,7 +22,16 @@ function saveTodos(items: TodoItem[]) {
 
 const PAGE_TITLES: Record<string, string> = {
   '/dashboard': 'Dashboard',
+  '/practice':  'Practice Areas',
+  '/profile':   'Practice Profile',
+  '/reviews':   'Reviews',
+  '/argument':  'Oral Argument',
+  '/realworld': 'Real World Explainer',
+  '/sources':   'Source Mapping',
+  '/simplify':  'Simplify Legal by Eagle',
+  '/florida':   'Florida',
   '/outline':   'Outline Generator',
+  '/exam':      'Exam Questions',
   '/tracker':   'Reading Tracker',
   '/sessions':  'Study Sessions',
   '/vault':     'Document Vault',
@@ -30,6 +39,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/calendar':  'Calendar',
   '/settings':  'Settings',
   '/assistant': 'AI Assistant',
+  '/whiteboard': 'Whiteboard',
 }
 
 type Diag = {

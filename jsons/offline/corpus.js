@@ -74,6 +74,101 @@ function sectionPath(section) {
   return null;
 }
 
+/* ── Verified overlay ────────────────────────────────────────────────────── */
+/*
+ * A per-section repair layer that sits ON TOP of the bundled corpus.
+ *
+ * The bundle is read-only (it ships inside app.asar) and it is a scrape, so parts of it are
+ * demonstrably wrong. Rather than replacing 24,670 files, a section that has been checked against
+ * flsenate.gov is written here, and every read prefers it. The overlay is small, inspectable, and
+ * reversible: deleting the directory reverts the app to the bundled copy with no other change.
+ *
+ * The root is injected by main.js (Electron's userData directory) because this module is plain
+ * Node and must not depend on Electron. SLP_CORPUS_OVERLAY overrides it, which is what the tests
+ * use so they never touch a real install.
+ */
+let overlayRoot = null;
+
+function setOverlayRoot(dir) { overlayRoot = dir || null; }
+
+function overlayDir() {
+  return overlayRoot || process.env.SLP_CORPUS_OVERLAY || null;
+}
+
+function overlayPath(section) {
+  const d = overlayDir();
+  return d ? path.join(d, section + '.md') : null;
+}
+
+function overlayMetaPath(section) {
+  const d = overlayDir();
+  return d ? path.join(d, section + '.meta.json') : null;
+}
+
+/** { verified_at, source_url, hash, edition } or null. Never throws. */
+function readOverlayMeta(section) {
+  const p = overlayMetaPath(section);
+  if (!p) return null;
+  try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; }
+}
+
+/** True when a verified copy of this section is present. */
+function hasOverlay(section) {
+  const p = overlayPath(section);
+  return !!(p && fs.existsSync(p));
+}
+
+/**
+ * Write a verified copy. Returns the paths written, or throws with a `code` so the IPC layer can
+ * report the failure instead of pretending the repair happened.
+ */
+function writeOverlay(section, markdown, meta = {}) {
+  const d = overlayDir();
+  if (!d) { const e = new Error('no overlay directory configured'); e.code = 'no_overlay_root'; throw e; }
+  const s = normalizeSection(section);
+  if (!s) { const e = new Error('unparseable section number'); e.code = 'bad_section'; throw e; }
+  fs.mkdirSync(d, { recursive: true });
+  const mdPath = overlayPath(s);
+  const metaPath = overlayMetaPath(s);
+  const record = {
+    section: s,
+    verified_at: meta.verified_at || new Date().toISOString(),
+    source_url: meta.source_url || null,
+    edition: meta.edition || null,
+    hash: meta.hash || null,
+    written_at: new Date().toISOString(),
+  };
+  fs.writeFileSync(mdPath, markdown, 'utf8');
+  fs.writeFileSync(metaPath, JSON.stringify(record, null, 2), 'utf8');
+  return { markdown_path: mdPath, meta_path: metaPath, meta: record };
+}
+
+/** Everything that has been verified, newest first. Powers the corpus-health panel. */
+function overlayStatus() {
+  const d = overlayDir();
+  if (!d || !fs.existsSync(d)) return { root: d, count: 0, sections: [] };
+  const sections = fs.readdirSync(d)
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => f.slice(0, -3))
+    .map((s) => {
+      const m = readOverlayMeta(s) || {};
+      return { section: s, verified_at: m.verified_at || null, source_url: m.source_url || null, edition: m.edition || null };
+    })
+    .sort((a, b) => String(b.verified_at || '').localeCompare(String(a.verified_at || '')));
+  return { root: d, count: sections.length, sections };
+}
+
+/** Remove a verified copy, reverting that section to the bundle. */
+function clearOverlay(section) {
+  const s = normalizeSection(section);
+  if (!s) return false;
+  let removed = false;
+  for (const p of [overlayPath(s), overlayMetaPath(s)]) {
+    if (p && fs.existsSync(p)) { fs.unlinkSync(p); removed = true; }
+  }
+  return removed;
+}
+
 /* ── Integrity guard ─────────────────────────────────────────────────────── */
 
 /**
@@ -129,12 +224,22 @@ function readSection(sectionInput, knownDefects) {
   const section = normalizeSection(sectionInput);
   if (!section) return { found: false, reason: 'unparseable section number' };
 
-  const file = sectionPath(section);
+  // A verified copy wins over the bundle. That is the entire point of the overlay.
+  const overlayFile = hasOverlay(section) ? overlayPath(section) : null;
+  let file = overlayFile || sectionPath(section);
   if (!file) return { found: false, section, reason: 'not in the bundled corpus' };
 
-  let raw;
+  let raw = null;
   try { raw = fs.readFileSync(file, 'utf8'); }
-  catch (err) { return { found: false, section, reason: 'unreadable: ' + err.message }; }
+  catch (err) {
+    // A damaged or half-written overlay must not take the section down with it.
+    if (overlayFile) {
+      const bundled = sectionPath(section);
+      if (bundled) { try { raw = fs.readFileSync(bundled, 'utf8'); file = bundled; } catch { /* fall through */ } }
+    }
+    if (raw === null) return { found: false, section, reason: 'unreadable: ' + err.message };
+  }
+  const overlaid = !!overlayFile && file === overlayFile;
 
   const cut = raw.indexOf('\n---\n');
   const meta = cut === -1 ? raw : raw.slice(0, cut);
@@ -165,6 +270,10 @@ function readSection(sectionInput, knownDefects) {
   // 4. Previously confirmed wrong content, carried so the answer can say so.
   const known = knownDefects && knownDefects[section];
 
+  // Where this text came from. The UI turns this into the authority line on every citation, so a
+  // repaired copy can say when it was checked and an unverified one can say it was not.
+  const ovMeta = overlaid ? readOverlayMeta(section) : null;
+
   return {
     found: true,
     section,
@@ -176,7 +285,17 @@ function readSection(sectionInput, knownDefects) {
     history: field(meta, 'History'),
     note: field(meta, 'Note'),
     body,
-    file: path.relative(path.join(__dirname, '..'), file).replace(/\\/g, '/'),
+    file: overlaid
+      ? 'corpus-overlay/' + section + '.md'
+      : path.relative(path.join(__dirname, '..'), file).replace(/\\/g, '/'),
+    provenance: overlaid
+      ? {
+          origin: 'overlay',
+          verified_at: (ovMeta && ovMeta.verified_at) || null,
+          source_url: (ovMeta && ovMeta.source_url) || null,
+          hash: (ovMeta && ovMeta.hash) || null,
+        }
+      : { origin: 'bundle', verified_at: null, source_url: null, hash: null },
     integrity: {
       ok: anomalies.length === 0 && !known,
       anomalies,
@@ -304,5 +423,8 @@ module.exports = {
   corpusRoot, normalizeSection, sectionStem, sectionPath,
   readSection, readSections, listSections, searchCatchlines, rankSections, tokensOf,
   detectForeignMarkers, catchlineIsCorrupt, cleanBody,
+  // verified overlay (repair layer that sits on top of the read-only bundle)
+  setOverlayRoot, overlayDir, overlayPath, overlayMetaPath, readOverlayMeta,
+  hasOverlay, writeOverlay, overlayStatus, clearOverlay,
 };
 

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "_note": "Hand-authored plain-language glosses for the sections a student is most likely to ask for. Each gloss is a translation of the section as it appears in this bundle, never a summary of remembered law. Sections with no gloss fall back to the retrieved text alone, which is the honest default: a wrong gloss would reintroduce exactly the hallucination risk offline mode exists to remove.",
+  "glosses": {
+    "768.81": "Florida compares each party's share of fault and reduces the plaintiff's recovery by the plaintiff's own percentage, rather than barring recovery because the plaintiff was partly at fault.",
+    "768.075": "A person who possesses land owes only a limited duty to a trespasser: no liability for injury unless the injury was willful or wanton.",
+    "767.01": "A dog's owner is liable for damage the dog does to a person, domestic animal or livestock, and the injured party does not have to prove the owner knew the dog was dangerous.",
+    "767.04": "An owner whose dog bites someone in a public place, or lawfully in a private place, is liable for the damages, subject to the defenses the section states.",
+    "768.125": "A person who sells or serves alcohol to someone known to be habitually addicted to it, or to a person under 21, may be liable for injury or damage caused by that intoxication.",
+    "768.13": "The Good Samaritan Act limits liability for emergency care given in good faith without compensation.",
+    "768.28": "Florida waives sovereign immunity for torts committed by the state and its agencies, within caps on recovery, and requires that notice be given before suit.",
+    "768.31": "A tortfeasor who pays more than its share of a common liability can recover contribution from the other tortfeasors.",
+    "768.72": "Punitive damages cannot be claimed by amendment or argued at trial unless there is a reasonable evidentiary basis for them in the record.",
+    "768.73": "Punitive damages are limited to three times the compensatory damages or $500,000, whichever is greater, with exceptions for certain intentional conduct.",
+    "768.79": "Either party may serve an offer of judgment; if the other side rejects it and does worse at trial, the rejecting side can be liable for the offeror's attorney's fees.",
+    "768.19": "When a death is caused by a wrongful act, the decedent's survivors and the estate have a cause of action for the losses the statute lists.",
+    "768.21": "The wrongful death statute lists what the estate may recover and what each survivor may recover for, and survivors take their own damages rather than through the estate.",
+    "768.16": "This is the Wrongful Death Act. It is the section that creates the Florida remedy; the following sections define who may claim and what is recoverable.",
+    "766.102": "In medical negligence the standard of care is the level of care a similar health care provider would give in similar circumstances, proved by expert testimony."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "style": "fact-first, element-based",
+  "reflections": [
+    "Walk me through the facts first — who did what, when, and to whom? Torts turns on the facts before it turns on the rule.",
+    "Start with duty. Who was the defendant, and what relationship, if any, did they have to the plaintiff?",
+    "Which element are you actually stuck on — duty, breach, cause, or damages? They fail independently.",
+    "What would a reasonable person have done differently, and what would that have changed?",
+    "Was the harm foreseeable to this defendant at the time they acted?"
+  ],
+  "hints": [
+    "Florida apportions damages by comparative fault under § 768.81 — a plaintiff's own fault reduces recovery rather than barring it.",
+    "Punitive damages must be pleaded with a reasonable evidentiary basis before they can be argued: § 768.72.",
+    "A wrongful death claim belongs to the survivors and the estate for their own losses, and is separate from any survival claim: § 768.19."
+  ]
+}

@@ -26,31 +26,35 @@ export const DEFAULT_PREFS: UiPrefs = {
 
 /** Full ramps so a dark switch never leaves half the surface hierarchy light. */
 const LIGHT_RAMP = {
-  background:                '#f8faf6',
-  surface:                   '#ffffff',
-  surfaceContainerLow:       '#f2f4f0',
-  surfaceContainer:          '#eceeeb',
-  surfaceContainerHigh:      '#e7e9e5',
-  surfaceVariant:            '#e1e3df',
-  primary:                   '#546345',
-  text:                      '#191c1a',
-  textVariant:               '#45483f',
-  outline:                   '#75786f',
-  outlineVariant:            '#c5c8bc',
+  background:                '#f2ede2',
+  surface:                   '#fbf8f1',
+  surfaceContainerLow:       '#ece6d9',
+  surfaceContainer:          '#e7e0d1',
+  surfaceContainerHigh:      '#e0d8c8',
+  surfaceVariant:            '#ddd5c4',
+  primary:                   '#1b1b19',
+  primaryContainer:          '#e7dccb',
+  accent:                    '#a8452b',
+  text:                      '#1b1b19',
+  textVariant:               '#57534a',
+  outline:                   '#8a8375',
+  outlineVariant:            '#dad4c6',
 }
 
 const DARK_RAMP = {
-  background:                '#101208',
-  surface:                   '#1a1d15',
-  surfaceContainerLow:       '#1e2119',
-  surfaceContainer:          '#23261d',
-  surfaceContainerHigh:      '#2e3128',
-  surfaceVariant:            '#45483f',
-  primary:                   '#bccca8',
-  text:                      '#e2e3dd',
-  textVariant:               '#c5c8bc',
-  outline:                   '#8f9287',
-  outlineVariant:            '#45483f',
+  background:                '#14130f',
+  surface:                   '#1c1a15',
+  surfaceContainerLow:       '#232019',
+  surfaceContainer:          '#29251d',
+  surfaceContainerHigh:      '#332e24',
+  surfaceVariant:            '#454034',
+  primary:                   '#f0e8d8',
+  primaryContainer:          '#332e24',
+  accent:                    '#c4593c',
+  text:                      '#ede6d8',
+  textVariant:               '#c9c2b2',
+  outline:                   '#8f8878',
+  outlineVariant:            '#454034',
 }
 
 /** Relative luminance per WCAG 2.1. */
@@ -97,6 +101,8 @@ export function resolvePalette(prefs: UiPrefs, systemPrefersDark: boolean) {
     surfaceContainerHigh: ramp.surfaceContainerHigh,
     surfaceVariant:       ramp.surfaceVariant,
     primary:            prefs.primary || ramp.primary,
+    primaryContainer:   ramp.primaryContainer,
+    accent:             ramp.accent,
     text:               prefs.text    || ramp.text,
     textVariant:        ramp.textVariant,
     outline:            ramp.outline,
@@ -122,7 +128,11 @@ export function applyTheme(prefs: UiPrefs, systemPrefersDark: boolean): ReturnTy
   set('--color-surface-variant', p.surfaceVariant)
   set('--color-primary', p.primary)
   set('--color-on-primary', readableOn(p.primary))
-  set('--color-primary-container', p.primary)
+  // The sand fill is its own token, not a copy of primary: primary is ink now, and copying it
+  // here is what turned every secondary button black the last time the palette moved.
+  set('--color-primary-container', p.primaryContainer)
+  set('--color-accent', p.accent)
+  set('--color-on-accent', readableOn(p.accent))
   set('--color-on-surface', p.text)
   set('--color-on-background', p.text)
   set('--color-on-surface-variant', p.textVariant)

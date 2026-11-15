@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { supabase, BIANNA_USER_ID, type DocumentRow, type CaseRow } from '../lib/supabase'
 import { loadCourses, type LocalCourse } from '../lib/courses'
+import { LIVE_AREAS, PRACTICE_AREAS } from '../lib/practiceAreas'
+import { evaluateClause } from '../lib/legalLogic'
+import { PLAYBOOK, PLAYBOOK_FINDINGS } from '../lib/legalFixtures'
+import { profileCompleteness } from '../lib/practiceProfile'
 
 type LocalAssignment = { id: string; title: string; type: string; due_date: string; notes: string | null }
 
@@ -68,6 +72,26 @@ function CourseProgressBar({ course }: { course: LocalCourse }) {
 
 export function Dashboard() {
   const navigate = useNavigate()
+
+  /**
+   * The legal-work state, above the study stats.
+   *
+   * The dashboard used to open on reading counts alone, which described a study app. It now
+   * opens on what a practice workspace would ask for first — what needs a decision, what needs
+   * a read, and whether the profile that calibrates every skill is still empty.
+   */
+  const practice = useMemo(() => {
+    let red = 0
+    let yellow = 0
+    for (const finding of PLAYBOOK_FINDINGS) {
+      const position = PLAYBOOK.find((p) => p.clauseId === finding.clauseId)
+      if (!position) continue
+      const deviation = evaluateClause(position, finding)
+      if (deviation.verdict === 'red') red += 1
+      else if (deviation.verdict === 'yellow') yellow += 1
+    }
+    return { red, yellow, ...profileCompleteness() }
+  }, [])
 
   /* Calendar events from localStorage */
   const [upcomingEvents, setUpcomingEvents] = useState<LocalAssignment[]>([])
@@ -163,6 +187,55 @@ export function Dashboard() {
           <span className="material-symbols-outlined text-lg">calendar_today</span>
           <span>{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
         </div>
+      </div>
+
+      {/* Practice band — the legal workspace, before the study numbers */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-outline-variant border border-outline-variant">
+        <button
+          type="button"
+          onClick={() => navigate('/practice')}
+          className="text-left bg-surface p-5 hover:bg-surface-container-lowest transition-colors"
+        >
+          <p className="label-micro">Practice areas</p>
+          <p className="font-serif text-2xl text-on-surface mt-2 leading-none">
+            {LIVE_AREAS.length} <span className="text-on-surface-variant text-base">of {PRACTICE_AREAS.length} live</span>
+          </p>
+          <p className="text-[13px] text-on-surface-variant mt-2 leading-snug">
+            Open the plugin index →
+          </p>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => navigate('/reviews?mode=playbook-deviation')}
+          className="text-left bg-surface p-5 hover:bg-surface-container-lowest transition-colors"
+        >
+          <p className="label-micro">Reviews</p>
+          <p className="font-serif text-2xl text-on-surface mt-2 leading-none">
+            {practice.red} <span className="text-on-surface-variant text-base">to decide</span>
+            <span className="text-outline-variant mx-1.5">·</span>
+            {practice.yellow} <span className="text-on-surface-variant text-base">to read</span>
+          </p>
+          <p className="text-[13px] text-on-surface-variant mt-2 leading-snug">
+            {practice.red > 0 ? 'Playbook deviations awaiting a decision →' : 'No deviations open →'}
+          </p>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => navigate('/profile')}
+          className="text-left bg-surface p-5 hover:bg-surface-container-lowest transition-colors"
+        >
+          <p className="label-micro">Practice profile</p>
+          <p className="font-serif text-2xl text-on-surface mt-2 leading-none">
+            {practice.complete ? 'In force' : `${practice.answered}/${practice.total}`}
+          </p>
+          <p className="text-[13px] text-on-surface-variant mt-2 leading-snug">
+            {practice.complete
+              ? 'Every skill reads from it →'
+              : 'Cold start not finished — skills run generically →'}
+          </p>
+        </button>
       </div>
 
       {/* Stats row */}

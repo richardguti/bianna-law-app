@@ -56,11 +56,39 @@ export default defineConfig(({ mode }) => {
     // Kept so CI has the one documented place to write .env.local; jsons/.env is now
     // additionally merged above.
     envDir: projectRoot,
+    // Array form, and '@excalidraw/excalidraw/index.css' must come FIRST: it is a prefix
+    // match of the bare package, so an object literal would let the package rule win and the
+    // stylesheet would resolve to JavaScript.
+    //
+    // Why an alias at all: the React source lives at the repo root (../src) while
+    // @excalidraw/excalidraw is installed in jsons/node_modules, beside the packager that
+    // bundles it. Bare-specifier resolution from src/ walks the ROOT node_modules and never
+    // sees it, which fails the build with "Rolldown failed to resolve import". Aliasing this
+    // one package leaves React resolving exactly where it already did; pointing
+    // resolve.modules at jsons/node_modules instead would risk a second copy of React and an
+    // "Invalid hook call".
     resolve: {
-      alias: {
+      alias: [
         // Allow /src/... imports in index.html to resolve from the parent src/ dir
-        '/src': path.resolve(projectRoot, 'src'),
-      },
+        { find: '/src', replacement: path.resolve(projectRoot, 'src') },
+        {
+          find: '@excalidraw/excalidraw/index.css',
+          replacement: path.resolve(configDir, 'node_modules/@excalidraw/excalidraw/dist/prod/index.css'),
+        },
+        // Excalidraw lazy-imports mermaid for its Mermaid dialog. The dialog is not
+        // reachable here, but resolving the dynamic import drags in the whole mermaid
+        // subtree, which aborts the Vite 8 / rolldown build with a native panic
+        // ("[Panic in async function] code: 'GenericFailure'") even with an 8 GB heap.
+        // The stub keeps the call sites intact; see jsons/stubs/excalidraw-mermaid-stub.js.
+        {
+          find: '@excalidraw/mermaid-to-excalidraw',
+          replacement: path.resolve(configDir, 'stubs/excalidraw-mermaid-stub.js'),
+        },
+        {
+          find: '@excalidraw/excalidraw',
+          replacement: path.resolve(configDir, 'node_modules/@excalidraw/excalidraw/dist/prod/index.js'),
+        },
+      ],
     },
     build: {
       // jsons/dist-react, NOT ../dist-react.

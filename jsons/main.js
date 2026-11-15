@@ -1,5 +1,5 @@
 /**
- * main.js — Senior Law Partner
+ * main.js â€” Senior Law Partner
  * Electron main process: IPC handlers, DeepSeek R1 API, RAG, document generation.
  */
 
@@ -10,14 +10,14 @@ const path   = require('path');
 const fs     = require('fs');
 const Store  = require('electron-store');
 
-// ─── Global Stability Guards ─────────────────────────────────────────────────
+// â”€â”€â”€ Global Stability Guards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Prevent any unhandled exception from silently crashing the app.
 process.on('uncaughtException', (err) => {
   console.error('[Main] Uncaught exception:', err);
   try {
     if (app.isReady()) {
       dialog.showErrorBox(
-        'Senior Law Partner — Unexpected Error',
+        'Senior Law Partner â€” Unexpected Error',
         `An error occurred but the app will keep running.\n\n${err.message}`
       );
     }
@@ -28,7 +28,7 @@ process.on('unhandledRejection', (reason) => {
   console.error('[Main] Unhandled rejection:', reason instanceof Error ? reason.message : reason);
 });
 
-// ─── Persistent Store ────────────────────────────────────────────────────────
+// â”€â”€â”€ Persistent Store â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let store;
 try {
   store = new Store({ encryptionKey: 'slp-bianna-secure-2024' });
@@ -37,7 +37,7 @@ try {
   store = new Store();
 }
 
-// ─── RAG Module ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ RAG Module â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let getRelevantContext = () => '';
 try {
   getRelevantContext = require('./rag').getRelevantContext;
@@ -45,7 +45,7 @@ try {
   console.warn('[RAG] Failed to load rag module:', e.message);
 }
 
-// ─── Predefined Legal Skills ─────────────────────────────────────────────────
+// â”€â”€â”€ Predefined Legal Skills â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function loadSkill(filename) {
   try {
     return fs.readFileSync(path.join(__dirname, 'skills', filename), 'utf8');
@@ -56,7 +56,7 @@ function loadSkill(filename) {
 const SKILL_OUTLINE_STYLE    = loadSkill('bia-outline-style.txt');
 const SKILL_LAW_RESEARCH     = loadSkill('law-school-research.txt');
 
-// ─── Notion Database IDs ─────────────────────────────────────────────────────
+// â”€â”€â”€ Notion Database IDs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const NOTION_IRAC_DB = '6815ff70-de8f-46b7-910c-79f57ba612d8';
 const NOTION_QUIZ_DB = 'a80f6729-fea3-479d-8e94-3c4fa43b7729';
 
@@ -80,8 +80,8 @@ let onRendererMounted = () => {};
 let hasUnsavedOutline = false;
 let exitConfirmed      = false;
 
-// ─── Window ──────────────────────────────────────────────────────────────────
-// ─── Launch diagnostics: safe mode and failure escalation ────────────────────
+// â”€â”€â”€ Window â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â”€â”€â”€ Launch diagnostics: safe mode and failure escalation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Three DMGs went out with the same white window because the failing layer was never
 // named. These three values name it without requiring any UI:
 //
@@ -190,7 +190,7 @@ function createWindow() {
   }
 }
 
-// ─── Boot diagnostics ────────────────────────────────────────────────────────
+// â”€â”€â”€ Boot diagnostics â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // The white-window failure was never tracked to a layer. Static checks proved the
 // yield markers were present in the packaged main.js; they did not prove the renderer
 // ever loaded. Those are different claims, and only the machine that fails can settle
@@ -256,14 +256,14 @@ app.whenReady().then(() => {
   });
 }).catch((err) => {
   console.error('[App] whenReady failed:', err);
-  dialog.showErrorBox('Senior Law Partner — Startup Error', err.message);
+  dialog.showErrorBox('Senior Law Partner â€” Startup Error', err.message);
 });
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// ─── File System: Documents/Bianna_Law/ ──────────────────────────────────────
+// â”€â”€â”€ File System: Documents/Bianna_Law/ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function getBiannaLawDir() {
   // app.getPath('documents') resolves the OS Documents folder (Windows may
   // redirect it to a cloud-synced location). That is where the corpus actually
@@ -279,7 +279,7 @@ function ensureBiannaLawDir() {
   }
 }
 
-// ─── Statute reference corpus: bundle → first-launch install ─────────────────
+// â”€â”€â”€ Statute reference corpus: bundle â†’ first-launch install â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // The full Florida Statutes ship inside the app (app.asar.unpacked/references/
 // florida-statutes) and are copied once into the user's own corpus so ICM indexes
 // them alongside her course materials, labelled florida_statutes/statute.
@@ -335,7 +335,7 @@ function corpusProgress(done, total) {
 
 /**
  * Idempotent first-launch install. Compares .version markers and copies only what
- * is missing or differs in size. Never throws — a failure must not block app start.
+ * is missing or differs in size. Never throws â€” a failure must not block app start.
  */
 async function ensureStatuteCorpusInstalled({ force = false } = {}) {
   // Yield before any synchronous work. Reading entries out of an asar is a lookup in
@@ -421,6 +421,98 @@ ipcMain.handle('corpus:status', () => {
   };
 });
 
+/* â”€â”€ Corpus verification against the live source â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/*
+ * The overlay is a writable cache, not user documents: it is app state, deleting it is safe, and
+ * it lives beside the app's other data. main.js owns the path because corpus.js is plain Node and
+ * must not depend on Electron; SLP_CORPUS_OVERLAY overrides it so nothing has to touch a real
+ * install during testing.
+ */
+const statuteVerifier = require('./offline/statute-verifier');
+const offlineCorpus = require('./offline/corpus');
+
+function corpusOverlayDir() {
+  return process.env.SLP_CORPUS_OVERLAY || path.join(app.getPath('userData'), 'corpus-overlay');
+}
+offlineCorpus.setOverlayRoot(corpusOverlayDir());
+
+/** The last thing this process fetched and parsed, per section. */
+const _verifiedLive = new Map();
+
+ipcMain.handle('corpus:verify-section', async (_event, { sectionNumber } = {}) => {
+  const s = String(sectionNumber || '').trim();
+  const cached = offlineCorpus.readSection(s, {});
+  try {
+    const live = await statuteVerifier.fetchLiveSection(s);
+    _verifiedLive.set(live.section, live);
+    const diff = statuteVerifier.compareSections(cached, live);
+    return {
+      ok: true,
+      section: live.section,
+      live,
+      cached: {
+        found: !!cached.found,
+        catchline: cached.catchline || null,
+        body: cached.body || null,
+        integrity: cached.integrity || null,
+        provenance: cached.provenance || null,
+      },
+      diff,
+      matches: diff.length === 0,
+      source_url: live.source_url,
+      verified_on: String(live.fetched_at).slice(0, 10),
+    };
+  } catch (err) {
+    const code = err.code || 'error';
+    return {
+      ok: false,
+      error: code,
+      message: err.message,
+      // 'offline' is not a failure of the app: the bundled copy still answers, it just carries its
+      // existing integrity warning and an unverified label.
+      offline: code === 'offline' || code === 'timeout',
+      cached: { found: !!cached.found, provenance: cached.provenance || null },
+    };
+  }
+});
+
+ipcMain.handle('corpus:repair-section', (_event, { sectionNumber } = {}) => {
+  const s = String(sectionNumber || '').trim();
+  // Only what this process itself fetched and parsed is ever written. The renderer is not trusted
+  // to supply statute text, because the overlay is served INSTEAD of the bundle -- a wrong repair
+  // would be worse than the damaged original, since nothing downstream would suspect it.
+  const live = _verifiedLive.get(s);
+  if (!live) {
+    return { ok: false, error: 'not_verified', message: 'run corpus:verify-section for Â§ ' + s + ' first' };
+  }
+  try {
+    const md = statuteVerifier.toMarkdown(live);
+    const written = offlineCorpus.writeOverlay(s, md, {
+      verified_at: live.fetched_at,
+      source_url: live.source_url,
+      edition: live.edition,
+      hash: statuteVerifier.hashOf(md),
+    });
+    return {
+      ok: true,
+      section: s,
+      overlay: written,
+      authority: 'Verified against flsenate.gov on ' + String(live.fetched_at).slice(0, 10) + '.',
+    };
+  } catch (err) {
+    return { ok: false, error: err.code || 'error', message: err.message };
+  }
+});
+
+ipcMain.handle('corpus:overlay-status', () => {
+  const st = offlineCorpus.overlayStatus();
+  return { ...st, rate: statuteVerifier.rateState(), edition: statuteVerifier.EDITION };
+});
+
+ipcMain.handle('corpus:revert-section', (_event, { sectionNumber } = {}) => ({
+  ok: true, removed: offlineCorpus.clearOverlay(sectionNumber),
+}));
+
 /** Index the freshly-installed corpus in the background. */
 async function syncIcmAfterCorpusInstall() {
   const icm = getIcm();
@@ -433,7 +525,7 @@ async function syncIcmAfterCorpusInstall() {
   }
 }
 
-// ─── DeepSeek & API Key Management ───────────────────────────────────────────
+// â”€â”€â”€ DeepSeek & API Key Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // The key is NOT in source. The renderer's injected default (VITE_DEEPSEEK_KEY from
 // a gitignored .env.local locally, or the DEEPSEEK_KEY repository secret in CI)
 // travels with each IPC call, and the student's own saved key is preferred below.
@@ -488,7 +580,7 @@ async function callDeepSeekMain({ apiKey, messages, model = 'deepseek-reasoner',
     lastReasoning = choice?.reasoning_content || lastReasoning;
   }
 
-  // Reasoning-only turn — salvage the closing portion of the CoT trace.
+  // Reasoning-only turn â€” salvage the closing portion of the CoT trace.
   const trace = lastReasoning.trim();
   if (trace) return trace.length > 12000 ? trace.slice(-12000) : trace;
 
@@ -498,9 +590,9 @@ async function callDeepSeekMain({ apiKey, messages, model = 'deepseek-reasoner',
 /**
  * Streaming variant of callDeepSeekMain.
  *
- * DeepSeek R1 turns regularly take 30–90s. Rather than making the renderer wait
+ * DeepSeek R1 turns regularly take 30â€“90s. Rather than making the renderer wait
  * on a silent request, this consumes the SSE stream and reports deltas as they
- * arrive so the UI can type out the answer live — and, crucially, show the
+ * arrive so the UI can type out the answer live â€” and, crucially, show the
  * model's `reasoning_content` chain-of-thought while it thinks.
  *
  * Returns the full assembled { content, reasoning } once the stream closes.
@@ -551,7 +643,7 @@ async function streamDeepSeekMain({
     if (!payload || payload === '[DONE]') return;
     let json;
     try { json = JSON.parse(payload); } catch { return; }
-    // finish_reason rides the final frame, which may carry no delta at all — read it
+    // finish_reason rides the final frame, which may carry no delta at all â€” read it
     // before the delta guard or it is dropped and truncation becomes invisible.
     const fr = json.choices?.[0]?.finish_reason;
     if (fr) finishReason = fr;
@@ -572,7 +664,7 @@ async function streamDeepSeekMain({
     try {
       read = await reader.read();
     } catch (readErr) {
-      // A Stop press aborts the reader mid-stream — keep whatever arrived.
+      // A Stop press aborts the reader mid-stream â€” keep whatever arrived.
       if (readErr && (readErr.name === 'AbortError' || /abort/i.test(readErr.message || ''))) break;
       throw readErr;
     }
@@ -607,7 +699,7 @@ ipcMain.handle('api-key-clear', () => {
   return { success: true };
 });
 
-// ─── ICM: the student's own materials as an internal RAG corpus ───────────────
+// â”€â”€â”€ ICM: the student's own materials as an internal RAG corpus â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // icm.js is lazy-required so a missing/broken module degrades to "no ICM context"
 // instead of taking down app startup.
 let _icm = null;
@@ -632,7 +724,7 @@ ipcMain.handle('icm:sync', async (_event, { root } = {}) => {
   if (!icm) return { success: false, error: 'ICM module unavailable.' };
   try {
     // Default to the same corpus dir the rest of the app reads (getBiannaLawDir),
-    // NOT icm.APP_DIR — the latter resolves to a local Documents path that does
+    // NOT icm.APP_DIR â€” the latter resolves to a local Documents path that does
     // not contain the actual course files when Windows redirects Documents.
     const target = root || getBiannaLawDir();
     if (!fs.existsSync(target)) fs.mkdirSync(target, { recursive: true });
@@ -666,6 +758,133 @@ ipcMain.handle('icm:list', (_event, { limit } = {}) => {
   return icm ? icm.listEntries(limit || 200) : [];
 });
 
+// â”€â”€â”€ IPC: Whiteboard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Storage + conversion live in jsons/whiteboard/index.js as a dependency-injected
+// factory, so its rules are testable in plain Node (tools/test_whiteboard.js) rather
+// than only by clicking. This block supplies the two dependencies it needs.
+const { createWhiteboard } = require('./whiteboard');
+
+function whiteboardDir() {
+  // Override first: it is what the Windows test harness and any future packaging test
+  // sets, and it keeps test sketches out of the real Documents folder.
+  if (process.env.SLP_WHITEBOARD_DIR) return process.env.SLP_WHITEBOARD_DIR;
+  const docs = getBiannaLawDir();
+  return path.join(docs, 'Whiteboards');
+}
+
+/** Minimal HTML -> docx block mapping. Bold/heading-styled lines become headings. */
+function htmlToDocxBlocks(html) {
+  const { Paragraph, HeadingLevel, ImageRun, TextRun } = require('docx');
+  const chunks = String(html || '')
+    .replace(/<hr\s*\/?>/gi, '\n')
+    .split(/<\/div>|<\/p>|\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const blocks = [];
+  for (const raw of chunks) {
+    /**
+     * An embedded image is carried through rather than stripped.
+     *
+     * The whiteboard exports a sketch as `<img src="data:image/png;base64,â€¦">`, and the original
+     * version of this function flattened every tag to text â€” so a drawing exported to DOCX arrived
+     * as a document containing only its title. The image is decoded and inserted at a fixed width
+     * because a canvas has no intrinsic print size worth trusting.
+     */
+    const image = raw.match(/<img[^>]+src=["']data:image\/(png|jpeg);base64,([^"']+)["']/i);
+    if (image) {
+      try {
+        const buffer = Buffer.from(image[2], 'base64');
+        blocks.push(
+          new Paragraph({
+            children: [
+              new ImageRun({ type: image[1].toLowerCase(), data: buffer, transformation: { width: 620, height: 414 } }),
+            ],
+          }),
+        );
+        const caption = raw.replace(/<img[^>]*>/gi, '').replace(/<[^>]+>/g, '').trim();
+        if (caption) blocks.push(new Paragraph({ children: [new TextRun({ text: caption, italics: true })] }));
+        continue;
+      } catch (err) {
+        console.error('[docx] image embed failed:', err.message);
+      }
+    }
+
+    const bold = /font-weight\s*:\s*(bold|[6-9]00)/i.test(raw);
+    const big = /font-size\s*:\s*(1\.[3-9]|[2-9])em/i.test(raw);
+    const text = raw.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').trim();
+    if (!text) continue;
+    if (bold && big) blocks.push(new Paragraph({ text, heading: HeadingLevel.HEADING_1 }));
+    else if (bold) blocks.push(new Paragraph({ text, heading: HeadingLevel.HEADING_2 }));
+    else blocks.push(new Paragraph({ text }));
+  }
+  return blocks.length ? blocks : [new Paragraph({ text: 'No content generated.' })];
+}
+
+/**
+ * The outline generator the whiteboard's convert() calls. Kept here rather than in the
+ * whiteboard module because it needs the key, the model and the Documents root - all
+ * main-process concerns. Returns { success, outline, docxPath }.
+ */
+async function whiteboardGenerateOutline({ prompt, title }) {
+  try {
+    // callDeepSeekMain returns a STRING, not an object: it resolves `choice.content`, or the
+    // salvaged tail of the reasoning trace when the model thought but did not answer (see its
+    // `return` statements). The first version read `out.content` and `out.reasoning` off that
+    // string, so both were undefined and the feature reported "the model returned nothing"
+    // 1.3s after a call that had actually succeeded.
+    const out = await callDeepSeekMain({
+      apiKey: getDeepSeekKey(),
+      model: 'deepseek-chat',
+      maxTokens: 8000,
+      messages: [{ role: 'user', content: prompt }],
+    });
+    const outline = String(out || '').trim();
+    if (!outline) return { success: false, error: 'The model returned nothing for that sketch.' };
+
+    const { Document, Packer } = require('docx');
+    const doc = new Document({ sections: [{ children: htmlToDocxBlocks(outline) }] });
+    const buf = await Packer.toBuffer(doc);
+    const dir = path.join(getBiannaLawDir(), 'Whiteboards');
+    fs.mkdirSync(dir, { recursive: true });
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const name = String(title || 'Whiteboard').replace(/[\\/:*?"<>|]/g, '-').slice(0, 70);
+    const docxPath = path.join(dir, `${name} - Outline ${stamp}.docx`);
+    fs.writeFileSync(docxPath, buf);
+    bootLog(`[whiteboard] outline written ${path.basename(docxPath)} (${outline.length} chars)`);
+    return { success: true, outline, docxPath };
+  } catch (err) {
+    bootLog(`[whiteboard] convert failed: ${err.message}`);
+    return { success: false, error: err.message };
+  }
+}
+
+
+const whiteboard = createWhiteboard({
+  getDir: whiteboardDir,
+  generateOutline: whiteboardGenerateOutline,
+  log: (m) => bootLog(m),
+});
+
+ipcMain.handle('whiteboard:list', () => {
+  try { return { success: true, items: whiteboard.list(), dir: whiteboard.rootDir() }; }
+  catch (err) { return { success: false, items: [], error: err.message }; }
+});
+
+ipcMain.handle('whiteboard:load', (_event, { file } = {}) => {
+  try { return whiteboard.load({ file }); }
+  catch (err) { return { success: false, error: err.message }; }
+});
+
+ipcMain.handle('whiteboard:save', (_event, { title, scene, pngBase64 } = {}) => {
+  try { return whiteboard.save({ title, scene, pngBase64 }); }
+  catch (err) { return { success: false, error: err.message }; }
+});
+
+ipcMain.handle('whiteboard:convert', async (_event, { text, title } = {}) => {
+  try { return await whiteboard.convert({ text, title }); }
+  catch (err) { return { success: false, error: err.message }; }
+});
+
 ipcMain.handle('icm:search', (_event, { query, topK } = {}) => {
   const icm = getIcm();
   return icm ? icm.search(query || '', topK || 8) : [];
@@ -685,8 +904,10 @@ ipcMain.handle('icm:verify', (_event, { query = 'minimum contacts' } = {}) => {
   if (!icm) return { success: false, error: 'ICM module unavailable.' };
 
   const stats = icm.stats();
-  const hits = icm.search(query, 4);
-  const block = icm.getIcmContext(query, 4);
+  // retrieve() applies the scope refusal and the evidence floor, which search()
+  // alone does not. `matched` is therefore a verdict, not a hit list â€” a query
+  // outside the corpus returns matched:false with the reason it was refused.
+  const r = icm.retrieve(query, 4);
 
   return {
     success: true,
@@ -694,17 +915,20 @@ ipcMain.handle('icm:verify', (_event, { query = 'minimum contacts' } = {}) => {
     filesIndexed: stats.files,
     byDiscipline: stats.byDiscipline,
     byDocType: stats.byDocType,
-    matched: hits.map((h) => ({ rel: h.rel, discipline: h.discipline, docType: h.docType, score: h.score })),
-    injectedBlockLength: block ? block.length : 0,
-    injectedBlockPrefix: block ? block.slice(0, 120) : '',
+    matched: r.matched,
+    scope: r.scope,
+    refusalReason: r.matched ? '' : r.reason,
+    hits: r.hits.map((h) => ({ rel: h.rel, discipline: h.discipline, docType: h.docType, score: h.score })),
+    injectedBlockLength: r.block ? r.block.length : 0,
+    injectedBlockPrefix: r.block ? r.block.slice(0, 160) : '',
     blockOrderedBeforeRag: true, // buildGroundingSuffix emits ICM before the generic RAG block
   };
 });
 
-// ─── IPC: Image OCR ──────────────────────────────────────────────────────────
+// â”€â”€â”€ IPC: Image OCR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // DeepSeek R1 has no vision input, so a screenshot of a casebook page is converted
-// to text first. This uses an OCR engine ONLY if one is installed locally — the app
-// is offline-first, so nothing is downloaded — and otherwise reports that it is
+// to text first. This uses an OCR engine ONLY if one is installed locally â€” the app
+// is offline-first, so nothing is downloaded â€” and otherwise reports that it is
 // unavailable so the UI can offer paste-text capture instead.
 ipcMain.handle('ocr:image', async (_event, { base64 } = {}) => {
   if (!base64) return { success: false, available: false, error: 'No image data supplied.' };
@@ -728,7 +952,7 @@ ipcMain.handle('ocr:image', async (_event, { base64 } = {}) => {
 });
 
 
-// ─── AI Tools — Lazy Initialization ──────────────────────────────────────────
+// â”€â”€â”€ AI Tools â€” Lazy Initialization â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Modules are required on first use instead of at startup so that any import
 // failure is isolated to the specific feature, not the entire app launch.
 const GEMINI_API_KEY = 'AIzaSyCuld2555PxD65YVIcTVJNPwKdXYVTKJrE';
@@ -758,7 +982,7 @@ function getSupermemory() {
   return _supermemory;
 }
 
-// ─── Part 3: unified BIA rendering for chat surfaces ─────────────────────────
+// â”€â”€â”€ Part 3: unified BIA rendering for chat surfaces â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 /**
  * Chat answers render in the same four-tier house language as outlines.
  *
@@ -794,7 +1018,7 @@ Rules:
 - Horizontal rules are forbidden. Use Tier 2 separation instead.
 - Every visible element must be inside the four-tier system.
 - Case names use <em><strong>Case Name</strong></em>.
-- Statutes cite as Fla. Stat. § 732.102 inside Tier 4 text.
+- Statutes cite as Fla. Stat. Â§ 732.102 inside Tier 4 text.
 - Output raw HTML only. No markdown. No \`\`\` fences. No preamble.
 `;
   }
@@ -821,7 +1045,7 @@ async function formatAsBia({ apiKey, rawText, mode = 'chat' }) {
   });
 }
 
-// ─── Formatting is mode- and turn-aware ──────────────────────────────────────
+// â”€â”€â”€ Formatting is mode- and turn-aware â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // formatAsBia is not a lossy filter, it is a SECOND GENERATIVE CALL: it sends the answer
 // back to the chat model with biaSystemChat() -- the four-tier contract -- as the system
 // prompt. Run over a Socratic turn, whose entire content is "here is a fact pattern, what
@@ -881,7 +1105,7 @@ ipcMain.handle('ai:bia-format', async (_event, { text, mode = 'chat', turn } = {
   }
 });
 
-// ─── IPC: AI Chat (Dual Model + Supermemory + RAG) ─────────────────────────
+// â”€â”€â”€ IPC: AI Chat (Dual Model + Supermemory + RAG) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('ai-prompt-send', async (_event, { prompt, systemPrompt, mode, modelPreference, bia = false } = {}) => {
   const apiKey = getDeepSeekKey();
 
@@ -939,7 +1163,7 @@ ipcMain.handle('ai-prompt-send', async (_event, { prompt, systemPrompt, mode, mo
   }
 });
 
-// ─── IPC: Streaming AI prompt (live tokens + reasoning trace) ────────────────
+// â”€â”€â”€ IPC: Streaming AI prompt (live tokens + reasoning trace) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // In-flight streams, keyed by streamId, so the renderer's Stop button can abort
 // the SSE connection mid-flight.
 const activeStreams = new Map();
@@ -973,7 +1197,7 @@ ipcMain.handle('ai:stream', async (event, { prompt, systemPrompt, messages, mode
       onContent:   (delta) => send('ai-response-chunk', { delta, streamId: id }),
     });
 
-    // Stopped by the user — hand back what arrived so the UI keeps the partial text.
+    // Stopped by the user â€” hand back what arrived so the UI keeps the partial text.
     if (aborted) {
       return { success: true, response: content, reasoning, aborted: true, streamId: id };
     }
@@ -996,14 +1220,14 @@ ipcMain.handle('ai:stream', async (event, { prompt, systemPrompt, messages, mode
       return { success: false, error: 'DeepSeek returned an empty answer. Try again or switch models in Settings.' };
     }
 
-    // Truncation: R1 hit the output ceiling mid-document. This is NOT the empty case —
-    // the draft is tens of thousands of usable characters — so every guard above passes
+    // Truncation: R1 hit the output ceiling mid-document. This is NOT the empty case â€”
+    // the draft is tens of thousands of usable characters â€” so every guard above passes
     // it straight through and a document cut off mid-tag used to reach the renderer
     // untouched.
     //
     // Recovery is two bounded steps:
     //   1. ONE continuation call: R1 resumes where it stopped and the text is appended.
-    //      Deliberately not a loop — each reasoner call is 60-90s, and three retries
+    //      Deliberately not a loop â€” each reasoner call is 60-90s, and three retries
     //      would be 4.5 minutes of spinner before she sees a finished outline. One
     //      retry catches the overwhelming majority of cases.
     //   2. The formatting stage, which renders the house stylesheet and closes anything
@@ -1037,7 +1261,7 @@ ipcMain.handle('ai:stream', async (event, { prompt, systemPrompt, messages, mode
           continued = true;
         }
       } catch (contErr) {
-        // Losing the continuation is survivable — the formatter can still close the draft.
+        // Losing the continuation is survivable â€” the formatter can still close the draft.
         console.error('[AI Stream] continuation failed:', contErr.message);
       }
     }
@@ -1079,7 +1303,7 @@ ipcMain.handle('ai:stream', async (event, { prompt, systemPrompt, messages, mode
   }
 });
 
-// ─── IPC: Abort an in-flight stream (Stop button) ────────────────────────────
+// â”€â”€â”€ IPC: Abort an in-flight stream (Stop button) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('ai:abort', (_event, { streamId } = {}) => {
   const controller = streamId ? activeStreams.get(streamId) : null;
   if (controller) {
@@ -1102,8 +1326,8 @@ function buildDefaultSystem(mode) {
 You embody the intersection of elite legal expertise and AI capabilities. Your core skill set:
 - ANALYZING: Break down complex legal problems using structured frameworks; identify the precise legal issue in every fact pattern.
 - RESEARCHING: Draw on case law, FRCP rules, constitutional provisions, and statutes to support every answer with authority.
-- SUMMARIZING: Distill dense legal material — cases, statutes, transcripts — into clear, scannable, actionable insights.
-- DRAFTING: Produce precise IRAC-structured arguments, case briefs, and outlines. Every analysis follows Issue → Rule → Application → Conclusion.
+- SUMMARIZING: Distill dense legal material â€” cases, statutes, transcripts â€” into clear, scannable, actionable insights.
+- DRAFTING: Produce precise IRAC-structured arguments, case briefs, and outlines. Every analysis follows Issue â†’ Rule â†’ Application â†’ Conclusion.
 - EXTRACTING INFORMATION: Pull out material facts, holdings, rules, and policy rationale from any source Bianna provides.
 - REVIEWING: Critically evaluate Bianna's reasoning. Correct mistakes firmly but encouragingly. Explain why she was wrong and what the correct analysis is.
 - TASKS DONE AT SCALE: Handle multi-issue problems, full case analyses, entire transcript reviews, and complex statutory interpretation efficiently.
@@ -1127,18 +1351,18 @@ Always be precise with legal terminology. Cite cases and statutes where relevant
     return base + skillsBlock + '\n\nMode: SOCRATIC. Do not give direct answers. Guide Bianna to the correct conclusion through targeted questions only.';
   }
   if (mode === 'outline') {
-    return base + skillsBlock + '\n\nMode: OUTLINE. You MUST format all output using the bia-outline-style rules above. No flowing paragraphs — strict numbered/lettered hierarchical outline only.';
+    return base + skillsBlock + '\n\nMode: OUTLINE. You MUST format all output using the bia-outline-style rules above. No flowing paragraphs â€” strict numbered/lettered hierarchical outline only.';
   }
   return base + skillsBlock;
 }
 
-// ─── Model preference (reasoner ⇄ chat ⇄ Gemini failover) ────────────────────
+// â”€â”€â”€ Model preference (reasoner â‡„ chat â‡„ Gemini failover) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // DeepSeek's API has suffered congestion outages; the Settings tab lets Bianna
 // switch the answering model without touching code.
 const MODEL_PREF_KEY = 'aiModelPreference';   // 'reasoner' | 'chat' | 'gemini'
 const MODEL_IDS = {
-  reasoner: 'deepseek-reasoner',  // R1 — deepest reasoning (default)
-  chat:     'deepseek-chat',      // V3 — fast, strong formatting
+  reasoner: 'deepseek-reasoner',  // R1 â€” deepest reasoning (default)
+  chat:     'deepseek-chat',      // V3 â€” fast, strong formatting
 };
 
 function getModelPreference() {
@@ -1160,7 +1384,7 @@ ipcMain.handle('ai-preference-set', (_event, pref) => {
   return { success: true, preference: pref };
 });
 
-// ─── UI preferences (theme + palette) ────────────────────────────────────────
+// â”€â”€â”€ UI preferences (theme + palette) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // `null` means "use the theme default", so switching light/dark stays coherent
 // while any colour the user explicitly picks is preserved.
 const UI_PREF_KEY = 'uiPreferences';
@@ -1172,7 +1396,7 @@ const DEFAULT_UI_PREFS = {
   text: null,
 };
 
-// ─── IPC: Editable preset fields (custom chip values, Part 5) ────────────────
+// â”€â”€â”€ IPC: Editable preset fields (custom chip values, Part 5) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Every preset field's custom values are namespaced under one store key, so a typo in
 // a page's storageKey cannot silently create a second, invisible list, and one migration
 // covers all six surfaces.
@@ -1275,15 +1499,15 @@ ipcMain.handle('ui-preference-reset', () => {
  */
 const REASONING_CONTRACT = `
 
-REASONING vs OUTPUT — STRICT SEPARATION:
+REASONING vs OUTPUT â€” STRICT SEPARATION:
 - Do all deliberation and planning internally. The user never sees your scratch work.
-- Your final answer must contain ONLY the finished deliverable — no preamble, no "let me think", no restating of these instructions.
+- Your final answer must contain ONLY the finished deliverable â€” no preamble, no "let me think", no restating of these instructions.
 - Complete the deliverable inside the response. If the material is long, prioritise finishing every requested tier over adding extra commentary.
 
 BALANCED DOCTRINAL ANALYSIS:
 - Where authority is contested, state the majority rule AND the dissent or minority position, with its strongest counter-argument.
 - Never collapse a split of authority into a single "correct" answer; flag the split explicitly.
-- Never fabricate citations or holdings. If something is outside the provided materials, write: "Outside provided course materials — verify with professor."`;
+- Never fabricate citations or holdings. If something is outside the provided materials, write: "Outside provided course materials â€” verify with professor."`;
 
 /**
  * The injectable grounding suffix: reasoning contract + ICM (user's own corpus)
@@ -1308,7 +1532,7 @@ async function buildGroundingSuffix(prompt, mode) {
 
   const ragContext = getRelevantContext(prompt, 3);
   const ragBlock = ragContext
-    ? `\n\nRELEVANT LEGAL CONTEXT (from local corpus — use this to ground your answer):\n\n${ragContext}`
+    ? `\n\nRELEVANT LEGAL CONTEXT (from local corpus â€” use this to ground your answer):\n\n${ragContext}`
     : '';
 
   // ICM: the student's OWN labelled files take precedence over the generic corpus.
@@ -1367,7 +1591,7 @@ async function formatWithChat({ apiKey, rawReasoning, instruction }) {
     messages: [
       {
         role: 'system',
-        content: `${instruction}\n\nYou are a formatting engine. Convert the supplied analysis into the exact output format requested. Output the artifact only — no commentary, no markdown fences.`,
+        content: `${instruction}\n\nYou are a formatting engine. Convert the supplied analysis into the exact output format requested. Output the artifact only â€” no commentary, no markdown fences.`,
       },
       { role: 'user', content: rawReasoning },
     ],
@@ -1378,7 +1602,7 @@ async function formatWithChat({ apiKey, rawReasoning, instruction }) {
  * Hard style contract for outline output.
  *
  * BIA_SYSTEM *describes* the four tiers, and in testing both deepseek-reasoner and
- * deepseek-chat ignored them every single time — substituting #12355B / #F0B429 /
+ * deepseek-chat ignored them every single time â€” substituting #12355B / #F0B429 /
  * #0B5FA5 for the specified #A4B491 / #EBEFE8. Restating the tiers as the PRIMARY
  * requirement, naming the forbidden values explicitly, is what actually holds.
  */
@@ -1390,18 +1614,18 @@ TIER 3 (element):        <div style="border:1.5px solid #A4B491;padding:9px 11px
 TIER 4 (rule detail):    <strong> for rule definitions, <em><strong> for case citations.
 PROFESSOR HOOKS:         prefix with a star character (U+2605).
 
-ABSOLUTE CONSTRAINT — THIS IS THE PRIMARY REQUIREMENT:
+ABSOLUTE CONSTRAINT â€” THIS IS THE PRIMARY REQUIREMENT:
 Every element MUST use one of the exact style strings given above, copied character for
 character. You MUST use the colours #A4B491 and #EBEFE8 and no others for backgrounds.
 You MUST NOT invent, substitute, or "improve" any colour, border, or padding. Do not use
 #12355B, #F0B429, #0B5FA5 or any other value. Every major doctrine uses TIER 1 verbatim.
 Every case citation uses <em><strong>. Every professor hook is prefixed with the star
-character. Close every element. Output raw HTML only — no commentary, no markdown fences.
+character. Close every element. Output raw HTML only â€” no commentary, no markdown fences.
 
 IF THE INPUT IS INCOMPLETE:
 The draft below may end mid-tag or mid-sentence. Close the element at the nearest
 sentence boundary and then append, on its own line:
-<em>(outline continues — regenerate for full version)</em>
+<em>(outline continues â€” regenerate for full version)</em>
 Never leave an unclosed tag, and never invent material to fill the gap. A complete-looking
 partial document with a visible note is correct; a broken tag is not.`;
 
@@ -1446,9 +1670,9 @@ async function completeWithChat({ apiKey, draft, instruction }) {
 
   const completed = formatted.join('\n\n');
 
-  // ── loss guard ────────────────────────────────────────────────────────────
+  // â”€â”€ loss guard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // The formatter is a rewriting model and has silently dropped the opening of a long
-  // draft: a 34,445-character draft that began at "WILLS & TRUSTS — MASTER ANALYTICAL
+  // draft: a 34,445-character draft that began at "WILLS & TRUSTS â€” MASTER ANALYTICAL
   // OUTLINE" / "I. FIRST PRINCIPLES" came back starting at "XII. PRINCIPAL AND INCOME",
   // with the first eleven sections gone and invented later ones in their place. The
   // instruction that caused it is fixed above; this guard means that even if it happens
@@ -1487,7 +1711,7 @@ You are a FORMATTING engine, not an author. The draft below is a finished outlin
 needs the house stylesheet applied. Reproduce it in full, from its FIRST line to its last,
 in the original order.
 
-WHAT "REPRODUCE" MEANS — THIS IS THE PRIMARY REQUIREMENT:
+WHAT "REPRODUCE" MEANS â€” THIS IS THE PRIMARY REQUIREMENT:
 - Output every section that appears in the draft. All of it, in order, starting with the
   draft's first element.
 - An earlier version of this instruction said "do not repeat sections that are already
@@ -1561,16 +1785,16 @@ function jsonHasKeys(raw, keys) {
 }
 
 /**
- * Staged (two-pass) generation for rigid output formats — the reasoning/formatting
+ * Staged (two-pass) generation for rigid output formats â€” the reasoning/formatting
  * split.
  *
- *   Stage 1 — the reasoning model THINKS: deepseek-reasoner, unrestricted, may
+ *   Stage 1 â€” the reasoning model THINKS: deepseek-reasoner, unrestricted, may
  *             return only a reasoning trace.
- *   Stage 2 — a format-stable model FORMATS: deepseek-chat turns whatever stage 1
+ *   Stage 2 â€” a format-stable model FORMATS: deepseek-chat turns whatever stage 1
  *             produced into the exact schema.
  *
  * Stage 2 runs whenever stage 1 returns nothing usable (empty content, or content
- * missing required keys) — precisely how deepseek-reasoner fails when its
+ * missing required keys) â€” precisely how deepseek-reasoner fails when its
  * chain-of-thought exhausts the output budget. This is what keeps the IRAC/syllabus
  * JSON and the 4-tier outline deterministic instead of intermittently empty.
  */
@@ -1591,7 +1815,7 @@ async function callDeepSeekStructured({ apiKey, messages, maxTokens = 8192, sche
   // to emit the complete artifact rather than a truncated JSON fragment.
   const formatMaxTokens = Math.max(maxTokens, 4096);
 
-  console.warn(`[Staged ICM] stage 1 unusable (finish_reason=${first.finishReason}) — formatting with ${MODEL_IDS.chat} (${formatMaxTokens} tok)`);
+  console.warn(`[Staged ICM] stage 1 unusable (finish_reason=${first.finishReason}) â€” formatting with ${MODEL_IDS.chat} (${formatMaxTokens} tok)`);
   return callDeepSeekMain({
     apiKey,
     model: MODEL_IDS.chat,
@@ -1600,7 +1824,7 @@ async function callDeepSeekStructured({ apiKey, messages, maxTokens = 8192, sche
       {
         role: 'system',
         content: 'You are a formatting engine. Convert the supplied legal analysis into the exact output format requested. '
-          + 'Respond with ONLY the artifact — no markdown fences, no commentary, no preamble.'
+          + 'Respond with ONLY the artifact â€” no markdown fences, no commentary, no preamble.'
           + (schemaHint ? `\n\nREQUIRED FORMAT:\n${schemaHint}` : ''),
       },
       { role: 'user', content: trace },
@@ -1644,7 +1868,7 @@ const STRUCTURED_VALIDATORS = {
   /**
    * Reading Tracker shape: { courseName, professor, semester, assignments[], cases[] }.
    * Distinct from `syllabus` (which uses weeks[]/readings[]) because the tracker
-   * stores one row per reading with a resolved calendar date — a truncated `cases`
+   * stores one row per reading with a resolved calendar date â€” a truncated `cases`
    * list silently loses classes from the schedule.
    */
   readingList(obj) {
@@ -1659,7 +1883,7 @@ const STRUCTURED_VALIDATORS = {
       if (!String(c.date || '').trim()) return `cases[${i}] (week ${c.week}) has no date`;
 
       // Reject the documented "Week N Readings" placeholder when a real topic
-      // exists elsewhere for that week — it means the model gave up mid-list.
+      // exists elsewhere for that week â€” it means the model gave up mid-list.
       if (/^week \d+ readings?$/i.test(String(c.caseName).trim()) && c.doctrineArea) {
         return `cases[${i}] is still the "${c.caseName}" placeholder despite a known topic`;
       }
@@ -1668,9 +1892,9 @@ const STRUCTURED_VALIDATORS = {
   },
 };
 
-// ─── IPC: Structured (JSON) generation from the renderer ─────────────────────
+// â”€â”€â”€ IPC: Structured (JSON) generation from the renderer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Single entry point for every JSON-producing call in the UI, so the staged
-// pipeline (R1 thinks → V3 formats) and domain validation are never bypassed.
+// pipeline (R1 thinks â†’ V3 formats) and domain validation are never bypassed.
 ipcMain.handle('ai:structured', async (_event, {
   prompt, systemPrompt, messages, mode,
   maxTokens = 8192, requiredKeys = [], schemaHint = '', validate = null,
@@ -1690,7 +1914,7 @@ ipcMain.handle('ai:structured', async (_event, {
       }
 
       if (problem) {
-        console.warn(`[ai:structured] first pass rejected (${problem}) — running a repair pass`);
+        console.warn(`[ai:structured] first pass rejected (${problem}) â€” running a repair pass`);
         text = await callDeepSeekMain({
           apiKey,
           model: MODEL_IDS.chat,
@@ -1699,7 +1923,7 @@ ipcMain.handle('ai:structured', async (_event, {
             {
               role: 'system',
               content: `You are a formatting engine. The JSON you are given is incomplete or malformed: ${problem}. `
-                + 'Rebuild it as a single complete, valid JSON object with every week fully populated — do not omit, '
+                + 'Rebuild it as a single complete, valid JSON object with every week fully populated â€” do not omit, '
                 + 'truncate, or summarise any week or reading. Respond with ONLY the JSON, no markdown fences.'
                 + (schemaHint ? `\n\nREQUIRED FORMAT:\n${schemaHint}` : ''),
             },
@@ -1723,8 +1947,8 @@ ipcMain.handle('ai:structured', async (_event, {
   }
 });
 
-// ─── IPC: Capture document analysis (chunked + staged) ──────────────────────
-// Long PDFs (a 10-page exam ≈ 40k chars) exhaust R1's reasoning budget in a
+// â”€â”€â”€ IPC: Capture document analysis (chunked + staged) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Long PDFs (a 10-page exam â‰ˆ 40k chars) exhaust R1's reasoning budget in a
 // single pass. Split into ~28k-char chunks at paragraph boundaries, analyze each
 // through the staged pipeline, then stitch the result.
 const CAPTURE_MAX_CHUNK = 28000;
@@ -1779,7 +2003,7 @@ ipcMain.handle('capture:analyze', async (_event, { text, sourceLabel = 'document
       return {
         success: false,
         finishReason: 'empty',
-        error: 'This document was too long to analyze in one pass — try a single page or section.',
+        error: 'This document was too long to analyze in one pass â€” try a single page or section.',
       };
     }
 
@@ -1800,7 +2024,7 @@ ipcMain.handle('capture:analyze', async (_event, { text, sourceLabel = 'document
   }
 });
 
-// ─── IPC: Document Generation (IRAC .docx) ───────────────────────────────────
+// â”€â”€â”€ IPC: Document Generation (IRAC .docx) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('generate-document', async (_event, { caseText, caseName }) => {
   const apiKey = getDeepSeekKey();
   if (!apiKey) {
@@ -1819,7 +2043,7 @@ Respond ONLY with a valid JSON object (no markdown fences) with exactly these fi
   "application": "Step-by-step application of the rules to the specific facts of this case.",
   "conclusion":  "The court's holding or the logical conclusion of the analysis.",
   "keyFacts":    "The most important facts that determined the outcome.",
-  "significance":"Why this case matters — its lasting legal significance or doctrinal contribution."
+  "significance":"Why this case matters â€” its lasting legal significance or doctrinal contribution."
 }`,
       },
       {
@@ -1872,7 +2096,7 @@ Respond ONLY with a valid JSON object (no markdown fences) with exactly these fi
 
     const bodyParagraph = (text) => new Paragraph({
       spacing: { line: 276, after: 120 },
-      children: [new TextRun({ text: text || '—', size: 22, color: '111827' })],
+      children: [new TextRun({ text: text || 'â€”', size: 22, color: '111827' })],
     });
 
     const dateStr   = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -1934,7 +2158,7 @@ Respond ONLY with a valid JSON object (no markdown fences) with exactly these fi
             alignment: AlignmentType.CENTER,
             spacing:   { before: 720 },
             children:  [new TextRun({
-              text:    'Generated by Senior Law Partner  •  For study purposes only',
+              text:    'Generated by Senior Law Partner  â€¢  For study purposes only',
               size:    16,
               color:   '6B7280',
               italics: true,
@@ -1985,22 +2209,22 @@ Respond ONLY with a valid JSON object (no markdown fences) with exactly these fi
   }
 });
 
-// ─── IPC: Settings ────────────────────────────────────────────────────────────
+// â”€â”€â”€ IPC: Settings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('open-settings', () => {
   mainWindow.webContents.send('show-settings-modal');
   return { success: true };
 });
 
-// ─── IPC: App Info ────────────────────────────────────────────────────────────
+// â”€â”€â”€ IPC: App Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('get-app-version', () => app.getVersion());
 
-// ─── IPC: Open Documents Folder ──────────────────────────────────────────────
+// â”€â”€â”€ IPC: Open Documents Folder â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('open-documents-folder', () => {
   shell.openPath(getBiannaLawDir());
   return { success: true };
 });
 
-// ─── IPC: List RAG Sources ───────────────────────────────────────────────────
+// â”€â”€â”€ IPC: List RAG Sources â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('list-rag-sources', () => {
   try {
     const { listSources } = require('./rag');
@@ -2008,7 +2232,7 @@ ipcMain.handle('list-rag-sources', () => {
   } catch { return []; }
 });
 
-// ─── IPC: Notion Key Management ──────────────────────────────────────────────
+// â”€â”€â”€ IPC: Notion Key Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('notion-key-exists', () => !!(store.get('notionApiKey') || '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'));
 
 ipcMain.handle('notion-key-save', (_event, key) => {
@@ -2024,7 +2248,7 @@ ipcMain.handle('notion-key-clear', () => {
   return { success: true };
 });
 
-// ─── IPC: Notion Sync — Summary / Video / Transcript ─────────────────────────
+// â”€â”€â”€ IPC: Notion Sync â€” Summary / Video / Transcript â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('notion-sync-summary', async (_event, { title, type, topic, summary }) => {
   const notion = getNotionClient();
   if (!notion) return { success: false, error: 'No Notion API key configured.' };
@@ -2045,13 +2269,13 @@ ipcMain.handle('notion-sync-summary', async (_event, { title, type, topic, summa
   }
 });
 
-// ─── IPC: Notion Sync — Quiz Result ──────────────────────────────────────────
+// â”€â”€â”€ IPC: Notion Sync â€” Quiz Result â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('notion-sync-quiz', async (_event, { topic, score, total, difficulty, wrongAnswers }) => {
   const notion = getNotionClient();
   if (!notion) return { success: false, error: 'No Notion API key configured.' };
   try {
     const dateStr     = new Date().toISOString().slice(0, 10);
-    const sessionName = `${topic || 'Quiz'} — ${dateStr}`;
+    const sessionName = `${topic || 'Quiz'} â€” ${dateStr}`;
     const pct         = total > 0 ? Math.round((score / total) * 100) : 0;
     await notion.pages.create({
       parent: { database_id: NOTION_QUIZ_DB },
@@ -2073,11 +2297,11 @@ ipcMain.handle('notion-sync-quiz', async (_event, { topic, score, total, difficu
   }
 });
 
-// ─── IPC: Notion Syllabus Organizer ──────────────────────────────────────────
+// â”€â”€â”€ IPC: Notion Syllabus Organizer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Workflow:
 //   1. DeepSeek R1 extracts structured week/topic/reading data from syllabus text
 //   2. Creates a rich Notion page under the main workspace page with:
-//      - Color-coded priority sections (🔴 High / 🟡 Medium / 🟢 Low)
+//      - Color-coded priority sections (ðŸ”´ High / ðŸŸ¡ Medium / ðŸŸ¢ Low)
 //      - Per-week reading tables with volume, difficulty, and due date columns
 ipcMain.handle('organize-syllabus', async (_event, { syllabusText, courseName }) => {
   const apiKey = getDeepSeekKey();
@@ -2165,32 +2389,32 @@ Infer priority from position in semester and topic weight (foundational doctrine
       callout: { icon: { type: 'emoji', emoji: icon }, rich_text: [rt(text)], color: bgColor },
     });
 
-    const priorityIcon  = (p) => p === 'High' ? '🔴' : p === 'Medium' ? '🟡' : '🟢';
+    const priorityIcon  = (p) => p === 'High' ? 'ðŸ”´' : p === 'Medium' ? 'ðŸŸ¡' : 'ðŸŸ¢';
     const priorityColor = (p) => p === 'High' ? 'red_background' : p === 'Medium' ? 'yellow_background' : 'green_background';
-    const diffIcon      = (d) => d === 'Hard' ? '🧠' : d === 'Medium' ? '📖' : '✅';
+    const diffIcon      = (d) => d === 'Hard' ? 'ðŸ§ ' : d === 'Medium' ? 'ðŸ“–' : 'âœ…';
 
     const pageBlocks = [
       // Header callout
-      callout('⚖️', `${syllabus.courseName || courseName}  •  ${syllabus.professor || ''}  •  ${syllabus.semester || ''}`, 'blue_background'),
+      callout('âš–ï¸', `${syllabus.courseName || courseName}  â€¢  ${syllabus.professor || ''}  â€¢  ${syllabus.semester || ''}`, 'blue_background'),
       divider(),
     ];
 
     // Key themes
     if (syllabus.keyThemes?.length) {
-      pageBlocks.push(heading2('📌 Key Themes'));
+      pageBlocks.push(heading2('ðŸ“Œ Key Themes'));
       syllabus.keyThemes.forEach(t => pageBlocks.push(bullet(t)));
       pageBlocks.push(divider());
     }
 
     // Exam dates
     if (syllabus.examDates?.length) {
-      pageBlocks.push(heading2('📅 Important Dates'));
-      syllabus.examDates.forEach(d => pageBlocks.push(callout('🗓️', d, 'orange_background')));
+      pageBlocks.push(heading2('ðŸ“… Important Dates'));
+      syllabus.examDates.forEach(d => pageBlocks.push(callout('ðŸ—“ï¸', d, 'orange_background')));
       pageBlocks.push(divider());
     }
 
     // Per-week sections
-    pageBlocks.push(heading2('📚 Weekly Reading Schedule'));
+    pageBlocks.push(heading2('ðŸ“š Weekly Reading Schedule'));
     for (const week of (syllabus.weeks || [])) {
       // Week header
       pageBlocks.push({
@@ -2201,27 +2425,27 @@ Infer priority from position in semester and topic weight (foundational doctrine
         },
       });
       if (week.dateRange) {
-        pageBlocks.push(bullet(`📅 ${week.dateRange}`));
+        pageBlocks.push(bullet(`ðŸ“… ${week.dateRange}`));
       }
       // Readings
       for (const r of (week.readings || [])) {
         const icon  = priorityIcon(r.priority);
         const diff  = diffIcon(r.difficulty);
-        const label = `${icon} ${diff}  ${r.title}${r.pages ? `  (${r.pages})` : ''}${r.notes ? `  — ${r.notes}` : ''}`;
+        const label = `${icon} ${diff}  ${r.title}${r.pages ? `  (${r.pages})` : ''}${r.notes ? `  â€” ${r.notes}` : ''}`;
         pageBlocks.push(callout(icon, label, priorityColor(r.priority)));
       }
       if (week.assignments) {
-        pageBlocks.push(bullet(`📝 Due: ${week.assignments}`, 'purple'));
+        pageBlocks.push(bullet(`ðŸ“ Due: ${week.assignments}`, 'purple'));
       }
     }
 
     // Priority legend footer
     pageBlocks.push(divider());
-    pageBlocks.push(callout('📊', 'Priority: 🔴 High (foundational) · 🟡 Medium · 🟢 Low  |  Difficulty: 🧠 Hard · 📖 Medium · ✅ Easy', 'gray_background'));
+    pageBlocks.push(callout('ðŸ“Š', 'Priority: ðŸ”´ High (foundational) Â· ðŸŸ¡ Medium Â· ðŸŸ¢ Low  |  Difficulty: ðŸ§  Hard Â· ðŸ“– Medium Â· âœ… Easy', 'gray_background'));
 
-    // Step 3: Create the Notion page — Notion API accepts max 100 blocks per request
+    // Step 3: Create the Notion page â€” Notion API accepts max 100 blocks per request
     const dateStr  = new Date().toISOString().slice(0, 10);
-    const pageTitle = `📚 ${syllabus.courseName || courseName} — Syllabus (${dateStr})`;
+    const pageTitle = `ðŸ“š ${syllabus.courseName || courseName} â€” Syllabus (${dateStr})`;
 
     const page = await notion.pages.create({
       parent: { page_id: NOTION_PARENT_PAGE },
@@ -2251,7 +2475,7 @@ Infer priority from position in semester and topic weight (foundational doctrine
   }
 });
 
-// ─── IPC: Sidebar — List & Open Bianna_Law Files ─────────────────────────────
+// â”€â”€â”€ IPC: Sidebar â€” List & Open Bianna_Law Files â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('list-bianna-files', () => {
   const dir = getBiannaLawDir();
   try {
@@ -2275,7 +2499,7 @@ ipcMain.handle('open-bianna-file', (_event, filePath) => {
   return { success: true };
 });
 
-// ─── Document text extraction (shared by every ingestion path) ───────────────
+// â”€â”€â”€ Document text extraction (shared by every ingestion path) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 /**
  * Extract text from a PDF, tolerating BOTH pdf-parse major versions.
  *
@@ -2288,7 +2512,7 @@ ipcMain.handle('open-bianna-file', (_event, filePath) => {
  */
 /**
  * pdf-parse emits page-separator markers ("-- 1 of 3 --") even when a page has no
- * text layer. Left in place they masquerade as content — a scanned PDF would be
+ * text layer. Left in place they masquerade as content â€” a scanned PDF would be
  * treated as successfully read and its separators sent to the model.
  */
 function stripPdfPageArtifacts(text) {
@@ -2301,7 +2525,7 @@ async function extractPdfText(filePath) {
   const buffer = fs.readFileSync(filePath);
   const mod = require('pdf-parse');
 
-  // v2.x — class API: new PDFParse({ data }).getText()
+  // v2.x â€” class API: new PDFParse({ data }).getText()
   if (mod && typeof mod.PDFParse === 'function') {
     const parser = new mod.PDFParse({ data: buffer });
     try {
@@ -2312,13 +2536,13 @@ async function extractPdfText(filePath) {
     }
   }
 
-  // v1.x — the module itself is the parse function
+  // v1.x â€” the module itself is the parse function
   if (typeof mod === 'function') {
     const data = await mod(buffer, { max: 0 });
     return { text: stripPdfPageArtifacts(data && data.text), pages: (data && data.numpages) || 0 };
   }
 
-  // v1.x installed elsewhere — the old subpath (absent in v2, hence the try/catch)
+  // v1.x installed elsewhere â€” the old subpath (absent in v2, hence the try/catch)
   try {
     const legacy = require('pdf-parse/lib/pdf-parse.js');
     if (typeof legacy === 'function') {
@@ -2347,21 +2571,21 @@ async function extractDocumentText(filePath, maxChars = 12000) {
   }
 
   if (!text || !text.trim()) {
-    // Scanned/image-only PDF has no text layer — the UI offers paste capture.
+    // Scanned/image-only PDF has no text layer â€” the UI offers paste capture.
     throw new Error('No selectable text found in this file (it may be a scan). Try pasting the pages instead.');
   }
 
   return text.length > maxChars
-    ? text.slice(0, maxChars) + `\n\n[… document truncated at ${maxChars} characters]`
+    ? text.slice(0, maxChars) + `\n\n[â€¦ document truncated at ${maxChars} characters]`
     : text;
 }
 
-// ─── IPC: Native In-App File Preview ─────────────────────────────────────────
+// â”€â”€â”€ IPC: Native In-App File Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Returns enough info for the renderer to display the file inside the webview
 // without opening any external application.
-//   PDF  → { type: 'pdf',  url: 'file:///...' }
-//   DOCX → { type: 'docx', html: '<html>...' }
-//   TXT/MD → { type: 'text', text: '...' }
+//   PDF  â†’ { type: 'pdf',  url: 'file:///...' }
+//   DOCX â†’ { type: 'docx', html: '<html>...' }
+//   TXT/MD â†’ { type: 'text', text: '...' }
 ipcMain.handle('preview-file', async (_event, filePath) => {
   const ext = path.extname(filePath).toLowerCase();
   try {
@@ -2395,7 +2619,7 @@ ipcMain.handle('preview-file', async (_event, filePath) => {
   }
 });
 
-// ─── YouTube transcript loader (ESM/CJS interop) ─────────────────────────────
+// â”€â”€â”€ YouTube transcript loader (ESM/CJS interop) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // youtube-transcript@1.3.0 declares "type":"module" but ships a CommonJS build
 // as its main entry, so `require('youtube-transcript')` throws
 // "exports is not defined in ES module scope". Load the CJS bundle explicitly.
@@ -2413,7 +2637,7 @@ function loadYoutubeTranscript() {
   return _ytCache;
 }
 
-// ─── IPC: YouTube Transcript Extraction ──────────────────────────────────────
+// â”€â”€â”€ IPC: YouTube Transcript Extraction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('extract-youtube-transcript', async (_event, videoUrl) => {
   try {
     const { YoutubeTranscript } = loadYoutubeTranscript();
@@ -2430,7 +2654,7 @@ ipcMain.handle('extract-youtube-transcript', async (_event, videoUrl) => {
   }
 });
 
-// ─── Persistent study memory (local files — no external service) ─────────────
+// â”€â”€â”€ Persistent study memory (local files â€” no external service) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Long-term study notes and daily session logs are appended to Markdown files
 // under Documents/Bianna_Law/Memory so the assistant can recall past sessions.
 const http  = require('http');
@@ -2469,8 +2693,8 @@ function getMemoryDir() {
   return path.join(getBiannaLawDir(), 'Memory');
 }
 
-// type='daily'    → Memory/daily/YYYY-MM-DD.md  (session notes, quiz results)
-// type='longterm' → Memory/MEMORY.md            (course facts, professor quirks)
+// type='daily'    â†’ Memory/daily/YYYY-MM-DD.md  (session notes, quiz results)
+// type='longterm' â†’ Memory/MEMORY.md            (course facts, professor quirks)
 ipcMain.handle('memory:write', async (_event, { content, type = 'daily', heading }) => {
   try {
     const memoryDir = getMemoryDir();
@@ -2520,7 +2744,7 @@ ipcMain.handle('memory:search', async (_event, { query, limit = 10 }) => {
   }
 });
 
-// ─── IPC: App Diagnostics (for the Troubleshoot modal) ───────────────────────
+// â”€â”€â”€ IPC: App Diagnostics (for the Troubleshoot modal) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Collects the full system state so the renderer can display it and ask DeepSeek R1
 // to analyse what's wrong and suggest/apply fixes.
 // Open a URL in the user's default browser (used for Google/Apple Calendar export)
@@ -2561,7 +2785,7 @@ ipcMain.handle('app:diagnostics', async () => {
   };
 });
 
-// ─── IPC: Profile & Calendar persistence (electron-store) ────────────────────
+// â”€â”€â”€ IPC: Profile & Calendar persistence (electron-store) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('profile:get', () => {
   return { success: true, profile: store.get('userProfile', null) };
 });
@@ -2591,7 +2815,7 @@ ipcMain.handle('calendar:save', (_event, events) => {
   }
 });
 
-// ─── IPC: Scan & Auto-Sort Legal Files ───────────────────────────────────────
+// â”€â”€â”€ IPC: Scan & Auto-Sort Legal Files â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Opens a native folder picker, walks files recursively, uses DeepSeek R1 to classify
 // each file as a course syllabus or document, copies them into Bianna_Law
 // subdirectories, and returns structured data for the renderer to import.
@@ -2605,7 +2829,7 @@ ipcMain.handle('scan-legal-files', async () => {
   if (canceled || !filePaths[0]) return { success: false, canceled: true };
   const scanPath = filePaths[0];
 
-  // Walk directory recursively — cap at 150 files to keep call fast
+  // Walk directory recursively â€” cap at 150 files to keep call fast
   const LEGAL_EXTS  = new Set(['.pdf', '.docx', '.txt', '.md', '.rtf']);
   const MAX_FILES   = 150;
   const collected   = [];
@@ -2734,12 +2958,12 @@ Rules:
   }
 });
 
-// ─── YouTube pipeline: bounded stages ────────────────────────────────────────
+// â”€â”€â”€ YouTube pipeline: bounded stages â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 /**
  * Bound a promise so no stage of a long pipeline can hang the UI.
  *
  * Every network step in the playlist handler goes through this. An unbounded await is
- * what turns one stalled fetch into a permanent "Processing…" with no way back.
+ * what turns one stalled fetch into a permanent "Processingâ€¦" with no way back.
  */
 function withTimeout(promise, ms, label) {
   return Promise.race([
@@ -2757,7 +2981,7 @@ ipcMain.handle('youtube:cancel', () => {
   youtubeRunCancelled = true;
   return { success: true };
 });
-// ─── Part 4: persistent chat threads ─────────────────────────────────────────
+// â”€â”€â”€ Part 4: persistent chat threads â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 /**
  * One append-only markdown file per action per day, at
  *   ~/Documents/Bianna_Law/AI-assistant-chat-instance-memory/YYYY/MM/DD/{action}.md
@@ -2830,27 +3054,84 @@ function listChatDaysFor(action) {
   return out.sort().reverse();
 }
 
-/** Parse one day's file into turns. Tolerant: a malformed block is skipped, not fatal. */
+/**
+ * Deletion must survive a reload, and an append-only store cannot be edited in place, so a delete
+ * writes a tombstone: the id is recorded once, never removed, and filtered on every read. The file
+ * is global to the action rather than per-day because a thread spans days and a turn deleted today
+ * may live in yesterday's file.
+ */
+function chatTombstoneFile(action) {
+  return path.join(chatMemoryRoot(), '_deleted', `${action}.txt`);
+}
+
+function readChatTombstones(action) {
+  const f = chatTombstoneFile(action);
+  if (!fs.existsSync(f)) return new Set();
+  try {
+    return new Set(fs.readFileSync(f, 'utf8').split('\n').map((s) => s.trim()).filter(Boolean));
+  } catch { return new Set(); }
+}
+
+function appendChatTombstone(action, id) {
+  const f = chatTombstoneFile(action);
+  fs.mkdirSync(path.dirname(f), { recursive: true });
+  fs.appendFileSync(f, String(id) + '\n', 'utf8');
+}
+
+/**
+ * Parse one day's file into turns. Tolerant: a malformed block is skipped, not fatal.
+ *
+ * A turn carries an id and, for assistant turns, its reasoning trace. Both are needed on load.
+ * Without the id a delete cannot name what it is deleting -- which is why deleted messages came
+ * back: deletion happened in renderer state only, and the loader had no way to know which stored
+ * turn was meant. Without the reasoning the chain-of-thought was visible while streaming and gone
+ * the moment the thread reloaded.
+ *
+ * Tombstoned ids are filtered here rather than at the call site, so every reader inherits it.
+ */
 function readChatDay(action, dateKey) {
   const file = chatFilePath(action, dateKey);
   if (!file || !fs.existsSync(file)) return [];
   let text = '';
   try { text = fs.readFileSync(file, 'utf8') } catch { return [] }
 
+  const deleted = readChatTombstones(action);
   const messages = [];
-  // Blocks look like: "## 21:34:12 — assistant\n<content>"
+  // Blocks look like: "## 21:34:12 â€” assistant #m-123\n<content>"
   for (const block of text.split(/\n(?=##\s)/)) {
-    const m = block.match(/^##\s+(\d{2}:\d{2}:\d{2})\s+.\s+(user|assistant)\s*\n([\s\S]*)$/);
+    const m = block.match(/^##\s+(\d{2}:\d{2}:\d{2})\s+.\s+(user|assistant)(?:\s+#(\S+))?\s*\n([\s\S]*)$/);
     if (!m) continue;
-    const content = m[3].replace(/\s+$/, '');
+    const [, stamp, role, id, rest] = m;
+    let content = m[4].replace(/\s+$/, '');
+    let reasoning = null;
+    let biaHtml = null;
+    // Two optional trailing blocks, stripped in REVERSE write order (reasoning is written
+    // last). Both are delimited so the answer itself may contain anything, including the
+    // literal delimiter text.
+    //
+    // The BIA block exists because the write format was previously lossy: the live session
+    // held `content` AND `biaHtml`, but only `biaHtml ?? answer` was persisted, so on reload
+    // the renderer received formatted HTML as if it were markdown and showed raw tags. A
+    // persistence format must carry every field the renderer needs to rebuild the live view.
+    const stripTail = (text, tag) => {
+      const open = `\n<<<${tag}>>>\n`;
+      const close = '\n<<<END>>>';
+      const i = text.indexOf(open);
+      if (i === -1 || !text.endsWith(close)) return [text, null];
+      return [text.slice(0, i).replace(/\s+$/, ''), text.slice(i + open.length, text.length - close.length).trim()];
+    };
+    let tail;
+    [content, tail] = stripTail(content, 'REASONING'); reasoning = tail;
+    [content, tail] = stripTail(content, 'BIA');       biaHtml = tail;
     if (!content) continue;
-    messages.push({ role: m[2], content, ts: `${dateKey}T${m[1]}`, date: dateKey });
+    if (id && deleted.has(id)) continue;
+    messages.push({ id: id || null, role, content, reasoning, biaHtml, ts: `${dateKey}T${stamp}`, date: dateKey });
   }
   return messages;
 }
 
 /** Append one turn, creating the day's folder and header on first write. */
-function appendChatTurnRaw(action, role, content) {
+function appendChatTurnRaw(action, role, content, { id = null, reasoning = null, biaHtml = null } = {}) {
   const dateKey = chatDateKey();
   const file = chatFilePath(action, dateKey);
   if (!file) throw new Error('Unrecognized chat action.');
@@ -2859,27 +3140,59 @@ function appendChatTurnRaw(action, role, content) {
   const stamp = new Date().toTimeString().slice(0, 8);
   const clean = String(content ?? '').replace(/\r\n/g, '\n').trim();
   if (!clean) throw new Error('Nothing to record.');
+  const turnId = id || `t-${dateKey.replace(/-/g, '')}-${stamp.replace(/:/g, '')}-${Math.random().toString(36).slice(2, 7)}`;
 
   if (!fs.existsSync(file)) {
     const title = action.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
-    fs.writeFileSync(file, `# ${title} — ${dateKey}\n`, 'utf8');
+    fs.writeFileSync(file, `# ${title} â€” ${dateKey}\n`, 'utf8');
   }
   // Append-only: no read-modify-write, so a crash can only ever cost the turn in flight.
-  fs.appendFileSync(file, `\n## ${stamp} — ${role}\n${clean}\n`, 'utf8');
-  return { file, dateKey, ts: `${dateKey}T${stamp}` };
+  // Written in this order so readChatDay can strip them back in reverse: the answer, then
+  // the formatted artifact, then the trace. Each block is omitted entirely when absent â€”
+  // no placeholder â€” so an unformatted turn reads back with biaHtml absent rather than a
+  // marker standing in for nothing.
+  const bia = biaHtml && String(biaHtml).trim()
+    ? `\n<<<BIA>>>\n${String(biaHtml).trim()}\n<<<END>>>`
+    : '';
+  const trace = reasoning && String(reasoning).trim()
+    ? `\n<<<REASONING>>>\n${String(reasoning).trim()}\n<<<END>>>`
+    : '';
+  fs.appendFileSync(file, `\n## ${stamp} â€” ${role} #${turnId}\n${clean}${bia}${trace}\n`, 'utf8');
+  return { file, dateKey, ts: `${dateKey}T${stamp}`, id: turnId };
 }
 
 /** IPC: append one turn to today's thread for an action. */
-ipcMain.handle('ai-chat:append-turn', (_event, { action, role, content } = {}) => {
+ipcMain.handle('ai-chat:append-turn', (_event, { action, role, content, id, reasoning, biaHtml } = {}) => {
   const a = safeChatAction(action);
   if (!a) return { success: false, error: 'Unrecognized chat action.' };
   const r = String(role || '').toLowerCase();
   if (r !== 'user' && r !== 'assistant') return { success: false, error: 'role must be user or assistant.' };
   try {
-    const info = appendChatTurnRaw(a, r, content);
+    const info = appendChatTurnRaw(a, r, content, { id, reasoning, biaHtml });
     return { success: true, ...info };
   } catch (err) {
     console.error('[ai-chat:append-turn]', err);
+    return { success: false, error: err.message };
+  }
+});
+
+/**
+ * IPC: delete one turn by id.
+ *
+ * Writes a tombstone rather than rewriting the day file, so the store stays append-only and every
+ * reader -- including any future summary rebuild -- sees the same deletion. A renderer-only delete
+ * is what made messages reappear on reload.
+ */
+ipcMain.handle('ai-chat:delete-turn', (_event, { action, id } = {}) => {
+  const a = safeChatAction(action);
+  if (!a) return { success: false, error: 'Unrecognized chat action.' };
+  const turnId = String(id || '').trim();
+  if (!turnId) return { success: false, error: 'A turn id is required to delete a turn.' };
+  try {
+    appendChatTombstone(a, turnId);
+    return { success: true, id: turnId };
+  } catch (err) {
+    console.error('[ai-chat:delete-turn]', err);
     return { success: false, error: err.message };
   }
 });
@@ -3002,7 +3315,7 @@ const YOUTUBE_VIDEO_SYSTEM =
   'You are Bianna\'s Senior Law Partner AI. Summarise a single law-school lecture transcript '
   + 'as a compact hierarchical outline using the Bia 4-tier format:\n\n'
   + 'I.  MAJOR DOCTRINE\n  A.  Sub-doctrine / Rule\n    1.  Element or test\n      a.  Exception / detail\n\n'
-  + 'For each case discussed include a compact IRAC. Label professor-highlighted cases with ★. '
+  + 'For each case discussed include a compact IRAC. Label professor-highlighted cases with â˜…. '
   + 'Output raw HTML in the house four-tier stylesheet only - no markdown fences, no preamble. '
   + 'Never fabricate a case citation or holding; if the transcript is unclear, say so.';
 
@@ -3011,22 +3324,22 @@ const YOUTUBE_MERGE_SYSTEM =
   + 'course. Merge them into ONE comprehensive, hierarchical law-school outline in the Bia 4-tier '
   + 'format:\n\nI.  MAJOR DOCTRINE\n  A.  Sub-doctrine / Rule\n    1.  Element or test\n      a.  Exception / detail\n\n'
   + 'Group content by legal topic, not by lecture order. Remove duplication, keep every case and rule, '
-  + 'and label professor-highlighted cases with ★. Output raw HTML in the house four-tier stylesheet '
+  + 'and label professor-highlighted cases with â˜…. Output raw HTML in the house four-tier stylesheet '
   + 'only - no markdown fences, no preamble. Never fabricate a case citation or holding.';
 
-// ─── IPC: YouTube Playlist → Outline ─────────────────────────────────────────
+// â”€â”€â”€ IPC: YouTube Playlist â†’ Outline â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Resolves a playlist, fetches captions (partial success is fine), outlines each video,
 // merges the sections, and saves to Documents/Bianna_Law/Outlines/.
 //
-// STAGE VOCABULARY, shared with Capture.tsx: extracting → generating → saving → done,
+// STAGE VOCABULARY, shared with Capture.tsx: extracting â†’ generating â†’ saving â†’ done,
 // plus error. Field names matter as much as stage names. The previous version emitted
 // `step` while the UI read `message`, and `complete` while the UI tested for `done`, so
-// every progress event was discarded and the button sat on "Processing…" no matter what
+// every progress event was discarded and the button sat on "Processingâ€¦" no matter what
 // the pipeline actually did. That mismatch - not missing telemetry - was the bug.
 // The renderer has always called this with `{ url }` while this handler read
 // `{ playlistUrl }`, so the URL was undefined, the regexes matched nothing, and the
 // handler returned "Unrecognized YouTube link" instantly - a result the UI never
-// inspected, which is why the button sat on "Processing…" and the pipeline never ran.
+// inspected, which is why the button sat on "Processingâ€¦" and the pipeline never ran.
 // Both names are accepted so neither side can reintroduce the mismatch.
 ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: urlAlias } = {}) => {
   const send = (stage, message, extra = {}) => {
@@ -3040,25 +3353,25 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
   const started = Date.now();
 
   try {
-    // `watch?v=` / youtu.be / embed → a single video. `playlist?list=` → a playlist. A
+    // `watch?v=` / youtu.be / embed â†’ a single video. `playlist?list=` â†’ a playlist. A
     // watch URL that also carries `list=` is treated as that single video.
     const singleId = url.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/);
     const listMatch = url.match(/[?&]list=([a-zA-Z0-9_-]{10,})/);
     const isPlaylist = !singleId && !!listMatch;
 
     if (!singleId && !listMatch) {
-      const error = 'Unrecognized YouTube link. Paste a video (watch?v=…) or a playlist (playlist?list=…) URL.';
+      const error = 'Unrecognized YouTube link. Paste a video (watch?v=â€¦) or a playlist (playlist?list=â€¦) URL.';
       send('error', error);
       return { success: false, error };
     }
 
-    // ── 1. Resolve the playlist ────────────────────────────────────────────
+    // â”€â”€ 1. Resolve the playlist â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     let videoIds = [];
     if (!isPlaylist) {
       videoIds = [singleId[1]];
       send('playlist-resolved', `Single video ${videoIds[0]}`, { current: 0, total: 1 });
     } else {
-      send('fetching-playlist', 'Resolving playlist URL…');
+      send('fetching-playlist', 'Resolving playlist URLâ€¦');
       let html = '';
       try {
         html = await withTimeout(
@@ -3082,8 +3395,8 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
       send('playlist-resolved', `${videoIds.length} videos`, { current: 0, total: videoIds.length });
     }
 
-    // ── 2. Captions: parallel, and partial success is a success ────────────
-    send('fetching-transcripts', 'Fetching captions…', { current: 0, total: videoIds.length });
+    // â”€â”€ 2. Captions: parallel, and partial success is a success â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    send('fetching-transcripts', 'Fetching captionsâ€¦', { current: 0, total: videoIds.length });
     const { YoutubeTranscript } = loadYoutubeTranscript();
     const settled = await Promise.allSettled(
       videoIds.map((id) => withTimeout(YoutubeTranscript.fetchTranscript(id), 15000, `transcript ${id}`)),
@@ -3121,7 +3434,7 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
       return { success: false, error };
     }
 
-    // ── 3. One outline per video, then a single merge ──────────────────────
+    // â”€â”€ 3. One outline per video, then a single merge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Sending every transcript in one call (up to 60k characters) exhausts R1's reasoning
     // budget and returns nothing usable; per-video keeps each call small, and lets one bad
     // video be skipped instead of failing the whole run.
@@ -3171,7 +3484,7 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
       return { success: false, error };
     }
 
-    send('generating-outline', `Merging ${perVideo.length} sections…`, { current: perVideo.length, total: perVideo.length });
+    send('generating-outline', `Merging ${perVideo.length} sectionsâ€¦`, { current: perVideo.length, total: perVideo.length });
     const merged = await withTimeout(callDeepSeekMain({
       apiKey,
       messages: [
@@ -3186,8 +3499,8 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
       return { success: false, error };
     }
 
-    // ── 4. Save to the Vault ───────────────────────────────────────────────
-    send('saving', 'Writing to Document Vault…');
+    // â”€â”€ 4. Save to the Vault â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    send('saving', 'Writing to Document Vaultâ€¦');
     const outlinesDir = path.join(getBiannaLawDir(), 'Outlines');
     fs.mkdirSync(outlinesDir, { recursive: true });
     const year = new Date().getFullYear();
@@ -3195,8 +3508,8 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
     const fileName = `Quimbee__Outline__${num}__${year}.md`;
     const filePath = path.join(outlinesDir, fileName);
     const source = isPlaylist ? `Playlist: ${listMatch[1]}` : `Video: ${videoIds[0]}`;
-    const header = `# Quimbee — Outline ${num} — ${year}\n\nGenerated: ${new Date().toLocaleString()}\n`
-      + `Videos: ${transcripts.length} / ${videoIds.length} · ${source}\n\n---\n\n`;
+    const header = `# Quimbee â€” Outline ${num} â€” ${year}\n\nGenerated: ${new Date().toLocaleString()}\n`
+      + `Videos: ${transcripts.length} / ${videoIds.length} Â· ${source}\n\n---\n\n`;
     const artifact = header + merged;
     fs.writeFileSync(filePath, artifact, 'utf8');
 
@@ -3219,7 +3532,7 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
   } catch (err) {
     // The handler as a whole is bounded. Previously a throw here - for example from
     // loadYoutubeTranscript, which sat outside any try - rejected the invoke and left the
-    // renderer on "Processing…" forever. Now the renderer always gets a reason.
+    // renderer on "Processingâ€¦" forever. Now the renderer always gets a reason.
     console.error('[process-youtube-playlist]', err);
     const message = err.message || 'Playlist processing failed.';
     send('error', message);
@@ -3228,7 +3541,7 @@ ipcMain.handle('process-youtube-playlist', async (_event, { playlistUrl, url: ur
 });
 
 
-// ─── IPC: Pick & Read File (PDF / DOCX / TXT) ────────────────────────────────
+// â”€â”€â”€ IPC: Pick & Read File (PDF / DOCX / TXT) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 ipcMain.handle('pick-and-read-file', async () => {
   const { filePaths, canceled } = await dialog.showOpenDialog(mainWindow, {
     title: 'Attach Document',
@@ -3255,8 +3568,8 @@ ipcMain.handle('pick-and-read-file', async () => {
   }
 });
 
-// ─── IPC: Read a dropped/known path (no second file picker) ──────────────────
-// The renderer resolves the real path of a dropped File via preload → getPathForFile,
+// â”€â”€â”€ IPC: Read a dropped/known path (no second file picker) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// The renderer resolves the real path of a dropped File via preload â†’ getPathForFile,
 // then calls this. Avoids the old behaviour where dropping a PDF re-opened a native
 // picker, and guarantees the drop zone can fall back to paste capture on failure.
 ipcMain.handle('read-file-text', async (_event, { filePath, maxChars } = {}) => {
@@ -3272,7 +3585,7 @@ ipcMain.handle('read-file-text', async (_event, { filePath, maxChars } = {}) => 
   }
 });
 
-// ─── IPC: Google Calendar Sync (OAuth Desktop Flow) ──────────────────────────
+// â”€â”€â”€ IPC: Google Calendar Sync (OAuth Desktop Flow) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const GOOGLE_CLIENT_ID = '693600415930-h4iu5hv5p1r53i22c7ltatt6tlmsu3qr.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = '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';
 const GOOGLE_REDIRECT_URI = 'http://localhost:3000/oauth2callback';
@@ -3350,7 +3663,7 @@ ipcMain.handle('sync-google-calendar', async (_event, eventsList) => {
       const res = await calendar.events.insert({
         calendarId: 'primary',
         resource: {
-          summary: `📖 Reading: ${ev.caseName.substring(0, 50)}`,
+          summary: `ðŸ“– Reading: ${ev.caseName.substring(0, 50)}`,
           description: 'Law School Reading Reminder via Senior Law Partner',
           start: { date: ev.date }, 
           end: { date: endStr },
@@ -3375,7 +3688,7 @@ ipcMain.handle('sync-google-calendar', async (_event, eventsList) => {
   }
 });
 
-// ─── IPC: renderer boot signals ──────────────────────────────────────────────
+// â”€â”€â”€ IPC: renderer boot signals â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // The renderer's half of the diagnostics at the top of this file. `on`, not `handle`:
 // these are fire-and-forget reports, and nothing in the renderer should wait on a log
 // write.
@@ -3387,7 +3700,7 @@ ipcMain.on('app:boot-fault', (_event, payload) => {
   bootLog('RENDERER FAULT [' + kind + '] ' + detail.replace(/\s+/g, ' ').slice(0, 1500));
 });
 
-// ─── Local Document Vault ────────────────────────────────────────────────────
+// â”€â”€â”€ Local Document Vault â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // The Vault used to be Supabase-only, so a missing project, table or RLS policy meant an
 // outline Bianna had just generated could not be saved anywhere: the insert failed and
 // the UI said only "Save failed". Keeping her work must not depend on a network service
@@ -3540,7 +3853,7 @@ ipcMain.handle('vault:open-folder', () => {
   return { success: true };
 });
 
-// ─── IPC: Export an outline to Word / PDF / HTML / Markdown ──────────────────
+// â”€â”€â”€ IPC: Export an outline to Word / PDF / HTML / Markdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // "Save it to a folder I choose" is a first-class outcome, not a consolation prize: a
 // student printing, emailing or editing her own work needs a real file in a real folder.
 // Word and PDF are both offered because which one is useful depends on what she is doing
@@ -3643,7 +3956,7 @@ ipcMain.handle('document:export', async (_event, {
     }
 
     fs.mkdirSync(path.dirname(target), { recursive: true });
-    const subtitle = [String(subject || ''), String(mode || '')].filter(Boolean).join('  •  ');
+    const subtitle = [String(subject || ''), String(mode || '')].filter(Boolean).join('  â€¢  ');
 
     if (fmt === 'docx')      await writeDocx(target, { title, subtitle, html: clean });
     else if (fmt === 'pdf')  await writePdf(target, { title, subtitle, html: clean });
@@ -3660,13 +3973,13 @@ ipcMain.handle('document:export', async (_event, {
   }
 });
 
-// ─── Quit guard ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Quit guard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // A generated outline can be tens of thousands of tokens of work. Closing the window
 // used to discard it without a word. The renderer reports whether anything is unsaved;
 // the first quit or close is intercepted and handed back for her to resolve.
 ipcMain.on('app:set-unsaved', (_event, flag) => { hasUnsavedOutline = !!flag; });
 
-// ─── IPC: Offline mode ───────────────────────────────────────────────────────
+// â”€â”€â”€ IPC: Offline mode â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Answers without a network and without an API key. Every response is either verbatim retrieval
 // from the bundled corpus, a value from a hand-authored JSON file, or a pattern-matched
 // reflection -- there is no model call and no generated legal text. See jsons/offline/index.js.
@@ -3691,6 +4004,684 @@ ipcMain.handle('offline:ask', async (_event, { text } = {}) => {
   }
 });
 
+// â”€â”€â”€ IPC: Local legal corpora â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// The doctrine library (tools/build_doctrine_corpus.js) and the curated seed set are searched
+// in-process by rag.js â€” no model call and no network, so this answers with the app offline.
+// Registered here, in the tail block, for the reason build-conventions.md Â§1 gives: nothing is
+// composed before its declaration, so a missing corpus cannot break module load, and a require
+// failure is confined to these two channels instead of taking every handler after it down.
+ipcMain.handle('rag:stats', () => {
+  try {
+    const { corpusStats } = require('./rag');
+    return { success: true, ...corpusStats() };
+  } catch (err) {
+    console.error('[rag:stats]', err);
+    return { success: false, error: err.message || String(err) };
+  }
+});
+
+/**
+ * Domain is threaded through rather than ignored: an attorney bound to property must retrieve only
+ * property material, and the filter belongs in the retriever where it cannot be bypassed by a
+ * caller that forgets to post-filter.
+ */
+ipcMain.handle('rag:search', (_event, { query, topK, domain } = {}) => {
+  try {
+    const { retrieveAdaptive } = require('./rag');
+    const result = retrieveAdaptive(
+      String(query || ''),
+      Math.min(Math.max(Number(topK) || 5, 1), 20),
+      domain || null,
+    );
+    return {
+      success: true,
+      domain: domain || null,
+      relaxed: Boolean(result.relaxed),
+      note: result.note || null,
+      hits: (result.hits || []).map((hit) => ({
+        id: hit.id,
+        source: hit.source,
+        title: hit.title,
+        domain: hit.domain,
+        excerpt: String(hit.content || '').replace(/\s+/g, ' ').slice(0, 400),
+        score: hit.score,
+      })),
+    };
+  } catch (err) {
+    console.error('[rag:search]', err);
+    return { success: false, error: err.message || String(err), hits: [] };
+  }
+});
+// ─── IPC: Real World Explainer (news ↔ doctrine) ─────────────────────────────
+// News is context, never authority: these handlers return headlines plus the doctrine passages the
+// corpus holds for each, and the page prints the corpus build date beside every answer.
+const REALWORLD_CREDENTIALS = 'realworldProviders';
+
+function readRealWorldCredentials() {
+  try {
+    const saved = store.get(REALWORLD_CREDENTIALS);
+    return saved && saved.username && saved.password ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+ipcMain.handle('realworld:status', () => {
+  try {
+    const realworld = require('./realworld');
+    return realworld.status(readRealWorldCredentials());
+  } catch (err) {
+    console.error('[realworld:status]', err);
+    return { ok: false, error: err.message || String(err) };
+  }
+});
+
+ipcMain.handle('realworld:search', async (_event, args = {}) => {
+  try {
+    const realworld = require('./realworld');
+    return await realworld.search({ ...args, credentials: readRealWorldCredentials() });
+  } catch (err) {
+    console.error('[realworld:search]', err);
+    return { success: false, error: err.message || String(err), items: [] };
+  }
+});
+
+ipcMain.handle('realworld:credentials-save', (_event, { username, password } = {}) => {
+  try {
+    if (!username || !password) {
+      return { success: false, error: 'Both a username and a password are required.' };
+    }
+    store.set(REALWORLD_CREDENTIALS, { username: String(username), password: String(password) });
+    return { success: true };
+  } catch (err) {
+    console.error('[realworld:credentials-save]', err);
+    return { success: false, error: err.message || String(err) };
+  }
+});
+// ─── IPC: Exam Question Mode ─────────────────────────────────────────────────
+const EXAM_DOMAINS = {
+  property: 'Property and future interests',
+  contracts: 'Contracts and commercial law',
+  constitutional: 'Constitutional law',
+  torts: 'Torts and civil liability',
+  criminal: 'Criminal procedure',
+};
+
+/** The sixteen subjects the Florida Board of Bar Examiners publishes test specifications for. */
+const FL_BAR_SUBJECTS = [
+  'Business Entities',
+  'Chapters 4 & 5 of the Rules Regulating The Florida Bar',
+  'Contracts',
+  'Criminal Law and Constitutional Criminal Procedure',
+  'Evidence',
+  'Family Law',
+  'Federal Constitutional Law',
+  'Florida Constitutional Law',
+  'Florida Rules of Civil Procedure',
+  'Florida Rules of Criminal Procedure',
+  'Florida Rules of Judicial Administration',
+  'Professionalism',
+  'Real Property',
+  'Torts',
+  'Uniform Commercial Code, Articles 3 and 9',
+  'Wills & Trusts',
+];
+
+/**
+ * Part B — the Multistate subjects. Florida splits the General Bar Examination 50/50 between Part A
+ * (Florida law) and Part B (national MBE law), and a mock that only covers Part A rehearses half the
+ * exam. These are drawn from the national shelves rather than the Florida bar-prep shelf, because
+ * Part B tests general law even though a few answers are indexed to Florida.
+ */
+const MBE_SUBJECTS = [
+  'Civil Procedure (MBE)',
+  'Constitutional Law (MBE)',
+  'Contracts and Sales (MBE)',
+  'Criminal Law and Procedure (MBE)',
+  'Evidence (MBE)',
+  'Real Property (MBE)',
+  'Torts (MBE)',
+];
+
+/**
+ * Florida distinctions — where Florida law departs from the general rule.
+ *
+ * Every prep course sells these, because the Board tests Florida law and penalises candidates who
+ * apply the majority rule. Each entry carries the authority so the generator can ask about the
+ * distinction rather than about the general doctrine. The section titles were checked against the
+ * bundled Florida Statutes (2025); the rule summaries are the part to verify against that text
+ * before relying on them in practice.
+ */
+const FLORIDA_DISTINCTIONS = {
+  Torts: [
+    'Fla. Stat. § 768.81 — modified comparative fault: recovery is barred when the claimant is more than 50% at fault (2023 amendment). Most states are pure comparative.',
+    'Fla. Stat. § 768.28 — sovereign immunity is waived only up to statutory caps ($200,000 per claimant, $300,000 per incident).',
+    'Fla. Stat. § 768.81(3) — joint and several liability is abolished except for enumerated exceptions; most states retain it for concurrent tortfeasors.',
+  ],
+  'Wills & Trusts': [
+    'Fla. Stat. § 732.201 — the surviving spouse may take an elective share (30% of the elective estate) against the will; the common-law dower/curtesy is gone.',
+    'Fla. Stat. § 732.302 — a pretermitted child takes an intestate share unless the omission was intentional and appears on the face of the will.',
+    'Fla. Stat. § 732.502 — execution requires the testator’s signature in the presence of two attesting witnesses, with a self-proving affidavit available.',
+  ],
+  'Real Property': [
+    'Fla. Const. art. X, § 4 — homestead cannot be devised if the testator is survived by a spouse or minor child, and is protected from forced sale for most creditors.',
+  ],
+  'Criminal Law and Constitutional Criminal Procedure': [
+    'Fla. R. Crim. P. 3.191 — speedy trial runs from arrest: 175 days for a felony, 90 days for a misdemeanor, with a defined recapture window.',
+  ],
+  'Florida Rules of Civil Procedure': [
+    'Fla. R. Civ. P. 1.510 — since 2021 summary judgment follows the federal Celotex standard, not the older Florida “genuine issue” gloss.',
+  ],
+};
+const EXAM_MODES = {
+  bar: { label: 'Bar Examination', blurb: 'The Board sixteen subjects, answered under Florida law.' },
+  final: { label: 'Final Exam', blurb: 'A course or topic, from any law shelf.' },
+};
+
+/**
+ * Cognitive levels an item can target.
+ *
+ * This is the spine of the generator. An exam that asks only "state the rule" measures recall, and
+ * recall is the cheapest thing to cram — which is why an item set can look respectable and still be
+ * answerable by pattern rather than by law. A run must span the levels in proportion, so the score
+ * says something about the candidate rather than about the test.
+ */
+const COGNITIVE_LEVELS = {
+  recall: 'RECALL - produce the rule, element, deadline or definition correctly.',
+  application:
+    'APPLICATION - match the facts to the rule, where the facts do not name the rule they trigger.',
+  analysis:
+    'ANALYSIS - more than one rule plausibly governs; choose between them against a competing doctrine.',
+};
+
+/** How a run distributes its items across levels, by requested difficulty. */
+const LEVEL_MIX = {
+  foundational: { recall: 0.5, application: 0.4, analysis: 0.1 },
+  midterm: { recall: 0.2, application: 0.6, analysis: 0.2 },
+  exam: { recall: 0.1, application: 0.45, analysis: 0.45 },
+};
+
+/**
+ * Bar blueprint, weighted from the Board's own practice analysis.
+ *
+ * `FBBE_Practice_Analysis_Study_Report.pdf` surveys Florida attorneys on how often each subject
+ * arises and how critical it is; Table ES 4 gives a frequency mean and a criticality mean per
+ * subject. Their product is a defensible prevalence weight, which is what a mock meant to mirror
+ * practice should draw on. Without it a "bar simulation" is ten questions on whatever the previous
+ * topic happened to be.
+ *
+ * Source values (frequency x criticality): Civil procedure 3.5x2.7, Evidence 3.3x2.7, Torts 3.3x2.6,
+ * Contracts 3.2x2.6, Criminal law 3.2x2.6, Criminal procedure 3.1x2.6, Family 2.9x2.4,
+ * Property 2.8x2.3, Wills/trusts 2.7x2.4, Administrative procedure 2.7x2.2, Business 2.6x2.2,
+ * Constitutional 2.6x2.3.
+ */
+const BAR_BLUEPRINT = {
+  'Florida Rules of Civil Procedure': 3.5 * 2.7,
+  Evidence: 3.3 * 2.7,
+  Torts: 3.3 * 2.6,
+  Contracts: 3.2 * 2.6,
+  'Criminal Law and Constitutional Criminal Procedure': 3.2 * 2.6,
+  'Uniform Commercial Code, Articles 3 and 9': 3.2 * 2.6,
+  'Florida Rules of Criminal Procedure': 3.1 * 2.6,
+  'Family Law': 2.9 * 2.4,
+  'Real Property': 2.8 * 2.3,
+  'Wills & Trusts': 2.7 * 2.4,
+  'Florida Rules of Judicial Administration': 2.7 * 2.2,
+  'Business Entities': 2.6 * 2.2,
+  'Federal Constitutional Law': 2.6 * 2.3,
+  'Florida Constitutional Law': 2.6 * 2.3,
+  Professionalism: 2.8 * 2.5,
+  'Chapters 4 & 5 of the Rules Regulating The Florida Bar': 2.8 * 2.5,
+};
+
+/**
+ * Distribute `count` items across the blueprint by largest remainder.
+ *
+ * Flooring every subject and dropping the fractions gives a ten-item run one item each and six
+ * empty slots; largest remainder gives the surplus to the subjects whose share was closest to whole.
+ */
+function barPlan(count) {
+  const entries = Object.entries(BAR_BLUEPRINT);
+  const total = entries.reduce((sum, [, weight]) => sum + weight, 0);
+  const exact = entries.map(([subject, weight]) => ({ subject, share: (weight / total) * count }));
+  const plan = exact.map((entry) => ({ subject: entry.subject, n: Math.floor(entry.share) }));
+
+  let assigned = plan.reduce((sum, entry) => sum + entry.n, 0);
+  const order = exact
+    .map((entry, index) => ({ index, remainder: entry.share - Math.floor(entry.share) }))
+    .sort((a, b) => b.remainder - a.remainder);
+
+  for (let k = 0; assigned < count && order.length; k += 1, assigned += 1) {
+    plan[order[k % order.length].index].n += 1;
+  }
+  return plan.filter((entry) => entry.n > 0);
+}
+
+function examInstructions(args) {
+  return lawInstructions(args);
+}
+
+function lawInstructions({ label, kind, difficulty, count, passages, sources, subject, levelMix, distinctions }) {
+  // The example used to read `"answerIndex":0`, and the model dutifully put the correct answer first
+  // in nearly every item — a student could score perfectly by always picking A. It now shows a
+  // non-zero index, and the options are shuffled after generation regardless.
+  const shape = kind === 'mcq'
+    ? '{"kind":"mcq","level":"application","prompt":"...","options":["...","...","...","..."],"answerIndex":2,"hint":"...","rationale":"...","doctrine":"..."}'
+    : '{"kind":"written","level":"analysis","prompt":"...","modelAnswer":"...","hint":"...","rationale":"...","doctrine":"..."}';
+
+  const rubric = kind === 'essay'
+    ? '\nFor essay questions also include "rubric": ["point 1 (weight)","point 2 (weight)","point 3 (weight)"].'
+    : '';
+
+  const mix = levelMix || LEVEL_MIX.midterm;
+  const levelPlan = Object.entries(mix)
+    .filter(([, share]) => share > 0)
+    .map(([level, share]) => `${Math.max(1, Math.round(count * share))} ${level} — ${COGNITIVE_LEVELS[level]}`)
+    .join('; ');
+
+  return {
+    system: `You write law school and bar examination questions on ${label}.
+
+THE QUESTION MUST STAND ALONE:
+- Never write "according to the passage", "in the excerpt", "the materials place…" or anything that
+  refers to your source. The student sees only the question.
+- A multiple-choice item is a fact pattern of two to four sentences followed by a call ("The court
+  should…", "Which is the strongest argument for…"), and four complete propositions as options.
+- Testing recall of a sentence is not an exam question. Test application: facts that do not announce
+  which rule they trigger.
+
+ITEM QUALITY — an item that breaks any of these is rejected by the reviewer in the next step:
+- ONE BEST ANSWER. The other three must be wrong for a reason you can name. At least two must be
+  true statements of law that fail this call, not invented nonsense.
+- NO CUEING. The key must not be the longest option, the only qualified option, the only
+  grammatically parallel one, or the only one repeating the stem. Never use "all of the above" or
+  "none of the above".
+- DISCRIMINATION. Could a candidate who memorised headings but never applied the rule get this
+  right? Then rewrite it. Could a candidate who knows the rule but reads carelessly get it wrong?
+  If not, the distractors are too weak.
+- STEM. Complete fact pattern, one call, no double negatives, no "which is NOT true" unless the call
+  says so. Do not name the doctrine being tested.
+- LEVEL PLAN for this batch: ${levelPlan}. Set a "level" field on each object.
+- RATIONALE names each distractor's misconception, not merely that it is wrong.
+
+NO POSITIONAL TELLS: spread the key across positions; keep option lengths within a few words; never
+let the correct option be the only precise one.
+
+GROUNDING:
+- Every rule tested must be supported by the supplied passages. Do not test doctrine they do not
+  contain, and do not invent case names, section numbers or quotations. Where a passage cites
+  authority, reuse that citation exactly; otherwise refer to "the rule" with no citation.
+- ${kind === 'mcq'
+      ? 'Exactly one option is unambiguously best. Never use obvious filler.'
+      : 'Provide a modelAnswer of three to six sentences that a strong student would write, and a hint that names the analytical step without giving the answer.'}
+- Difficulty: ${difficulty}. Foundational tests rule statement and element identification; midterm
+  tests application to new facts; exam tests issue-spotting where more than one doctrine competes.
+  At exam level the obvious rule should lead to the wrong answer.
+
+${distinctions && distinctions.length ? `FLORIDA DISTINCTIONS — test these where an item touches them, and make the general-law rule a distractor:
+- ${distinctions.join('\n- ')}
+` : ''}${subject ? `FLORIDA BAR SUBJECT — ${subject}. Answer according to Florida law wherever it diverges from the
+general law, and say which rule is Florida-specific. A question that would be right in a common-law
+jurisdiction and wrong in Florida is a good question, and must be answered the Florida way.
+` : ''}Return ONLY a JSON array of ${count} objects, no prose, no markdown fences. Each object:
+${shape}${rubric}`,
+    user: `Sources drawn from: ${sources.join('; ') || 'the bundled corpus'}.\n\nPassages:\n\n${passages}\n\nWrite ${count} ${kind === 'mcq' ? 'multiple-choice' : kind} examination questions on ${label}.`,
+  };
+}
+
+function parseQuestionArray(raw) {
+  const text = String(raw || '').replace(/```json/gi, '').replace(/```/g, '');
+  const start = text.indexOf('[');
+  const end = text.lastIndexOf(']');
+  if (start < 0 || end <= start) return [];
+  try {
+    const parsed = JSON.parse(text.slice(start, end + 1));
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    // A single object instead of a one-element array is a common reply when count is 1 — accept it
+    // rather than discarding a valid item.
+    try {
+      const single = JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1));
+      return single && typeof single === 'object' && single.prompt ? [single] : [];
+    } catch {
+      return [];
+    }
+  }
+}
+
+function sanitiseQuestion(item, kind, index) {
+  if (!item || typeof item !== 'object') return null;
+  const prompt = String(item.prompt || '').trim();
+  if (prompt.length < 15) return null;
+  const hint = String(item.hint || '').trim();
+  const rationale = String(item.rationale || '').trim();
+  const doctrine = String(item.doctrine || '').trim();
+  const level = ['recall', 'application', 'analysis'].includes(item.level) ? item.level : undefined;
+  const id = 'q-' + Date.now() + '-' + index;
+
+  if (kind === 'mcq') {
+    const options = Array.isArray(item.options) ? item.options.map((o) => String(o).trim()) : [];
+    const answerIndex = Number(item.answerIndex);
+    if (options.length !== 4 || options.some((o) => !o)) return null;
+    if (!Number.isInteger(answerIndex) || answerIndex < 0 || answerIndex > 3) return null;
+    return { id, kind, level, prompt, options, answerIndex, hint, rationale, doctrine };
+  }
+
+  const modelAnswer = String(item.modelAnswer || '').trim();
+  if (modelAnswer.length < 40) return null;
+  const rubric = Array.isArray(item.rubric) ? item.rubric.map((r) => String(r).trim()).filter(Boolean) : [];
+  return { id, kind, level, prompt, modelAnswer, rubric, hint, rationale, doctrine };
+}
+
+/**
+ * Shuffle a question's options and remap the key.
+ *
+ * Instruction alone does not fix position bias: asked to vary the position, the model still clusters
+ * on the first slot. Shuffling makes the position independent of the model's habits, and costs
+ * nothing because the option text travels with its correctness.
+ */
+function shuffledOptions(question) {
+  if (question.kind !== 'mcq') return question;
+  const order = question.options.map((_, index) => index);
+  for (let i = order.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return {
+    ...question,
+    options: order.map((index) => question.options[index]),
+    answerIndex: order.indexOf(question.answerIndex),
+  };
+}
+
+/**
+ * Item review — a second pass that can reject what the first pass wrote.
+ *
+ * Generation alone cannot be trusted with quality: asked for "exam level", a model will happily
+ * produce a recall item with three filler options, and a student scoring 9/10 on it has learned
+ * nothing about readiness. Every batch is shown back against the item-writing rules and the rejects
+ * are dropped. This is a held-out check for the instrument itself: a score only means something if
+ * the test was validated, not merely produced.
+ *
+ * It fails open — losing a whole run to a malformed verdict is worse than one unreviewed item.
+ */
+async function reviewItems(items) {
+  if (!items.length) return items;
+  try {
+    const payload = items
+      .map((question, index) =>
+        JSON.stringify({
+          index,
+          prompt: question.prompt,
+          options: question.options,
+          answerIndex: question.answerIndex,
+          modelAnswer: question.modelAnswer ? question.modelAnswer.slice(0, 600) : undefined,
+          rationale: question.rationale,
+        }),
+      )
+      .join('\n');
+
+    const system = `You are reviewing examination items before they are shown to a law student. Be exacting.
+
+For each item decide KEEP or REJECT. Reject when any of these is true:
+- more than one option is defensible as the best answer, or the key is wrong;
+- the key is identifiable without reading the facts (longest option, most qualified option, the only
+  option repeating the stem, the only grammatically parallel option);
+- a distractor is nonsense rather than a real misconception;
+- the stem names the doctrine the item is testing;
+- the fact pattern is incomplete, or the law it states is wrong;
+- the rationale does not explain why the nearest distractor fails.
+
+Return ONLY a JSON array, one object per item, in order:
+[{"index":0,"keep":true,"reason":"..."}]`;
+
+    const raw = await callDeepSeekMain({
+      apiKey: getDeepSeekKey(),
+      model: 'deepseek-chat',
+      maxTokens: 2000,
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: payload },
+      ],
+    });
+
+    const text = String(raw || '').replace(/```json/gi, '').replace(/```/g, '');
+    const start = text.indexOf('[');
+    const end = text.lastIndexOf(']');
+    if (start < 0 || end <= start) return items;
+
+    const verdicts = JSON.parse(text.slice(start, end + 1));
+    const rejected = new Set(
+      (Array.isArray(verdicts) ? verdicts : [])
+        .filter((verdict) => verdict && verdict.keep === false && Number.isInteger(verdict.index))
+        .map((verdict) => verdict.index),
+    );
+    if (!rejected.size) return items;
+    console.log('[exam] reviewer rejected ' + rejected.size + ' of ' + items.length);
+    return items.filter((_, index) => !rejected.has(index));
+  } catch (err) {
+    console.error('[exam] review failed, keeping items:', err.message);
+    return items;
+  }
+}
+
+ipcMain.handle('exam:generate', async (_event, args = {}) => {
+  try {
+    const kind = ['mcq', 'written', 'essay'].includes(args.kind) ? args.kind : 'mcq';
+    const difficulty = ['foundational', 'midterm', 'exam'].includes(args.difficulty)
+      ? args.difficulty
+      : 'midterm';
+    const count = Math.min(Math.max(Number(args.count) || 10, 1), 25);
+
+    const mode = args.mode === 'bar' ? 'bar' : 'final';
+    const isMbe = mode === 'bar' && MBE_SUBJECTS.includes(args.subject);
+    const subject = mode === 'bar' && (FL_BAR_SUBJECTS.includes(args.subject) || isMbe) ? args.subject : null;
+    const part = ['A', 'B', 'both'].includes(args.part) ? args.part : 'A';
+    const domainKey = EXAM_DOMAINS[args.domain] ? args.domain : null;
+    const topic = String(args.topic || '').trim();
+    const allSources = Boolean(args.allSources) || !domainKey;
+    // A Bar run with nothing chosen is legitimate: the blueprint supplies the subjects. A final-exam
+    // run is not — there is no default course to draw on.
+    const label =
+      topic ||
+      subject ||
+      (domainKey
+        ? EXAM_DOMAINS[domainKey]
+        : part === 'B'
+          ? 'Multistate Bar Examination — national law'
+          : 'Florida Bar Examination');
+
+    if (mode === 'final' && !domainKey && !topic) {
+      return {
+        success: false,
+        error: 'Choose a practice area or type a topic for a final exam.',
+        questions: [],
+      };
+    }
+
+    const { retrieveAdaptive } = require('./rag');
+
+    /**
+     * Shelves depend on the subject, not on the run: a "both parts" sitting asks Florida subjects
+     * and MBE subjects in the same run, and they live on different shelves.
+     */
+    const shelvesFor = (forLabel) => {
+      if (MBE_SUBJECTS.includes(forLabel)) {
+        return ['torts', 'contracts', 'property', 'constitutional', 'criminal', 'general'];
+      }
+      if (mode === 'bar') return ['barprep', 'general'];
+      return allSources
+        ? ['contracts', 'torts', 'property', 'constitutional', 'criminal', 'general']
+        : [domainKey];
+    };
+
+    // A Bar mock asks a different subject in each batch, so retrieval is per label and cached.
+    const cache = new Map();
+    const gather = (forLabel) => {
+      if (cache.has(forLabel)) return cache.get(forLabel);
+      // "(MBE)" is a label for the candidate, not a term in any statute or treatise. Querying it
+      // returned nothing on the national shelves and broke the run.
+      const query = forLabel.replace(/\s*\(MBE\)$/i, '');
+      const seen = new Set();
+      const pooled = [];
+      for (const shelf of shelvesFor(forLabel)) {
+        const result = retrieveAdaptive(query, 4, shelf);
+        for (const hit of result.hits || []) {
+          if (seen.has(hit.id)) continue;
+          seen.add(hit.id);
+          pooled.push({ ...hit, shelf });
+        }
+      }
+      pooled.sort((a, b) => (b.score || 0) - (a.score || 0));
+      const chosen = pooled.slice(0, 8);
+      const bundle = {
+        passages: chosen
+          .map(
+            (hit, index) =>
+              `[${index + 1}] (${hit.source}${hit.shelf && hit.shelf !== 'general' ? ' · ' + hit.shelf : ''}) ` +
+              String(hit.content || '').replace(/\s+/g, ' ').slice(0, 700),
+          )
+          .join('\n\n'),
+        sources: [...new Set(chosen.map((hit) => hit.source))].filter(Boolean),
+      };
+      cache.set(forLabel, bundle);
+      return bundle;
+    };
+
+    const first = gather(label);
+    if (!first.passages) {
+      return {
+        success: false,
+        error: `Nothing in the corpus matches "${label}", so questions would not be grounded in anything.`,
+        questions: [],
+      };
+    }
+
+    /**
+     * A Bar run with no named subject follows the Board's practice analysis; every other run stays
+     * on one label. A ten-question mock should look like the survey, not like ten contracts items.
+     */
+    const planSubjects = [];
+    if (mode === 'bar' && !subject && !topic) {
+      if (part === 'B') {
+        // Part B alone stays one pooled national run. Splitting seven Multistate subjects into
+        // seven single-item requests cost a model call each and returned one usable item in 26
+        // seconds; a pooled run asks six at a time across the same doctrines.
+      } else if (part === 'both') {
+        // Half Florida, half Multistate — the two halves run consecutively, as the real examination
+        // separates Part A from Part B across sessions. Interleaving them item by item forced one
+        // question per request, which is both slower and more fragile than a run per subject.
+        for (const group of barPlan(Math.ceil(count / 2))) {
+          for (let k = 0; k < group.n; k += 1) planSubjects.push(group.subject);
+        }
+        const multistateCount = Math.max(1, Math.floor(count / 2));
+        for (let k = 0; k < multistateCount; k += 1) {
+          planSubjects.push(MBE_SUBJECTS[k % MBE_SUBJECTS.length]);
+        }
+      } else {
+        for (const group of barPlan(count)) {
+          for (let k = 0; k < group.n; k += 1) planSubjects.push(group.subject);
+        }
+      }
+    }
+
+    const BATCH = 6;
+    const collected = [];
+    const usedSources = new Set(first.sources);
+
+    const target = Math.min(25, count + Math.ceil(count * 0.3));
+    for (let batch = 0; batch < 12 && collected.length < target; batch += 1) {
+      const batchLabel = planSubjects[collected.length] || label;
+      // Follow the plan: ask only for the run of items this subject is allocated. Asking six
+      // questions about civil procedure when the blueprint wanted one breaks the distribution the
+      // practice analysis was used to build.
+      let planned = 0;
+      while (
+        planned < BATCH &&
+        collected.length + planned < planSubjects.length &&
+        planSubjects[collected.length + planned] === batchLabel
+      ) {
+        planned += 1;
+      }
+      const ask = planned > 0 ? planned : Math.min(BATCH, target - collected.length);
+      const bundle = gather(batchLabel);
+      if (!bundle.passages) break;
+      bundle.sources.forEach((source) => usedSources.add(source));
+
+      const { system, user } = examInstructions({
+        mode,
+        label: batchLabel,
+        kind,
+        difficulty,
+        count: ask,
+        passages: bundle.passages,
+        sources: bundle.sources,
+        subject: batchLabel === subject ? subject : null,
+        distinctions: FLORIDA_DISTINCTIONS[batchLabel] || [],
+        levelMix: LEVEL_MIX[difficulty],
+      });
+
+      const raw = await callDeepSeekMain({
+        apiKey: getDeepSeekKey(),
+        model: 'deepseek-chat',
+        maxTokens: 12000,
+        messages: [
+          { role: 'system', content: system },
+          { role: 'user', content: user },
+        ],
+      });
+
+      const parsed = parseQuestionArray(raw);
+      const batchQuestions = parsed
+        .map((item, index) => sanitiseQuestion(item, kind, `${batch}-${index}`))
+        .filter(Boolean)
+        .slice(0, ask)
+        // Carry the subject with the item: without it the run can report a total score but not
+        // which subject produced the misses, which is the only part a candidate can act on.
+        .map((question) => ({ ...question, subject: batchLabel }));
+      if (!batchQuestions.length) break;
+
+      collected.push(...batchQuestions);
+    }
+
+    // One review pass over the whole run, not one per batch: the reviewer reads items side by side,
+    // which is both cheaper and better at spotting a key that repeats across items.
+    const vetted = await reviewItems(collected);
+
+    // Shuffle before anything sees the questions: position bias must not reach the UI.
+    const questions = vetted.slice(0, count).map(shuffledOptions);
+
+    if (!questions.length) {
+      return {
+        success: false,
+        error:
+          'No item survived review. The reviewer rejected every question — try again, or narrow the topic.',
+        questions: [],
+      };
+    }
+
+    return {
+      success: true,
+      mode,
+      subject,
+      domain: domainKey,
+      allSources,
+      topic: topic || null,
+      label,
+      part,
+      blueprint: planSubjects.length ? planSubjects : null,
+      sources: [...usedSources],
+      kinds: questions.map((question) => question.level || null),
+      kind,
+      questions,
+      requested: count,
+      returned: questions.length,
+    };
+  } catch (err) {
+    console.error('[exam:generate]', err);
+    return { success: false, error: err.message || String(err), questions: [] };
+  }
+});
 ipcMain.handle('app:exit-now', () => {
   exitConfirmed = true;
   app.quit();

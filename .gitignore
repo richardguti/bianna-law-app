@@ -1,4 +1,4 @@
-# Build outputs. Several GB, and GitHub rejects any single file over 100 MB --
+﻿# Build outputs. Several GB, and GitHub rejects any single file over 100 MB --
 # the Electron framework binary alone is 170.8 MB.
 dist/
 jsons/dist/
@@ -65,3 +65,18 @@ gen_set2_key.py
 gen_set3_key.py
 generate_exam_variants.py
 generate_mock_exam.py
+
+# Corpus regeneration scratch output. tools/extract-nxt.js writes this on every run; it is a
+# measurement of one run, not a source file. See docs/CORPUS-REGEN-REPORT.md.
+nxt-extract-summary.json
+# Generated scope/index artifacts (empty stubs written by the ICM scope harness)
+/both
+/outline
+/statutes
+*.inverted.json
+
+# Florida Legislature download bundles (~236 MB of .nxt files), reproducible
+FLDL-*/
+
+# Source PDFs are read from outside the repository
+/*.pdf
